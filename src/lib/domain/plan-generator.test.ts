@@ -105,6 +105,40 @@ describe("generateDailyPlan", () => {
     expect(onlyRepeated).toBe(false);
   });
 
+  it("boosts toilet routine when the owner asks about housetraining", () => {
+    const plan = generateDailyPlan({
+      dog: {
+        ...dog,
+        lifeStage: "young_puppy",
+        primaryReason: "Toilet training accidents",
+      },
+      exercises: EXERCISE_LIBRARY,
+      progressByObjective: {},
+      recentSessions: [],
+    });
+
+    expect(plan.items.some((item) => item.exerciseId === "ex-toilet-routine")).toBe(
+      true,
+    );
+  });
+
+  it("boosts mouthing redirect for puppy nipping goals", () => {
+    const plan = generateDailyPlan({
+      dog: {
+        ...dog,
+        lifeStage: "young_puppy",
+        primaryReason: "Puppy mouthing and nipping hands",
+      },
+      exercises: EXERCISE_LIBRARY,
+      progressByObjective: {},
+      recentSessions: [],
+    });
+
+    expect(plan.items.some((item) => item.exerciseId === "ex-puppy-mouthing")).toBe(
+      true,
+    );
+  });
+
   it("selects easier variation when progress needs_easier", () => {
     const plan = generateDailyPlan({
       dog,

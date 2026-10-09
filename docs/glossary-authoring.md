@@ -100,6 +100,7 @@ claimed as professionally signed-off:
 - `negative-reinforcement`
 - `leave-it`
 - `drop-swap`
+- `mouthing`
 
 Do not add how-to treatment plans for fear or aggression against these entries.
 

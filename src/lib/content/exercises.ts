@@ -165,11 +165,59 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
       "Ask for a smaller movement, reward sooner, or practise on a more secure surface. That means lowering your [[criteria]].",
     safetyNote:
       "If sitting seems stiff or painful, stop and speak to your vet before continuing.",
-    harderVariationId: "ex-wait-brief",
+    harderVariationId: "ex-down-comfort",
     hint: "Lure slowly. Rushing often makes dogs jump instead of sit.",
     glossaryTermIds: ["luring", "marker-word", "timing", "cue", "fluency", "criteria"],
     topicGroup: "everyday_foundations",
-    contentVersion: 2,
+    contentVersion: 3,
+  },
+  {
+    id: "ex-down-comfort",
+    slug: "comfortable-down",
+    title: "Teach a comfortable down",
+    summary: "Help your dog lie down willingly without being pushed.",
+    learningObjectiveId: "down",
+    category: "manners",
+    lifeStages: [
+      "young_puppy",
+      "older_puppy",
+      "adolescent",
+      "adult",
+      "senior",
+    ],
+    difficulty: 2,
+    estimatedMinutes: 3,
+    prerequisiteIds: ["ex-sit-comfort"],
+    purpose:
+      "Build a soft [[down]] — lying down on purpose — using gentle [[luring]], not pressure on the shoulders or hips.",
+    preparation:
+      "Use a non-slippery floor or mat. Have small treats ready. Start somewhere quiet so [[arousal]] stays low.",
+    steps: [
+      "Begin from a sit, or wait until your dog sits.",
+      "Hold a treat at their nose, then slowly lower it straight down toward the floor between their front paws ([[luring]] into a down).",
+      "As elbows touch the floor, use your [[marker-word]] and reward on the floor. That [[timing]] pays for the lie-down.",
+      "Repeat a few times. Later you can add a verbal [[cue]] once the movement is easy.",
+    ],
+    lookFor: "A willing fold into a down without sprawling in worry or being shoved — early [[fluency]].",
+    ifDifficult:
+      "Reward a smaller dip toward the floor first, then build. That means lowering your [[criteria]]. A softer surface can help.",
+    safetyNote:
+      "Never push your dog’s back or hips into a down. If lying down seems stiff or painful, stop and speak to your vet.",
+    easierVariationId: "ex-sit-comfort",
+    harderVariationId: "ex-mat-settle",
+    hint: "Keep the lure close to the body. Sweeping it too far forward often makes dogs stand up and walk.",
+    glossaryTermIds: [
+      "down",
+      "luring",
+      "arousal",
+      "marker-word",
+      "timing",
+      "cue",
+      "fluency",
+      "criteria",
+    ],
+    topicGroup: "everyday_foundations",
+    contentVersion: 1,
   },
   {
     id: "ex-wait-brief",
@@ -808,6 +856,83 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     topicGroup: "puppy_life",
     contentVersion: 2,
   },
+  {
+    id: "ex-toilet-routine",
+    slug: "toilet-routine-basics",
+    title: "Build a simple toilet routine",
+    summary: "Use timing, supervision, and calm rewards for toileting outside.",
+    learningObjectiveId: "housetraining",
+    category: "home",
+    lifeStages: ["young_puppy", "older_puppy", "adolescent", "adult"],
+    difficulty: 1,
+    estimatedMinutes: 4,
+    prerequisiteIds: [],
+    purpose:
+      "Set up everyday [[housetraining]] with [[management]] first: take your dog out often, supervise indoors, and reward toileting outside. Accidents are information, not defiance.",
+    preparation:
+      "Choose a regular outdoor toilet spot. Have a lead ready and a few small rewards. Limit free roam indoors when you cannot watch ([[management]]).",
+    steps: [
+      "Take your dog out after waking, after meals, after play, and about every 1–2 hours for young puppies (less often for older dogs).",
+      "Wait quietly at the toilet spot. When they toilet outside, use your [[marker-word]] calmly and give a [[reward]].",
+      "If an accident happens indoors, clean thoroughly with an enzymatic cleaner. Skip scolding — it often teaches hiding, not holding on.",
+      "Indoors, interrupt gently if you catch them mid-sniff circling, then go straight outside and reward success there.",
+    ],
+    lookFor: "More toileting in the outdoor spot and fewer indoor accidents over days — not overnight perfection.",
+    ifDifficult:
+      "Increase outdoor trips, tighten indoor [[management]] (lead indoors, smaller room, puppy pen), and reward outdoor toileting more generously.",
+    safetyNote:
+      "Sudden loss of house training, straining, blood, or frequent attempts can be medical — contact your vet. Do not rub a dog’s nose in accidents or use punishment.",
+    hint: "Prevention beats mopping. Supervise, schedule, and pay outdoor toileting well.",
+    glossaryTermIds: [
+      "housetraining",
+      "management",
+      "marker-word",
+      "reward",
+      "training-vs-management",
+    ],
+    topicGroup: "life_at_home",
+    contentVersion: 1,
+  },
+  {
+    id: "ex-puppy-mouthing",
+    slug: "puppy-mouthing-redirect",
+    title: "Redirect puppy mouthing",
+    summary: "Give mouths a legal outlet and pause play when teeth land on skin.",
+    learningObjectiveId: "puppy-mouthing",
+    category: "puppy",
+    lifeStages: ["young_puppy", "older_puppy"],
+    difficulty: 1,
+    estimatedMinutes: 3,
+    prerequisiteIds: [],
+    purpose:
+      "Help with everyday [[mouthing]]: puppies explore with their mouths. We use [[management]], a pause, and a chew or toy — not smacking, yelling, or holding the mouth shut.",
+    preparation:
+      "Have a soft toy or suitable chew ready. Keep sessions short. If your puppy is overtired, they often mouth more — plan a rest after ([[recovery-time]] / [[enrichment]]).",
+    steps: [
+      "Start calm play with hands as invitations, not wrestle targets.",
+      "If teeth touch skin or clothes, calmly stop moving hands and pause play for a few seconds.",
+      "Offer the toy or chew as a redirect. When they mouth the toy, use your [[marker-word]] and continue briefly.",
+      "End before the puppy gets frantic. Tired, overstimulated puppies need sleep more than more games — watch [[arousal]] and [[stress-signals]].",
+    ],
+    lookFor: "More chewing on toys/chews and shorter mouthing-on-people bursts. Soft [[body-language]] during play.",
+    ifDifficult:
+      "Shorten play, add a rest break, use a longer toy, and increase [[management]] (playpen, chew station). Avoid rough hand play that invites nipping.",
+    safetyNote:
+      "Hard biting that breaks skin, guarding toys with growling/snapping, or fear-based biting is beyond this app — seek suitably qualified reward-based help, and a vet if pain seems possible. Never use physical punishment for mouthing.",
+    hint: "Be boring when teeth hit skin; be interesting when the toy is in the mouth.",
+    glossaryTermIds: [
+      "mouthing",
+      "management",
+      "recovery-time",
+      "enrichment",
+      "marker-word",
+      "arousal",
+      "stress-signals",
+      "body-language",
+    ],
+    topicGroup: "puppy_life",
+    contentVersion: 1,
+  },
 ];
 
 export const TOPIC_GROUPS: {
@@ -823,7 +948,7 @@ export const TOPIC_GROUPS: {
   {
     id: "puppy_life",
     title: "Puppy life",
-    description: "Gentle confidence-building for younger dogs.",
+    description: "Gentle confidence-building, mouthing redirects, and early life skills.",
   },
   {
     id: "walking_together",
@@ -843,7 +968,7 @@ export const TOPIC_GROUPS: {
   {
     id: "life_at_home",
     title: "Life at home",
-    description: "Doorways, greetings, and everyday pauses.",
+    description: "Toilet routines, doorways, greetings, and everyday pauses.",
   },
 ];
 

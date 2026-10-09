@@ -15,7 +15,7 @@ Review statuses are **internal**. They are not certifications, IMDT approvals, o
 | Remove or disable pending review | Material unresolved welfare concern — none in this pass |
 | Requires qualified review | Specialist judgement needed before treating the method detail as settled |
 
-**Coverage:** All 20 exercises received a basic review (metadata + steps + safety). Deeper scrutiny was applied to walking, leave-it, greetings, door manners, puppy exposure, recall-under-distraction, and handling.
+**Coverage:** Originally 20 exercises received a basic review (metadata + steps + safety). Deeper scrutiny was applied to walking, leave-it, greetings, door manners, puppy exposure, recall-under-distraction, and handling. Later additions (`ex-down-comfort`, `ex-toilet-routine`, `ex-puppy-mouthing`) were authored against the content-review checklist with management-first, welfare-bound copy — treat them as **Passes initial review** pending the next full audit pass; mouthing remains **qualified-review** sensitive.
 
 **Remove/disable pending review:** None identified. Do not disable the library wholesale; prioritise revisions listed below.
 
@@ -28,7 +28,10 @@ Review statuses are **internal**. They are not certifications, IMDT approvals, o
 | `ex-name-response` | Practise responding to their name | name-response | 1 | — | — / `ex-name-mild-distract` | No | all | Needs improvement |
 | `ex-reward-marker` | Introduce a friendly ‘yes’ word | reward-marker | 1 | — | — / — | No | all | Needs improvement |
 | `ex-engagement-easy` | Invite a moment of attention | engagement | 1 | — | — / — | No | all | Passes initial review |
-| `ex-sit-comfort` | Teach a comfortable sit | sit | 1 | engagement-easy | — / wait-brief | Yes (pain/vet) | all | Passes initial review |
+| `ex-sit-comfort` | Teach a comfortable sit | sit | 1 | engagement-easy | — / down-comfort | Yes (pain/vet) | all | Passes initial review |
+| `ex-down-comfort` | Teach a comfortable down | down | 2 | sit-comfort | sit-comfort / mat-settle | Yes (no force; pain/vet) | all | Passes initial review (post-audit add) |
+| `ex-toilet-routine` | Build a simple toilet routine | housetraining | 1 | — | — / — | Yes (vet if medical; no punishment) | puppy–adult | Passes initial review (post-audit add) |
+| `ex-puppy-mouthing` | Redirect puppy mouthing | puppy-mouthing | 1 | — | — / — | Yes (escalate hard bites/guarding; no punishment) | young/older puppy | Passes initial review + qualified review recommended (post-audit add) |
 | `ex-wait-brief` | Practise a brief wait | wait | 2 | sit-comfort | sit-comfort / — | No | older puppy–senior | Needs improvement |
 | `ex-mat-settle` | Settle on a mat | mat-settle | 1 | — | — / calm-home | No | all | Needs improvement |
 | `ex-calm-home` | Practise calm settling at home | calm-home | 2 | mat-settle | mat-settle / — | No | older puppy–senior | Needs improvement |

@@ -873,6 +873,89 @@ export const GLOSSARY: GlossaryTerm[] = [
     contentVersion: 1,
     published: true,
   },
+  {
+    id: "housetraining",
+    preferredTerm: "Housetraining",
+    alternativeTerms: ["toilet training", "house training", "potty training"],
+    searchPhrases: [
+      "toilet training",
+      "weeing in the house",
+      "puppy accidents",
+      "how to toilet train",
+      "going to the toilet outside",
+    ],
+    category: "everyday_skills",
+    shortDefinition:
+      "Helping a dog learn where toileting is wanted, mainly through routine, supervision, and rewarding outdoor success.",
+    deeperExplanation:
+      "Housetraining is mostly management plus clear pay for toileting in the right place. Scolding accidents often teaches dogs to hide when they need to go. Sudden regression can be medical and needs a vet check.",
+    example:
+      "You take your puppy out after a nap; they wee on the grass; you calmly mark and reward, then play a little.",
+    commonMisunderstanding:
+      "Accidents are rarely “spite”. They usually mean the schedule, supervision, or health picture needs adjusting.",
+    relatedTermIds: ["management", "reward", "marker-word", "training-vs-management"],
+    relevantExerciseIds: ["ex-toilet-routine"],
+    contentVersion: 1,
+    published: true,
+  },
+  {
+    id: "down",
+    preferredTerm: "Down",
+    alternativeTerms: ["lie down", "drop"],
+    searchPhrases: [
+      "lie down",
+      "teach down",
+      "get them to lie",
+      "down cue",
+    ],
+    category: "everyday_skills",
+    shortDefinition:
+      "Lying down on purpose when invited — elbows on the floor — without being pushed into position.",
+    deeperExplanation:
+      "A comfortable down is taught with luring or shaping, then named with a cue. It is different from a settle on a mat, though the two skills support each other. Never force hips or shoulders down.",
+    example:
+      "From a sit, you lower a treat to the floor; your dog folds into a down; you mark and reward.",
+    commonMisunderstanding:
+      "“Down” for lying down is not the same as asking a jumping dog to get “down” off a person — use clear, separate cues in everyday speech if needed.",
+    relatedTermIds: ["luring", "cue", "settle", "fluency"],
+    relevantExerciseIds: ["ex-down-comfort", "ex-sit-comfort"],
+    contentVersion: 1,
+    published: true,
+  },
+  {
+    id: "mouthing",
+    preferredTerm: "Mouthing",
+    alternativeTerms: ["puppy biting", "nipping", "play biting"],
+    searchPhrases: [
+      "puppy biting hands",
+      "nipping",
+      "teeth on skin",
+      "mouthing during play",
+      "stop puppy biting",
+    ],
+    category: "everyday_skills",
+    shortDefinition:
+      "When a puppy or dog puts teeth on skin or clothes during exploration or play — common in youngsters, and best handled with pauses and redirects.",
+    deeperExplanation:
+      "Mouthing is often normal puppy behaviour, especially when tired or overexcited. Useful responses include stopping play briefly, offering a toy or chew, and arranging more rest and enrichment. Painful or fearful biting, or guarding with growls and snaps, needs qualified in-person help — not an app treatment plan.",
+    example:
+      "Your puppy mouths your sleeve; you pause; you offer a soft toy; they chew the toy instead and play continues briefly.",
+    commonMisunderstanding:
+      "Smacking, shouting, or holding the mouth shut often worsens fear or rough play rather than teaching a kind alternative.",
+    relatedTermIds: [
+      "management",
+      "enrichment",
+      "arousal",
+      "recovery-time",
+      "body-language",
+    ],
+    relevantExerciseIds: ["ex-puppy-mouthing"],
+    needsQualifiedReview: true,
+    editorialNotes:
+      "Literacy + redirect only; escalate hard bites / guarding / fear — not a bite-inhibition protocol claim.",
+    contentVersion: 1,
+    published: true,
+  },
 ];
 
 /**

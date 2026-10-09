@@ -19,6 +19,11 @@ export default function PrivacyPage() {
           that history across devices.
         </p>
         <p>
+          If you turn on training reminders, this device’s browser may store a push subscription so
+          we can send a daily notification. You can turn reminders off from My dog; uninstalling the
+          app or revoking notification permission also stops delivery.
+        </p>
+        <p>
           We do not sell personal data. Training notes are private to your account. Server-side
           access controls prevent other owners from reading your dogs or sessions.
         </p>

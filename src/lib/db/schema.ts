@@ -13,6 +13,11 @@ export const users = sqliteTable("users", {
   passwordHash: text("password_hash").notNull(),
   isGuest: integer("is_guest", { mode: "boolean" }).notNull().default(false),
   timezone: text("timezone").notNull().default("Europe/London"),
+  reminderEnabled: integer("reminder_enabled", { mode: "boolean" })
+    .notNull()
+    .default(false),
+  reminderLocalTime: text("reminder_local_time").notNull().default("17:00"),
+  reminderLastSentDate: text("reminder_last_sent_date"),
   createdAt: integer("created_at", { mode: "timestamp_ms" })
     .notNull()
     .default(sql`(unixepoch() * 1000)`),
@@ -20,6 +25,27 @@ export const users = sqliteTable("users", {
     .notNull()
     .default(sql`(unixepoch() * 1000)`),
 });
+
+export const pushSubscriptions = sqliteTable(
+  "push_subscriptions",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    endpoint: text("endpoint").notNull().unique(),
+    p256dh: text("p256dh").notNull(),
+    auth: text("auth").notNull(),
+    userAgent: text("user_agent"),
+    createdAt: integer("created_at", { mode: "timestamp_ms" })
+      .notNull()
+      .default(sql`(unixepoch() * 1000)`),
+    updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+      .notNull()
+      .default(sql`(unixepoch() * 1000)`),
+  },
+  (table) => [index("push_subs_user_idx").on(table.userId)],
+);
 
 export const dogs = sqliteTable(
   "dogs",
@@ -225,6 +251,7 @@ export const ownerTermProgress = sqliteTable(
 );
 
 export type User = typeof users.$inferSelect;
+export type PushSubscriptionRow = typeof pushSubscriptions.$inferSelect;
 export type Dog = typeof dogs.$inferSelect;
 export type Exercise = typeof exercises.$inferSelect;
 export type ExerciseVersion = typeof exerciseVersions.$inferSelect;

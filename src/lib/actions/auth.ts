@@ -11,6 +11,7 @@ import {
   dogSkillProgress,
   dogs,
   ownerTermProgress,
+  pushSubscriptions,
   trainingSessions,
   users,
 } from "@/lib/db/schema";
@@ -164,6 +165,7 @@ export async function deleteAccountAction(): Promise<void> {
     db.delete(dogs).where(eq(dogs.id, dog.id)).run();
   }
   db.delete(ownerTermProgress).where(eq(ownerTermProgress.ownerId, user.id)).run();
+  db.delete(pushSubscriptions).where(eq(pushSubscriptions.userId, user.id)).run();
   db.delete(users).where(eq(users.id, user.id)).run();
   await destroySession();
   redirect("/");

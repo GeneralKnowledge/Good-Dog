@@ -10,7 +10,9 @@ import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { dogSkillProgress, dogs, trainingSessions } from "@/lib/db/schema";
 import { ClaimGuestForm } from "@/components/ClaimGuestForm";
+import { ReminderSettings } from "@/components/ReminderSettings";
 import { deleteAccountAction, signOutAction } from "@/lib/actions/auth";
+import { isPushConfigured } from "@/lib/push/vapid";
 
 const LIFE_STAGE_LABELS: Record<string, string> = {
   young_puppy: "Young puppy",
@@ -135,6 +137,13 @@ export default async function DogPage() {
           <ClaimGuestForm />
         </section>
       ) : null}
+
+      <ReminderSettings
+        configured={isPushConfigured()}
+        initialEnabled={user.reminderEnabled}
+        initialTime={user.reminderLocalTime}
+        dogName={dog.name}
+      />
 
       <section className="mx-5 mb-8 flex flex-col gap-3">
         <form action={signOutAction}>

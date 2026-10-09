@@ -10,6 +10,10 @@ vi.mock("@/lib/actions/glossary", () => ({
   markTermsIntroducedAction: vi.fn(async () => ({ ok: true })),
 }));
 
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn() }),
+}));
+
 describe("TermRichText + GlossaryPanel", () => {
   let container: HTMLDivElement;
   let root: Root;
@@ -65,8 +69,8 @@ describe("TermRichText + GlossaryPanel", () => {
     const term = getGlossaryTerm("marker-word")!;
     expect(dialog!.textContent).toContain(term.shortDefinition);
     expect(dialog!.textContent).toMatch(/Example:/);
-    const learnMore = dialog!.querySelector(
-      'a[href="/learn/glossary/marker-word"]',
+    const learnMore = Array.from(dialog!.querySelectorAll("button")).find((b) =>
+      /Learn more/i.test(b.textContent ?? ""),
     );
     expect(learnMore).toBeTruthy();
     expect(container.querySelector('[data-testid="next-step"]')).toBeTruthy();

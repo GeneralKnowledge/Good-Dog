@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useId, useRef } from "react";
 import { createPortal } from "react-dom";
 import type { GlossaryTerm } from "@/lib/content/glossary";
@@ -13,6 +13,7 @@ export function GlossaryPanel({
   term: GlossaryTerm;
   onClose: () => void;
 }) {
+  const router = useRouter();
   const titleId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
 
@@ -70,13 +71,17 @@ export function GlossaryPanel({
             {term.commonMisunderstanding}
           </p>
         ) : null}
-        <Link
-          href={`/learn/glossary/${term.id}`}
+        <button
+          type="button"
           className="btn btn-primary mt-5 w-full"
-          onClick={onClose}
+          onClick={() => {
+            const href = `/learn/glossary/${term.id}`;
+            onClose();
+            router.push(href);
+          }}
         >
           Learn more
-        </Link>
+        </button>
       </div>
     </div>
   );

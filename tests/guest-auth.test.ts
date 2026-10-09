@@ -76,6 +76,7 @@ describe("guest accounts", () => {
     ensureSchema(legacy);
     const columns = legacy.prepare(`PRAGMA table_info(users)`).all() as Array<{ name: string }>;
     expect(columns.some((c) => c.name === "is_guest")).toBe(true);
+    expect(columns.some((c) => c.name === "reminder_enabled")).toBe(true);
     const row = legacy.prepare(`SELECT is_guest FROM users WHERE id = ?`).get("u1") as {
       is_guest: number;
     };

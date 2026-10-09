@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { GuestContinueButton } from "@/components/GuestContinueButton";
+import { InstallSplash } from "@/components/InstallSplash";
 import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { dogs } from "@/lib/db/schema";
@@ -15,6 +16,7 @@ export default async function HomePage() {
 
   return (
     <main className="flex flex-1 flex-col">
+      <InstallSplash mode="landing" />
       <section className="relative flex min-h-[100dvh] flex-col overflow-hidden px-5 pb-10 pt-8">
         <div
           className="pointer-events-none absolute inset-0 opacity-90"

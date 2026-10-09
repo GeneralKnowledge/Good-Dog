@@ -25,7 +25,22 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-You can create an account, sign in, or **continue as a guest**. Guests get a full session on this device; add an email later from **My dog** to keep progress. The app also supports **Add to Home Screen** (web app manifest + install prompt) for a phone shortcut.
+You can create an account, sign in, or **continue as a guest**. Guests get a full session on this device; add an email later from **My dog** to keep progress. The app offers an **Install** splash (landing + delayed in-app prompt) via the web app manifest.
+
+### Optional training reminders (Web Push)
+
+1. Generate keys: `npx web-push generate-vapid-keys`
+2. Set in `.env.local`: `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` (e.g. `mailto:you@example.com`), and `CRON_SECRET` (≥16 chars)
+3. Restart the app, then enable reminders under **My dog**
+4. Call the cron endpoint every 5–15 minutes (systemd timer or crontab), for example:
+
+```bash
+curl -fsS -X POST \
+  -H "Authorization: Bearer $CRON_SECRET" \
+  https://your-domain/api/cron/reminders
+```
+
+Reminders send only if practice is still outstanding that day. iPhone delivery requires the app installed to the Home Screen.
 
 ### Environment
 

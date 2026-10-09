@@ -32,4 +32,19 @@ export function greetingForHour(date: Date = new Date(), timeZone = DEFAULT_TZ):
   return "Good evening";
 }
 
+/** Returns HH:mm in the given IANA timezone (24h). */
+export function localTimeHm(date: Date = new Date(), timeZone: string = DEFAULT_TZ): string {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone,
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(date);
+  const hour = parts.find((p) => p.type === "hour")?.value ?? "00";
+  const minute = parts.find((p) => p.type === "minute")?.value ?? "00";
+  // Some engines return "24" for midnight — normalise.
+  const normalisedHour = hour === "24" ? "00" : hour;
+  return `${normalisedHour}:${minute}`;
+}
+
 export { DEFAULT_TZ };

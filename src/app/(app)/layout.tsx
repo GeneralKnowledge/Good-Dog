@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
-import { AddToHomeScreen } from "@/components/AddToHomeScreen";
 import { BottomNav } from "@/components/BottomNav";
+import { InstallSplash } from "@/components/InstallSplash";
 import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { dogs } from "@/lib/db/schema";
@@ -20,7 +20,7 @@ export default async function AppLayout({
   return (
     <div className="flex min-h-dvh flex-col">
       <div className="flex-1 pb-4">{children}</div>
-      <AddToHomeScreen />
+      <InstallSplash mode="in-app" />
       <BottomNav />
     </div>
   );

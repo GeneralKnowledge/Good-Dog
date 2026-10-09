@@ -105,6 +105,38 @@ export const HELP_ARTICLES: HelpArticle[] = [
       "In everyday training talk, threshold often means the point where your dog becomes too distressed, excited, or overwhelmed to respond comfortably. If they cannot notice something and still work with you, increase distance or reduce difficulty rather than forcing the exercise. It is a practical guide, not a diagnosis of what your dog is feeling.",
     relatedExerciseIds: ["ex-puppy-sounds", "ex-name-mild-distract"],
   },
+  {
+    id: "help-toilet-accidents",
+    question: "What if my dog keeps having toilet accidents indoors?",
+    keywords: [
+      "toilet",
+      "accident",
+      "wee",
+      "poo",
+      "housetrain",
+      "house train",
+      "potty",
+    ],
+    answer:
+      "Tighten the routine rather than scolding. Take them out more often (especially after waking, meals, and play), supervise or limit free roam indoors, and reward outdoor toileting calmly. Clean accidents with an enzymatic cleaner. Rubbing a nose in a mess or shouting usually teaches hiding, not holding on. If accidents start suddenly, or there is straining or blood, contact your vet.",
+    relatedExerciseIds: ["ex-toilet-routine"],
+  },
+  {
+    id: "help-puppy-mouthing",
+    question: "What if my puppy mouths or nips my hands?",
+    keywords: ["mouth", "mouthing", "nip", "nipping", "bite", "teeth", "chew hands"],
+    answer:
+      "Pause the fun when teeth land on skin, then offer a toy or chew instead. Keep play short, and give tired puppies more sleep — overtired mouthing is common. Avoid smacking or holding the mouth shut. If bites break skin, or you see growling and stiff guarding over items, seek suitably qualified reward-based help.",
+    relatedExerciseIds: ["ex-puppy-mouthing"],
+  },
+  {
+    id: "help-teach-down",
+    question: "How do I teach my dog to lie down?",
+    keywords: ["down", "lie down", "lying down", "drop"],
+    answer:
+      "From a sit, lure a treat slowly down between the front paws toward the floor. Mark and reward when elbows touch. Do not push the dog into position. If they stand and walk forward, keep the lure closer to their chest. Once the movement is easy, you can add a verbal cue.",
+    relatedExerciseIds: ["ex-down-comfort", "ex-sit-comfort"],
+  },
 ];
 
 export function searchHelp(query: string): HelpArticle[] {

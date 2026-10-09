@@ -152,6 +152,31 @@ function scoreExercise(
   if (reason.includes("settle") && exercise.category === "calm") score += 4;
   if (reason.includes("manners") && exercise.category === "manners") score += 3;
   if (reason.includes("puppy") && exercise.category === "puppy") score += 4;
+  if (
+    (reason.includes("toilet") ||
+      reason.includes("housetrain") ||
+      reason.includes("house train") ||
+      reason.includes("wee") ||
+      reason.includes("accident")) &&
+    exercise.learningObjectiveId === "housetraining"
+  ) {
+    score += 5;
+  }
+  if (
+    (reason.includes("mouth") ||
+      reason.includes("nip") ||
+      reason.includes("bite") ||
+      reason.includes("teeth")) &&
+    exercise.learningObjectiveId === "puppy-mouthing"
+  ) {
+    score += 5;
+  }
+  if (
+    (reason.includes("down") || reason.includes("lie")) &&
+    exercise.learningObjectiveId === "down"
+  ) {
+    score += 4;
+  }
 
   if (progress?.state === "needs_easier") score += 2;
   if (progress?.state === "practising") score += 3;
@@ -197,10 +222,15 @@ function starterPool(exercises: ExerciseContent[], lifeStage: LifeStage) {
     "ex-rest-spot",
     "ex-handling-touch",
     "ex-lead-intro",
+    "ex-toilet-routine",
   ];
 
   if (lifeStage === "young_puppy" || lifeStage === "older_puppy") {
-    preferredIds.push("ex-puppy-sounds", "ex-puppy-surfaces");
+    preferredIds.push(
+      "ex-puppy-sounds",
+      "ex-puppy-surfaces",
+      "ex-puppy-mouthing",
+    );
   }
 
   return exercises.filter(

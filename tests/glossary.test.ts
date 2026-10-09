@@ -41,6 +41,9 @@ describe("glossary integrity", () => {
       "counterconditioning",
       "management",
       "arousal",
+      "housetraining",
+      "down",
+      "mouthing",
     ];
     for (const id of required) {
       const term = getGlossaryTerm(id);

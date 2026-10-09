@@ -4,11 +4,12 @@ import { eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
-import { pushSubscriptions, users } from "@/lib/db/schema";
+import { dogs, pushSubscriptions, users } from "@/lib/db/schema";
+import { sendPushToUser } from "@/lib/push/reminders";
 import { isPushConfigured } from "@/lib/push/vapid";
 
 export type ReminderActionResult =
-  | { ok: true }
+  | { ok: true; message?: string }
   | { ok: false; error: string };
 
 const TIME_RE = /^([01]\d|2[0-3]):[0-5]\d$/;
@@ -106,4 +107,42 @@ export async function updateReminderSettingsAction(
     .run();
 
   return { ok: true };
+}
+
+export async function sendTestReminderAction(): Promise<ReminderActionResult> {
+  const user = await requireUser();
+  if (!user) {
+    return { ok: false, error: "Not signed in" };
+  }
+  if (!isPushConfigured()) {
+    return { ok: false, error: "Reminders are not configured on this server" };
+  }
+
+  const dog = db.select().from(dogs).where(eq(dogs.ownerId, user.id)).get();
+  const dogName = dog?.name ?? "your dog";
+
+  try {
+    const result = await sendPushToUser({
+      userId: user.id,
+      title: "Good Dog — test",
+      body: `Notifications are working. A quiet minute with ${dogName} whenever you’re ready.`,
+      url: "/today",
+    });
+
+    if (result.delivered === 0) {
+      return {
+        ok: false,
+        error:
+          "No active push subscription on this account yet. Turn reminders on (and allow notifications), preferably from the installed Home Screen app on iPhone.",
+      };
+    }
+
+    return {
+      ok: true,
+      message: `Test notification sent to ${result.delivered} device${result.delivered === 1 ? "" : "s"}. Check your lock screen / notification shade.`,
+    };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Could not send test notification";
+    return { ok: false, error: message };
+  }
 }

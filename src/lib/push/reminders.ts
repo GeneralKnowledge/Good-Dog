@@ -16,6 +16,68 @@ function planNeedsReminder(itemsJson: string, completionState: string): boolean 
   }
 }
 
+export async function sendPushToUser(options: {
+  userId: string;
+  title: string;
+  body: string;
+  url?: string;
+}): Promise<{ delivered: number; removed: number }> {
+  if (!configureWebPush()) {
+    throw new Error("Push is not configured (missing VAPID env vars)");
+  }
+
+  const subs = db
+    .select()
+    .from(pushSubscriptions)
+    .where(eq(pushSubscriptions.userId, options.userId))
+    .all();
+
+  if (subs.length === 0) {
+    return { delivered: 0, removed: 0 };
+  }
+
+  const payload = JSON.stringify({
+    title: options.title,
+    body: options.body,
+    url: options.url ?? "/today",
+  });
+
+  let delivered = 0;
+  let removed = 0;
+
+  for (const sub of subs) {
+    try {
+      await webpush.sendNotification(
+        {
+          endpoint: sub.endpoint,
+          keys: { p256dh: sub.p256dh, auth: sub.auth },
+        },
+        payload,
+      );
+      delivered += 1;
+    } catch (error) {
+      const statusCode =
+        typeof error === "object" &&
+        error &&
+        "statusCode" in error &&
+        typeof (error as { statusCode: unknown }).statusCode === "number"
+          ? (error as { statusCode: number }).statusCode
+          : null;
+      if (statusCode === 404 || statusCode === 410) {
+        db.delete(pushSubscriptions).where(eq(pushSubscriptions.id, sub.id)).run();
+        removed += 1;
+      } else {
+        console.error("Push send failed", {
+          userId: options.userId,
+          statusCode,
+        });
+      }
+    }
+  }
+
+  return { delivered, removed };
+}
+
 export async function sendDueTrainingReminders(now: Date = new Date()): Promise<{
   considered: number;
   sent: number;
@@ -71,56 +133,15 @@ export async function sendDueTrainingReminders(now: Date = new Date()): Promise<
       continue;
     }
 
-    const subs = db
-      .select()
-      .from(pushSubscriptions)
-      .where(eq(pushSubscriptions.userId, user.id))
-      .all();
-
-    if (subs.length === 0) {
-      skipped += 1;
-      continue;
-    }
-
-    const dogName = dog.name;
-    const payload = JSON.stringify({
+    const result = await sendPushToUser({
+      userId: user.id,
       title: "Good Dog",
-      body: `A few quiet minutes with ${dogName}? Today’s plan is ready.`,
+      body: `A few quiet minutes with ${dog.name}? Today’s plan is ready.`,
       url: "/today",
     });
+    removed += result.removed;
 
-    let delivered = false;
-    for (const sub of subs) {
-      try {
-        await webpush.sendNotification(
-          {
-            endpoint: sub.endpoint,
-            keys: { p256dh: sub.p256dh, auth: sub.auth },
-          },
-          payload,
-        );
-        delivered = true;
-      } catch (error) {
-        const statusCode =
-          typeof error === "object" &&
-          error &&
-          "statusCode" in error &&
-          typeof (error as { statusCode: unknown }).statusCode === "number"
-            ? (error as { statusCode: number }).statusCode
-            : null;
-        if (statusCode === 404 || statusCode === 410) {
-          db.delete(pushSubscriptions).where(eq(pushSubscriptions.id, sub.id)).run();
-          removed += 1;
-        } else {
-          console.error("Push send failed", {
-            userId: user.id,
-            statusCode,
-          });
-        }
-      }
-    }
-
-    if (delivered) {
+    if (result.delivered > 0) {
       db.update(users)
         .set({ reminderLastSentDate: today, updatedAt: new Date() })
         .where(eq(users.id, user.id))

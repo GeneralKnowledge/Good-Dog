@@ -42,6 +42,8 @@ curl -fsS -X POST \
 
 Reminders send only if practice is still outstanding that day. iPhone delivery requires the app installed to the Home Screen.
 
+Use **Send test notification** on My dog to verify delivery immediately after enabling reminders on a real phone.
+
 ### Environment
 
 | Variable | Purpose |

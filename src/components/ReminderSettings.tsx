@@ -4,6 +4,7 @@ import { useActionState, useState, useTransition } from "react";
 import {
   removePushSubscriptionAction,
   savePushSubscriptionAction,
+  sendTestReminderAction,
   updateReminderSettingsAction,
   type ReminderActionResult,
 } from "@/lib/actions/reminders";
@@ -83,13 +84,39 @@ export function ReminderSettings({
   const [clientError, setClientError] = useState<string | null>(null);
   const [clientOk, setClientOk] = useState<string | null>(null);
   const [pendingSubscribe, startSubscribe] = useTransition();
+  const [pendingTest, startTest] = useTransition();
   const [state, formAction, pendingSave] = useActionState(
     updateReminderSettingsAction,
     null as ReminderActionResult | null,
   );
 
   const statusMessage =
-    clientOk ?? (state?.ok ? "Reminder settings saved." : null);
+    clientOk ?? (state?.ok ? (state.message ?? "Reminder settings saved.") : null);
+
+  const sendTest = () => {
+    setClientError(null);
+    setClientOk(null);
+    startTest(() => {
+      void (async () => {
+        try {
+          // Refresh subscription first so a newly registered phone is stored.
+          if (enabled) {
+            await registerAndSubscribe();
+          }
+          const result = await sendTestReminderAction();
+          if (!result.ok) {
+            setClientError(result.error);
+            return;
+          }
+          setClientOk(result.message ?? "Test notification sent.");
+        } catch (error) {
+          setClientError(
+            error instanceof Error ? error.message : "Could not send test notification",
+          );
+        }
+      })();
+    });
+  };
 
   const onToggle = (next: boolean) => {
     setEnabled(next);
@@ -203,11 +230,24 @@ export function ReminderSettings({
         <button
           className="btn btn-primary"
           type="submit"
-          disabled={pendingSave || pendingSubscribe || !enabled}
+          disabled={pendingSave || pendingSubscribe || pendingTest || !enabled}
         >
           {pendingSave || pendingSubscribe ? "Saving…" : "Save reminder"}
         </button>
       </form>
+
+      <button
+        type="button"
+        className="btn btn-secondary mt-3 w-full"
+        disabled={pendingTest || pendingSubscribe || !enabled}
+        onClick={sendTest}
+      >
+        {pendingTest ? "Sending test…" : "Send test notification"}
+      </button>
+      <p className="mt-2 text-xs leading-relaxed text-muted">
+        On iPhone, open Good Dog from the Home Screen icon (not Safari), turn reminders on, then tap
+        Send test notification.
+      </p>
     </section>
   );
 }

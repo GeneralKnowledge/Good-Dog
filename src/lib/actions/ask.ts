@@ -1,10 +1,7 @@
 "use server";
 
 import { HELP_ARTICLES, searchHelp } from "@/lib/content/help";
-import {
-  formatGlossaryAnswer,
-  answerFromGlossary,
-} from "@/lib/content/terminology-answers";
+import { answerFromGlossary } from "@/lib/content/terminology-answers";
 import { getPublishedGlossary } from "@/lib/content/glossary";
 import { requireUser } from "@/lib/auth/session";
 
@@ -114,11 +111,4 @@ ${glossaryKnowledge}`,
       source: "help",
     };
   }
-}
-
-/** Pure helper re-export for tests — glossary-first answer without auth. */
-export function previewTerminologyAnswer(question: string, dogName: string) {
-  const hit = answerFromGlossary(question, dogName);
-  if (!hit) return null;
-  return formatGlossaryAnswer(hit.term, dogName);
 }

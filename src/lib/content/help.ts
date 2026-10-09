@@ -76,6 +76,35 @@ export const HELP_ARTICLES: HelpArticle[] = [
     answer:
       "No. Good Dog follows reward-based, force-free guidance. Do not use intimidation, pain, fear, or equipment designed to punish. If a skill feels stuck, make it easier, change the environment, or ask for qualified reward-based help.",
   },
+  {
+    id: "help-why-yes",
+    question: "Why do I say ‘Yes!’ before giving the treat?",
+    keywords: ["yes", "marker", "mark", "click", "before treat", "word"],
+    answer:
+      "The word “Yes!” is a marker word (an event marker). It helps identify the exact moment you want to reward. You then give the treat. Clear timing helps your dog connect the reward with the behaviour, rather than with whatever happened a few seconds later. You can open “Marker word” in Learn for a fuller explanation.",
+    relatedExerciseIds: ["ex-reward-marker", "ex-name-response"],
+  },
+  {
+    id: "help-positive-reinforcement",
+    question: "What does positive reinforcement mean?",
+    keywords: [
+      "positive reinforcement",
+      "reinforcement",
+      "reward based",
+      "r+",
+    ],
+    answer:
+      "Positive reinforcement means something your dog values follows a behaviour, making that behaviour more likely again. In behavioural science, “positive” means something is added — not that it is morally “good”. It is different from negative reinforcement, which involves removing something. Good Dog’s glossary in Learn explains this in everyday language with examples.",
+    relatedExerciseIds: ["ex-name-response", "ex-reward-marker"],
+  },
+  {
+    id: "help-threshold",
+    question: "What does threshold mean in training?",
+    keywords: ["threshold", "too much", "overwhelmed", "over threshold"],
+    answer:
+      "In everyday training talk, threshold often means the point where your dog becomes too distressed, excited, or overwhelmed to respond comfortably. If they cannot notice something and still work with you, increase distance or reduce difficulty rather than forcing the exercise. It is a practical guide, not a diagnosis of what your dog is feeling.",
+    relatedExerciseIds: ["ex-puppy-sounds", "ex-name-mild-distract"],
+  },
 ];
 
 export function searchHelp(query: string): HelpArticle[] {

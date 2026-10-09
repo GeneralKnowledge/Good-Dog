@@ -123,6 +123,18 @@ CREATE TABLE IF NOT EXISTS dog_skill_progress (
   updated_at INTEGER NOT NULL DEFAULT (unixepoch() * 1000)
 );
 CREATE UNIQUE INDEX IF NOT EXISTS dog_skill_unique ON dog_skill_progress(dog_id, learning_objective_id);
+
+CREATE TABLE IF NOT EXISTS owner_term_progress (
+  id TEXT PRIMARY KEY NOT NULL,
+  owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  term_id TEXT NOT NULL,
+  state TEXT NOT NULL,
+  introduced_at INTEGER NOT NULL,
+  explored_at INTEGER,
+  updated_at INTEGER NOT NULL DEFAULT (unixepoch() * 1000)
+);
+CREATE UNIQUE INDEX IF NOT EXISTS owner_term_unique ON owner_term_progress(owner_id, term_id);
+CREATE INDEX IF NOT EXISTS owner_term_owner_idx ON owner_term_progress(owner_id);
 `;
 
 sqlite.exec(migrationSql);

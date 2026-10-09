@@ -10,6 +10,7 @@ import {
   dailyPlans,
   dogSkillProgress,
   dogs,
+  ownerTermProgress,
   trainingSessions,
   users,
 } from "@/lib/db/schema";
@@ -99,6 +100,7 @@ export async function deleteAccountAction(): Promise<void> {
     db.delete(dogSkillProgress).where(eq(dogSkillProgress.dogId, dog.id)).run();
     db.delete(dogs).where(eq(dogs.id, dog.id)).run();
   }
+  db.delete(ownerTermProgress).where(eq(ownerTermProgress.ownerId, user.id)).run();
   db.delete(users).where(eq(users.id, user.id)).run();
   await destroySession();
   redirect("/");

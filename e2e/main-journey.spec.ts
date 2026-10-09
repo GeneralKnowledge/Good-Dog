@@ -22,6 +22,17 @@ test("main owner journey", async ({ page }) => {
 
   await page.getByRole("link", { name: "Start exercise" }).first().click();
   await expect(page.getByText("Let’s practise")).toBeVisible();
+
+  const termLink = page.getByRole("button", { name: /Explain:/i }).first();
+  if (await termLink.count()) {
+    await termLink.click();
+    await expect(page.getByRole("dialog")).toBeVisible();
+    await expect(page.getByText(/Example:/i)).toBeVisible();
+    await page.getByRole("button", { name: /Close definition/i }).click();
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    await expect(page.getByText("Let’s practise")).toBeVisible();
+  }
+
   await page.getByRole("button", { name: "Finish and tell us how it went" }).click();
   await expect(page.getByRole("heading", { name: "How did that go?" })).toBeVisible();
   await page.getByRole("button", { name: /Easy — managed it comfortably/i }).click();

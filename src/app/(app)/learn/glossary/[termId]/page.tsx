@@ -112,10 +112,13 @@ export default async function GlossaryTermPage({
       ) : null}
 
       {term.needsQualifiedReview ? (
-        <p className="mt-4 text-xs leading-relaxed text-muted">
-          This idea has important nuance. Good Dog gives a careful beginner explanation; serious
-          behaviour work may need a suitably qualified, reward-based professional.
-        </p>
+        <section className="mt-4 rounded-2xl border border-accent/30 bg-accent-soft p-4 text-sm leading-relaxed">
+          <strong>Careful use:</strong> This idea has important nuance and is flagged for qualified
+          review. Good Dog offers literacy and gentle everyday practice ideas only — not a treatment
+          plan for fear, aggression, or resource guarding. If {dog?.name ?? "your dog"} seems
+          worried, stiff, or unsafe around a trigger, pause and seek suitably qualified,
+          reward-based professional help (and a vet if pain or sudden change is possible).
+        </section>
       ) : null}
 
       {related.length > 0 ? (

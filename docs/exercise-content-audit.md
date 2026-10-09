@@ -2,7 +2,7 @@
 
 **Library source:** [`src/lib/content/exercises.ts`](../src/lib/content/exercises.ts)  
 **Seed / versions:** [`scripts/seed.ts`](../scripts/seed.ts), table `exercise_versions`  
-**All exercises currently:** `contentVersion: 1`, `published: true`  
+**All exercises currently:** `published: true`. Content versions are now mostly `2`–`3` after the terminology teaching layer (inline glossary links). Treat this audit’s per-exercise notes as the welfare baseline; re-check copy when bumping versions.  
 **Audit date:** 2026-10-09  
 
 Review statuses are **internal**. They are not certifications, IMDT approvals, or professional sign-off.

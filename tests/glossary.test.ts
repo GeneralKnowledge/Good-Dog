@@ -2,14 +2,19 @@ import { describe, expect, it } from "vitest";
 import { EXERCISE_LIBRARY } from "@/lib/content/exercises";
 import {
   GLOSSARY,
+  LEARN_ASK_ONLY_TERM_IDS,
   collectLinkedTermIds,
   extractTermIdsFromText,
+  findUntaughtPublishedTerms,
   getGlossaryTerm,
   getPublishedGlossary,
   searchGlossary,
   validateGlossaryIntegrity,
 } from "@/lib/content/glossary";
-import { answerFromGlossary } from "@/lib/content/terminology-answers";
+import {
+  answerFromGlossary,
+  preferApprovedGlossaryOverAi,
+} from "@/lib/content/terminology-answers";
 
 const exerciseIds = new Set(EXERCISE_LIBRARY.map((e) => e.id));
 
@@ -136,13 +141,37 @@ describe("exercise term links", () => {
     expect(exercise.contentVersion).toBeGreaterThanOrEqual(2);
   });
 
-  it("keeps most exercises on content version 2 with glossary metadata", () => {
+  it("keeps exercises on content version 2+ with glossary metadata", () => {
     const withTerms = EXERCISE_LIBRARY.filter(
       (e) => (e.glossaryTermIds?.length ?? 0) > 0,
     );
-    expect(withTerms.length).toBeGreaterThanOrEqual(12);
+    expect(withTerms.length).toBe(EXERCISE_LIBRARY.length);
     expect(getPublishedGlossary().length).toBeGreaterThanOrEqual(30);
     expect(GLOSSARY.every((t) => t.id.match(/^[a-z0-9-]+$/))).toBe(true);
+  });
+
+  it("teaches every published term in an exercise or on the Learn/Ask-only allowlist", () => {
+    const linked = new Set<string>();
+    for (const exercise of EXERCISE_LIBRARY) {
+      const texts = [
+        exercise.purpose,
+        exercise.preparation,
+        ...exercise.steps,
+        exercise.lookFor,
+        exercise.ifDifficult,
+        exercise.hint,
+        exercise.safetyNote ?? "",
+      ];
+      for (const id of collectLinkedTermIds(texts)) linked.add(id);
+    }
+    expect(findUntaughtPublishedTerms(linked)).toEqual([]);
+    expect(LEARN_ASK_ONLY_TERM_IDS.has("negative-reinforcement")).toBe(true);
+    expect(linked.has("marker-signal")).toBe(true);
+    expect(linked.has("training-vs-management")).toBe(true);
+    expect(linked.has("stay")).toBe(true);
+    expect(linked.has("drop-swap")).toBe(true);
+    expect(linked.has("behaviour-chain")).toBe(true);
+    expect(linked.has("reinforcement-schedule")).toBe(true);
   });
 });
 
@@ -168,5 +197,26 @@ describe("Ask terminology grounding", () => {
 
   it("returns null for unrelated practical questions", () => {
     expect(answerFromGlossary("What if we miss a day?", "Pip")).toBeNull();
+  });
+
+  it("prefers approved glossary text when AI invents a conflicting definition", () => {
+    const result = preferApprovedGlossaryOverAi(
+      "What is a marker word?",
+      "Pip",
+      "A marker word means you are telling the dog off for being naughty.",
+    );
+    expect(result?.term.id).toBe("marker-word");
+    expect(result?.answer.toLowerCase()).not.toMatch(/telling the dog off/);
+    expect(result?.answer.toLowerCase()).toMatch(/mark|moment|reward/);
+  });
+
+  it("answers negative reinforcement as literacy without equating negative with bad", () => {
+    const result = answerFromGlossary(
+      "What does negative reinforcement mean?",
+      "Pip",
+    );
+    expect(result?.term.id).toBe("negative-reinforcement");
+    expect(result?.answer.toLowerCase()).toMatch(/remov/);
+    expect(result?.answer.toLowerCase()).toMatch(/not .*bad|means removal/);
   });
 });

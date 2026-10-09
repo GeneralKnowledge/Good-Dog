@@ -6,6 +6,7 @@ import {
   TERM_LINK_PATTERN,
   type GlossaryTerm,
 } from "@/lib/content/glossary";
+import type { TermExposureState } from "@/lib/types";
 import { GlossaryPanel } from "./GlossaryPanel";
 
 type Segment =
@@ -37,13 +38,19 @@ export function TermRichText({
   text,
   className,
   onTermsPresented,
+  termExposure,
+  highlightNewTermId,
 }: {
   text: string;
   className?: string;
   onTermsPresented?: (termIds: string[]) => void;
+  termExposure?: Record<string, TermExposureState>;
+  /** When set, the first occurrence of this term in this block shows a quiet “new” cue */
+  highlightNewTermId?: string | null;
 }) {
   const segments = useMemo(() => parseSegments(text), [text]);
   const [active, setActive] = useState<GlossaryTerm | null>(null);
+  const activatorRef = useRef<HTMLButtonElement | null>(null);
 
   const termIds = useMemo(
     () =>
@@ -63,6 +70,13 @@ export function TermRichText({
     onTermsPresented(termIds);
   }, [termIds, onTermsPresented]);
 
+  const firstHighlightIndex = useMemo(() => {
+    if (!highlightNewTermId) return -1;
+    return segments.findIndex(
+      (s) => s.type === "term" && s.termId === highlightNewTermId,
+    );
+  }, [segments, highlightNewTermId]);
+
   if (termIds.length === 0) {
     return <span className={className}>{text}</span>;
   }
@@ -78,22 +92,42 @@ export function TermRichText({
           if (!term) {
             return <Fragment key={`m-${index}`}>{segment.label}</Fragment>;
           }
+          const state = termExposure?.[segment.termId];
+          const showNewCue = index === firstHighlightIndex && !state;
           return (
-            <button
-              key={`m-${index}`}
-              type="button"
-              className="term-link"
-              onClick={() => setActive(term)}
-              aria-haspopup="dialog"
-              aria-label={`Explain: ${term.preferredTerm}`}
-            >
-              {segment.label}
-            </button>
+            <Fragment key={`m-${index}`}>
+              <button
+                type="button"
+                className="term-link"
+                onClick={(event) => {
+                  activatorRef.current = event.currentTarget;
+                  setActive(term);
+                }}
+                aria-haspopup="dialog"
+                aria-label={
+                  showNewCue
+                    ? `New training word: ${term.preferredTerm}`
+                    : `Explain: ${term.preferredTerm}`
+                }
+              >
+                {segment.label}
+              </button>
+              {showNewCue ? (
+                <span className="term-new-cue" aria-hidden="true">
+                  {" "}
+                  (new training word)
+                </span>
+              ) : null}
+            </Fragment>
           );
         })}
       </span>
       {active ? (
-        <GlossaryPanel term={active} onClose={() => setActive(null)} />
+        <GlossaryPanel
+          term={active}
+          onClose={() => setActive(null)}
+          returnFocusRef={activatorRef}
+        />
       ) : null}
     </>
   );

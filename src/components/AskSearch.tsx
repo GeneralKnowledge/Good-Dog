@@ -4,8 +4,7 @@ import Link from "next/link";
 import { useMemo, useState, useTransition } from "react";
 import type { HelpArticle } from "@/lib/content/help";
 import { searchHelp } from "@/lib/content/help";
-import { searchGlossary } from "@/lib/content/glossary";
-import { formatGlossaryAnswer } from "@/lib/content/terminology-answers";
+import { searchGlossary, type GlossaryTerm } from "@/lib/content/glossary";
 import { askOptionalAiAction } from "@/lib/actions/ask";
 
 export function AskSearch({
@@ -24,6 +23,7 @@ export function AskSearch({
   );
   const [aiError, setAiError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
+  const [expandedTermId, setExpandedTermId] = useState<string | null>(null);
 
   const results = useMemo(() => {
     if (!query.trim()) return initialArticles;
@@ -47,6 +47,7 @@ export function AskSearch({
             setAiAnswer(null);
             setAiSource(null);
             setAiError(null);
+            setExpandedTermId(null);
           }}
           placeholder={`e.g. Why do I say yes before the treat?`}
         />
@@ -57,18 +58,17 @@ export function AskSearch({
           <h2 className="mb-2 font-display text-xl">Training words</h2>
           <ul className="flex flex-col gap-3">
             {glossaryMatches.map((term) => (
-              <li key={term.id} className="card p-4 fade-up">
-                <h3 className="font-semibold leading-snug">{term.preferredTerm}</h3>
-                <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-muted">
-                  {formatGlossaryAnswer(term, dogName)}
-                </p>
-                <Link
-                  href={`/learn/glossary/${term.id}`}
-                  className="btn btn-secondary mt-3 w-full"
-                >
-                  Open in Learn
-                </Link>
-              </li>
+              <GlossaryMatchCard
+                key={term.id}
+                term={term}
+                dogName={dogName}
+                expanded={expandedTermId === term.id}
+                onToggle={() =>
+                  setExpandedTermId((current) =>
+                    current === term.id ? null : term.id,
+                  )
+                }
+              />
             ))}
           </ul>
         </section>
@@ -152,6 +152,48 @@ export function AskSearch({
         ) : null}
       </div>
     </div>
+  );
+}
+
+function GlossaryMatchCard({
+  term,
+  dogName,
+  expanded,
+  onToggle,
+}: {
+  term: GlossaryTerm;
+  dogName: string;
+  expanded: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <li className="card p-4 fade-up">
+      <h3 className="font-semibold leading-snug">{term.preferredTerm}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-muted">{term.shortDefinition}</p>
+      {expanded ? (
+        <div className="mt-3 space-y-2 text-sm leading-relaxed text-muted">
+          <p>
+            <span className="font-semibold text-foreground">Example: </span>
+            {term.example.replace(/\byour dog\b/gi, dogName)}
+          </p>
+          <p>{term.deeperExplanation}</p>
+          {term.commonMisunderstanding ? (
+            <p className="rounded-xl bg-accent-soft px-3 py-2">
+              <span className="font-semibold text-foreground">Common mix-up: </span>
+              {term.commonMisunderstanding}
+            </p>
+          ) : null}
+        </div>
+      ) : null}
+      <div className="mt-3 flex flex-col gap-2">
+        <button type="button" className="btn btn-secondary w-full" onClick={onToggle}>
+          {expanded ? "Show less" : "Show a little more"}
+        </button>
+        <Link href={`/learn/glossary/${term.id}`} className="btn btn-ghost w-full">
+          Open in Learn
+        </Link>
+      </div>
+    </li>
   );
 }
 

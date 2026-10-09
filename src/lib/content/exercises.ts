@@ -66,7 +66,7 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 2,
     prerequisiteIds: [],
     purpose:
-      "Give yourself a clear way to mark the exact moment your dog does something useful. Trainers call this an [[event-marker]]. Today you’ll use a spoken [[marker-word]].",
+      "Give yourself a clear way to mark the exact moment your dog does something useful. Trainers call this an [[event-marker]]. Today you’ll use a spoken [[marker-word]] — one kind of [[marker-signal]].",
     preparation:
       "Have several tiny treats ready for clear [[reward-delivery]]. Practise somewhere calm with few distractions.",
     steps: [
@@ -78,10 +78,11 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     lookFor: "Your dog starts looking hopeful as soon as they hear the word.",
     ifDifficult:
       "Keep sessions very short and use a reward your dog clearly enjoys. If they get frantic, pause — [[arousal]] may be too high for clear learning.",
-    hint: "The word should come first, then the reward — keep the gap tiny.",
+    hint: "The word should come first, then the reward — keep the gap tiny. A clicker is another [[marker-signal]]; pick one clear option for now.",
     glossaryTermIds: [
       "event-marker",
       "marker-word",
+      "marker-signal",
       "reward",
       "reward-delivery",
       "timing",
@@ -89,7 +90,7 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
       "arousal",
     ],
     topicGroup: "everyday_foundations",
-    contentVersion: 2,
+    contentVersion: 3,
   },
   {
     id: "ex-engagement-easy",
@@ -182,7 +183,7 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: ["ex-sit-comfort"],
     purpose:
-      "Help your dog pause calmly for a moment before moving on. Trainers often call this a brief [[wait]].",
+      "Help your dog pause calmly for a moment before moving on. Trainers often call this a brief [[wait]]. A longer held pause is often called a [[stay]] — we are not asking for that yet.",
     preparation: "Start indoors. Have a reward ready and keep sessions short.",
     steps: [
       "Ask for a sit, or wait until your dog sits.",
@@ -194,10 +195,10 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     ifDifficult:
       "Reward after half a second, then gradually build. That means lowering your [[criteria]].",
     easierVariationId: "ex-sit-comfort",
-    hint: "Short successful waits beat long, wobbly ones.",
-    glossaryTermIds: ["wait", "cue", "marker-word", "fluency", "criteria"],
+    hint: "Short successful waits beat long, wobbly ones. Save a formal [[stay]] for when short waits feel easy.",
+    glossaryTermIds: ["wait", "stay", "cue", "marker-word", "fluency", "criteria"],
     topicGroup: "life_at_home",
-    contentVersion: 2,
+    contentVersion: 3,
   },
   {
     id: "ex-mat-settle",
@@ -230,16 +231,17 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     ifDifficult:
       "Make the mat more inviting with easier rewards and less pressure to stay. Lower the [[criteria]].",
     harderVariationId: "ex-calm-home",
-    hint: "Reward on the mat itself so the place becomes valuable.",
+    hint: "Reward on the mat itself so the place becomes valuable. Later, approach → settle can become a short [[behaviour-chain]].",
     glossaryTermIds: [
       "settle",
       "shaping",
       "criteria",
       "marker-word",
       "body-language",
+      "behaviour-chain",
     ],
     topicGroup: "calm_confidence",
-    contentVersion: 2,
+    contentVersion: 3,
   },
   {
     id: "ex-calm-home",
@@ -253,13 +255,13 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: ["ex-mat-settle"],
     purpose:
-      "Help your dog practise a calm [[settle]] while everyday life continues nearby — gentle [[generalisation]] of the mat skill.",
+      "Help your dog practise a calm [[settle]] while everyday life continues nearby — gentle [[generalisation]] of the mat skill. Going to the mat and settling can become a short [[behaviour-chain]] once each piece is easy.",
     preparation:
       "Use the mat your dog already knows. Start when the house is fairly quiet so [[arousal]] stays manageable.",
     steps: [
       "Invite your dog to the mat and reward a [[settle]].",
       "Sit nearby and calmly read or sip a drink for a minute.",
-      "Quietly reward soft staying every so often — keep [[criteria]] realistic.",
+      "Quietly reward soft staying every so often — keep [[criteria]] realistic. You do not need a fixed [[reinforcement-schedule]] yet; pay often while this is new.",
       "Release gently and finish before they get restless. Allow [[recovery-time]] afterwards if needed.",
     ],
     lookFor: "Softer breathing and a willingness to stay without fussing. Watch [[body-language]].",
@@ -274,9 +276,11 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
       "criteria",
       "recovery-time",
       "body-language",
+      "behaviour-chain",
+      "reinforcement-schedule",
     ],
     topicGroup: "calm_confidence",
-    contentVersion: 2,
+    contentVersion: 3,
   },
   {
     id: "ex-handling-touch",
@@ -580,30 +584,32 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: ["ex-engagement-easy"],
     purpose:
-      "Practise an easy [[leave-it]] game: turning away from something can earn something better.",
+      "Practise an easy [[leave-it]] game: turning away from something can earn something better. This is [[training-vs-management|training]]; keeping unsafe items out of reach is [[management]].",
     preparation:
       "Use a low-value item under your foot or hand, and higher-value rewards from your other hand. Dangerous items are a [[management]] job first — not a training game.",
     steps: [
       "Place a dull item where your dog can see but not take it.",
       "Wait for any look away or pause — that is today’s [[criteria]].",
-      "Use your [[marker-word]] and reward from your other hand.",
+      "Use your [[marker-word]] and reward from your other hand. A kind [[drop-swap|trade or swap]] is a related skill for items already in the mouth — we are not practising that here.",
       "Repeat a few times, keeping success easy.",
     ],
     lookFor: "Offering space from the item without tension. Watch [[body-language]].",
     ifDifficult:
       "Use an even duller item and reward the tiniest look away.",
     safetyNote:
-      "Do not use this game with dangerous items your dog might grab. Manage first, train second.",
+      "Do not use this game with dangerous items your dog might grab. Manage first, train second. If your dog stiffens or growls over items, pause and seek qualified reward-based help rather than forcing a [[drop-swap]].",
     hint: "You are teaching a choice, not a stare-down.",
     glossaryTermIds: [
       "leave-it",
       "management",
+      "training-vs-management",
       "criteria",
       "marker-word",
       "body-language",
+      "drop-swap",
     ],
     topicGroup: "life_at_home",
-    contentVersion: 2,
+    contentVersion: 3,
   },
   {
     id: "ex-door-manners",
@@ -617,7 +623,7 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: ["ex-wait-brief"],
     purpose:
-      "Make doorways less exciting so exits feel safer and calmer. This is everyday [[door-manners]], built from a brief [[wait]] plus [[management]].",
+      "Make doorways less exciting so exits feel safer and calmer. This is everyday [[door-manners]], built from a brief [[wait]] plus [[management]] — a clear [[training-vs-management]] pairing.",
     preparation:
       "Practise at an internal door first. Have rewards ready. Keep [[arousal]] low.",
     steps: [
@@ -628,19 +634,20 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     ],
     lookFor: "Less rushing and more settled feet near the door.",
     ifDifficult:
-      "Practise further from the door and keep openings tiny. Increase [[distance]] from the excitement.",
+      "Practise further from the door and keep openings tiny. Increase [[distance]] from the excitement. Use [[management]] (lead, quieter exit) while you train.",
     easierVariationId: "ex-wait-brief",
     hint: "The door opening is a privilege earned by calm, not a race start.",
     glossaryTermIds: [
       "door-manners",
       "wait",
       "management",
+      "training-vs-management",
       "arousal",
       "marker-word",
       "distance",
     ],
     topicGroup: "life_at_home",
-    contentVersion: 2,
+    contentVersion: 3,
   },
   {
     id: "ex-greeting-calm",

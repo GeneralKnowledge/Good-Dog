@@ -14,6 +14,7 @@ function migrate(sqlite: Database.Database) {
       id TEXT PRIMARY KEY NOT NULL,
       email TEXT NOT NULL UNIQUE,
       password_hash TEXT NOT NULL,
+      is_guest INTEGER NOT NULL DEFAULT 0,
       timezone TEXT NOT NULL DEFAULT 'Europe/London',
       created_at INTEGER NOT NULL DEFAULT (unixepoch() * 1000),
       updated_at INTEGER NOT NULL DEFAULT (unixepoch() * 1000)

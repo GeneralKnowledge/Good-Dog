@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useId, useState, useTransition } from "react";
+import { useCallback, useId, useMemo, useState, useTransition } from "react";
 import { nanoid } from "nanoid";
 import { markTermsIntroducedAction } from "@/lib/actions/glossary";
 import { submitFeedbackAction } from "@/lib/actions/training";
-import type { ExerciseContent } from "@/lib/types";
+import { extractTermIdsFromText } from "@/lib/content/glossary";
+import type { ExerciseContent, TermExposureState } from "@/lib/types";
 import { TermRichText } from "@/components/glossary/TermRichText";
 
 export function ExerciseRunner({
@@ -16,6 +17,7 @@ export function ExerciseRunner({
   planId,
   planItemId,
   exerciseVersionId,
+  termExposure = {},
 }: {
   exercise: ExerciseContent;
   dogId: string;
@@ -23,6 +25,7 @@ export function ExerciseRunner({
   planId?: string;
   planItemId?: string;
   exerciseVersionId: string;
+  termExposure?: Record<string, TermExposureState>;
 }) {
   const router = useRouter();
   const noteId = useId();
@@ -35,12 +38,52 @@ export function ExerciseRunner({
   const [mutationId] = useState(() => nanoid());
   const seen = useState(() => new Set<string>())[0];
 
-  const onTermsPresented = useCallback((termIds: string[]) => {
-    const fresh = termIds.filter((id) => !seen.has(id));
-    if (fresh.length === 0) return;
-    for (const id of fresh) seen.add(id);
-    void markTermsIntroducedAction(fresh);
-  }, [seen]);
+  const onTermsPresented = useCallback(
+    (termIds: string[]) => {
+      const fresh = termIds.filter((id) => !seen.has(id));
+      if (fresh.length === 0) return;
+      for (const id of fresh) seen.add(id);
+      void markTermsIntroducedAction(fresh);
+    },
+    [seen],
+  );
+
+  /** First new term in guide copy (not metadata-only footer). */
+  const firstNewTermId = useMemo(() => {
+    const guideTexts = [
+      exercise.purpose,
+      exercise.preparation,
+      ...exercise.steps,
+      exercise.lookFor,
+      exercise.ifDifficult,
+      exercise.safetyNote ?? "",
+    ];
+    for (const text of guideTexts) {
+      for (const id of extractTermIdsFromText(text)) {
+        if (!termExposure[id]) return id;
+      }
+    }
+    return null;
+  }, [exercise, termExposure]);
+
+  const newTermBlockIndex = useMemo(() => {
+    if (!firstNewTermId) return -1;
+    const blocks = [
+      exercise.purpose,
+      exercise.preparation,
+      ...exercise.steps,
+      exercise.lookFor,
+      exercise.ifDifficult,
+      exercise.safetyNote ?? "",
+    ];
+    return blocks.findIndex((text) =>
+      extractTermIdsFromText(text).includes(firstNewTermId),
+    );
+  }, [exercise, firstNewTermId]);
+
+  function highlightFor(blockIndex: number): string | null {
+    return newTermBlockIndex === blockIndex ? firstNewTermId : null;
+  }
 
   function sendFeedback(outcome: "easy" | "getting_there" | "too_difficult") {
     setError(null);
@@ -157,32 +200,52 @@ export function ExerciseRunner({
     );
   }
 
+  const stepStartIndex = 2;
+
   return (
     <div className="mx-5 my-4 flex flex-col gap-4 pb-8 fade-up">
       <p className="text-sm text-muted">
         Underlined words are training terms you can tap for a short explanation.
+        {firstNewTermId
+          ? " One new word in today’s guide is marked quietly so you can explore it if you want."
+          : ""}
       </p>
 
       <div className="card p-5">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand">Purpose</p>
         <div className="mt-2 leading-relaxed">
-          <TermRichText text={exercise.purpose} onTermsPresented={onTermsPresented} />
+          <TermRichText
+            text={exercise.purpose}
+            onTermsPresented={onTermsPresented}
+            termExposure={termExposure}
+            highlightNewTermId={highlightFor(0)}
+          />
         </div>
       </div>
 
       <div className="card p-5">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand">Before you start</p>
         <div className="mt-2 leading-relaxed">
-          <TermRichText text={exercise.preparation} onTermsPresented={onTermsPresented} />
+          <TermRichText
+            text={exercise.preparation}
+            onTermsPresented={onTermsPresented}
+            termExposure={termExposure}
+            highlightNewTermId={highlightFor(1)}
+          />
         </div>
       </div>
 
       <div className="card p-5">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand">Let’s practise</p>
         <ol className="mt-3 list-decimal space-y-3 pl-5 leading-relaxed">
-          {exercise.steps.map((step) => (
+          {exercise.steps.map((step, i) => (
             <li key={step}>
-              <TermRichText text={step} onTermsPresented={onTermsPresented} />
+              <TermRichText
+                text={step}
+                onTermsPresented={onTermsPresented}
+                termExposure={termExposure}
+                highlightNewTermId={highlightFor(stepStartIndex + i)}
+              />
             </li>
           ))}
         </ol>
@@ -191,7 +254,12 @@ export function ExerciseRunner({
       <div className="card p-5">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand">What to look for</p>
         <div className="mt-2 leading-relaxed">
-          <TermRichText text={exercise.lookFor} onTermsPresented={onTermsPresented} />
+          <TermRichText
+            text={exercise.lookFor}
+            onTermsPresented={onTermsPresented}
+            termExposure={termExposure}
+            highlightNewTermId={highlightFor(stepStartIndex + exercise.steps.length)}
+          />
         </div>
       </div>
 
@@ -200,21 +268,39 @@ export function ExerciseRunner({
           If it feels difficult
         </p>
         <div className="mt-2 leading-relaxed">
-          <TermRichText text={exercise.ifDifficult} onTermsPresented={onTermsPresented} />
+          <TermRichText
+            text={exercise.ifDifficult}
+            onTermsPresented={onTermsPresented}
+            termExposure={termExposure}
+            highlightNewTermId={highlightFor(
+              stepStartIndex + exercise.steps.length + 1,
+            )}
+          />
         </div>
       </div>
 
       {exercise.safetyNote ? (
         <div className="rounded-2xl border border-accent/30 bg-accent-soft p-4 text-sm leading-relaxed">
           <strong>Safety note:</strong>{" "}
-          <TermRichText text={exercise.safetyNote} onTermsPresented={onTermsPresented} />
+          <TermRichText
+            text={exercise.safetyNote}
+            onTermsPresented={onTermsPresented}
+            termExposure={termExposure}
+            highlightNewTermId={highlightFor(
+              stepStartIndex + exercise.steps.length + 2,
+            )}
+          />
         </div>
       ) : null}
 
       {showHint ? (
         <div className="card p-4 text-sm leading-relaxed text-brand-deep fade-up">
           <strong>Hint:</strong>{" "}
-          <TermRichText text={exercise.hint} onTermsPresented={onTermsPresented} />
+          <TermRichText
+            text={exercise.hint}
+            onTermsPresented={onTermsPresented}
+            termExposure={termExposure}
+          />
         </div>
       ) : null}
 
@@ -224,7 +310,11 @@ export function ExerciseRunner({
           {exercise.glossaryTermIds!.map((id, i) => (
             <span key={id}>
               {i > 0 ? ", " : ""}
-              <TermRichText text={`[[${id}]]`} onTermsPresented={onTermsPresented} />
+              <TermRichText
+                text={`[[${id}]]`}
+                termExposure={termExposure}
+                // Footer links are tappable but do not drive introduction by themselves
+              />
             </span>
           ))}
         </div>

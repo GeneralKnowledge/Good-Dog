@@ -70,10 +70,38 @@ Good Dog glossary text must remain original.
 
 `owner_term_progress` stores `introduced` / `explored` per authenticated owner.
 
-- Introduced: term appears in exercise copy the owner actually saw
+- Introduced: term appears in exercise guide copy the owner actually saw (not metadata alone)
 - Explored: owner opened the panel or Learn term page
+- ExerciseRunner shows a quiet “(new training word)” cue on the first new term in a guide
 
 This never affects dog skill progression or plan generation.
+
+## Learn/Ask-only allowlist
+
+Some published terms are literacy-only and need not appear in exercise copy. They live in
+`LEARN_ASK_ONLY_TERM_IDS` / `LEARN_ASK_ONLY_REASONS` in `glossary.ts`.
+
+Currently:
+
+| Term id | Reason |
+| --- | --- |
+| `negative-reinforcement` | Add/remove literacy for Ask/Learn; early plans should not centre −R teaching |
+
+Every other published term must be linked in at least one exercise (`[[term-id]]` in copy).
+
+## Terms awaiting qualified review
+
+These are published for careful beginner literacy with in-product boundary copy. They are **not**
+claimed as professionally signed-off:
+
+- `threshold`
+- `desensitisation`
+- `counterconditioning`
+- `negative-reinforcement`
+- `leave-it`
+- `drop-swap`
+
+Do not add how-to treatment plans for fear or aggression against these entries.
 
 ## Review checklist
 

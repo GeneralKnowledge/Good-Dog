@@ -87,6 +87,15 @@ Exercise ID / version: _______________________
 - [ ] Life-stage gate tested mentally against young puppy / senior where relevant.
 - [ ] Topic group placement does not oversell a “course path”.
 
+## 12. Training terminology (glossary)
+
+- [ ] Plain English comes first; technical terms appear only when useful for this task.
+- [ ] Inline `[[term-id]]` / `[[term-id|label]]` links resolve to published glossary entries.
+- [ ] `glossaryTermIds` lists terms taught or reinforced here; `contentVersion` bumped on material glossary edits.
+- [ ] No unexplained jargon; no wall of definitions before practice.
+- [ ] Welfare-sensitive terms (`needsQualifiedReview`) keep literacy + boundaries, not treatment plans.
+- [ ] Definitions remain original Good Dog wording (no proprietary course copy; no IMDT endorsement claims).
+
 ---
 
 ## Decision
@@ -109,3 +118,5 @@ _________________________________________________________________
 - [`exercise-content-audit.md`](./exercise-content-audit.md)
 - [`welfare-principles-audit.md`](./welfare-principles-audit.md)
 - [`improvement-roadmap.md`](./improvement-roadmap.md)
+- [`glossary-authoring.md`](./glossary-authoring.md)
+- [`terminology-teaching-audit.md`](./terminology-teaching-audit.md)

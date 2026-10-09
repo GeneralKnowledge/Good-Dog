@@ -43,3 +43,13 @@ No AI introduced if unused; existing optional AI will prefer glossary definition
 - [x] Owner-scoped `owner_term_progress` (introduced / explored)
 - [x] Ask grounded on glossary (`answerFromGlossary` before help/AI)
 - [x] Authoring docs + Vitest coverage for integrity, search, UI, isolation
+
+## Phase 2+ backlog (next steps)
+
+- [x] Progressive new-vs-introduced cues in `ExerciseRunner` (quiet “(new training word)” cue)
+- [x] Orphan terms taught in context or allowlisted (`LEARN_ASK_ONLY_TERM_IDS`)
+- [x] Glossary panel focus trap, restore-focus, body scroll lock
+- [x] Ask short glossary cards + fail-closed preference for approved definitions over AI
+- [x] Stronger `needsQualifiedReview` boundary copy on term pages / panels
+- [x] Docs sync: authoring allowlist, content-review glossary section, exercise-audit version note
+- [x] Tests for progressive cue, orphan integrity, panel a11y, Ask grounding

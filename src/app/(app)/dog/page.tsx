@@ -9,6 +9,7 @@ import { describeSkillState } from "@/lib/domain/progression";
 import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { dogSkillProgress, dogs, trainingSessions } from "@/lib/db/schema";
+import { ClaimGuestForm } from "@/components/ClaimGuestForm";
 import { deleteAccountAction, signOutAction } from "@/lib/actions/auth";
 
 const LIFE_STAGE_LABELS: Record<string, string> = {
@@ -124,6 +125,17 @@ export default async function DogPage() {
         <DogProfileEditor dog={dog} />
       </section>
 
+      {user.isGuest ? (
+        <section className="mx-5 mb-4 card p-5">
+          <h2 className="font-display text-xl">Keep your progress</h2>
+          <p className="mt-2 text-sm leading-relaxed text-muted">
+            You’re using a guest session on this device. Add an email and password so you can sign
+            in again later without losing {dog.name}’s plan and history.
+          </p>
+          <ClaimGuestForm />
+        </section>
+      ) : null}
+
       <section className="mx-5 mb-8 flex flex-col gap-3">
         <form action={signOutAction}>
           <button type="submit" className="btn btn-secondary w-full">
@@ -132,7 +144,7 @@ export default async function DogPage() {
         </form>
         <form action={deleteAccountAction}>
           <button type="submit" className="btn btn-ghost w-full text-danger">
-            Delete account and training data
+            {user.isGuest ? "Delete guest data" : "Delete account and training data"}
           </button>
         </form>
         <Link href="/privacy" className="text-center text-sm text-muted underline">

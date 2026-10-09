@@ -11,6 +11,7 @@ export const users = sqliteTable("users", {
   id: text("id").primaryKey(),
   email: text("email").notNull().unique(),
   passwordHash: text("password_hash").notNull(),
+  isGuest: integer("is_guest", { mode: "boolean" }).notNull().default(false),
   timezone: text("timezone").notNull().default("Europe/London"),
   createdAt: integer("created_at", { mode: "timestamp_ms" })
     .notNull()

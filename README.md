@@ -25,6 +25,8 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+You can create an account, sign in, or **continue as a guest**. Guests get a full session on this device; add an email later from **My dog** to keep progress. The app also supports **Add to Home Screen** (web app manifest + install prompt) for a phone shortcut.
+
 ### Environment
 
 | Variable | Purpose |

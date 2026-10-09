@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { localTimeHm } from "@/lib/dates";
+import { isReminderDueAt, localTimeHm, timeHmToMinutes } from "@/lib/dates";
 
 describe("localTimeHm", () => {
   it("formats a known UTC instant in Europe/London", () => {
@@ -13,13 +13,41 @@ describe("localTimeHm", () => {
     const date = new Date("2024-07-15T16:05:00.000Z");
     expect(localTimeHm(date, "Europe/London")).toBe("17:05");
   });
+
+  it("keeps midnight zero-padded", () => {
+    const date = new Date("2026-10-09T23:44:00.000Z"); // 00:44 Europe/London (BST)
+    expect(localTimeHm(date, "Europe/London")).toBe("00:44");
+  });
 });
 
-describe("reminder due window", () => {
-  it("treats times at or after the reminder as due", () => {
-    const reminder = "17:00";
-    expect("16:59" < reminder).toBe(true);
-    expect("17:00" < reminder).toBe(false);
-    expect("17:05" < reminder).toBe(false);
+describe("isReminderDueAt", () => {
+  it("is not due one minute before the reminder", () => {
+    expect(
+      isReminderDueAt({ nowHm: "00:44", reminderHm: "00:45", windowMinutes: 20 }),
+    ).toBe(false);
+  });
+
+  it("is due at the reminder minute", () => {
+    expect(
+      isReminderDueAt({ nowHm: "00:45", reminderHm: "00:45", windowMinutes: 20 }),
+    ).toBe(true);
+  });
+
+  it("is due a few minutes after, within the window", () => {
+    expect(
+      isReminderDueAt({ nowHm: "00:55", reminderHm: "00:45", windowMinutes: 20 }),
+    ).toBe(true);
+  });
+
+  it("is not due after the delivery window", () => {
+    expect(
+      isReminderDueAt({ nowHm: "01:10", reminderHm: "00:45", windowMinutes: 20 }),
+    ).toBe(false);
+  });
+
+  it("parses HH:mm into minutes", () => {
+    expect(timeHmToMinutes("00:45")).toBe(45);
+    expect(timeHmToMinutes("17:00")).toBe(17 * 60);
+    expect(timeHmToMinutes("nope")).toBeNull();
   });
 });

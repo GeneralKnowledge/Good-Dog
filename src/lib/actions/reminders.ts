@@ -97,10 +97,13 @@ export async function updateReminderSettingsAction(
     return { ok: false, error: "Choose a valid time" };
   }
 
+  const timeChanged = timeRaw !== user.reminderLocalTime;
   db.update(users)
     .set({
       reminderEnabled: enabled,
       reminderLocalTime: timeRaw,
+      // If they pick a new time, allow that slot to fire today.
+      reminderLastSentDate: timeChanged ? null : user.reminderLastSentDate,
       updatedAt: new Date(),
     })
     .where(eq(users.id, user.id))

@@ -1,5 +1,5 @@
 import { and, eq } from "drizzle-orm";
-import { localDateString, localTimeHm } from "@/lib/dates";
+import { isReminderDueAt, localDateString, localTimeHm } from "@/lib/dates";
 import { db } from "@/lib/db";
 import { dailyPlans, dogs, pushSubscriptions, users } from "@/lib/db/schema";
 import { configureWebPush, webpush } from "@/lib/push/vapid";
@@ -109,8 +109,14 @@ export async function sendDueTrainingReminders(now: Date = new Date()): Promise<
       skipped += 1;
       continue;
     }
-    // Due once the local clock reaches the chosen time (works with 5–15 min cron).
-    if (hm < user.reminderLocalTime) {
+    // Only within a short window after the chosen time (works with 5–15 min cron).
+    if (
+      !isReminderDueAt({
+        nowHm: hm,
+        reminderHm: user.reminderLocalTime,
+        windowMinutes: 20,
+      })
+    ) {
       skipped += 1;
       continue;
     }

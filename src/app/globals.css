@@ -210,6 +210,27 @@ textarea {
   animation: softPulse 2.4s ease-in-out infinite;
 }
 
+.term-link {
+  display: inline;
+  margin: 0;
+  padding: 0 0.05em;
+  border: none;
+  border-bottom: 1.5px dashed var(--brand);
+  background: transparent;
+  color: var(--brand-deep);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.term-link:hover,
+.term-link:focus-visible {
+  background: var(--brand-soft);
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
 @keyframes softPulse {
   0%,
   100% {

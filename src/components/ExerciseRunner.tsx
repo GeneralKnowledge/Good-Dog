@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useId, useState, useTransition } from "react";
+import { useCallback, useId, useState, useTransition } from "react";
 import { nanoid } from "nanoid";
+import { markTermsIntroducedAction } from "@/lib/actions/glossary";
 import { submitFeedbackAction } from "@/lib/actions/training";
 import type { ExerciseContent } from "@/lib/types";
+import { TermRichText } from "@/components/glossary/TermRichText";
 
 export function ExerciseRunner({
   exercise,
@@ -31,6 +33,14 @@ export function ExerciseRunner({
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
   const [mutationId] = useState(() => nanoid());
+  const seen = useState(() => new Set<string>())[0];
+
+  const onTermsPresented = useCallback((termIds: string[]) => {
+    const fresh = termIds.filter((id) => !seen.has(id));
+    if (fresh.length === 0) return;
+    for (const id of fresh) seen.add(id);
+    void markTermsIntroducedAction(fresh);
+  }, [seen]);
 
   function sendFeedback(outcome: "easy" | "getting_there" | "too_difficult") {
     setError(null);
@@ -149,46 +159,74 @@ export function ExerciseRunner({
 
   return (
     <div className="mx-5 my-4 flex flex-col gap-4 pb-8 fade-up">
+      <p className="text-sm text-muted">
+        Underlined words are training terms you can tap for a short explanation.
+      </p>
+
       <div className="card p-5">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand">Purpose</p>
-        <p className="mt-2 leading-relaxed">{exercise.purpose}</p>
+        <div className="mt-2 leading-relaxed">
+          <TermRichText text={exercise.purpose} onTermsPresented={onTermsPresented} />
+        </div>
       </div>
 
       <div className="card p-5">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand">Before you start</p>
-        <p className="mt-2 leading-relaxed">{exercise.preparation}</p>
+        <div className="mt-2 leading-relaxed">
+          <TermRichText text={exercise.preparation} onTermsPresented={onTermsPresented} />
+        </div>
       </div>
 
       <div className="card p-5">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand">Let’s practise</p>
         <ol className="mt-3 list-decimal space-y-3 pl-5 leading-relaxed">
           {exercise.steps.map((step) => (
-            <li key={step}>{step}</li>
+            <li key={step}>
+              <TermRichText text={step} onTermsPresented={onTermsPresented} />
+            </li>
           ))}
         </ol>
       </div>
 
       <div className="card p-5">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand">What to look for</p>
-        <p className="mt-2 leading-relaxed">{exercise.lookFor}</p>
+        <div className="mt-2 leading-relaxed">
+          <TermRichText text={exercise.lookFor} onTermsPresented={onTermsPresented} />
+        </div>
       </div>
 
       <div className="card p-5">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand">
           If it feels difficult
         </p>
-        <p className="mt-2 leading-relaxed">{exercise.ifDifficult}</p>
+        <div className="mt-2 leading-relaxed">
+          <TermRichText text={exercise.ifDifficult} onTermsPresented={onTermsPresented} />
+        </div>
       </div>
 
       {exercise.safetyNote ? (
         <div className="rounded-2xl border border-accent/30 bg-accent-soft p-4 text-sm leading-relaxed">
-          <strong>Safety note:</strong> {exercise.safetyNote}
+          <strong>Safety note:</strong>{" "}
+          <TermRichText text={exercise.safetyNote} onTermsPresented={onTermsPresented} />
         </div>
       ) : null}
 
       {showHint ? (
         <div className="card p-4 text-sm leading-relaxed text-brand-deep fade-up">
-          <strong>Hint:</strong> {exercise.hint}
+          <strong>Hint:</strong>{" "}
+          <TermRichText text={exercise.hint} onTermsPresented={onTermsPresented} />
+        </div>
+      ) : null}
+
+      {(exercise.glossaryTermIds?.length ?? 0) > 0 ? (
+        <div className="text-sm text-muted">
+          Words in this exercise:{" "}
+          {exercise.glossaryTermIds!.map((id, i) => (
+            <span key={id}>
+              {i > 0 ? ", " : ""}
+              <TermRichText text={`[[${id}]]`} onTermsPresented={onTermsPresented} />
+            </span>
+          ))}
         </div>
       ) : null}
 

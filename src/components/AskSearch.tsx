@@ -1,8 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState, useTransition } from "react";
 import type { HelpArticle } from "@/lib/content/help";
 import { searchHelp } from "@/lib/content/help";
+import { searchGlossary } from "@/lib/content/glossary";
+import { formatGlossaryAnswer } from "@/lib/content/terminology-answers";
 import { askOptionalAiAction } from "@/lib/actions/ask";
 
 export function AskSearch({
@@ -16,6 +19,9 @@ export function AskSearch({
 }) {
   const [query, setQuery] = useState("");
   const [aiAnswer, setAiAnswer] = useState<string | null>(null);
+  const [aiSource, setAiSource] = useState<"glossary" | "help" | "ai" | null>(
+    null,
+  );
   const [aiError, setAiError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
@@ -23,6 +29,11 @@ export function AskSearch({
     if (!query.trim()) return initialArticles;
     return searchHelp(query);
   }, [query, initialArticles]);
+
+  const glossaryMatches = useMemo(() => {
+    if (!query.trim()) return [];
+    return searchGlossary(query).slice(0, 3);
+  }, [query]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -34,11 +45,34 @@ export function AskSearch({
           onChange={(e) => {
             setQuery(e.target.value);
             setAiAnswer(null);
+            setAiSource(null);
             setAiError(null);
           }}
-          placeholder={`e.g. What if ${dogName} gets distracted?`}
+          placeholder={`e.g. Why do I say yes before the treat?`}
         />
       </div>
+
+      {glossaryMatches.length > 0 ? (
+        <section aria-label="Training words">
+          <h2 className="mb-2 font-display text-xl">Training words</h2>
+          <ul className="flex flex-col gap-3">
+            {glossaryMatches.map((term) => (
+              <li key={term.id} className="card p-4 fade-up">
+                <h3 className="font-semibold leading-snug">{term.preferredTerm}</h3>
+                <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-muted">
+                  {formatGlossaryAnswer(term, dogName)}
+                </p>
+                <Link
+                  href={`/learn/glossary/${term.id}`}
+                  className="btn btn-secondary mt-3 w-full"
+                >
+                  Open in Learn
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <ul className="flex flex-col gap-3">
         {results.map((article) => (
@@ -54,57 +88,69 @@ export function AskSearch({
             ) : null}
           </li>
         ))}
-        {results.length === 0 ? (
+        {results.length === 0 && glossaryMatches.length === 0 ? (
           <li className="card p-4 text-sm text-muted">
-            No exact match in the approved library. Try another phrase, or browse the suggestions
-            above by clearing the search.
+            No exact match in the approved library. Try another phrase, browse
+            training words in Learn, or clear the search.
           </li>
         ) : null}
       </ul>
 
-      {aiConfigured ? (
-        <div className="card p-4">
-          <h2 className="font-display text-xl">Optional AI helper</h2>
-          <p className="mt-2 text-sm text-muted leading-relaxed">
-            Uses approved Good Dog guidance as its source. Disabled automatically if no API key is
-            configured.
-          </p>
-          <button
-            type="button"
-            className="btn btn-secondary mt-3 w-full"
-            disabled={pending || !query.trim()}
-            onClick={() => {
-              startTransition(async () => {
-                setAiError(null);
-                const result = await askOptionalAiAction({
-                  question: query,
-                  dogName,
-                });
-                if (!result.ok) {
-                  setAiError(result.error);
-                  setAiAnswer(null);
-                  return;
-                }
-                setAiAnswer(result.answer);
-              });
-            }}
-          >
-            {pending ? "Thinking…" : "Ask with approved guidance"}
-          </button>
-          {aiAnswer ? (
-            <p className="mt-3 text-sm leading-relaxed text-brand-deep">{aiAnswer}</p>
-          ) : null}
-          {aiError ? (
-            <p className="mt-3 text-sm text-danger" role="alert">
-              {aiError}
-            </p>
-          ) : null}
-        </div>
-      ) : (
-        <p className="text-sm text-muted">
-          Optional AI help is not configured. The approved answers above work without an API key.
+      <div className="card p-4">
+        <h2 className="font-display text-xl">Ask with approved guidance</h2>
+        <p className="mt-2 text-sm text-muted leading-relaxed">
+          Terminology answers use Good Dog’s reviewed glossary. Optional AI (when
+          configured) stays grounded on the same approved text.
+          {!aiConfigured
+            ? " No AI key is configured — glossary and help answers still work."
+            : ""}
         </p>
-      )}
+        <button
+          type="button"
+          className="btn btn-secondary mt-3 w-full"
+          disabled={pending || !query.trim()}
+          onClick={() => {
+            startTransition(async () => {
+              setAiError(null);
+              const result = await askOptionalAiAction({
+                question: query,
+                dogName,
+              });
+              if (!result.ok) {
+                setAiError(result.error);
+                setAiAnswer(null);
+                setAiSource(null);
+                return;
+              }
+              setAiAnswer(result.answer);
+              setAiSource(result.source);
+            });
+          }}
+        >
+          {pending ? "Thinking…" : "Explain using approved answers"}
+        </button>
+        {aiAnswer ? (
+          <div className="mt-3">
+            {aiSource ? (
+              <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-brand">
+                {aiSource === "glossary"
+                  ? "From the glossary"
+                  : aiSource === "ai"
+                    ? "AI using approved guidance"
+                    : "From help articles"}
+              </p>
+            ) : null}
+            <p className="whitespace-pre-wrap text-sm leading-relaxed text-brand-deep">
+              {aiAnswer}
+            </p>
+          </div>
+        ) : null}
+        {aiError ? (
+          <p className="mt-3 text-sm text-danger" role="alert">
+            {aiError}
+          </p>
+        ) : null}
+      </div>
     </div>
   );
 }

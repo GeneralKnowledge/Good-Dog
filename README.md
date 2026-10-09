@@ -53,11 +53,17 @@ npm run build
 ## Product map
 
 - **Today** — persisted daily plan (2–3 short activities)
-- **Learn** — curated exercise library by topic
+- **Learn** — curated exercise library by topic, plus a searchable training glossary
 - **My dog** — profile, plain-English progress, history
-- **Ask** — searchable approved help answers (+ optional AI)
+- **Ask** — searchable approved help answers, glossary-grounded terminology answers (+ optional AI)
 
 Progression is deterministic (no LLM required): prerequisites, welfare overrides, consolidation vs modest difficulty increases, and same-day plan stability.
+
+### Training terminology
+
+Good Dog teaches proper training language gradually inside exercises (plain English first, technical term alongside, tap for a short definition). Owners can browse or search the glossary in Learn. Optional AI, when configured, must use the approved glossary rather than inventing conflicting definitions.
+
+See [`docs/glossary-authoring.md`](./docs/glossary-authoring.md) and [`docs/terminology-teaching-audit.md`](./docs/terminology-teaching-audit.md).
 
 ## Architecture notes
 
@@ -91,3 +97,9 @@ An internal, evidence-based audit against *publicly documented* IMDT ethics and 
 | [docs/progression-audit.md](./docs/progression-audit.md) | Scenario traces through the real planner |
 | [docs/improvement-roadmap.md](./docs/improvement-roadmap.md) | P0–P3 implementation plan |
 | [docs/content-review-checklist.md](./docs/content-review-checklist.md) | Pre-publication checklist for new/revised exercises |
+| [docs/terminology-teaching-audit.md](./docs/terminology-teaching-audit.md) | Baseline audit before the glossary teaching layer |
+| [docs/glossary-authoring.md](./docs/glossary-authoring.md) | How to add/review glossary terms |
+
+## Content provenance
+
+Glossary definitions are original Good Dog educational content. Public IMDT and UK welfare materials were used only as general accuracy checks for principles — not as copy sources, and not as evidence of endorsement. Good Dog is independent and does not claim IMDT approval, accreditation, or professional review.

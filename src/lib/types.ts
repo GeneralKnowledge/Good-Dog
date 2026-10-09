@@ -59,8 +59,12 @@ export interface ExerciseContent {
   safetyNote?: string;
   hint: string;
   topicGroup: TopicGroup;
+  /** Glossary terms introduced or reinforced by this exercise */
+  glossaryTermIds?: string[];
   contentVersion: number;
 }
+
+export type TermExposureState = "introduced" | "explored";
 
 export interface ProgressionConfig {
   easyResultsForIncrease: number;

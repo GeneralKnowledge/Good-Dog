@@ -79,3 +79,15 @@ npm run test:e2e
 ## Privacy
 
 Account email, dog profile fields, plans, and session outcomes are private to the signed-in owner. Delete account from **My dog** to remove associated data. See `/privacy`.
+
+## Welfare and curriculum audit
+
+An internal, evidence-based audit against *publicly documented* IMDT ethics and UK dog welfare guidance lives in [`docs/`](./docs/). It identifies gaps and a prioritised improvement roadmap. Completing or reading that audit does **not** mean Good Dog is IMDT approved, endorsed, accredited, or professionally reviewed.
+
+| Document | Purpose |
+| --- | --- |
+| [docs/welfare-principles-audit.md](./docs/welfare-principles-audit.md) | Principles matrix, evidence, risks |
+| [docs/exercise-content-audit.md](./docs/exercise-content-audit.md) | Inventory and review status of all exercises |
+| [docs/progression-audit.md](./docs/progression-audit.md) | Scenario traces through the real planner |
+| [docs/improvement-roadmap.md](./docs/improvement-roadmap.md) | P0–P3 implementation plan |
+| [docs/content-review-checklist.md](./docs/content-review-checklist.md) | Pre-publication checklist for new/revised exercises |

@@ -114,7 +114,7 @@ export async function sendDueTrainingReminders(now: Date = new Date()): Promise<
       !isReminderDueAt({
         nowHm: hm,
         reminderHm: user.reminderLocalTime,
-        windowMinutes: 20,
+        windowMinutes: 30,
       })
     ) {
       skipped += 1;

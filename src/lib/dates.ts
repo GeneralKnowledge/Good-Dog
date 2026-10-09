@@ -66,7 +66,7 @@ export function isReminderDueAt(options: {
   const now = timeHmToMinutes(options.nowHm);
   const reminder = timeHmToMinutes(options.reminderHm);
   if (now === null || reminder === null) return false;
-  const windowMinutes = options.windowMinutes ?? 20;
+  const windowMinutes = options.windowMinutes ?? 30;
   return now >= reminder && now < reminder + windowMinutes;
 }
 

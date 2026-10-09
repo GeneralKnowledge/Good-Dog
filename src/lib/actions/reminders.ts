@@ -112,6 +112,36 @@ export async function updateReminderSettingsAction(
   return { ok: true };
 }
 
+export async function getReminderDebugAction(): Promise<{
+  ok: true;
+  reminderEnabled: boolean;
+  reminderLocalTime: string;
+  reminderLastSentDate: string | null;
+  timezone: string;
+  subscriptionCount: number;
+  pushConfigured: boolean;
+} | { ok: false; error: string }> {
+  const user = await requireUser();
+  if (!user) {
+    return { ok: false, error: "Not signed in" };
+  }
+  const subscriptionCount = db
+    .select()
+    .from(pushSubscriptions)
+    .where(eq(pushSubscriptions.userId, user.id))
+    .all().length;
+
+  return {
+    ok: true,
+    reminderEnabled: user.reminderEnabled,
+    reminderLocalTime: user.reminderLocalTime,
+    reminderLastSentDate: user.reminderLastSentDate,
+    timezone: user.timezone,
+    subscriptionCount,
+    pushConfigured: isPushConfigured(),
+  };
+}
+
 export async function sendTestReminderAction(): Promise<ReminderActionResult> {
   const user = await requireUser();
   if (!user) {

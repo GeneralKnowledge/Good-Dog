@@ -1,7 +1,8 @@
 "use client";
 
-import { useActionState, useState, useTransition } from "react";
+import { useActionState, useEffect, useState, useTransition } from "react";
 import {
+  getReminderDebugAction,
   removePushSubscriptionAction,
   savePushSubscriptionAction,
   sendTestReminderAction,
@@ -20,9 +21,27 @@ function urlBase64ToUint8Array(base64String: string): Uint8Array {
   return output;
 }
 
+function isStandaloneDisplay(): boolean {
+  const media = window.matchMedia("(display-mode: standalone)").matches;
+  const iosStandalone =
+    "standalone" in navigator &&
+    Boolean((navigator as Navigator & { standalone?: boolean }).standalone);
+  return media || iosStandalone;
+}
+
+function isIosDevice(): boolean {
+  return /iphone|ipad|ipod/i.test(navigator.userAgent);
+}
+
 async function registerAndSubscribe(): Promise<PushSubscription | null> {
   if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
     throw new Error("Push notifications are not supported in this browser");
+  }
+
+  if (isIosDevice() && !isStandaloneDisplay()) {
+    throw new Error(
+      "On iPhone, open Good Dog from the Home Screen icon first (Share → Add to Home Screen), then enable reminders there.",
+    );
   }
 
   const keyRes = await fetch("/api/push/vapid-public-key");
@@ -36,7 +55,7 @@ async function registerAndSubscribe(): Promise<PushSubscription | null> {
     throw new Error("Notification permission was not granted");
   }
 
-  const registration = await navigator.serviceWorker.register("/sw.js");
+  const registration = await navigator.serviceWorker.register("/sw.js", { scope: "/" });
   await navigator.serviceWorker.ready;
 
   const existing = await registration.pushManager.getSubscription();
@@ -68,6 +87,23 @@ async function registerAndSubscribe(): Promise<PushSubscription | null> {
   return subscription;
 }
 
+type DeviceStatus = {
+  ios: boolean;
+  standalone: boolean;
+  permission: NotificationPermission | "unsupported";
+  serviceWorker: boolean;
+  pushManager: boolean;
+};
+
+type ServerStatus = {
+  reminderEnabled: boolean;
+  reminderLocalTime: string;
+  reminderLastSentDate: string | null;
+  timezone: string;
+  subscriptionCount: number;
+  pushConfigured: boolean;
+};
+
 export function ReminderSettings({
   configured,
   initialEnabled,
@@ -83,12 +119,49 @@ export function ReminderSettings({
   const [time, setTime] = useState(initialTime);
   const [clientError, setClientError] = useState<string | null>(null);
   const [clientOk, setClientOk] = useState<string | null>(null);
+  const [deviceStatus, setDeviceStatus] = useState<DeviceStatus | null>(null);
+  const [serverStatus, setServerStatus] = useState<ServerStatus | null>(null);
   const [pendingSubscribe, startSubscribe] = useTransition();
   const [pendingTest, startTest] = useTransition();
+  const [pendingDebug, startDebug] = useTransition();
   const [state, formAction, pendingSave] = useActionState(
     updateReminderSettingsAction,
     null as ReminderActionResult | null,
   );
+
+  const refreshDiagnostics = () => {
+    startDebug(() => {
+      void (async () => {
+        const permission =
+          typeof Notification === "undefined" ? "unsupported" : Notification.permission;
+        setDeviceStatus({
+          ios: isIosDevice(),
+          standalone: isStandaloneDisplay(),
+          permission,
+          serviceWorker: "serviceWorker" in navigator,
+          pushManager: "PushManager" in window,
+        });
+        const debug = await getReminderDebugAction();
+        if (debug.ok) {
+          setServerStatus({
+            reminderEnabled: debug.reminderEnabled,
+            reminderLocalTime: debug.reminderLocalTime,
+            reminderLastSentDate: debug.reminderLastSentDate,
+            timezone: debug.timezone,
+            subscriptionCount: debug.subscriptionCount,
+            pushConfigured: debug.pushConfigured,
+          });
+        }
+      })();
+    });
+  };
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      refreshDiagnostics();
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   const statusMessage =
     clientOk ?? (state?.ok ? (state.message ?? "Reminder settings saved.") : null);
@@ -99,20 +172,22 @@ export function ReminderSettings({
     startTest(() => {
       void (async () => {
         try {
-          // Refresh subscription first so a newly registered phone is stored.
           if (enabled) {
             await registerAndSubscribe();
           }
           const result = await sendTestReminderAction();
           if (!result.ok) {
             setClientError(result.error);
+            refreshDiagnostics();
             return;
           }
           setClientOk(result.message ?? "Test notification sent.");
+          refreshDiagnostics();
         } catch (error) {
           setClientError(
             error instanceof Error ? error.message : "Could not send test notification",
           );
+          refreshDiagnostics();
         }
       })();
     });
@@ -134,9 +209,9 @@ export function ReminderSettings({
             }
             const formData = new FormData();
             formData.set("reminderLocalTime", time);
-            // omit reminderEnabled so the action stores false
             await updateReminderSettingsAction(null, formData);
             setClientOk("Reminders turned off.");
+            refreshDiagnostics();
           } catch {
             // ignore unsubscribe failures
           }
@@ -157,9 +232,11 @@ export function ReminderSettings({
             throw new Error(saved.error);
           }
           setClientOk("Notifications enabled on this device.");
+          refreshDiagnostics();
         } catch (error) {
           setEnabled(false);
           setClientError(error instanceof Error ? error.message : "Could not enable notifications");
+          refreshDiagnostics();
         }
       })();
     });
@@ -177,13 +254,22 @@ export function ReminderSettings({
     );
   }
 
+  const iosNeedsInstall = deviceStatus?.ios && !deviceStatus.standalone;
+
   return (
     <section className="mx-5 mb-4 card p-5">
       <h2 className="font-display text-xl">Training reminders</h2>
       <p className="mt-2 text-sm leading-relaxed text-muted">
-        Get a gentle daily nudge when {dogName} still has practice left. Works best after you Install
-        Good Dog on your home screen (required on iPhone).
+        Get a gentle daily nudge when {dogName} still has practice left. On iPhone this only works
+        from the Home Screen app (iOS 16.4+).
       </p>
+
+      {iosNeedsInstall ? (
+        <p className="mt-3 rounded-xl bg-accent-soft px-3 py-2 text-sm text-[var(--caution)]" role="status">
+          You’re in Safari. Tap Share → <span className="font-semibold">Add to Home Screen</span>,
+          open Good Dog from that icon, then turn reminders on here.
+        </p>
+      ) : null}
 
       <form action={formAction} className="mt-4 flex flex-col gap-4">
         <label className="flex items-center justify-between gap-3 text-sm font-semibold">
@@ -239,15 +325,48 @@ export function ReminderSettings({
       <button
         type="button"
         className="btn btn-secondary mt-3 w-full"
-        disabled={pendingTest || pendingSubscribe || !enabled}
+        disabled={pendingTest || pendingSubscribe || !enabled || Boolean(iosNeedsInstall)}
         onClick={sendTest}
       >
         {pendingTest ? "Sending test…" : "Send test notification"}
       </button>
-      <p className="mt-2 text-xs leading-relaxed text-muted">
-        On iPhone, open Good Dog from the Home Screen icon (not Safari), turn reminders on, then tap
-        Send test notification.
-      </p>
+
+      <div className="mt-4 rounded-xl bg-brand-soft/50 px-3 py-3 text-xs leading-relaxed text-muted">
+        <div className="flex items-center justify-between gap-2">
+          <p className="font-semibold text-foreground">Notification check</p>
+          <button
+            type="button"
+            className="underline"
+            disabled={pendingDebug}
+            onClick={refreshDiagnostics}
+          >
+            Refresh
+          </button>
+        </div>
+        {deviceStatus ? (
+          <ul className="mt-2 space-y-1">
+            <li>Opened as app (Home Screen): {deviceStatus.standalone ? "yes" : "no"}</li>
+            <li>iPhone/iPad: {deviceStatus.ios ? "yes" : "no"}</li>
+            <li>Permission: {deviceStatus.permission}</li>
+            <li>Service worker API: {deviceStatus.serviceWorker ? "yes" : "no"}</li>
+            <li>Push API: {deviceStatus.pushManager ? "yes" : "no"}</li>
+          </ul>
+        ) : null}
+        {serverStatus ? (
+          <ul className="mt-2 space-y-1">
+            <li>Reminders enabled: {serverStatus.reminderEnabled ? "yes" : "no"}</li>
+            <li>
+              Saved time: {serverStatus.reminderLocalTime} ({serverStatus.timezone})
+            </li>
+            <li>Devices registered: {serverStatus.subscriptionCount}</li>
+            <li>Last daily send: {serverStatus.reminderLastSentDate ?? "never"}</li>
+          </ul>
+        ) : null}
+        <p className="mt-2">
+          If <span className="font-semibold">Send test</span> works but the set time does not, the
+          server cron job is usually missing or not running every 5–15 minutes.
+        </p>
+      </div>
     </section>
   );
 }

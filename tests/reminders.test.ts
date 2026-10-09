@@ -23,25 +23,25 @@ describe("localTimeHm", () => {
 describe("isReminderDueAt", () => {
   it("is not due one minute before the reminder", () => {
     expect(
-      isReminderDueAt({ nowHm: "00:44", reminderHm: "00:45", windowMinutes: 20 }),
+      isReminderDueAt({ nowHm: "00:44", reminderHm: "00:45", windowMinutes: 30 }),
     ).toBe(false);
   });
 
   it("is due at the reminder minute", () => {
     expect(
-      isReminderDueAt({ nowHm: "00:45", reminderHm: "00:45", windowMinutes: 20 }),
+      isReminderDueAt({ nowHm: "00:45", reminderHm: "00:45", windowMinutes: 30 }),
     ).toBe(true);
   });
 
   it("is due a few minutes after, within the window", () => {
     expect(
-      isReminderDueAt({ nowHm: "00:55", reminderHm: "00:45", windowMinutes: 20 }),
+      isReminderDueAt({ nowHm: "01:00", reminderHm: "00:45", windowMinutes: 30 }),
     ).toBe(true);
   });
 
   it("is not due after the delivery window", () => {
     expect(
-      isReminderDueAt({ nowHm: "01:10", reminderHm: "00:45", windowMinutes: 20 }),
+      isReminderDueAt({ nowHm: "01:20", reminderHm: "00:45", windowMinutes: 30 }),
     ).toBe(false);
   });
 

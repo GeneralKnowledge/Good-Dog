@@ -102,6 +102,10 @@ Affiliate items stay static outbound links. Own-brand items use checkout → sup
 4. Hard ban list: choke/prong/shock, citronella, any aversive “training aids”; white-label limited to soft training treats (never “behaviour cure” food claims).  
 5. Whether / when to open a Pero Trade trade account and run sample review (Phase 2 only).
 
+## Design exploration
+
+Packaging + in-app shop mockups for drop-shipped Signature-style treats (with pack-size caveats) are noted in [`shop-dropship-mockup-notes.md`](./shop-dropship-mockup-notes.md).
+
 ## Out of scope for this planning pass
 
-Shop UI, affiliate account signup, product photography, applying for a Pero Trade account, label design, placing wholesale orders, Stripe, or inventory. This doc is the planning input only.
+Shop UI implementation, affiliate account signup, applying for a Pero Trade account, final label artwork, placing wholesale orders, Stripe, or inventory. This doc is the planning input only.

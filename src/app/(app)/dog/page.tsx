@@ -53,31 +53,34 @@ export default async function DogPage() {
     <main>
       <AppHeader
         title={dog.name}
+        emphasizeTitle
         subtitle={`${LIFE_STAGE_LABELS[dog.lifeStage] ?? dog.lifeStage} · usually ${TIME_LABELS[dog.availableTime]?.toLowerCase() ?? "a short session"}`}
       />
 
-      <section className="mx-5 mb-4 card p-5">
-        <h2 className="font-display text-xl">Current priorities</h2>
-        <p className="mt-2 text-muted leading-relaxed">{dog.primaryReason}</p>
+      <section className="mx-5 mb-6">
+        <p className="section-label">Current focus</p>
+        <p className="mt-2 leading-relaxed text-muted">{dog.primaryReason}</p>
         {dog.preferredRewards ? (
           <p className="mt-3 text-sm text-muted">Preferred rewards: {dog.preferredRewards}</p>
         ) : null}
       </section>
 
-      <section className="mx-5 mb-4 card p-5">
-        <h2 className="font-display text-xl">Skills in progress</h2>
+      <hr className="mx-5 hairline" />
+
+      <section className="mx-5 my-6">
+        <h2 className="font-display text-xl text-brand-deep">Skills in progress</h2>
         {progress.length === 0 ? (
           <p className="mt-2 text-muted leading-relaxed">
             No practised skills yet. Complete an activity from Today and we’ll summarise what you’re
             working on here.
           </p>
         ) : (
-          <ul className="mt-3 flex flex-col gap-3">
+          <ul className="mt-3 flex flex-col gap-2">
             {progress.map((item) => {
               const description = describeSkillState(item.state);
               if (!description) return null;
               return (
-                <li key={item.id} className="rounded-xl bg-brand-soft/60 px-3 py-3">
+                <li key={item.id} className="rounded-xl bg-brand-soft/70 px-3 py-3">
                   <p className="font-semibold">{getObjectiveLabel(item.learningObjectiveId)}</p>
                   <p className="mt-1 text-sm text-muted">{description}</p>
                 </li>
@@ -87,16 +90,23 @@ export default async function DogPage() {
         )}
       </section>
 
-      <section className="mx-5 mb-4 card p-5">
-        <h2 className="font-display text-xl">Recent activity</h2>
+      <hr className="mx-5 hairline" />
+
+      <section className="mx-5 my-6">
+        <h2 className="font-display text-xl text-brand-deep">Recent practice</h2>
         {history.length === 0 ? (
-          <p className="mt-2 text-muted">Nothing recorded yet — your history will appear after the first session.</p>
+          <p className="mt-2 text-muted">
+            Nothing recorded yet — history appears after the first session.
+          </p>
         ) : (
-          <ul className="mt-3 flex flex-col gap-3">
-            {history.map((session) => {
+          <ul className="mt-3 flex flex-col">
+            {history.map((session, i) => {
               const exercise = getExerciseById(session.exerciseId);
               return (
-                <li key={session.id} className="border-b border-line pb-3 last:border-0 last:pb-0">
+                <li
+                  key={session.id}
+                  className={`py-3 ${i > 0 ? "border-t border-line" : ""}`}
+                >
                   <p className="font-medium">{exercise?.title ?? "Exercise"}</p>
                   <p className="mt-1 text-sm text-muted">
                     {labelOutcome(session.outcome)}

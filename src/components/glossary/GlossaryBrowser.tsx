@@ -58,7 +58,7 @@ export function GlossaryBrowser({
           <TermCard key={term.id} term={term} state={exposure[term.id]} />
         ))}
         {results.length === 0 ? (
-          <li className="card p-4 text-sm text-muted">
+          <li className="panel p-4 text-sm text-muted">
             No matching terms. Try “marker”, “reward”, “threshold”, or describe what you’re looking
             for in everyday words.
           </li>
@@ -81,8 +81,10 @@ function CategoryChip({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-full px-3 py-2 text-sm font-semibold ${
-        active ? "bg-brand text-white" : "bg-white text-muted border border-line"
+      className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${
+        active
+          ? "bg-brand-soft text-brand-deep"
+          : "bg-transparent text-muted border border-line"
       }`}
       aria-pressed={active}
     >
@@ -100,21 +102,25 @@ function TermCard({
 }) {
   const badge =
     state === "explored"
-      ? "Explore further"
+      ? "Explored"
       : state === "introduced"
-        ? "Previously introduced"
-        : "New term";
+        ? "Seen"
+        : null;
 
   return (
-    <li className="card p-4 fade-up">
+    <li className="plan-row fade-up">
       <div className="flex items-start justify-between gap-3">
-        <h3 className="font-semibold leading-snug">{term.preferredTerm}</h3>
-        <span className="shrink-0 rounded-full bg-brand-soft px-2 py-1 text-xs font-semibold text-brand-deep">
-          {badge}
-        </span>
+        <h3 className="font-display text-lg leading-snug text-brand-deep">
+          {term.preferredTerm}
+        </h3>
+        {badge ? (
+          <span className="shrink-0 text-xs font-semibold uppercase tracking-wide text-muted">
+            {badge}
+          </span>
+        ) : null}
       </div>
-      <p className="mt-2 text-sm leading-relaxed text-muted">{term.shortDefinition}</p>
-      <Link href={`/learn/glossary/${term.id}`} className="btn btn-secondary mt-3 w-full">
+      <p className="text-sm leading-relaxed text-muted">{term.shortDefinition}</p>
+      <Link href={`/learn/glossary/${term.id}`} className="btn btn-secondary w-full">
         Open definition
       </Link>
     </li>

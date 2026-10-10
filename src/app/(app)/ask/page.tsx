@@ -20,7 +20,7 @@ export default async function AskPage() {
     <main>
       <AppHeader
         title="Ask"
-        subtitle={`Practical answers for ordinary training questions with ${dog.name}.`}
+        subtitle={`Short answers about training with ${dog.name} — grounded in our glossary when we can.`}
       />
       <div className="px-5 pb-8">
         <AskSearch

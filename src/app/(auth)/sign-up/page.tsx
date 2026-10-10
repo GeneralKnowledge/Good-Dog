@@ -5,14 +5,14 @@ import { AuthForm } from "@/components/AuthForm";
 export default function SignUpPage() {
   return (
     <main className="flex flex-1 flex-col px-5 py-8">
-      <Link href="/" className="font-display text-2xl text-brand-deep">
+      <Link href="/" className="font-display text-3xl tracking-tight text-brand-deep fade-up">
         Good Dog
       </Link>
-      <h1 className="mt-6 font-display text-3xl">Create your account</h1>
-      <p className="mt-2 text-muted">
+      <h1 className="mt-8 font-display text-3xl fade-up fade-up-delay-1">Create your account</h1>
+      <p className="mt-2 text-muted fade-up fade-up-delay-2">
         We’ll keep your dog’s profile and training history private to you.
       </p>
-      <div className="card mt-6 p-5">
+      <div className="panel mt-6 p-5 fade-up fade-up-delay-3">
         <AuthForm action={signUpAction} submitLabel="Create account" mode="sign-up" />
       </div>
       <p className="mt-5 text-center text-sm text-muted">

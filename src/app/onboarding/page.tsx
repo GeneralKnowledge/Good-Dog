@@ -17,12 +17,14 @@ export default async function OnboardingPage() {
 
   return (
     <main className="flex flex-1 flex-col px-5 py-8">
-      <p className="font-display text-2xl text-brand-deep">Good Dog</p>
-      <h1 className="mt-5 font-display text-3xl leading-tight">Tell us about your dog</h1>
-      <p className="mt-2 text-muted leading-relaxed">
+      <p className="font-display text-3xl tracking-tight text-brand-deep fade-up">Good Dog</p>
+      <h1 className="mt-8 font-display text-3xl leading-tight fade-up fade-up-delay-1">
+        Tell us about your dog
+      </h1>
+      <p className="mt-2 text-muted leading-relaxed fade-up fade-up-delay-2">
         Just the essentials — enough to suggest a useful first plan. You can edit this later.
       </p>
-      <div className="card mt-6 p-5">
+      <div className="panel mt-6 p-5 fade-up fade-up-delay-3">
         <OnboardingForm action={createDogAction} />
       </div>
     </main>

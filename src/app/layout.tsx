@@ -3,16 +3,16 @@ import { Fraunces, Nunito_Sans } from "next/font/google";
 import { APP_DESCRIPTION, APP_NAME, THEME_COLOR } from "@/lib/app-meta";
 import "./globals.css";
 
+// Variable fonts — do not pass a weight array. Turbopack's Google-font loader
+// only accepts a single query entry; discrete weights break CSS loading.
 const display = Fraunces({
-  variable: "--font-display",
+  variable: "--font-fraunces",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
 });
 
 const body = Nunito_Sans({
-  variable: "--font-body",
+  variable: "--font-nunito",
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
 });
 
 export const metadata: Metadata = {

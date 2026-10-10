@@ -17,8 +17,6 @@
   --danger-soft: #f7eaea;
   --shadow: 0 10px 30px rgba(31, 42, 36, 0.06);
   --radius: 1.25rem;
-  --font-display: var(--font-display);
-  --font-body: var(--font-body);
 }
 
 @theme inline {
@@ -33,8 +31,9 @@
   --color-line: var(--line);
   --color-danger: var(--danger);
   --color-danger-soft: var(--danger-soft);
-  --font-sans: var(--font-body);
-  --font-display: var(--font-display);
+  /* next/font sets --font-nunito / --font-fraunces on <html> */
+  --font-sans: var(--font-nunito), "Segoe UI", ui-sans-serif, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
 }
 
 * {
@@ -54,7 +53,7 @@ html {
 body {
   margin: 0;
   color: var(--ink);
-  font-family: var(--font-body), "Segoe UI", sans-serif;
+  font-family: var(--font-sans);
   background:
     radial-gradient(circle at top left, rgba(47, 111, 94, 0.08), transparent 28%),
     radial-gradient(circle at top right, rgba(196, 122, 44, 0.08), transparent 24%),

@@ -17,18 +17,18 @@ export default async function AskPage() {
   const aiConfigured = Boolean(process.env.OPENAI_API_KEY);
 
   return (
-    <main>
+    <main className="flex min-h-0 flex-1 flex-col">
       <AppHeader
         title="Ask"
         subtitle={`Short answers about training with ${dog.name} — grounded in our glossary when we can.`}
       />
-      <div className="px-5 pb-8">
+      <div className="sheet flex flex-1 flex-col">
         <AskSearch
           dogName={dog.name}
           initialArticles={HELP_ARTICLES}
           aiConfigured={aiConfigured}
         />
-        <p className="mt-6 text-xs leading-relaxed text-muted">
+        <p className="mt-6 pb-2 text-xs leading-relaxed text-muted">
           Good Dog provides general training guidance, not veterinary care or individual behaviour
           assessment. For pain, illness, sudden changes, biting, or serious fear, seek a vet or a
           suitably qualified reward-based professional.

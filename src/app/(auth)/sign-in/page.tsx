@@ -4,11 +4,13 @@ import { AuthForm } from "@/components/AuthForm";
 
 export default function SignInPage() {
   return (
-    <main className="flex flex-1 flex-col px-5 py-8">
-      <Link href="/" className="font-display text-3xl tracking-tight text-brand-deep fade-up">
+    <main className="auth-shell flex min-h-dvh flex-1 flex-col px-5 py-8">
+      <Link href="/" className="font-display text-3xl tracking-tight text-chrome fade-up">
         Good Dog
       </Link>
-      <h1 className="mt-8 font-display text-3xl fade-up fade-up-delay-1">Welcome back</h1>
+      <h1 className="mt-8 font-display text-3xl text-chrome fade-up fade-up-delay-1">
+        Welcome back
+      </h1>
       <p className="mt-2 text-muted fade-up fade-up-delay-2">
         Sign in to continue with today’s plan.
       </p>

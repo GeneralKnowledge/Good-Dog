@@ -53,12 +53,17 @@ export function GlossaryBrowser({
         ))}
       </div>
 
-      <ul className="flex flex-col gap-3">
-        {results.map((term) => (
-          <TermCard key={term.id} term={term} state={exposure[term.id]} />
+      <ul className="flex flex-col">
+        {results.map((term, index) => (
+          <TermCard
+            key={term.id}
+            term={term}
+            state={exposure[term.id]}
+            bordered={index > 0}
+          />
         ))}
         {results.length === 0 ? (
-          <li className="panel p-4 text-sm text-muted">
+          <li className="py-4 text-sm text-muted">
             No matching terms. Try “marker”, “reward”, “threshold”, or describe what you’re looking
             for in everyday words.
           </li>
@@ -96,9 +101,11 @@ function CategoryChip({
 function TermCard({
   term,
   state,
+  bordered,
 }: {
   term: GlossaryTerm;
   state?: "introduced" | "explored";
+  bordered?: boolean;
 }) {
   const badge =
     state === "explored"
@@ -108,20 +115,19 @@ function TermCard({
         : null;
 
   return (
-    <li className="plan-row fade-up">
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="font-display text-lg leading-snug text-brand-deep">
-          {term.preferredTerm}
-        </h3>
-        {badge ? (
-          <span className="shrink-0 text-xs font-semibold uppercase tracking-wide text-muted">
-            {badge}
-          </span>
-        ) : null}
-      </div>
-      <p className="text-sm leading-relaxed text-muted">{term.shortDefinition}</p>
-      <Link href={`/learn/glossary/${term.id}`} className="btn btn-secondary w-full">
-        Open definition
+    <li className={`fade-up ${bordered ? "border-t border-line" : ""}`}>
+      <Link href={`/learn/glossary/${term.id}`} className="block py-4">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="font-semibold leading-snug text-brand-deep">
+            {term.preferredTerm}
+          </h3>
+          {badge ? (
+            <span className="shrink-0 text-xs font-semibold uppercase tracking-wide text-muted">
+              {badge}
+            </span>
+          ) : null}
+        </div>
+        <p className="mt-1 text-sm leading-relaxed text-muted">{term.shortDefinition}</p>
       </Link>
     </li>
   );

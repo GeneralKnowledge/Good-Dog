@@ -13,40 +13,36 @@ export default async function HomePage() {
   }
 
   return (
-    <main className="flex flex-1 flex-col">
-      <section className="hero-bleed">
-        <div
-          className="hero-bleed__media"
-          style={{ backgroundImage: "url(/hero-dog.jpg)" }}
-          aria-hidden="true"
-        />
-        <div className="hero-bleed__veil" aria-hidden="true" />
-        <div className="hero-bleed__content">
-          <p className="font-display text-5xl tracking-tight fade-up">Good Dog</p>
-          <h1 className="mt-6 max-w-[14ch] font-display text-[2rem] leading-[1.15] fade-up fade-up-delay-1">
-            A few quiet minutes together, every day.
-          </h1>
-          <p className="mt-4 max-w-[30ch] text-base leading-relaxed text-white/85 fade-up fade-up-delay-2">
-            Open the app. Find out what to practise today. Follow simple steps.
-          </p>
+    <main className="landing-shell flex min-h-dvh flex-1 flex-col">
+      <div className="flex flex-1 flex-col px-5 pb-8 pt-10">
+        <p className="font-display text-5xl tracking-tight text-chrome fade-up">Good Dog</p>
+        <h1 className="mt-5 max-w-[16ch] font-display text-[1.85rem] leading-[1.15] text-chrome fade-up fade-up-delay-1">
+          A few quiet minutes together, every day.
+        </h1>
+        <p className="mt-4 max-w-[32ch] text-base leading-relaxed text-[rgba(27,48,34,0.78)] fade-up fade-up-delay-2">
+          Open the app. Find out what to practise today. Follow simple steps.
+        </p>
 
-          <div className="mt-auto flex flex-col gap-3 pt-14 fade-up fade-up-delay-3">
-            <Link href="/sign-up" className="btn btn-primary w-full">
-              Get started
-            </Link>
-            <Link
-              href="/sign-in"
-              className="btn w-full border border-white/35 bg-white/10 text-white backdrop-blur-sm"
-            >
-              Sign in
-            </Link>
-            <p className="px-1 pt-2 text-center text-xs leading-relaxed text-white/70">
-              General reward-based training guidance for everyday life — not veterinary care or
-              individual behaviour assessment.
-            </p>
-          </div>
+        <div
+          className="landing-photo mt-8 flex-1 fade-up fade-up-delay-2"
+          style={{ backgroundImage: "url(/hero-dog.jpg)" }}
+          role="img"
+          aria-label="A person spending calm time with their dog at home"
+        />
+
+        <div className="mt-8 flex flex-col gap-3 fade-up fade-up-delay-3">
+          <Link href="/sign-up" className="btn btn-primary w-full">
+            Get started
+          </Link>
+          <Link href="/sign-in" className="btn btn-secondary w-full">
+            Sign in
+          </Link>
+          <p className="px-1 pt-2 text-center text-xs leading-relaxed text-muted">
+            General reward-based training guidance for everyday life — not veterinary care or
+            individual behaviour assessment.
+          </p>
         </div>
-      </section>
+      </div>
     </main>
   );
 }

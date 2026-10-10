@@ -42,68 +42,70 @@ export default async function TodayPage({
   const firstOpenIndex = items.findIndex((i) => !i.completedSessionId);
 
   return (
-    <main>
+    <main className="flex min-h-0 flex-1 flex-col">
       <AppHeader
         title={`Today with ${dog.name}`}
         subtitle={`${greetingForHour()} — two or three quiet minutes is enough.`}
       />
 
-      {params.welcome === "1" ? (
-        <div className="mx-5 mb-4 why-band text-sm leading-relaxed text-brand-deep fade-up">
-          Welcome — you and {dog.name} are ready. We’ll suggest a few small activities each day.
-          Start with whichever feels easiest.
-        </div>
-      ) : null}
+      <div className="sheet flex flex-1 flex-col gap-4">
+        {params.welcome === "1" ? (
+          <div className="why-band text-sm leading-relaxed text-brand-deep fade-up">
+            Welcome — you and {dog.name} are ready. We’ll suggest a few small activities each day.
+            Start with whichever feels easiest.
+          </div>
+        ) : null}
 
-      <div className="mx-5 mb-5 fade-up fade-up-delay-1">
-        <div className="mb-2 flex items-baseline justify-between gap-3 text-sm">
-          <span className="font-semibold text-brand-deep">
-            {allDone
-              ? "Today’s plan is complete"
-              : `${completedCount} of ${items.length} done`}
-          </span>
+        <div className="fade-up fade-up-delay-1">
+          <div className="mb-2 flex items-baseline justify-between gap-3 text-sm">
+            <span className="font-semibold text-brand-deep">
+              {allDone
+                ? "Today’s plan is complete"
+                : `${completedCount} of ${items.length} done`}
+            </span>
+          </div>
+          <div className="progress-track" aria-hidden="true">
+            <div className="progress-fill" style={{ width: `${progressPct}%` }} />
+          </div>
         </div>
-        <div className="progress-track" aria-hidden="true">
-          <div className="progress-fill" style={{ width: `${progressPct}%` }} />
-        </div>
-      </div>
 
-      {allDone ? (
-        <section className="mx-5 mb-5 panel p-5 fade-up">
-          <h2 className="font-display text-2xl text-brand-deep">That’s enough for today</h2>
-          <p className="mt-2 leading-relaxed text-muted">
-            You and {dog.name} put in a little practice. That’s how skills grow.
-          </p>
-          {recentWin ? (
-            <p className="mt-3 text-sm text-brand-deep">
-              Recent win: an exercise felt comfortable — we’ll keep building from there.
+        {allDone ? (
+          <section className="panel p-5 fade-up">
+            <h2 className="font-display text-2xl text-brand-deep">That’s enough for today</h2>
+            <p className="mt-2 leading-relaxed text-muted">
+              You and {dog.name} put in a little practice. That’s how skills grow.
             </p>
-          ) : null}
+            {recentWin ? (
+              <p className="mt-3 text-sm text-brand-deep">
+                Recent win: an exercise felt comfortable — we’ll keep building from there.
+              </p>
+            ) : null}
+          </section>
+        ) : null}
+
+        <section className="flex flex-col gap-3">
+          {items.map((item, index) => {
+            const exercise = getExerciseById(item.exerciseId);
+            if (!exercise) return null;
+            return (
+              <PlanCard
+                key={item.id}
+                item={item}
+                exercise={exercise}
+                dogId={dog.id}
+                planId={plan.id}
+                emphasize={index === firstOpenIndex}
+              />
+            );
+          })}
         </section>
-      ) : null}
 
-      <section className="flex flex-col gap-3 px-5 pb-4">
-        {items.map((item, index) => {
-          const exercise = getExerciseById(item.exerciseId);
-          if (!exercise) return null;
-          return (
-            <PlanCard
-              key={item.id}
-              item={item}
-              exercise={exercise}
-              dogId={dog.id}
-              planId={plan.id}
-              emphasize={index === firstOpenIndex}
-            />
-          );
-        })}
-      </section>
-
-      {!allDone && !plan.isShortPlan ? (
-        <div className="px-5 pb-6">
-          <ShortPlanButton dogId={dog.id} />
-        </div>
-      ) : null}
+        {!allDone && !plan.isShortPlan ? (
+          <div className="pb-2">
+            <ShortPlanButton dogId={dog.id} />
+          </div>
+        ) : null}
+      </div>
     </main>
   );
 }

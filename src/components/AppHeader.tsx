@@ -5,32 +5,35 @@ export function AppHeader({
   subtitle,
   brandHref = "/today",
   emphasizeTitle = false,
+  backHref,
+  backLabel,
 }: {
-  title: string;
+  title?: string;
   subtitle?: string;
   brandHref?: string;
-  /** When true, title is the hero (e.g. dog name on My dog). */
+  /** When true, only brand shows in chrome — title lives in the sheet (e.g. My dog). */
   emphasizeTitle?: boolean;
+  backHref?: string;
+  backLabel?: string;
 }) {
   return (
-    <header className="px-5 pt-6 pb-4">
-      <Link
-        href={brandHref}
-        className="font-display text-xl tracking-tight text-brand-deep fade-up"
-      >
+    <header className="chrome-header fade-up">
+      {backHref ? (
+        <Link
+          href={backHref}
+          className="mb-3 inline-block text-sm font-semibold text-[rgba(247,244,235,0.85)]"
+        >
+          ← {backLabel ?? "Back"}
+        </Link>
+      ) : null}
+      <Link href={brandHref} className="chrome-brand">
         Good Dog
       </Link>
-      <h1
-        className={`mt-3 font-display leading-[1.12] text-foreground fade-up fade-up-delay-1 ${
-          emphasizeTitle ? "text-4xl" : "text-3xl"
-        }`}
-      >
-        {title}
-      </h1>
-      {subtitle ? (
-        <p className="mt-2 max-w-[36ch] text-[0.98rem] leading-relaxed text-muted fade-up fade-up-delay-2">
-          {subtitle}
-        </p>
+      {!emphasizeTitle && title ? (
+        <>
+          <h1>{title}</h1>
+          {subtitle ? <p className="chrome-sub">{subtitle}</p> : null}
+        </>
       ) : null}
     </header>
   );

@@ -69,16 +69,16 @@ export default async function ExercisePage({
   }
 
   return (
-    <main className="pb-8">
+    <main className="auth-shell min-h-dvh pb-8">
       <header className="px-5 pt-6">
         <Link href="/today" className="text-sm font-semibold text-brand-deep">
           ← Today
         </Link>
         <p className="mt-4 font-display text-lg text-brand-deep">Good Dog</p>
-        <h1 className="mt-2 font-display text-3xl leading-tight text-foreground">
+        <h1 className="mt-2 font-display text-3xl leading-tight text-brand-deep">
           {content.title}
         </h1>
-        <p className="mt-2 max-w-[36ch] text-muted leading-relaxed">{content.summary}</p>
+        <p className="mt-2 max-w-[36ch] leading-relaxed text-muted">{content.summary}</p>
       </header>
       <ExerciseRunner
         exercise={content}

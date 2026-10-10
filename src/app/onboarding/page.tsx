@@ -16,12 +16,12 @@ export default async function OnboardingPage() {
   }
 
   return (
-    <main className="flex flex-1 flex-col px-5 py-8">
-      <p className="font-display text-3xl tracking-tight text-brand-deep fade-up">Good Dog</p>
-      <h1 className="mt-8 font-display text-3xl leading-tight fade-up fade-up-delay-1">
+    <main className="auth-shell flex min-h-dvh flex-1 flex-col px-5 py-8">
+      <p className="font-display text-3xl tracking-tight text-chrome fade-up">Good Dog</p>
+      <h1 className="mt-8 font-display text-3xl leading-tight text-chrome fade-up fade-up-delay-1">
         Tell us about your dog
       </h1>
-      <p className="mt-2 text-muted leading-relaxed fade-up fade-up-delay-2">
+      <p className="mt-2 leading-relaxed text-muted fade-up fade-up-delay-2">
         Just the essentials — enough to suggest a useful first plan. You can edit this later.
       </p>
       <div className="panel mt-6 p-5 fade-up fade-up-delay-3">

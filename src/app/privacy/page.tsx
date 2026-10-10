@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function PrivacyPage() {
   return (
-    <main className="px-5 py-8">
-      <Link href="/" className="font-display text-2xl text-brand-deep">
+    <main className="auth-shell min-h-dvh px-5 py-8">
+      <Link href="/" className="font-display text-2xl text-chrome">
         Good Dog
       </Link>
-      <h1 className="mt-6 font-display text-3xl">Privacy notice</h1>
+      <h1 className="mt-6 font-display text-3xl text-chrome">Privacy notice</h1>
       <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted">
         <p>
           Good Dog stores your account email, dog profile details you provide, daily plans, and

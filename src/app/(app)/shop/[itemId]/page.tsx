@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import { AppHeader } from "@/components/AppHeader";
 import { ShopBuyButton } from "@/components/shop/ShopBuyButton";
 import { formatGbp, getShopItem } from "@/lib/content/shop-items";
 import { getExerciseById } from "@/lib/content/exercises";
@@ -20,107 +21,111 @@ export default async function ShopItemPage({
   if (!item) notFound();
 
   return (
-    <main className="pb-10">
-      <header className="px-5 pt-6">
-        <Link href="/shop" className="text-sm font-semibold text-brand-deep">
-          ← Shop
-        </Link>
-      </header>
+    <main className="flex min-h-0 flex-1 flex-col">
+      <AppHeader
+        backHref="/shop"
+        backLabel="Shop"
+        title={item.title}
+        subtitle={item.packLabel}
+      />
 
-      <div className="mx-5 mt-4 flex justify-center fade-up">
-        <div className="relative h-64 w-48 overflow-hidden rounded-2xl bg-brand-soft/60 shadow-[var(--shadow)]">
-          <Image
-            src={item.imageSrc}
-            alt=""
-            fill
-            className="object-contain p-2"
-            sizes="192px"
-            priority
-          />
+      <div className="sheet flex flex-1 flex-col">
+        <div className="flex justify-center fade-up">
+          <div className="relative h-64 w-48 overflow-hidden rounded-2xl bg-brand-soft/60 shadow-[var(--shadow)]">
+            <Image
+              src={item.imageSrc}
+              alt=""
+              fill
+              className="object-contain p-2"
+              sizes="192px"
+              priority
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="mx-5 mt-6 text-center fade-up fade-up-delay-1">
-        <p className="font-display text-lg text-brand-deep">Good Dog</p>
-        <h1 className="mt-1 font-display text-3xl leading-tight text-brand-deep">
-          {item.title}
-        </h1>
-        <p className="mx-auto mt-3 max-w-[34ch] leading-relaxed text-muted">
-          {item.saleType === "own_brand"
-            ? detailIntro(item.id) ?? item.blurb
-            : item.blurb}
-        </p>
-      </div>
+        <div className="mt-6 text-center fade-up fade-up-delay-1">
+          <p className="mx-auto max-w-[34ch] leading-relaxed text-muted">
+            {item.saleType === "own_brand"
+              ? detailIntro(item.id) ?? item.blurb
+              : item.blurb}
+          </p>
+          {item.priceGbp !== undefined ? (
+            <p className="mt-3 font-display text-3xl text-accent">
+              {formatGbp(item.priceGbp)}
+            </p>
+          ) : null}
+        </div>
 
-      <hr className="mx-5 mt-6 hairline" />
+        <hr className="mt-6 hairline" />
 
-      {item.detailLines && item.detailLines.length > 0 ? (
-        <ul className="mx-5 mt-5 flex flex-col gap-4 fade-up fade-up-delay-2">
-          {item.detailLines.map((line) => (
-            <li key={line.label} className="flex items-start gap-3">
-              <span
-                className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand-deep"
-                aria-hidden="true"
-              >
-                {iconForLabel(line.label)}
-              </span>
-              <p className="pt-1.5 text-sm leading-relaxed text-muted">
-                <span className="font-semibold text-foreground">{line.label}:</span>{" "}
-                {line.text}
-              </p>
-            </li>
-          ))}
-        </ul>
-      ) : null}
-
-      {(item.relatedExerciseIds.length > 0 || item.relatedTermIds.length > 0) && (
-        <section className="mx-5 mt-8 fade-up">
-          <p className="section-label">Pairs with training</p>
-          <ul className="mt-3 flex flex-col gap-2 text-sm text-muted">
-            {item.relatedExerciseIds.slice(0, 3).map((id) => {
-              const exercise = getExerciseById(id);
-              if (!exercise) return null;
-              return <li key={id}>{exercise.title}</li>;
-            })}
-            {item.relatedTermIds.slice(0, 3).map((id) => {
-              const term = getGlossaryTerm(id);
-              if (!term) return null;
-              return (
-                <li key={id}>
-                  <Link
-                    href={`/learn/glossary/${id}`}
-                    className="font-semibold text-brand-deep underline decoration-dashed underline-offset-2"
-                  >
-                    {term.preferredTerm}
-                  </Link>
-                </li>
-              );
-            })}
+        {item.detailLines && item.detailLines.length > 0 ? (
+          <ul className="mt-5 flex flex-col gap-4 fade-up fade-up-delay-2">
+            {item.detailLines.map((line) => (
+              <li key={line.label} className="flex items-start gap-3">
+                <span
+                  className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand-deep"
+                  aria-hidden="true"
+                >
+                  {iconForLabel(line.label)}
+                </span>
+                <p className="pt-1.5 text-sm leading-relaxed text-muted">
+                  <span className="font-semibold text-foreground">{line.label}:</span>{" "}
+                  {line.text}
+                </p>
+              </li>
+            ))}
           </ul>
-        </section>
-      )}
-
-      <div className="mx-5 mt-8 flex flex-col gap-3 fade-up fade-up-delay-3">
-        {item.saleType === "own_brand" ? (
-          <ShopBuyButton priceGbp={item.priceGbp} saleType="own_brand" />
-        ) : item.affiliateUrl ? (
-          <a
-            href={item.affiliateUrl}
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="btn btn-primary w-full"
-          >
-            View partner listing
-          </a>
         ) : null}
-        <p className="text-center text-xs leading-relaxed text-muted">
-          {item.saleType === "own_brand"
-            ? "Ships from our UK supply partner when checkout is live. Not veterinary advice."
-            : `${item.fulfilmentNote}. Not veterinary advice.`}
-          {item.priceGbp !== undefined
-            ? ` Illustrated price ${formatGbp(item.priceGbp)}.`
-            : ""}
-        </p>
+
+        {(item.relatedExerciseIds.length > 0 || item.relatedTermIds.length > 0) && (
+          <section className="mt-8 fade-up">
+            <p className="section-label">Pairs with training</p>
+            <ul className="mt-3 flex flex-col gap-2 text-sm text-muted">
+              {item.relatedExerciseIds.slice(0, 3).map((id) => {
+                const exercise = getExerciseById(id);
+                if (!exercise) return null;
+                return <li key={id}>{exercise.title}</li>;
+              })}
+              {item.relatedTermIds.slice(0, 3).map((id) => {
+                const term = getGlossaryTerm(id);
+                if (!term) return null;
+                return (
+                  <li key={id}>
+                    <Link
+                      href={`/learn/glossary/${id}`}
+                      className="font-semibold text-brand-deep underline decoration-dashed underline-offset-2"
+                    >
+                      {term.preferredTerm}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        )}
+
+        <div className="mt-8 mb-2 flex flex-col gap-3 fade-up fade-up-delay-3">
+          {item.saleType === "own_brand" ? (
+            <ShopBuyButton priceGbp={item.priceGbp} saleType="own_brand" />
+          ) : item.affiliateUrl ? (
+            <a
+              href={item.affiliateUrl}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="btn btn-primary w-full"
+            >
+              View partner listing
+            </a>
+          ) : null}
+          <p className="text-center text-xs leading-relaxed text-muted">
+            {item.saleType === "own_brand"
+              ? "Ships from our UK supply partner when checkout is live. Not veterinary advice."
+              : `${item.fulfilmentNote}. Not veterinary advice.`}
+            {item.priceGbp !== undefined
+              ? ` Illustrated price ${formatGbp(item.priceGbp)}.`
+              : ""}
+          </p>
+        </div>
       </div>
     </main>
   );

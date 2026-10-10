@@ -336,7 +336,7 @@ export function ExerciseRunner({
         </div>
       ) : null}
 
-      <div className="sticky bottom-[4.5rem] z-10 flex flex-col gap-3 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)] to-transparent pt-6">
+      <div className="sticky bottom-4 z-10 flex flex-col gap-3 bg-gradient-to-t from-[var(--sheet)] via-[var(--sheet)] to-transparent pt-6">
         <button type="button" className="btn btn-primary w-full" onClick={() => setPhase("feedback")}>
           Finish and tell us how it went
         </button>

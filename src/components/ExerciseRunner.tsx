@@ -112,7 +112,7 @@ export function ExerciseRunner({
 
   if (phase === "done") {
     return (
-      <div className="panel mx-5 my-4 p-5 fade-up">
+      <div className="prose-width panel mx-auto my-4 w-full p-5 fade-up">
         <h2 className="heading-section">That’s useful feedback</h2>
         <p className="mt-2 text-muted leading-relaxed">
           We’ll adjust the next step for {dogName}. A short session is enough for today if you
@@ -133,7 +133,7 @@ export function ExerciseRunner({
 
   if (phase === "feedback") {
     return (
-      <div className="mx-5 my-4 flex flex-col gap-4 fade-up">
+      <div className="prose-width mx-auto my-4 flex w-full flex-col gap-4 px-5 fade-up">
         <div className="panel p-5">
           <h2 className="heading-section">How did that go?</h2>
           <p className="mt-2 text-muted">One tap is enough. Typing is optional.</p>
@@ -203,7 +203,7 @@ export function ExerciseRunner({
   const stepStartIndex = 2;
 
   return (
-    <div className="my-2 flex flex-col gap-6 pb-4 fade-up">
+    <div className="prose-width mx-auto my-2 flex w-full flex-col gap-6 pb-4 fade-up">
       <p className="text-sm leading-relaxed text-muted">
         Underlined words are training terms you can tap for a short explanation.
         {firstNewTermId

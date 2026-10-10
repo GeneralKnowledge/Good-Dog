@@ -8,6 +8,7 @@
  * 4. Surfaces — card (action), panel (info), plan-row (list), why-band (coaching), chip (filter).
  * 5. Tokens only — extend variables here; avoid raw hex in components.
  * 6. Touch-first — 44px+ targets, safe areas on shell and nav.
+ * 7. Responsive — shell widens at lg; prose stays ~65ch; lists may grid at xl.
  */
 
 :root {
@@ -43,6 +44,12 @@
   --marketing-sage-top: #e4ebe0;
   --marketing-sage-mid: #eef3ea;
   --marketing-sage-bottom: #e8efe4;
+
+  --shell-max: 28rem;
+  --shell-max-lg: 42rem;
+  --sidebar-width: 5.5rem;
+  --stage-padding: 1rem;
+  --stage-padding-md: 1.5rem;
 }
 
 @theme inline {
@@ -125,7 +132,7 @@ summary,
 .app-shell {
   position: relative;
   z-index: 1;
-  width: min(100%, 28rem);
+  width: min(100%, var(--shell-max));
   margin: 0 auto;
   min-height: 100dvh;
   display: flex;
@@ -144,11 +151,90 @@ summary,
   background: var(--chrome);
 }
 
+.app-frame--responsive {
+  flex-direction: column;
+}
+
+.app-frame__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+
 .app-frame__body {
   display: flex;
   flex: 1;
   flex-direction: column;
   min-height: 0;
+}
+
+.app-sidebar {
+  display: none;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: var(--sidebar-width);
+  background: var(--chrome);
+  border-right: 1px solid color-mix(in srgb, var(--on-chrome) 8%, transparent);
+  padding: 1.25rem 0.35rem 1rem;
+  gap: 0.2rem;
+}
+
+.sidebar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.55rem 0.25rem;
+  border-radius: 0.9rem;
+  color: var(--on-chrome-subtle);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.15;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.sidebar-item svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sidebar-item[data-active="true"] {
+  color: var(--on-chrome);
+  background: color-mix(in srgb, var(--on-chrome) 12%, transparent);
+}
+
+.install-anchor {
+  width: min(100%, var(--shell-max));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.prose-width {
+  max-width: 65ch;
+}
+
+.grid-cards-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.marketing-form-wrap {
+  width: 100%;
+}
+
+.landing-layout {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
 .text-display-brand {
@@ -631,6 +717,105 @@ summary,
   }
   50% {
     transform: scale(1.015);
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --stage-padding: var(--stage-padding-md);
+  }
+
+  body {
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(47, 111, 94, 0.18), transparent 55%),
+      var(--chrome);
+  }
+
+  .app-shell {
+    margin-top: var(--stage-padding-md);
+    margin-bottom: var(--stage-padding-md);
+    min-height: calc(100dvh - 2 * var(--stage-padding-md));
+    border-radius: 1.75rem;
+    overflow: hidden;
+    box-shadow:
+      var(--shadow),
+      0 0 0 1px color-mix(in srgb, var(--on-chrome) 6%, transparent);
+  }
+
+  .landing-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .landing-layout__visual {
+    min-height: 20rem;
+    margin-top: 0;
+  }
+
+  .marketing-form-wrap {
+    max-width: 24rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --shell-max: var(--shell-max-lg);
+  }
+
+  .app-frame--responsive {
+    flex-direction: row;
+    min-height: 100dvh;
+  }
+
+  .app-frame__main {
+    min-height: 100dvh;
+  }
+
+  .nav-bar {
+    display: none;
+  }
+
+  .app-sidebar {
+    display: flex;
+  }
+
+  .sheet {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .chrome-header:not(:has(.chrome-back)) {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 1.25rem;
+    align-items: start;
+  }
+
+  .chrome-header:not(:has(.chrome-back)) .chrome-brand {
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
+
+  .chrome-header:not(:has(.chrome-back)) h1 {
+    margin-top: 0;
+    text-align: right;
+  }
+
+  .chrome-header:not(:has(.chrome-back)) .chrome-sub {
+    text-align: right;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 1280px) {
+  .grid-cards-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
   }
 }
 

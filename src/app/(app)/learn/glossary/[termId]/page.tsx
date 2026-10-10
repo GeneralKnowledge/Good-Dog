@@ -89,6 +89,7 @@ export default async function GlossaryTermPage({
       />
 
       <div className="sheet flex flex-1 flex-col gap-5">
+        <div className="prose-width mx-auto flex w-full flex-col gap-5">
         {term.alternativeTerms.length > 0 ? (
           <p className="text-sm text-muted">
             You may also hear: {term.alternativeTerms.join(", ")}
@@ -178,6 +179,7 @@ export default async function GlossaryTermPage({
           </Link>{" "}
           ({getPublishedGlossary().length} published).
         </p>
+        </div>
       </div>
     </main>
   );

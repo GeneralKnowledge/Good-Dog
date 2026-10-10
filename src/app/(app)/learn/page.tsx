@@ -71,7 +71,7 @@ export default async function LearnPage() {
                 <section key={group.id} className="fade-up">
                   <h3 className="heading-subsection">{group.title}</h3>
                   <p className="mt-1 text-sm text-muted">{group.description}</p>
-                  <ul className="mt-3 flex flex-col gap-3">
+                  <ul className="grid-cards-2 mt-3">
                     {exercises.map((exercise) => {
                       const matchesFocus =
                         dogTrainingPolicy.affinityScore(exercise, subject) >= 3;

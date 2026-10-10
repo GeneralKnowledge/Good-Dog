@@ -78,7 +78,7 @@ export function AskSearch({
         </section>
       ) : null}
 
-      <ul className="flex flex-col gap-3">
+      <ul className="grid-cards-2">
         {results.map((article) => (
           <li key={article.id} className="card p-4 fade-up">
             <h2 className="font-semibold leading-snug">{article.question}</h2>

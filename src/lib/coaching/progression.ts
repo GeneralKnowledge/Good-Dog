@@ -4,6 +4,7 @@ import {
   type SessionOutcome,
   type SkillState,
 } from "./types";
+import { hasRecentWelfareInProgress } from "./welfare";
 
 export interface OutcomeRecord {
   outcome: SessionOutcome;
@@ -54,7 +55,11 @@ export function applyOutcomeToProgress(
   } else if (state === "introduced") {
     state = "practising";
   } else if (state === "needs_easier") {
-    state = "practising";
+    if (hasRecentWelfareInProgress(recentOutcomes, now, config)) {
+      state = "needs_easier";
+    } else {
+      state = "practising";
+    }
   } else if (state === "practising") {
     state =
       easyStreak >= Math.max(2, config.easyResultsForIncrease - 1)

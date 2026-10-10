@@ -119,6 +119,36 @@ describe("generateDailyPlan", () => {
     expect(onlyRepeated).toBe(false);
   });
 
+  it("avoids the same objective shortly after a welfare concern", () => {
+    const now = Date.now();
+    const plan = generateDailyPlan({
+      dog,
+      exercises: EXERCISE_LIBRARY,
+      progressByObjective: {
+        recall: {
+          state: "practising",
+          easyStreak: 1,
+          recentOutcomes: [],
+        },
+      },
+      recentSessions: [
+        {
+          exerciseId: "ex-recall-foundation",
+          learningObjectiveId: "recall",
+          completedAt: now - 60_000,
+          outcome: "easy",
+          welfareConcern: true,
+        },
+      ],
+      now,
+    });
+
+    for (const item of plan.items) {
+      const ex = EXERCISE_LIBRARY.find((e) => e.id === item.exerciseId);
+      expect(ex?.learningObjectiveId).not.toBe("recall");
+    }
+  });
+
   it("selects easier variation when progress needs_easier", () => {
     const plan = generateDailyPlan({
       dog,

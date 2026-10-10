@@ -7,6 +7,12 @@ import { searchHelp } from "@/lib/domains/dog-training/content/help";
 import { searchGlossary, type GlossaryTerm } from "@/lib/content/glossary";
 import type { TermExposureMap } from "@/lib/content/glossary-browse";
 import { askOptionalAiAction } from "@/lib/actions/ask";
+import {
+  findGuidesForHelpArticle,
+  findGuidesForQuestion,
+  getGuideByLessonId,
+} from "@/lib/domains/dog-training/kb-import";
+import { getEscalateGuideLessonIds } from "@/lib/domains/dog-training/kb-import";
 
 export type AskArticle = HelpArticle & {
   relatedExercises: Array<{ id: string; title: string; versionId: string }>;
@@ -45,6 +51,22 @@ export function AskSearch({
     if (!isSearching) return [];
     return searchGlossary(query).slice(0, 3);
   }, [query, isSearching]);
+
+  const guideMatches = useMemo(() => {
+    if (!isSearching) return [];
+    const fromQuestion = findGuidesForQuestion(query);
+    const fromArticles = results.flatMap((a) => findGuidesForHelpArticle(a.id));
+    const fromEscalate = getEscalateGuideLessonIds(query)
+      .map((id) => getGuideByLessonId(id))
+      .filter(Boolean);
+    const seen = new Set<string>();
+    const merged = [...fromQuestion, ...fromArticles, ...fromEscalate.filter(Boolean)];
+    return merged.filter((g) => {
+      if (!g || seen.has(g.lessonId)) return false;
+      seen.add(g.lessonId);
+      return true;
+    }) as Array<{ lessonId: string; title: string; summary: string }>;
+  }, [query, isSearching, results]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -97,6 +119,25 @@ export function AskSearch({
         </section>
       ) : null}
 
+      {guideMatches.length > 0 ? (
+        <section aria-label="Related guides">
+          <h2 className="heading-subsection mb-2">Related guides</h2>
+          <ul className="flex flex-col gap-2">
+            {guideMatches.slice(0, 3).map((guide) => (
+              <li key={guide.lessonId}>
+                <Link
+                  href={`/learn/guides/${guide.lessonId}`}
+                  className="card block p-3 text-sm"
+                >
+                  <p className="font-semibold">{guide.title}</p>
+                  <p className="mt-1 text-muted">{guide.summary}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
       {isSearching ? (
         <ul className="grid-cards-2">
           {results.map((article) => (
@@ -106,9 +147,20 @@ export function AskSearch({
                 {personalise(article.answer, dogName)}
               </p>
               {article.escalate ? (
-                <p className="mt-3 rounded-xl bg-accent-soft px-3 py-2 text-xs leading-relaxed">
-                  This may need professional support beyond the app.
-                </p>
+                <>
+                  <p className="mt-3 rounded-xl bg-accent-soft px-3 py-2 text-xs leading-relaxed">
+                    This may need professional support beyond the app.
+                  </p>
+                  {findGuidesForHelpArticle(article.id).slice(0, 1).map((guide) => (
+                    <Link
+                      key={guide.lessonId}
+                      href={`/learn/guides/${guide.lessonId}`}
+                      className="mt-2 inline-block text-sm font-semibold text-brand-deep underline"
+                    >
+                      Read: {guide.title}
+                    </Link>
+                  ))}
+                </>
               ) : null}
               {article.relatedExercises.length > 0 ? (
                 <div className="mt-3 flex flex-col gap-2">

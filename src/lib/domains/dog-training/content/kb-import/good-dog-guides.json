@@ -1,0 +1,166 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-10-10T15:23:15.493Z",
+  "guides": [
+    {
+      "lessonId": "lesson-puppy-socialisation",
+      "title": "Socialise your puppy safely",
+      "summary": "Go at your puppy's pace, keep experiences positive, and follow your vet's guidance before walks on the ground.",
+      "advisory": true,
+      "advisoryMessage": "Follow your vet's vaccination and socialisation timing for your puppy.",
+      "protocolId": "proto-puppy-socialisation-dt",
+      "kind": "management",
+      "ownerBodyMarkdown": "## Socialise your puppy safely\n\nGo at your puppy's pace, keep experiences positive, and follow your vet's guidance before walks on the ground.\n\nThis guide summarises approved management and education content from the Good Dog knowledge base. For personalised behaviour treatment, contact your vet and a qualified reward-based professional.",
+      "provenance": {
+        "protocolId": "proto-puppy-socialisation-dt",
+        "claimIds": [],
+        "sourceIds": [],
+        "reviewStatus": "paraphrase_ok_export",
+        "lastVerified": "2026-10-10"
+      },
+      "suggestedAskKeywords": [
+        "puppy",
+        "socialise",
+        "socialization",
+        "vaccination"
+      ]
+    },
+    {
+      "lessonId": "lesson-steal-chase",
+      "title": "Stop the steal-and-chase game",
+      "summary": "Do not chase stolen items; wait for a drop and redirect to proper toys and chews.",
+      "advisory": false,
+      "advisoryMessage": null,
+      "protocolId": "proto-steal-chase-management-dt",
+      "kind": "management",
+      "ownerBodyMarkdown": "## Stop the steal-and-chase game\n\nDo not chase stolen items; wait for a drop and redirect to proper toys and chews.\n\nThis guide summarises approved management and education content from the Good Dog knowledge base. For personalised behaviour treatment, contact your vet and a qualified reward-based professional.",
+      "provenance": {
+        "protocolId": "proto-steal-chase-management-dt",
+        "claimIds": [],
+        "sourceIds": [],
+        "reviewStatus": "paraphrase_ok_export",
+        "lastVerified": "2026-10-10"
+      },
+      "suggestedAskKeywords": [
+        "steal",
+        "chase",
+        "run away",
+        "grab"
+      ]
+    },
+    {
+      "lessonId": "lesson-fireworks-management",
+      "title": "Help your dog through fireworks",
+      "summary": "Create a safe space, stay calm, and watch for stress signs—get professional help for severe fear.",
+      "advisory": true,
+      "advisoryMessage": "If your dog panics, injures themselves, or stops eating, contact your vet and seek qualified behaviour support.",
+      "protocolId": "proto-fireworks-management-dt",
+      "kind": "management",
+      "ownerBodyMarkdown": "## Help your dog through fireworks\n\nCreate a safe space, stay calm, and watch for stress signs—get professional help for severe fear.\n\nThis guide summarises approved management and education content from the Good Dog knowledge base. For personalised behaviour treatment, contact your vet and a qualified reward-based professional.",
+      "provenance": {
+        "protocolId": "proto-fireworks-management-dt",
+        "claimIds": [],
+        "sourceIds": [],
+        "reviewStatus": "paraphrase_ok_export",
+        "lastVerified": "2026-10-10"
+      },
+      "suggestedAskKeywords": [
+        "fireworks",
+        "noise",
+        "thunder",
+        "fear"
+      ]
+    },
+    {
+      "lessonId": "lesson-reactive-management",
+      "title": "Help your reactive dog on walks",
+      "summary": "Create distance, keep the lead relaxed, reward calm—and get vet and behaviour support when needed.",
+      "advisory": true,
+      "advisoryMessage": "Management only—not a treatment plan for aggression. See your vet first; use ABTC-registered help for ongoing reactivity.",
+      "protocolId": "proto-reactive-walk-management-dt",
+      "kind": "management",
+      "ownerBodyMarkdown": "## Help your reactive dog on walks\n\nCreate distance, keep the lead relaxed, reward calm—and get vet and behaviour support when needed.\n\nThis guide summarises approved management and education content from the Good Dog knowledge base. For personalised behaviour treatment, contact your vet and a qualified reward-based professional.",
+      "provenance": {
+        "protocolId": "proto-reactive-walk-management-dt",
+        "claimIds": [],
+        "sourceIds": [],
+        "reviewStatus": "paraphrase_ok_export",
+        "lastVerified": "2026-10-10"
+      },
+      "suggestedAskKeywords": [
+        "reactive",
+        "bark",
+        "lunge",
+        "walk"
+      ]
+    },
+    {
+      "lessonId": "lesson-rescue-settling",
+      "title": "Help a rescue dog settle in",
+      "summary": "Go slowly, keep routines predictable, and get professional support if fear or aggression persists.",
+      "advisory": true,
+      "advisoryMessage": "Rescue dogs may need extra time and professional support—avoid overwhelming new environments.",
+      "protocolId": "proto-rescue-settling-dt",
+      "kind": "management",
+      "ownerBodyMarkdown": "## Help a rescue dog settle in\n\nGo slowly, keep routines predictable, and get professional support if fear or aggression persists.\n\nThis guide summarises approved management and education content from the Good Dog knowledge base. For personalised behaviour treatment, contact your vet and a qualified reward-based professional.",
+      "provenance": {
+        "protocolId": "proto-rescue-settling-dt",
+        "claimIds": [],
+        "sourceIds": [],
+        "reviewStatus": "paraphrase_ok_export",
+        "lastVerified": "2026-10-10"
+      },
+      "suggestedAskKeywords": [
+        "rescue",
+        "adopt",
+        "settle",
+        "new home"
+      ]
+    },
+    {
+      "lessonId": "lesson-adolescent-regression",
+      "title": "When your teenage dog regresses",
+      "summary": "Shorten sessions, revisit easy wins, and stay force-free through adolescent ups and downs.",
+      "advisory": true,
+      "advisoryMessage": "Teenage fear periods vary; reduce pressure and seek help if anxiety persists.",
+      "protocolId": "proto-adolescent-regression-mgmt",
+      "kind": "management",
+      "ownerBodyMarkdown": "## When your teenage dog regresses\n\nShorten sessions, revisit easy wins, and stay force-free through adolescent ups and downs.\n\nThis guide summarises approved management and education content from the Good Dog knowledge base. For personalised behaviour treatment, contact your vet and a qualified reward-based professional.",
+      "provenance": {
+        "protocolId": "proto-adolescent-regression-mgmt",
+        "claimIds": [],
+        "sourceIds": [],
+        "reviewStatus": "paraphrase_ok_export",
+        "lastVerified": "2026-10-10"
+      },
+      "suggestedAskKeywords": [
+        "teenage",
+        "adolescent",
+        "regress"
+      ]
+    },
+    {
+      "lessonId": "lesson-read-your-dog-stress",
+      "title": "Read stress signals",
+      "summary": "Notice lip licks, yawning, and turning away—pause and help your dog feel safe.",
+      "advisory": false,
+      "advisoryMessage": null,
+      "protocolId": "proto-ddd-progression-skeleton",
+      "kind": "education",
+      "ownerBodyMarkdown": "## Read stress signals\n\nNotice lip licks, yawning, and turning away—pause and help your dog feel safe.\n\nThis guide summarises approved management and education content from the Good Dog knowledge base. For personalised behaviour treatment, contact your vet and a qualified reward-based professional.",
+      "provenance": {
+        "protocolId": "proto-ddd-progression-skeleton",
+        "claimIds": [],
+        "sourceIds": [],
+        "reviewStatus": "paraphrase_ok_export",
+        "lastVerified": "2026-10-10"
+      },
+      "suggestedAskKeywords": [
+        "stress",
+        "worried",
+        "yawn",
+        "lip lick"
+      ]
+    }
+  ]
+}

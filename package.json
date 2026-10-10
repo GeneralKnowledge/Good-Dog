@@ -14,7 +14,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "check": "npm run lint && npm run typecheck && npm run test"
+    "check": "npm run lint && npm run typecheck && npm run test",
+    "kb:build-companion": "node scripts/build-kb-companion-exports.mjs",
+    "kb:check-stale": "node scripts/check-kb-import-staleness.mjs"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

@@ -6,6 +6,10 @@ import {
   type ProgressSnapshot,
 } from "./progression";
 import {
+  objectiveInWelfareCooldown,
+  WELFARE_CALM_EXERCISE_IDS,
+} from "./welfare";
+import {
   DEFAULT_PROGRESSION_CONFIG,
   type CoachingExercise,
   type CoachingSubject,
@@ -119,7 +123,6 @@ function scoreExercise<E extends CoachingExercise, S extends CoachingSubject>(
 
   score += policy.affinityScore(exercise, subject);
 
-  if (progress?.state === "needs_easier") score += 2;
   if (progress?.state === "practising") score += 3;
   if (progress?.state === "becoming_consistent") score += 2;
   if (progress?.state === "ready_to_increase") score += 2;
@@ -172,14 +175,36 @@ export function generateDailyPlan<
     if (!prerequisitesMet(exercise, input.progressByObjective, exercisesById)) {
       return false;
     }
+    if (
+      objectiveInWelfareCooldown(
+        exercise.learningObjectiveId,
+        input.recentSessions,
+        now,
+        config,
+      )
+    ) {
+      return false;
+    }
     return true;
   });
+
+  const anyWelfareCooldown = input.recentSessions.some(
+    (s) =>
+      s.welfareConcern &&
+      now - s.completedAt < config.welfareCooldownDays * DAY_MS,
+  );
 
   const hasAnyProgress = Object.values(input.progressByObjective).some(
     (p) => p.state !== "not_introduced",
   );
 
   let candidates = eligible;
+  if (anyWelfareCooldown && eligible.length > 0) {
+    const calm = eligible.filter((e) =>
+      (WELFARE_CALM_EXERCISE_IDS as readonly string[]).includes(e.id),
+    );
+    if (calm.length > 0) candidates = calm;
+  }
   if (!hasAnyProgress) {
     const starters = policy.starterExercises(eligible, subject);
     if (starters.length > 0) candidates = starters;
@@ -192,18 +217,26 @@ export function generateDailyPlan<
       const resolved = resolveVariation(exercise, baseProgress, exercisesById);
       const progress =
         input.progressByObjective[resolved.exercise.learningObjectiveId];
+      let score = scoreExercise(
+        resolved.exercise,
+        subject,
+        policy,
+        progress,
+        input.recentSessions,
+        now,
+        config,
+      );
+      if (
+        baseProgress?.state === "needs_easier" &&
+        !exercise.easierVariationId &&
+        resolved.exercise.id === exercise.id
+      ) {
+        score -= 25;
+      }
       return {
         ...resolved,
         progress,
-        score: scoreExercise(
-          resolved.exercise,
-          subject,
-          policy,
-          progress,
-          input.recentSessions,
-          now,
-          config,
-        ),
+        score,
       };
     })
     .sort((a, b) => b.score - a.score);

@@ -7,6 +7,7 @@ import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { ownerTermProgress } from "@/lib/db/schema";
 import { getDogForOwner } from "@/lib/services/dogs";
+import { ReferralsBlock } from "@/components/kb/ReferralsBlock";
 
 export default async function AskPage() {
   const user = await requireUser();
@@ -56,11 +57,9 @@ export default async function AskPage() {
           aiConfigured={aiConfigured}
           termExposure={termExposure}
         />
-        <p className="mt-6 text-xs leading-relaxed text-muted">
-          Good Dog provides general training guidance, not veterinary care or individual behaviour
-          assessment. For pain, illness, sudden changes, biting, or serious fear, seek a vet or a
-          suitably qualified reward-based professional.
-        </p>
+        <div className="mt-6">
+          <ReferralsBlock compact />
+        </div>
       </div>
     </main>
   );

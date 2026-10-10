@@ -107,7 +107,9 @@ rules that keep the engine reusable, and where each kind of change belongs.
 
 ### Knowledge base sync (DogResearch)
 
-Safety rules and export metadata are vendored from [DogResearch](https://github.com/GeneralKnowledge/DogResearch) under `src/lib/domains/dog-training/content/kb-import/`. Ask uses the safety bundle for post-filters; daily plans respect recall promotion gates. Exercise copy in `exercises.ts` is **not** auto-synced — `held[]` in the domain export blocks blind overwrite of `ex-lead-loose`.
+Safety rules, guides, referrals, and ask patterns are vendored from [DogResearch](https://github.com/GeneralKnowledge/DogResearch) under `src/lib/domains/dog-training/content/kb-import/` (`good-dog-domain.json`, `good-dog-safety.json`, `good-dog-guides.json`, `good-dog-referrals.json`, `good-dog-ask-patterns.json`). Loaders live in `kb-import.ts`; Learn renders `/learn/guides/[lessonId]`. Ask uses safety post-filters and links escalate flows to guides; daily plans respect recall promotion gates and welfare cooldowns. Exercise copy in `exercises.ts` is **not** auto-synced — `held[]` in the domain export blocks blind overwrite of `ex-lead-loose`.
+
+CI runs `npm run kb:check-stale` (max age configurable via `KB_IMPORT_MAX_AGE_DAYS`). Companion exports can be regenerated locally with `npm run kb:build-companion` when DogResearch has not yet published them.
 
 Refresh JSON after a KB release:
 

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { ReferralsBlock } from "@/components/kb/ReferralsBlock";
+import { getEthicsDisclaimer } from "@/lib/domains/dog-training/kb-import";
 
 export default function PrivacyPage() {
   return (
@@ -25,11 +27,8 @@ export default function PrivacyPage() {
           You can delete your account and associated dog, plan, and session data from the My dog
           screen.
         </p>
-        <p>
-          Good Dog provides general reward-based training guidance. It is not veterinary care,
-          medical advice, or an individual behaviour assessment, and it is not affiliated with or
-          endorsed by any training organisation unless explicitly documented.
-        </p>
+        <p>{getEthicsDisclaimer()}</p>
+        <ReferralsBlock compact />
       </div>
       <Link href="/dog" className="btn btn-secondary mt-8 w-full">
         Back

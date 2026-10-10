@@ -13,6 +13,8 @@ import { dogSkillProgress, trainingSessions } from "@/lib/db/schema";
 import { deleteAccountAction, signOutAction } from "@/lib/actions/auth";
 import { isPushConfigured } from "@/lib/push/vapid";
 import { getDogForOwner } from "@/lib/services/dogs";
+import { AssessmentMetricsChecklist } from "@/components/dog/AssessmentMetricsChecklist";
+import { loadProgressMap } from "@/lib/services/plans";
 
 const LIFE_STAGE_LABELS: Record<string, string> = {
   young_puppy: "Young puppy",
@@ -51,6 +53,11 @@ export default async function DogPage() {
     .all();
 
   const wins = history.filter((h) => h.outcome === "easy").slice(0, 3);
+
+  const progressByObjective = loadProgressMap(dog.id);
+  const recentForMetrics = history
+    .filter((s) => s.outcome)
+    .map((s) => ({ exerciseId: s.exerciseId, outcome: s.outcome! }));
 
   return (
     <main className="flex min-h-0 flex-1 flex-col">
@@ -94,6 +101,18 @@ export default async function DogPage() {
               })}
             </ul>
           )}
+        </section>
+
+        <section>
+          <h2 className="heading-subsection">Building toward</h2>
+          <p className="mt-1 text-sm text-muted">
+            Milestones from the knowledge base — inferred from your practice, not a formal
+            assessment.
+          </p>
+          <AssessmentMetricsChecklist
+            progressByObjective={progressByObjective}
+            recentSessions={recentForMetrics}
+          />
         </section>
 
         <hr className="hairline" />

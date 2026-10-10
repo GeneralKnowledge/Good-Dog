@@ -1,0 +1,717 @@
+{
+  "schemaVersion": "1.0.0",
+  "kbProfile": "research-agent-v1",
+  "generatedAt": "2026-10-10T15:23:15.493Z",
+  "exercises": [
+    {
+      "id": "ex-reward-marker",
+      "slug": "reward-marker",
+      "title": "Introduce a marker word",
+      "steps": [
+        "Choose one marker (calm verbal word such as 'yes', clicker, whistle, or visual signal for deaf dogs) and use it consistently in tone and form.",
+        "Repeat marker then treat pairing multiple times in a short session until dog visibly anticipates food after the marker alone.",
+        "Begin teaching new behaviours only after charging criterion met; maintain rule that marker is always followed by reward during learning phase."
+      ],
+      "safetyNote": "Do not train on full stomach if dog prone to vomiting with excitement—adjust timing",
+      "prerequisiteIds": [],
+      "learningObjectiveId": "reward-marker",
+      "glossaryTermIds": [],
+      "contentVersion": 1,
+      "estimatedMinutes": 3,
+      "difficulty": 1,
+      "category": "engagement",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "topicGroup": "everyday_foundations",
+      "contentCompleteness": "steps_only",
+      "newExercise": false,
+      "goodDogExportStatus": "active",
+      "provenance": {
+        "protocolId": "proto-marker-charging-dt",
+        "claimIds": [
+          "claim-dt-marker-001-charge-marker",
+          "claim-dt-pr-003-marker-follow-reward",
+          "claim-dt-marker-002-calm-marker-word"
+        ],
+        "sourceIds": [
+          "src-dt-positive-reinforcement",
+          "src-dt-introducing-marker"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10",
+        "displayEligibilitySummary": [
+          {
+            "sourceId": "src-dt-positive-reinforcement",
+            "displayEligibility": "paraphrase_ok"
+          },
+          {
+            "sourceId": "src-dt-introducing-marker",
+            "displayEligibility": "paraphrase_ok"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex-sit-comfort",
+      "slug": "sit-comfort",
+      "title": "First sit with a lure",
+      "steps": [
+        "With dog standing, hold treat near nose.",
+        "Move hand in arc over head so dog follows treat; as head rises, bottom goes to floor; praise and treat the instant sit happens.",
+        "Practice in short regular sessions.",
+        "Add verbal cue 'sit' as dog moves into sit, not before movement.",
+        "Continue short regular practice.",
+        "Use an 'okay' or release cue to mark end of exercise."
+      ],
+      "safetyNote": "",
+      "prerequisiteIds": [],
+      "learningObjectiveId": "sit",
+      "glossaryTermIds": [],
+      "contentVersion": 1,
+      "estimatedMinutes": 3,
+      "difficulty": 1,
+      "category": "manners",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "topicGroup": "everyday_foundations",
+      "contentCompleteness": "steps_only",
+      "newExercise": false,
+      "goodDogExportStatus": "active",
+      "provenance": {
+        "protocolId": "proto-sit-lure-rspca",
+        "claimIds": [
+          "claim-rspca-005-sit-lure-timing",
+          "claim-rspca-002-short-sessions"
+        ],
+        "sourceIds": [
+          "src-rspca-dog-training",
+          "src-rspca-sit"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10",
+        "displayEligibilitySummary": [
+          {
+            "sourceId": "src-rspca-dog-training",
+            "displayEligibility": "paraphrase_ok"
+          },
+          {
+            "sourceId": "src-rspca-sit",
+            "displayEligibility": "paraphrase_ok"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex-down-comfort",
+      "slug": "down-comfort",
+      "title": "Teach down without forcing",
+      "steps": [
+        "From sit, lure hand toward floor in front of paws; mark and reward any down or shaping step toward floor.",
+        "Fade visible lure; add verbal 'down' before gesture once behaviour reliable."
+      ],
+      "safetyNote": "Never push dog into down",
+      "prerequisiteIds": [
+        "ex-sit-comfort"
+      ],
+      "learningObjectiveId": "down",
+      "glossaryTermIds": [],
+      "contentVersion": 1,
+      "estimatedMinutes": 3,
+      "difficulty": 1,
+      "category": "manners",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "topicGroup": "everyday_foundations",
+      "contentCompleteness": "steps_only",
+      "newExercise": false,
+      "goodDogExportStatus": "active",
+      "provenance": {
+        "protocolId": "proto-down-lure-dt",
+        "claimIds": [
+          "claim-dt-down-001-no-force",
+          "claim-dt-down-002-shaping"
+        ],
+        "sourceIds": [
+          "src-dt-lie-down"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10",
+        "displayEligibilitySummary": [
+          {
+            "sourceId": "src-dt-lie-down",
+            "displayEligibility": "paraphrase_ok"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex-name-response",
+      "slug": "name-response",
+      "title": "Build name response",
+      "steps": [
+        "Reward every voluntary glance toward handler without saying name yet.",
+        "Say name once; when dog looks, throw treat to side; repeat varying direction; generalise locations."
+      ],
+      "safetyNote": "",
+      "prerequisiteIds": [],
+      "learningObjectiveId": "name-response",
+      "glossaryTermIds": [],
+      "contentVersion": 1,
+      "estimatedMinutes": 3,
+      "difficulty": 1,
+      "category": "engagement",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "topicGroup": "everyday_foundations",
+      "contentCompleteness": "steps_only",
+      "newExercise": false,
+      "goodDogExportStatus": "active",
+      "provenance": {
+        "protocolId": "proto-name-attention-dt",
+        "claimIds": [
+          "claim-dt-name-001-check-in",
+          "claim-dt-name-002-no-repeat-name"
+        ],
+        "sourceIds": [
+          "src-dt-name-training-full"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10",
+        "displayEligibilitySummary": [
+          {
+            "sourceId": "src-dt-name-training-full",
+            "displayEligibility": "paraphrase_ok"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex-mat-settle",
+      "slug": "mat-settle",
+      "title": "Settle on a mat",
+      "steps": [
+        "Sit quietly; drop treats on mat for any behaviour that is not staring, pulling, or barking; gradually reinforce lie down and relaxation signs.",
+        "Increase duration between treats; add distractions at distance; if dog gets up, wait for re-settle before rewarding."
+      ],
+      "safetyNote": "",
+      "prerequisiteIds": [],
+      "learningObjectiveId": "mat-settle",
+      "glossaryTermIds": [],
+      "contentVersion": 1,
+      "estimatedMinutes": 4,
+      "difficulty": 1,
+      "category": "calm",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "topicGroup": "calm_confidence",
+      "contentCompleteness": "steps_only",
+      "newExercise": false,
+      "goodDogExportStatus": "active",
+      "provenance": {
+        "protocolId": "proto-settle-mat-dt",
+        "claimIds": [
+          "claim-dt-settle-002-reward-relaxed",
+          "claim-dt-settle-001-self-directed"
+        ],
+        "sourceIds": [
+          "src-dt-settle-training"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10",
+        "displayEligibilitySummary": [
+          {
+            "sourceId": "src-dt-settle-training",
+            "displayEligibility": "paraphrase_ok"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex-wait-brief",
+      "slug": "wait-brief",
+      "title": "Build a stay",
+      "steps": [
+        "Build sit duration beside dog; add single 'stay' cue; return before rewarding; reward only in position.",
+        "Add lean/step away and return; gradually vary direction and distance; generalise locations with higher value treats."
+      ],
+      "safetyNote": "RSPCA: stay is not for leaving unrestrained dog in hazardous situations",
+      "prerequisiteIds": [
+        "ex-sit-comfort"
+      ],
+      "learningObjectiveId": "wait",
+      "glossaryTermIds": [],
+      "contentVersion": 1,
+      "estimatedMinutes": 3,
+      "difficulty": 1,
+      "category": "manners",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "topicGroup": "life_at_home",
+      "contentCompleteness": "steps_only",
+      "newExercise": false,
+      "goodDogExportStatus": "active",
+      "provenance": {
+        "protocolId": "proto-stay-progression-dt",
+        "claimIds": [
+          "claim-dt-stay-001-return-to-reward",
+          "claim-dt-stay-002-variable-duration",
+          "claim-rspca-stay-001-reward-in-position"
+        ],
+        "sourceIds": [
+          "src-dt-stay-training",
+          "src-rspca-stay"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10",
+        "displayEligibilitySummary": [
+          {
+            "sourceId": "src-dt-stay-training",
+            "displayEligibility": "paraphrase_ok"
+          },
+          {
+            "sourceId": "src-rspca-stay",
+            "displayEligibility": "paraphrase_ok"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex-leave-it-easy",
+      "slug": "leave-it-easy",
+      "title": "Leave it — foundations",
+      "steps": [
+        "Hold low-value item in one hand; when dog sniffs then looks or moves away, mark and reward from other hand with better treat.",
+        "Add verbal cue 'leave' as item presented; mark and reward look-away.",
+        "Generalise: new locations, item on floor, dropped from low height, gradually higher-value forbidden items."
+      ],
+      "safetyNote": "Use fair trade instead of force-taking items from mouth",
+      "prerequisiteIds": [],
+      "learningObjectiveId": "leave-it",
+      "glossaryTermIds": [],
+      "contentVersion": 1,
+      "estimatedMinutes": 3,
+      "difficulty": 1,
+      "category": "manners",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "topicGroup": "everyday_foundations",
+      "contentCompleteness": "steps_only",
+      "newExercise": false,
+      "goodDogExportStatus": "active",
+      "provenance": {
+        "protocolId": "proto-leave-it-dt",
+        "claimIds": [
+          "claim-dt-leave-002-look-away",
+          "claim-dt-leave-001-fair-trade"
+        ],
+        "sourceIds": [
+          "src-dt-leave-training"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10",
+        "displayEligibilitySummary": [
+          {
+            "sourceId": "src-dt-leave-training",
+            "displayEligibility": "paraphrase_ok"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex-kb-rspca-leave",
+      "slug": "kb-rspca-leave",
+      "title": "Teach leave (RSPCA method)",
+      "steps": [
+        "Place treat in closed fist; say 'take it' in friendly voice and let dog sniff/lick closed hand without opening.",
+        "When dog backs off even slightly, open fist, release treat and praise generously.",
+        "Add gentle 'leave' as dog backs off, then release treat; progress to treat visible in open palm and reward from other hand when dog leaves it."
+      ],
+      "safetyNote": "Pair with fair-trade if item already in mouth (see Dogs Trust leave guidance)",
+      "prerequisiteIds": [
+        "ex-leave-it-easy"
+      ],
+      "learningObjectiveId": "leave-it",
+      "glossaryTermIds": [],
+      "contentVersion": 1,
+      "estimatedMinutes": 3,
+      "difficulty": 1,
+      "category": "manners",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "topicGroup": "everyday_foundations",
+      "contentCompleteness": "steps_only",
+      "newExercise": true,
+      "goodDogExportStatus": "active",
+      "provenance": {
+        "protocolId": "proto-leave-rspca-fist",
+        "claimIds": [
+          "claim-rspca-leave-001-back-off-rewarded",
+          "claim-rspca-leave-002-gentle-cue-tone"
+        ],
+        "sourceIds": [
+          "src-rspca-leave-training"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10",
+        "displayEligibilitySummary": [
+          {
+            "sourceId": "src-rspca-leave-training",
+            "displayEligibility": "paraphrase_ok"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex-recall-foundation",
+      "slug": "recall-foundation",
+      "title": "Build a reliable recall (basics)",
+      "steps": [
+        "Establish reliable name response, then introduce one short recall cue (e.g. 'come' or 'here') plus optional open-arms visual signal; ensure all household members use the same cues.",
+        "In enclosed space, get attention with name, give recall cue, step away; reward generously with praise and treats when dog arrives; use happy voice and welcoming body language even if response is slow.",
+        "Increase distance and distractions gradually; let dog move away before cueing recall; use long line on harness for safety; if ignore occurs stay calm, guide gently with long line without pulling toward you, or collect dog; reward high-value when dog returns without extra guidance."
+      ],
+      "safetyNote": "off-lead only after tier-2 long-line recall metrics only after tier-2 long-line recall metrics in open spaces only when confident recall is reliable Collar ID tag and microchip compliance per UK guidance (verify legally current) Use harness and long line; do not pull dog toward handler on line",
+      "prerequisiteIds": [],
+      "harderVariationId": "ex-recall-mild-distract",
+      "learningObjectiveId": "recall",
+      "glossaryTermIds": [],
+      "contentVersion": 1,
+      "estimatedMinutes": 4,
+      "difficulty": 2,
+      "category": "recall",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "topicGroup": "coming_back",
+      "contentCompleteness": "steps_only",
+      "newExercise": false,
+      "goodDogExportStatus": "active",
+      "provenance": {
+        "protocolId": "proto-recall-three-step-dt",
+        "claimIds": [
+          "claim-dt-recall-001-prerequisite-name",
+          "claim-dt-recall-003-no-punish-late-return",
+          "claim-dt-recall-002-five-second-rule",
+          "claim-dt-recall-004-offlead-criteria",
+          "claim-dt-escape-001-unreliable-recall-management"
+        ],
+        "sourceIds": [
+          "src-dt-recall-training",
+          "src-dt-escaping-running-away"
+        ],
+        "reviewStatus": "reviewed_pilot_export",
+        "lastVerified": "2026-10-10",
+        "displayEligibilitySummary": [
+          {
+            "sourceId": "src-dt-recall-training",
+            "displayEligibility": "paraphrase_ok"
+          },
+          {
+            "sourceId": "src-dt-escaping-running-away",
+            "displayEligibility": "paraphrase_ok"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex-kb-emergency-recall",
+      "slug": "kb-emergency-recall",
+      "title": "Emergency recall practice",
+      "steps": [
+        "Follow Dogs Trust recall progression (name, cue, reward, long line) with RSPCA guidance to be exciting and reward collar touch positively."
+      ],
+      "safetyNote": "safe-002-recall-management UK collar/tag/microchip compliance",
+      "prerequisiteIds": [
+        "ex-recall-foundation"
+      ],
+      "learningObjectiveId": "recall",
+      "glossaryTermIds": [],
+      "contentVersion": 1,
+      "estimatedMinutes": 4,
+      "difficulty": 2,
+      "category": "recall",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "topicGroup": "coming_back",
+      "contentCompleteness": "steps_only",
+      "newExercise": true,
+      "goodDogExportStatus": "active",
+      "provenance": {
+        "protocolId": "proto-recall-emergency-good-dog",
+        "claimIds": [
+          "claim-rspca-recall-001-no-scold",
+          "claim-dt-recall-003-no-punish-late-return",
+          "claim-rspca-recall-002-not-only-lead"
+        ],
+        "sourceIds": [
+          "src-dt-recall-training",
+          "src-rspca-recall"
+        ],
+        "reviewStatus": "reviewed_pilot_export",
+        "lastVerified": "2026-10-10",
+        "displayEligibilitySummary": [
+          {
+            "sourceId": "src-dt-recall-training",
+            "displayEligibility": "paraphrase_ok"
+          },
+          {
+            "sourceId": "src-rspca-recall",
+            "displayEligibility": "paraphrase_ok"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex-greeting-calm",
+      "slug": "greeting-calm",
+      "title": "Four paws on the floor",
+      "steps": [
+        "Ask greeters to turn away or stand still when dog jumps; reward the moment all four paws are on the floor.",
+        "Generalise to doorbell/arrivals; all household members stay consistent."
+      ],
+      "safetyNote": "",
+      "prerequisiteIds": [],
+      "learningObjectiveId": "greetings",
+      "glossaryTermIds": [],
+      "contentVersion": 1,
+      "estimatedMinutes": 4,
+      "difficulty": 2,
+      "category": "manners",
+      "lifeStages": [
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "topicGroup": "life_at_home",
+      "contentCompleteness": "steps_only",
+      "newExercise": false,
+      "goodDogExportStatus": "active",
+      "provenance": {
+        "protocolId": "proto-jumping-four-paws-dt",
+        "claimIds": [
+          "claim-dt-jump-002-no-reward-jump",
+          "claim-dt-jump-001-four-paws"
+        ],
+        "sourceIds": [
+          "src-dt-jumping-up"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10",
+        "displayEligibilitySummary": [
+          {
+            "sourceId": "src-dt-jumping-up",
+            "displayEligibility": "paraphrase_ok"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex-puppy-mouthing",
+      "slug": "puppy-mouthing",
+      "title": "Redirect mouthing and nipping",
+      "steps": [
+        "Ensure sleep, exercise, and mental enrichment are met; avoid known overstimulation triggers temporarily.",
+        "Offer a chew or toy when mouthing starts; reward calm mouth on appropriate items."
+      ],
+      "safetyNote": "safe-004-scope-referral",
+      "prerequisiteIds": [],
+      "learningObjectiveId": "puppy-mouthing",
+      "glossaryTermIds": [],
+      "contentVersion": 1,
+      "estimatedMinutes": 3,
+      "difficulty": 1,
+      "category": "puppy",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy"
+      ],
+      "topicGroup": "puppy_life",
+      "contentCompleteness": "steps_only",
+      "newExercise": false,
+      "goodDogExportStatus": "active",
+      "provenance": {
+        "protocolId": "proto-mouthing-redirect-dt",
+        "claimIds": [
+          "claim-dt-mouth-002-redirect",
+          "claim-dt-mouth-003-refer-bite",
+          "claim-dt-mouth-001-needs"
+        ],
+        "sourceIds": [
+          "src-dt-mouthing-nipping"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10",
+        "displayEligibilitySummary": [
+          {
+            "sourceId": "src-dt-mouthing-nipping",
+            "displayEligibility": "paraphrase_ok"
+          }
+        ]
+      }
+    }
+  ],
+  "held": [
+    {
+      "lessonId": "lesson-loose-lead",
+      "protocolId": "proto-loose-lead-dt",
+      "goodDogExerciseId": "ex-lead-loose",
+      "methodTags": [
+        "stop_until_slack_then_forward_motion"
+      ],
+      "reason": "hold_until_method_review"
+    }
+  ],
+  "draftExercises": [
+    {
+      "id": "ex-kb-loose-lead-check-in-draft",
+      "slug": "kb-loose-lead-check-in-draft",
+      "title": "Loose-lead walking — reward check-ins (draft, force-free)",
+      "steps": [
+        "Walk indoors or in a quiet area; mark and reward any moment the lead is soft while your dog is near you.",
+        "When your dog checks in or the lead loosens, reward generously; if the lead tightens, pause politely and wait for slack without jerking."
+      ],
+      "safetyNote": "Do not use equipment designed to cause pain or fear. Seek local reward-based help if walks feel unsafe.",
+      "prerequisiteIds": [
+        "ex-lead-intro"
+      ],
+      "easierVariationId": "ex-lead-intro",
+      "harderVariationId": "ex-check-in-walk",
+      "learningObjectiveId": "lead-walking",
+      "glossaryTermIds": [],
+      "contentVersion": 1,
+      "estimatedMinutes": 4,
+      "difficulty": 2,
+      "category": "walking",
+      "lifeStages": [
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "topicGroup": "walking_together",
+      "contentCompleteness": "steps_only",
+      "newExercise": true,
+      "goodDogExportStatus": "draft",
+      "provenance": {
+        "protocolId": "proto-loose-lead-force-free-draft",
+        "claimIds": [
+          "claim-dt-ll-001-stop-when-tight"
+        ],
+        "sourceIds": [
+          "src-dt-loose-lead"
+        ],
+        "reviewStatus": "requires_human_review",
+        "lastVerified": "2026-10-10",
+        "displayEligibilitySummary": []
+      }
+    }
+  ],
+  "managementModules": [
+    {
+      "lessonId": "lesson-puppy-socialisation",
+      "title": "Socialise your puppy safely",
+      "summary": "Go at your puppy's pace, keep experiences positive, and follow your vet's guidance before walks on the ground.",
+      "protocolId": "proto-puppy-socialisation-dt",
+      "advisory": true,
+      "advisoryMessage": "Follow your vet's vaccination and socialisation timing for your puppy."
+    },
+    {
+      "lessonId": "lesson-steal-chase",
+      "title": "Stop the steal-and-chase game",
+      "summary": "Do not chase stolen items; wait for a drop and redirect to proper toys and chews.",
+      "protocolId": "proto-steal-chase-management-dt",
+      "advisory": false,
+      "advisoryMessage": null
+    },
+    {
+      "lessonId": "lesson-fireworks-management",
+      "title": "Help your dog through fireworks",
+      "summary": "Create a safe space, stay calm, and watch for stress signs—get professional help for severe fear.",
+      "protocolId": "proto-fireworks-management-dt",
+      "advisory": true,
+      "advisoryMessage": "If your dog panics, injures themselves, or stops eating, contact your vet and seek qualified behaviour support."
+    },
+    {
+      "lessonId": "lesson-reactive-management",
+      "title": "Help your reactive dog on walks",
+      "summary": "Create distance, keep the lead relaxed, reward calm—and get vet and behaviour support when needed.",
+      "protocolId": "proto-reactive-walk-management-dt",
+      "advisory": true,
+      "advisoryMessage": "Management only—not a treatment plan for aggression. See your vet first; use ABTC-registered help for ongoing reactivity."
+    },
+    {
+      "lessonId": "lesson-rescue-settling",
+      "title": "Help a rescue dog settle in",
+      "summary": "Go slowly, keep routines predictable, and get professional support if fear or aggression persists.",
+      "protocolId": "proto-rescue-settling-dt",
+      "advisory": true,
+      "advisoryMessage": "Rescue dogs may need extra time and professional support—avoid overwhelming new environments."
+    },
+    {
+      "lessonId": "lesson-adolescent-regression",
+      "title": "When your teenage dog regresses",
+      "summary": "Shorten sessions, revisit easy wins, and stay force-free through adolescent ups and downs.",
+      "protocolId": "proto-adolescent-regression-mgmt",
+      "advisory": true,
+      "advisoryMessage": "Teenage fear periods vary; reduce pressure and seek help if anxiety persists."
+    }
+  ],
+  "educationOnly": [
+    {
+      "lessonId": "lesson-read-your-dog-stress",
+      "title": "Read stress signals",
+      "summary": "Notice lip licks, yawning, and turning away—pause and help your dog feel safe.",
+      "protocolId": "proto-ddd-progression-skeleton"
+    }
+  ],
+  "skipped": []
+}

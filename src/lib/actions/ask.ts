@@ -4,10 +4,22 @@ import { HELP_ARTICLES, searchHelp } from "@/lib/domains/dog-training";
 import { answerFromGlossary } from "@/lib/content/terminology-answers";
 import { getPublishedGlossary } from "@/lib/content/glossary";
 import { requireUser } from "@/lib/auth/session";
+import {
+  getKbSafetyRules,
+  sanitizeAskAnswer,
+} from "@/lib/domains/dog-training/kb-safety";
 
 export type AskResult =
   | { ok: true; answer: string; source: "glossary" | "help" | "ai" }
   | { ok: false; error: string };
+
+function personalise(text: string, dogName: string) {
+  return text.replace(/\byour dog\b/gi, dogName);
+}
+
+function finishAnswer(answer: string, question: string, dogName: string): string {
+  return sanitizeAskAnswer(personalise(answer, dogName), dogName, question);
+}
 
 export async function askOptionalAiAction(input: {
   question: string;
@@ -19,10 +31,16 @@ export async function askOptionalAiAction(input: {
   const question = input.question.trim();
   if (!question) return { ok: false, error: "Enter a question first" };
 
+  const dogName = input.dogName.trim() || "your dog";
+
   // Prefer reviewed glossary definitions for terminology questions
-  const glossaryHit = answerFromGlossary(question, input.dogName);
+  const glossaryHit = answerFromGlossary(question, dogName);
   if (glossaryHit) {
-    return { ok: true, answer: glossaryHit.answer, source: "glossary" };
+    return {
+      ok: true,
+      answer: finishAnswer(glossaryHit.answer, question, dogName),
+      source: "glossary",
+    };
   }
 
   const localMatches = searchHelp(question);
@@ -35,7 +53,7 @@ export async function askOptionalAiAction(input: {
   if (!apiKey) {
     return {
       ok: true,
-      answer: fallback.replace(/\byour dog\b/gi, input.dogName),
+      answer: finishAnswer(fallback, question, dogName),
       source: "help",
     };
   }
@@ -57,6 +75,11 @@ export async function askOptionalAiAction(input: {
       )
       .join("\n\n");
 
+    const criticalSafety = getKbSafetyRules()
+      .filter((r) => r.severity === "critical")
+      .map((r) => `- ${r.title}: ${r.rule}`)
+      .join("\n");
+
     const response = await fetch(`${baseUrl}/chat/completions`, {
       method: "POST",
       headers: {
@@ -71,7 +94,10 @@ export async function askOptionalAiAction(input: {
             role: "system",
             content: `You are Good Dog’s optional helper for UK dog owners. Use ONLY the approved guidance and glossary provided. British English. Reward-based, force-free. Never invent veterinary diagnoses, credentials, endorsements, or guaranteed outcomes. If the topic involves biting, severe aggression, severe fear, pain, illness, or sudden behaviour change, advise seeking a vet or qualified reward-based professional. Prefer small practical next steps.
 
-When the owner asks about a training term that appears in the approved glossary, you MUST use that definition (do not invent a conflicting one). Explain in plain English first, then name the term. Dog name: ${input.dogName}.
+When the owner asks about a training term that appears in the approved glossary, you MUST use that definition (do not invent a conflicting one). Explain in plain English first, then name the term. Dog name: ${dogName}.
+
+Non-negotiable safety rules from the knowledge base:
+${criticalSafety}
 
 Approved help:
 ${helpKnowledge}
@@ -87,7 +113,11 @@ ${glossaryKnowledge}`,
     if (!response.ok) {
       return {
         ok: true,
-        answer: `${fallback.replace(/\byour dog\b/gi, input.dogName)} (AI helper unavailable just now — showing approved guidance.)`,
+        answer: finishAnswer(
+          `${fallback} (AI helper unavailable just now — showing approved guidance.)`,
+          question,
+          dogName,
+        ),
         source: "help",
       };
     }
@@ -99,15 +129,23 @@ ${glossaryKnowledge}`,
     if (!content) {
       return {
         ok: true,
-        answer: fallback.replace(/\byour dog\b/gi, input.dogName),
+        answer: finishAnswer(fallback, question, dogName),
         source: "help",
       };
     }
-    return { ok: true, answer: content, source: "ai" };
+    return {
+      ok: true,
+      answer: finishAnswer(content, question, dogName),
+      source: "ai",
+    };
   } catch {
     return {
       ok: true,
-      answer: `${fallback.replace(/\byour dog\b/gi, input.dogName)} (AI helper unavailable — showing approved guidance.)`,
+      answer: finishAnswer(
+        `${fallback} (AI helper unavailable — showing approved guidance.)`,
+        question,
+        dogName,
+      ),
       source: "help",
     };
   }

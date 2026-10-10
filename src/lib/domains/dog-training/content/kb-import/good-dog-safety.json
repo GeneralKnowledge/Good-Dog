@@ -1,0 +1,239 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-10-10T15:23:15.494Z",
+  "safetyRules": [
+    {
+      "id": "safe-001-no-aversive-routine",
+      "title": "Do not recommend pain, fear or coercion as routine training",
+      "rule": "Good Dog must not present pain, intimidation, choke chains, shouting, hitting, or aversive equipment as standard training solutions.",
+      "rationaleClaimIds": [
+        "claim-imdt-001-force-free",
+        "claim-imdt-002-no-pp-nr",
+        "claim-rspca-004-avoid-aversive-classes",
+        "claim-abtc-003-no-aversives"
+      ],
+      "action": "filter_out_or_flag_sources",
+      "severity": "critical",
+      "referralText": "Direct owner to reward-based professional (ABTC/IMDT-aligned) if current trainer uses aversives.",
+      "lastReviewed": "2026-10-10"
+    },
+    {
+      "id": "safe-002-recall-management",
+      "title": "Manage recall failure with lines and secure areas",
+      "rule": "Until recall is reliable, keep the dog on a long line or lead; off-lead only in secure areas or when confidence in recall is established.",
+      "rationaleClaimIds": [
+        "claim-dt-recall-004-offlead-criteria",
+        "claim-dt-escape-001-unreliable-recall-management"
+      ],
+      "action": "block_off_lead_progression_in_app",
+      "severity": "critical",
+      "referralText": "If recall does not improve, refer to qualified trainer or behaviourist.",
+      "lastReviewed": "2026-10-10"
+    },
+    {
+      "id": "safe-003-no-punish-return",
+      "title": "Never punish a dog for coming back late",
+      "rule": "After recall, even if slow, use positive reinforcement; avoid anger, shouting, or ending fun as punishment for late return.",
+      "rationaleClaimIds": [
+        "claim-dt-recall-003-no-punish-late-return"
+      ],
+      "action": "embed_in_recall_lessons",
+      "severity": "high",
+      "referralText": null,
+      "lastReviewed": "2026-10-10"
+    },
+    {
+      "id": "safe-004-scope-referral",
+      "title": "Refer beyond training education scope",
+      "rule": "Aggression, severe fear, sudden unexplained behaviour change, or suspected pain/illness require veterinary and/or clinical behaviour referral—not generic app protocols alone.",
+      "rationaleClaimIds": [
+        "claim-imdt-003-referral"
+      ],
+      "action": "show_referral_cta",
+      "severity": "critical",
+      "referralText": "Contact veterinarian for medical causes; seek ABTC-registered Clinical Animal Behaviourist or Veterinary Behaviourist for clinical behaviour treatment.",
+      "lastReviewed": "2026-10-10"
+    },
+    {
+      "id": "safe-005-growl-not-punish",
+      "title": "Do not punish warning signals without addressing cause",
+      "rule": "Do not train owners to suppress growling or other warnings without addressing underlying fear, pain, or conflict; prioritise management and professional support.",
+      "rationaleClaimIds": [
+        "claim-bc-stress-001-no-punish-defensive",
+        "claim-bc-child-001-remove-on-stress",
+        "claim-dt-reactive-003-create-distance-reward"
+      ],
+      "action": "filter_and_refer",
+      "severity": "critical",
+      "referralText": "Qualified behaviourist; veterinary pain assessment.",
+      "notes": "Overlaps safe-007; kept for ethics-spec traceability.",
+      "lastReviewed": "2026-10-10"
+    },
+    {
+      "id": "safe-006-child-supervision",
+      "title": "Always supervise children and dogs",
+      "rule": "Never leave a child alone with a dog; teach do-not-disturb contexts and gentle interaction.",
+      "rationaleClaimIds": [
+        "claim-rspca-child-001-supervise",
+        "claim-rspca-child-002-do-not-disturb"
+      ],
+      "action": "embed_in_family_safety_lessons",
+      "severity": "critical",
+      "referralText": null,
+      "lastReviewed": "2026-10-10"
+    },
+    {
+      "id": "safe-007-no-punish-growling",
+      "title": "Do not punish warning signals",
+      "rule": "Do not punish growling or other warnings; remove dog from trigger and seek vet/behaviourist support.",
+      "rationaleClaimIds": [
+        "claim-bc-stress-001-no-punish-defensive",
+        "claim-bc-child-001-remove-on-stress"
+      ],
+      "action": "filter_and_refer",
+      "severity": "critical",
+      "referralText": "Veterinary assessment and accredited animal behaviourist.",
+      "lastReviewed": "2026-10-10"
+    },
+    {
+      "id": "safe-008-abtc-aversive-ban",
+      "title": "Do not recommend ABTC-listed aversive tools or methods",
+      "rule": "Good Dog must not recommend equipment or methods on ABTC indicative aversive lists (e.g. shock, choke, prong, alpha roll).",
+      "rationaleClaimIds": [
+        "claim-abtc-aversive-001-shock-choke-prong",
+        "claim-abtc-aversive-002-alpha-roll"
+      ],
+      "action": "filter_out_or_flag_sources",
+      "severity": "critical",
+      "referralText": null,
+      "lastReviewed": "2026-10-10"
+    },
+    {
+      "id": "safe-007-no-confrontational-guarding",
+      "title": "Do not confront resource guarding with force or chase games",
+      "rule": "Do not recommend chasing, prying items from the mouth, or punishing growls over possessions; use management, trade-up, and professional referral for guarding with aggression.",
+      "rationaleClaimIds": [
+        "claim-dt-steal-001-no-chase-game",
+        "claim-dt-steal-002-ignore-drop",
+        "claim-bc-stress-001-no-punish-defensive"
+      ],
+      "action": "filter_and_refer",
+      "severity": "critical",
+      "referralText": "ABTC Clinical Animal Behaviourist for resource guarding with aggression.",
+      "lastReviewed": "2026-10-10"
+    }
+  ],
+  "assessmentMetrics": [
+    {
+      "id": "metric-name-latency-2s",
+      "title": "Name response within 2 seconds",
+      "behaviourId": "beh-name-orientation",
+      "tier": 1,
+      "observableCriteria": "Dog orients to handler within 2 seconds of name spoken once at conversational volume.",
+      "progressionGate": null,
+      "supportingClaimIds": [
+        "claim-dt-name-001-check-in"
+      ],
+      "supportingProtocolIds": [
+        "proto-name-attention-dt"
+      ],
+      "goodDogModule": "foundation_skills",
+      "lastReviewed": "2026-10-10"
+    },
+    {
+      "id": "metric-recall-long-line-5m",
+      "title": "Recall on long line — 5 metres",
+      "behaviourId": "beh-recall-to-handler",
+      "tier": 1,
+      "observableCriteria": "Single recall cue; dog returns to within arm's reach on 5m long line in low distraction.",
+      "progressionGate": "safe-002-recall-management",
+      "supportingClaimIds": [
+        "claim-dt-recall-004-offlead-criteria"
+      ],
+      "supportingProtocolIds": [
+        "proto-recall-three-step-dt"
+      ],
+      "goodDogModule": "life_skills",
+      "lastReviewed": "2026-10-10"
+    },
+    {
+      "id": "metric-recall-long-line-10m",
+      "title": "Recall on long line — 10 metres",
+      "behaviourId": "beh-recall-to-handler",
+      "tier": 2,
+      "observableCriteria": "Single recall cue; reliable on 10m long line with mild distraction.",
+      "progressionGate": "safe-002-recall-management",
+      "supportingClaimIds": [
+        "claim-dt-recall-004-offlead-criteria"
+      ],
+      "supportingProtocolIds": [
+        "proto-recall-three-step-dt"
+      ],
+      "goodDogModule": "life_skills",
+      "lastReviewed": "2026-10-10"
+    },
+    {
+      "id": "metric-loose-lead-10-steps",
+      "title": "Loose lead — 10 consecutive steps",
+      "behaviourId": "beh-loose-lead-walk",
+      "tier": 1,
+      "observableCriteria": "Ten consecutive steps with slack lead without owner stopping.",
+      "progressionGate": null,
+      "supportingClaimIds": [
+        "claim-dt-ll-001-stop-when-tight"
+      ],
+      "supportingProtocolIds": [
+        "proto-loose-lead-dt"
+      ],
+      "goodDogModule": "life_skills",
+      "lastReviewed": "2026-10-10"
+    },
+    {
+      "id": "metric-off-lead-not-unlocked",
+      "title": "Off-lead freedom (not auto-unlocked)",
+      "behaviourId": "beh-recall-to-handler",
+      "tier": 99,
+      "observableCriteria": "App must not promote off-lead in public until tier 2 recall met AND owner confirms secure area or professional sign-off.",
+      "progressionGate": "safe-002-recall-management",
+      "supportingClaimIds": [
+        "claim-dt-recall-004-offlead-criteria",
+        "claim-govuk-002-collar-tag-public"
+      ],
+      "supportingProtocolIds": [
+        "proto-recall-three-step-dt"
+      ],
+      "goodDogModule": "life_skills",
+      "lastReviewed": "2026-10-10"
+    }
+  ],
+  "violatesNoAversivePatterns": [
+    {
+      "source": "\\bshock collar\\b",
+      "flags": "i"
+    },
+    {
+      "source": "\\bchoke chain\\b",
+      "flags": "i"
+    },
+    {
+      "source": "\\bprong\\b",
+      "flags": "i"
+    },
+    {
+      "source": "\\balpha roll\\b",
+      "flags": "i"
+    },
+    {
+      "source": "\\bhit(ting)?\\s+(your\\s+)?dog\\b",
+      "flags": "i"
+    }
+  ],
+  "blocksOffLeadPromotion": {
+    "description": "Do not promote off-lead exercise until tier-2 long-line recall metrics are met.",
+    "requiredMetricIds": [
+      "metric-recall-long-line-5m",
+      "metric-recall-long-line-10m"
+    ]
+  },
+  "safe002Sanitized": "Recall-related protocol steps in good-dog-domain.json use sanitizeProtocolForExport (off-lead phrasing gated)."
+}

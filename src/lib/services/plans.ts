@@ -17,7 +17,11 @@ import {
   type SessionOutcome,
   type SkillState,
 } from "@/lib/coaching";
-import { EXERCISE_LIBRARY, dogTrainingPolicy } from "@/lib/domains/dog-training";
+import {
+  EXERCISE_LIBRARY,
+  dogTrainingPolicy,
+  exercisesWithRecallPromotionGate,
+} from "@/lib/domains/dog-training";
 import { ensureExercises } from "@/lib/db/ensure-exercises";
 import { toDogSubject } from "@/lib/services/dogs";
 
@@ -147,9 +151,15 @@ export function getOrCreateDailyPlan(options: {
       };
     });
 
+  const exercisesForPlan = exercisesWithRecallPromotionGate(
+    EXERCISE_LIBRARY,
+    progressByObjective,
+    recentSessions,
+  );
+
   const generated = generateDailyPlan({
     subject: toDogSubject(dog),
-    exercises: EXERCISE_LIBRARY,
+    exercises: exercisesForPlan,
     policy: dogTrainingPolicy,
     progressByObjective,
     recentSessions,

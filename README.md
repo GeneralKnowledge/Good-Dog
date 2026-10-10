@@ -105,6 +105,18 @@ Good Dog teaches proper training language gradually inside exercises (plain Engl
 See [docs/architecture.md](docs/architecture.md) for the module map, the import
 rules that keep the engine reusable, and where each kind of change belongs.
 
+### Knowledge base sync (DogResearch)
+
+Safety rules and export metadata are vendored from [DogResearch](https://github.com/GeneralKnowledge/DogResearch) under `src/lib/domains/dog-training/content/kb-import/`. Ask uses the safety bundle for post-filters; daily plans respect recall promotion gates. Exercise copy in `exercises.ts` is **not** auto-synced — `held[]` in the domain export blocks blind overwrite of `ex-lead-loose`.
+
+Refresh JSON after a KB release:
+
+```bash
+DOG_RESEARCH_PATH=/path/to/DogResearch ./scripts/sync-kb-import.sh
+```
+
+Or copy `dist/good-dog-*.json` from the DogResearch CI artifact `good-dog-kb-dist`.
+
 ## Testing
 
 ```bash

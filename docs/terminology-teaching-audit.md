@@ -33,4 +33,4 @@
 - Expand `whyThisWorks` to more exercises only when copy benefits
 - Content review passes for `needsQualifiedReview` terms
 - Optional dedicated `/learn/glossary` index route (browse already on Learn)
-- Shop / affiliate area — see [`shop-affiliate-plan.md`](./shop-affiliate-plan.md) (Amazon UK + Zooplus first; not built yet)
+- Shop / affiliate + white-label plan — see [`shop-affiliate-plan.md`](./shop-affiliate-plan.md) (Amazon UK + Zooplus first; Pero Trade branded treats Phase 2; not built yet)

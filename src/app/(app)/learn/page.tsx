@@ -30,24 +30,24 @@ export default async function LearnPage() {
     <main>
       <AppHeader
         title="Learn"
-        subtitle="Browse practical exercises, and look up training words when you want to understand them better."
+        subtitle="Training words and short exercises you can browse anytime."
       />
 
-      <section className="mx-5 mb-8">
-        <div className="mb-3 flex items-end justify-between gap-3">
-          <div>
-            <h2 className="font-display text-2xl">Training words</h2>
-            <p className="mt-1 text-sm text-muted">
-              Proper terminology with plain-English explanations. Today’s plan remains the main
-              place to practise.
-            </p>
-          </div>
+      <section className="mx-5 mb-10">
+        <h2 className="font-display text-2xl text-brand-deep">Training words</h2>
+        <p className="mt-1 text-sm text-muted">
+          Plain-English explanations. Today remains the main place to practise.
+        </p>
+        <div className="mt-4">
+          <GlossaryBrowser exposure={exposure} />
         </div>
-        <GlossaryBrowser exposure={exposure} />
       </section>
 
-      <div className="flex flex-col gap-5 px-5 pb-8">
-        <h2 className="font-display text-2xl">Exercise topics</h2>
+      <div className="flex flex-col gap-8 px-5 pb-8">
+        <div>
+          <h2 className="font-display text-2xl text-brand-deep">Exercise topics</h2>
+          <p className="mt-1 text-sm text-muted">Pick something that fits the moment.</p>
+        </div>
         {TOPIC_GROUPS.map((group) => {
           const exercises = EXERCISE_LIBRARY.filter(
             (e) =>
@@ -57,17 +57,20 @@ export default async function LearnPage() {
           if (exercises.length === 0) return null;
           return (
             <section key={group.id} className="fade-up">
-              <h3 className="font-display text-xl">{group.title}</h3>
+              <h3 className="font-display text-xl text-brand-deep">{group.title}</h3>
               <p className="mt-1 text-sm text-muted">{group.description}</p>
-              <ul className="mt-3 flex flex-col gap-3">
-                {exercises.map((exercise) => (
-                  <li key={exercise.id} className="card p-4">
+              <ul className="mt-4 flex flex-col">
+                {exercises.map((exercise, i) => (
+                  <li
+                    key={exercise.id}
+                    className={`py-4 ${i > 0 ? "border-t border-line" : ""}`}
+                  >
                     <h4 className="font-semibold leading-snug">{exercise.title}</h4>
                     <p className="mt-1 text-sm text-muted">{exercise.summary}</p>
-                    <p className="mt-2 text-xs text-muted">
-                      {exercise.estimatedMinutes} minutes
+                    <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-muted">
+                      {exercise.estimatedMinutes} min
                       {(exercise.glossaryTermIds?.length ?? 0) > 0
-                        ? ` · ${exercise.glossaryTermIds!.length} training words`
+                        ? ` · ${exercise.glossaryTermIds!.length} words`
                         : ""}
                     </p>
                     <Link

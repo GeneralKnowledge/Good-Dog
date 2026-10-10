@@ -1,6 +1,6 @@
 # Site redesign mockups
 
-**Status:** Visual exploration only — not implemented in the app yet.  
+**Status:** Early exploration images. The locked rulebook for implementation is [`design-direction.md`](./design-direction.md).  
 **Companion:** [`shop-dropship-mockup-notes.md`](./shop-dropship-mockup-notes.md), [`shop-affiliate-plan.md`](./shop-affiliate-plan.md)
 
 ## Direction

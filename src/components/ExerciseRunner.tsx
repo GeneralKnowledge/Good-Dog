@@ -112,8 +112,8 @@ export function ExerciseRunner({
 
   if (phase === "done") {
     return (
-      <div className="card mx-5 my-4 p-5 fade-up">
-        <h2 className="font-display text-2xl">That’s useful feedback</h2>
+      <div className="panel mx-5 my-4 p-5 fade-up">
+        <h2 className="font-display text-2xl text-brand-deep">That’s useful feedback</h2>
         <p className="mt-2 text-muted leading-relaxed">
           We’ll adjust the next step for {dogName}. A short session is enough for today if you
           want to stop here.
@@ -134,8 +134,8 @@ export function ExerciseRunner({
   if (phase === "feedback") {
     return (
       <div className="mx-5 my-4 flex flex-col gap-4 fade-up">
-        <div className="card p-5">
-          <h2 className="font-display text-2xl">How did that go?</h2>
+        <div className="panel p-5">
+          <h2 className="font-display text-2xl text-brand-deep">How did that go?</h2>
           <p className="mt-2 text-muted">One tap is enough. Typing is optional.</p>
           <div className="mt-4 flex flex-col gap-3">
             <button
@@ -203,17 +203,17 @@ export function ExerciseRunner({
   const stepStartIndex = 2;
 
   return (
-    <div className="mx-5 my-4 flex flex-col gap-4 pb-8 fade-up">
-      <p className="text-sm text-muted">
+    <div className="mx-5 my-4 flex flex-col gap-6 pb-10 fade-up">
+      <p className="text-sm leading-relaxed text-muted">
         Underlined words are training terms you can tap for a short explanation.
         {firstNewTermId
           ? " One new word in today’s guide is marked quietly so you can explore it if you want."
           : ""}
       </p>
 
-      <div className="card p-5">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">Purpose</p>
-        <div className="mt-2 leading-relaxed">
+      <section>
+        <p className="section-label">Purpose</p>
+        <div className="mt-2 text-[1.05rem] leading-relaxed">
           <TermRichText
             text={exercise.purpose}
             onTermsPresented={onTermsPresented}
@@ -221,12 +221,12 @@ export function ExerciseRunner({
             highlightNewTermId={highlightFor(0)}
           />
         </div>
-      </div>
+      </section>
 
       {exercise.whyThisWorks ? (
-        <div className="rounded-2xl border border-brand/20 bg-brand-soft/50 px-4 py-3 text-sm leading-relaxed">
+        <div className="why-band text-sm leading-relaxed">
           <p className="font-semibold text-brand-deep">Why this works</p>
-          <p className="mt-1 text-muted">
+          <p className="mt-1.5 text-muted">
             <TermRichText
               text={`${exercise.whyThisWorks.plainWhy} This is called [[${exercise.whyThisWorks.termId}]].`}
               onTermsPresented={onTermsPresented}
@@ -241,8 +241,8 @@ export function ExerciseRunner({
         </div>
       ) : null}
 
-      <div className="card p-5">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">Before you start</p>
+      <section>
+        <p className="section-label">Before you start</p>
         <div className="mt-2 leading-relaxed">
           <TermRichText
             text={exercise.preparation}
@@ -251,13 +251,15 @@ export function ExerciseRunner({
             highlightNewTermId={highlightFor(1)}
           />
         </div>
-      </div>
+      </section>
 
-      <div className="card p-5">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">Let’s practise</p>
-        <ol className="mt-3 list-decimal space-y-3 pl-5 leading-relaxed">
+      <hr className="hairline" />
+
+      <section>
+        <p className="section-label">Let’s practise</p>
+        <ol className="mt-3 list-decimal space-y-4 pl-5 text-[1.05rem] leading-relaxed">
           {exercise.steps.map((step, i) => (
-            <li key={step}>
+            <li key={step} className="pl-1">
               <TermRichText
                 text={step}
                 onTermsPresented={onTermsPresented}
@@ -267,10 +269,12 @@ export function ExerciseRunner({
             </li>
           ))}
         </ol>
-      </div>
+      </section>
 
-      <div className="card p-5">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">What to look for</p>
+      <hr className="hairline" />
+
+      <section>
+        <p className="section-label">What to look for</p>
         <div className="mt-2 leading-relaxed">
           <TermRichText
             text={exercise.lookFor}
@@ -279,12 +283,10 @@ export function ExerciseRunner({
             highlightNewTermId={highlightFor(stepStartIndex + exercise.steps.length)}
           />
         </div>
-      </div>
+      </section>
 
-      <div className="card p-5">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">
-          If it feels difficult
-        </p>
+      <section>
+        <p className="section-label">If it feels difficult</p>
         <div className="mt-2 leading-relaxed">
           <TermRichText
             text={exercise.ifDifficult}
@@ -295,7 +297,7 @@ export function ExerciseRunner({
             )}
           />
         </div>
-      </div>
+      </section>
 
       {exercise.safetyNote ? (
         <div className="rounded-2xl border border-accent/30 bg-accent-soft p-4 text-sm leading-relaxed">
@@ -312,7 +314,7 @@ export function ExerciseRunner({
       ) : null}
 
       {showHint ? (
-        <div className="card p-4 text-sm leading-relaxed text-brand-deep fade-up">
+        <div className="panel p-4 text-sm leading-relaxed text-brand-deep fade-up">
           <strong>Hint:</strong>{" "}
           <TermRichText
             text={exercise.hint}
@@ -328,17 +330,13 @@ export function ExerciseRunner({
           {exercise.glossaryTermIds!.map((id, i) => (
             <span key={id}>
               {i > 0 ? ", " : ""}
-              <TermRichText
-                text={`[[${id}]]`}
-                termExposure={termExposure}
-                // Footer links are tappable but do not drive introduction by themselves
-              />
+              <TermRichText text={`[[${id}]]`} termExposure={termExposure} />
             </span>
           ))}
         </div>
       ) : null}
 
-      <div className="flex flex-col gap-3">
+      <div className="sticky bottom-[4.5rem] z-10 flex flex-col gap-3 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)] to-transparent pt-6">
         <button type="button" className="btn btn-primary w-full" onClick={() => setPhase("feedback")}>
           Finish and tell us how it went
         </button>

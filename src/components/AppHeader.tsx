@@ -3,17 +3,38 @@ import Link from "next/link";
 export function AppHeader({
   title,
   subtitle,
+  brandHref = "/today",
+  emphasizeTitle = false,
+  backHref,
+  backLabel,
 }: {
-  title: string;
+  title?: string;
   subtitle?: string;
+  brandHref?: string;
+  /** When true, only brand shows in chrome — title lives in the sheet (e.g. My dog). */
+  emphasizeTitle?: boolean;
+  backHref?: string;
+  backLabel?: string;
 }) {
   return (
-    <header className="px-5 pt-6 pb-3">
-      <Link href="/today" className="font-display text-2xl tracking-tight text-brand-deep">
+    <header className="chrome-header fade-up">
+      {backHref ? (
+        <Link
+          href={backHref}
+          className="mb-3 inline-block text-sm font-semibold text-[rgba(247,244,235,0.85)]"
+        >
+          ← {backLabel ?? "Back"}
+        </Link>
+      ) : null}
+      <Link href={brandHref} className="chrome-brand">
         Good Dog
       </Link>
-      <h1 className="mt-3 font-display text-3xl leading-tight text-foreground">{title}</h1>
-      {subtitle ? <p className="mt-2 text-muted leading-relaxed">{subtitle}</p> : null}
+      {!emphasizeTitle && title ? (
+        <>
+          <h1>{title}</h1>
+          {subtitle ? <p className="chrome-sub">{subtitle}</p> : null}
+        </>
+      ) : null}
     </header>
   );
 }

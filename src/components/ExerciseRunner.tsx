@@ -59,7 +59,7 @@ export function ExerciseRunner({
 
   if (phase === "done") {
     return (
-      <div className="card mx-5 my-4 p-5 fade-up">
+      <div className="card my-2 p-5 fade-up">
         <h2 className="font-display text-2xl">That’s useful feedback</h2>
         <p className="mt-2 text-muted leading-relaxed">
           We’ll adjust the next step for {dogName}. A short session is enough for today if you
@@ -80,7 +80,7 @@ export function ExerciseRunner({
 
   if (phase === "feedback") {
     return (
-      <div className="mx-5 my-4 flex flex-col gap-4 fade-up">
+      <div className="my-2 flex flex-col gap-4 fade-up">
         <div className="card p-5">
           <h2 className="font-display text-2xl">How did that go?</h2>
           <p className="mt-2 text-muted">One tap is enough. Typing is optional.</p>
@@ -148,7 +148,7 @@ export function ExerciseRunner({
   }
 
   return (
-    <div className="mx-5 my-4 flex flex-col gap-4 pb-8 fade-up">
+    <div className="my-2 flex flex-col gap-4 pb-4 fade-up">
       <div className="card p-5">
         <p className="leading-relaxed">{exercise.purpose}</p>
 

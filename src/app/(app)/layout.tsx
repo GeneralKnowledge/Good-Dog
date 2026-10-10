@@ -15,8 +15,8 @@ export default async function AppLayout({
   if (!dog?.onboardingComplete) redirect("/onboarding");
 
   return (
-    <div className="flex min-h-dvh flex-col">
-      <div className="flex-1 pb-4">{children}</div>
+    <div className="app-frame">
+      <div className="app-frame__body">{children}</div>
       <BottomNav />
     </div>
   );

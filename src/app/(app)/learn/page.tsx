@@ -27,12 +27,12 @@ export default async function LearnPage() {
   };
 
   return (
-    <main>
+    <main className="flex min-h-0 flex-1 flex-col">
       <AppHeader
         title="Learn"
         subtitle="A small library of practical topics. Today’s plan remains the easiest place to start."
       />
-      <div className="flex flex-col gap-5 px-5 pb-8">
+      <div className="sheet flex flex-1 flex-col gap-8">
         {TOPIC_GROUPS.map((group) => {
           const exercises = EXERCISE_LIBRARY.filter(
             (e) =>
@@ -46,26 +46,30 @@ export default async function LearnPage() {
           if (exercises.length === 0) return null;
           return (
             <section key={group.id} className="fade-up">
-              <h2 className="font-display text-2xl">{group.title}</h2>
+              <h2 className="font-display text-2xl text-brand-deep">{group.title}</h2>
               <p className="mt-1 text-sm text-muted">{group.description}</p>
               <ul className="mt-3 flex flex-col gap-3">
                 {exercises.map((exercise) => {
                   const matchesFocus =
                     dogTrainingPolicy.affinityScore(exercise, subject) >= 3;
                   return (
-                    <li key={exercise.id} className="card p-4">
-                      <h3 className="font-semibold leading-snug">{exercise.title}</h3>
-                      <p className="mt-1 text-sm text-muted">{exercise.summary}</p>
-                      <p className="mt-2 text-xs text-muted">
-                        {exercise.estimatedMinutes} minutes
-                        {matchesFocus ? " · matches your focus" : ""}
-                      </p>
-                      <Link
-                        href={`/exercise/${exercise.id}?dogId=${dog.id}&versionId=${exercise.id}-v${exercise.contentVersion}`}
-                        className="btn btn-secondary mt-3 w-full"
-                      >
-                        Try this exercise
-                      </Link>
+                    <li key={exercise.id} className="plan-row">
+                      <div className="plan-row__body w-full">
+                        <h3 className="font-semibold leading-snug text-brand-deep">
+                          {exercise.title}
+                        </h3>
+                        <p className="mt-1 text-sm text-muted">{exercise.summary}</p>
+                        <p className="mt-2 text-xs text-muted">
+                          {exercise.estimatedMinutes} minutes
+                          {matchesFocus ? " · matches your focus" : ""}
+                        </p>
+                        <Link
+                          href={`/exercise/${exercise.id}?dogId=${dog.id}&versionId=${exercise.id}-v${exercise.contentVersion}`}
+                          className="btn btn-secondary mt-3 w-full"
+                        >
+                          Try this exercise
+                        </Link>
+                      </div>
                     </li>
                   );
                 })}

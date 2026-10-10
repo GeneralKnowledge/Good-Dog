@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 const items = [
   { href: "/today", label: "Today" },
   { href: "/learn", label: "Learn" },
+  { href: "/shop", label: "Shop" },
   { href: "/dog", label: "My dog" },
   { href: "/ask", label: "Ask" },
 ] as const;
@@ -15,7 +16,7 @@ export function BottomNav() {
 
   return (
     <nav className="nav-bar" aria-label="Primary">
-      <div className="nav-grid">
+      <div className="nav-grid nav-grid--five">
         {items.map((item) => {
           const active =
             pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -50,6 +51,13 @@ function iconFor(label: (typeof items)[number]["label"]) {
       return (
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M4 6h16M4 12h16M4 18h10" />
+        </svg>
+      );
+    case "Shop":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 8h12l-1 11H7L6 8z" />
+          <path d="M9 8V6a3 3 0 0 1 6 0v2" />
         </svg>
       );
     case "My dog":

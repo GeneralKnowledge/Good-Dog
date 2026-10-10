@@ -130,6 +130,18 @@ export default async function DogPage() {
         ) : null}
       </section>
 
+      <section className="mx-5 mb-6">
+        <Link
+          href="/shop"
+          className="plan-row block text-brand-deep"
+        >
+          <p className="font-display text-lg">Shop kit ideas</p>
+          <p className="mt-1 text-sm text-muted">
+            Session treats and walk gear — optional, never required for the plan.
+          </p>
+        </Link>
+      </section>
+
       <section className="mx-5 mb-4">
         <DogProfileEditor dog={dog} />
       </section>

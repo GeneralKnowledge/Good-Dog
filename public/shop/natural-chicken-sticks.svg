@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="420" viewBox="0 0 320 420" fill="none">
+  <rect width="320" height="420" fill="#F3F6F2"/>
+  <path d="M85 28h150c12 0 22 10 22 22v320c0 18-14 32-32 32H95c-18 0-32-14-32-32V50c0-12 10-22 22-22z" fill="#E8DCC8" stroke="#1F4F43" stroke-width="3"/>
+  <rect x="75" y="270" width="170" height="132" rx="8" fill="#1F4F43"/>
+  <text x="160" y="120" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#1F4F43" font-weight="700">Good Dog</text>
+  <text x="160" y="148" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#5A6B62">Natural Chicken Sticks</text>
+  <text x="160" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#5A6B62">100% meat · 200 g</text>
+  <rect x="118" y="190" width="14" height="70" rx="4" fill="#C47A2C"/>
+  <rect x="140" y="185" width="14" height="75" rx="4" fill="#A86828"/>
+  <rect x="162" y="192" width="14" height="68" rx="4" fill="#C47A2C"/>
+  <rect x="184" y="188" width="14" height="72" rx="4" fill="#B8732A"/>
+  <text x="160" y="320" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#E4F0EB">Longer lasting</text>
+</svg>

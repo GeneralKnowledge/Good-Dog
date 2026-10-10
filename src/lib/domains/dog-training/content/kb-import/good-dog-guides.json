@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "1.0.0",
-  "generatedAt": "2026-10-10T15:23:15.493Z",
+  "schemaVersion": "1.1.0",
+  "generatedAt": "2026-10-10T17:32:13.932Z",
   "guides": [
     {
       "lessonId": "lesson-puppy-socialisation",
@@ -9,20 +9,34 @@
       "advisory": true,
       "advisoryMessage": "Follow your vet's vaccination and socialisation timing for your puppy.",
       "protocolId": "proto-puppy-socialisation-dt",
-      "kind": "management",
-      "ownerBodyMarkdown": "## Socialise your puppy safely\n\nGo at your puppy's pace, keep experiences positive, and follow your vet's guidance before walks on the ground.\n\nThis guide summarises approved management and education content from the Good Dog knowledge base. For personalised behaviour treatment, contact your vet and a qualified reward-based professional.",
+      "ownerBodyMarkdown": "Go at your puppy's pace, keep experiences positive, and follow your vet's guidance before walks on the ground.\n\n## What to try\n\n### Step 1\n\nBegin at home with gentle handling, household sounds (e.g. vacuum off then on at distance), varied surfaces and props (hats, umbrellas) at puppy's pace with rewards for relaxed behaviour.\n\nIf this is hard: Increase distance; reduce duration; split stimuli.\n\n### Step 2\n\nBefore full vaccination, carry puppy to observe people, traffic and dogs from safe distance; reward calm observation.\n\nIf this is hard: Shorter outings; quieter locations.\n\n### Step 3\n\nAfter vaccination clearance, introduce walks, varied dogs/animals at distance, visitors and sound desensitisation; stop immediately if puppy becomes worried or over-aroused.\n\nIf this is hard: Return to earlier step; consult vet/trainer.\n\n## Please note\n\nFollow your vet's vaccination and socialisation timing for your puppy.\n\n## When to pause\n\n- Follow vet vaccination and parasite advice\n- Persistent fear—professional help\n\n## Get help\n\n- Puppy class with reward-based ABTC instructor optional\n",
       "provenance": {
         "protocolId": "proto-puppy-socialisation-dt",
-        "claimIds": [],
-        "sourceIds": [],
-        "reviewStatus": "paraphrase_ok_export",
+        "claimIds": [
+          "claim-dt-pupsoc-003-stop-if-worried",
+          "claim-dt-pupsoc-001-critical-window",
+          "claim-dt-pupsoc-002-vaccination-before-ground",
+          "claim-dt-pup101-001-individual-pace"
+        ],
+        "sourceIds": [
+          "src-dt-puppy-socialisation",
+          "src-dt-puppy-training-101"
+        ],
+        "reviewStatus": "requires_human_review",
         "lastVerified": "2026-10-10"
       },
       "suggestedAskKeywords": [
-        "puppy",
         "socialise",
         "socialization",
-        "vaccination"
+        "puppy",
+        "vaccination",
+        "before vaccinations",
+        "carry in sling/carrier",
+        "vet timing",
+        "positive exposures at home",
+        "stop interaction",
+        "reduce intensity",
+        "seek professional help if persistent"
       ]
     },
     {
@@ -32,20 +46,76 @@
       "advisory": false,
       "advisoryMessage": null,
       "protocolId": "proto-steal-chase-management-dt",
-      "kind": "management",
-      "ownerBodyMarkdown": "## Stop the steal-and-chase game\n\nDo not chase stolen items; wait for a drop and redirect to proper toys and chews.\n\nThis guide summarises approved management and education content from the Good Dog knowledge base. For personalised behaviour treatment, contact your vet and a qualified reward-based professional.",
+      "ownerBodyMarkdown": "Do not chase stolen items; wait for a drop and redirect to proper toys and chews.\n\n## What to try\n\n### Step 1\n\nWhen your dog picks up a non-dangerous item, do not chase; wait calmly until they drop it.\n\nIf this is hard: Remove tempting items from reach.\n\n### Step 2\n\nIncrease enrichment and training so your dog gets attention without stealing.\n\nIf this is hard: Expect temporary increase when ignoring (it may happen more often for a short while, then fade).\n\n## When to pause\n\n- If your dog growls or snaps over food or items, stop and ask an ABTC clinical animal behaviourist for help.\n- Aggression over resources—refer out\n\n## Get help\n\n- Qualified behaviourist if aggression present\n",
       "provenance": {
         "protocolId": "proto-steal-chase-management-dt",
-        "claimIds": [],
-        "sourceIds": [],
-        "reviewStatus": "paraphrase_ok_export",
+        "claimIds": [
+          "claim-dt-steal-001-no-chase-game",
+          "claim-dt-steal-002-ignore-drop",
+          "claim-dt-steal-003-enrichment"
+        ],
+        "sourceIds": [
+          "src-dt-stop-stealing"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
         "lastVerified": "2026-10-10"
       },
       "suggestedAskKeywords": [
         "steal",
+        "stolen",
         "chase",
-        "run away",
-        "grab"
+        "runs away with",
+        "drop it",
+        "guarding",
+        "chase game reinforcement",
+        "enrichment",
+        "trade-up"
+      ]
+    },
+    {
+      "lessonId": "lesson-read-your-dog-stress",
+      "title": "Read stress signals",
+      "summary": "Notice lip licks, yawning, and turning away—pause and help your dog feel safe.",
+      "advisory": false,
+      "advisoryMessage": null,
+      "protocolId": "proto-recognise-stress-signals",
+      "ownerBodyMarkdown": "Notice lip licks, yawning, and turning away—pause and help your dog feel safe.\n\n## What to try\n\n### Step 1\n\nLook at your dog as a whole, together with the situation, not just one sign. Subtle signs include yawning when not tired, lip licking, panting when not hot, pinned-back ears, whale eye, pacing, and turning away or withdrawing. Clearer signs include loss of appetite, backing away, a tucked tail, cowering, trembling and a fixed stare.\n\nIf this is hard: Note down when and where the signs happen to spot a pattern.\n\n### Step 2\n\nWhen you see stress signs, stay calm, avoid raising your voice, and move your dog away from the cause or give them a quiet space to retreat to without forcing interaction.\n\nIf this is hard: Increase the distance or end the activity for the day.\n\n### Step 3\n\nKeep routines steady, change them gradually, and balance enrichment with plenty of rest. Contact your vet if the change in behaviour is sudden, or if signs keep happening, because health problems can cause similar signs.\n\nIf this is hard: Ask your vet for tailored advice or a referral.\n\n## When to pause\n\n- See your vet if pain or illness might be involved, and an ABTC-registered clinical behaviourist for aggression or severe fear.\n- Never tell your dog off for growling. It is a warning, so give them space and ask your vet and a qualified behaviourist for help.\n- If your dog stiffens and stares, growls, shows teeth, snaps or bites, give them space and contact your vet and a qualified behaviourist.\n\n## Get help\n\n- Your vet, then an ABTC-registered clinical animal behaviourist if there is aggression or persistent fear.\n",
+      "provenance": {
+        "protocolId": "proto-recognise-stress-signals",
+        "claimIds": [
+          "claim-bc-stress-002-body-language-list",
+          "claim-bc-stress-003-subtle-and-obvious-signs",
+          "claim-pdsa-stress-001-whole-dog-and-context",
+          "claim-bc-stress-004-defensive-escalation-health",
+          "claim-bc-stress-005-help-calm-dog",
+          "claim-bc-stress-001-no-punish-defensive",
+          "claim-pdsa-stress-002-prevention-and-patterns"
+        ],
+        "sourceIds": [
+          "src-bluecross-stress-dogs",
+          "src-pdsa-stress-dogs",
+          "src-dt-happy-vet-visits"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10"
+      },
+      "suggestedAskKeywords": [
+        "stress signals",
+        "lip lick",
+        "yawning",
+        "body language",
+        "anxious",
+        "turning away",
+        "whale eye",
+        "tucked tail",
+        "panting",
+        "yawn",
+        "pause the session",
+        "yawning or lip licking",
+        "loss of appetite",
+        "look at the whole dog and context",
+        "do not punish a warning",
+        "create space"
       ]
     },
     {
@@ -55,20 +125,32 @@
       "advisory": true,
       "advisoryMessage": "If your dog panics, injures themselves, or stops eating, contact your vet and seek qualified behaviour support.",
       "protocolId": "proto-fireworks-management-dt",
-      "kind": "management",
-      "ownerBodyMarkdown": "## Help your dog through fireworks\n\nCreate a safe space, stay calm, and watch for stress signs—get professional help for severe fear.\n\nThis guide summarises approved management and education content from the Good Dog knowledge base. For personalised behaviour treatment, contact your vet and a qualified reward-based professional.",
+      "ownerBodyMarkdown": "Create a safe space, stay calm, and watch for stress signs—get professional help for severe fear.\n\n## What to try\n\n### Step 1\n\nPrepare a safe resting area away from windows; stay nearby and keep daily routines as normal as possible.\n\nIf this is hard: Add masking sounds before events if your dog tolerates.\n\n### Step 2\n\nDuring fireworks, monitor stress signs (panting, hiding, vocalising); do not punish fear responses.\n\nIf this is hard: Vet check if signs may be medical.\n\n## Please note\n\nIf your dog panics, injures themselves, or stops eating, contact your vet and seek qualified behaviour support.\n\n## When to pause\n\n- See your vet if pain or illness might be involved, and an ABTC-registered clinical behaviourist for aggression or severe fear.\n- Worsening panic—professional desensitisation plan\n\n## Get help\n\n- ABTC behaviourist for severe noise phobia\n",
       "provenance": {
         "protocolId": "proto-fireworks-management-dt",
-        "claimIds": [],
-        "sourceIds": [],
-        "reviewStatus": "paraphrase_ok_export",
+        "claimIds": [
+          "claim-dt-fireworks-002-safe-space",
+          "claim-dt-fireworks-001-signs"
+        ],
+        "sourceIds": [
+          "src-dt-fireworks-seasonal"
+        ],
+        "reviewStatus": "reviewed_pilot_export",
         "lastVerified": "2026-10-10"
       },
       "suggestedAskKeywords": [
         "fireworks",
-        "noise",
+        "bangs",
+        "noise fear",
         "thunder",
-        "fear"
+        "scared of noises",
+        "safe space",
+        "routine",
+        "masking sounds",
+        "vet if health concerns",
+        "severe panic",
+        "self-injury",
+        "behaviourist/vet plan"
       ]
     },
     {
@@ -78,20 +160,37 @@
       "advisory": true,
       "advisoryMessage": "Management only—not a treatment plan for aggression. See your vet first; use ABTC-registered help for ongoing reactivity.",
       "protocolId": "proto-reactive-walk-management-dt",
-      "kind": "management",
-      "ownerBodyMarkdown": "## Help your reactive dog on walks\n\nCreate distance, keep the lead relaxed, reward calm—and get vet and behaviour support when needed.\n\nThis guide summarises approved management and education content from the Good Dog knowledge base. For personalised behaviour treatment, contact your vet and a qualified reward-based professional.",
+      "ownerBodyMarkdown": "Create distance, keep the lead relaxed, reward calm—and get vet and behaviour support when needed.\n\n## What to try\n\n### Step 1\n\nIdentify triggers and choose quieter walk times/places; turn away or use visual barriers before your dog reaches threshold.\n\nIf this is hard: Increase distance further; shorten walks.\n\n### Step 2\n\nKeep lead secure but relaxed; if trigger appears, create distance until your dog shows relaxation, then reward with food/praise/toy.\n\nIf this is hard: U-turn earlier; use higher-value rewards.\n\n### Step 3\n\nAllow 48–72h recovery after major reactions before challenging walks; contact Dogs Trust Behaviour Support Line or ABTC professional for structured modification if needed.\n\nIf this is hard: Temporary walk suspension with enrichment at home.\n\n## Please note\n\nManagement only—not a treatment plan for aggression. See your vet first; use ABTC-registered help for ongoing reactivity.\n\n## When to pause\n\n- See your vet if pain or illness might be involved, and an ABTC-registered clinical behaviourist for aggression or severe fear.\n- If training uses pain, fear, or equipment such as a choke or prong, switch to a reward-based professional.\n- Bites or imminent bite risk—management only with behaviourist/vet\n\n## Get help\n\n- ABTC Clinical Animal Behaviourist or Veterinary Behaviourist for treatment plans\n- Dogs Trust Behaviour Support Line for triage\n",
       "provenance": {
         "protocolId": "proto-reactive-walk-management-dt",
-        "claimIds": [],
-        "sourceIds": [],
-        "reviewStatus": "paraphrase_ok_export",
+        "claimIds": [
+          "claim-dt-reactive-003-create-distance-reward",
+          "claim-dt-reactive-002-vet-check-first",
+          "claim-dt-reactive-004-relaxed-lead",
+          "claim-dt-reactive-005-stress-recovery-window",
+          "claim-dt-reactive-006-behaviour-support-referral"
+        ],
+        "sourceIds": [
+          "src-dt-reactive-dog",
+          "src-dt-finding-behaviour-support"
+        ],
+        "reviewStatus": "reviewed_pilot_export",
         "lastVerified": "2026-10-10"
       },
       "suggestedAskKeywords": [
         "reactive",
-        "bark",
-        "lunge",
-        "walk"
+        "lunges",
+        "barks at dogs",
+        "lead reactivity",
+        "on lead barking",
+        "fear or frustration",
+        "pain or illness",
+        "learned habit",
+        "lead tension",
+        "create distance",
+        "reward calm",
+        "avoid telling off",
+        "keep lead relaxed"
       ]
     },
     {
@@ -101,20 +200,26 @@
       "advisory": true,
       "advisoryMessage": "Rescue dogs may need extra time and professional support—avoid overwhelming new environments.",
       "protocolId": "proto-rescue-settling-dt",
-      "kind": "management",
-      "ownerBodyMarkdown": "## Help a rescue dog settle in\n\nGo slowly, keep routines predictable, and get professional support if fear or aggression persists.\n\nThis guide summarises approved management and education content from the Good Dog knowledge base. For personalised behaviour treatment, contact your vet and a qualified reward-based professional.",
+      "ownerBodyMarkdown": "Go slowly, keep routines predictable, and get professional support if fear or aggression persists.\n\n## What to try\n\n### Step 1\n\nKeep routine predictable; allow your dog to approach people and novelty at their pace; reward calm exploration.\n\nIf this is hard: Reduce visitors and walk length.\n\n## Please note\n\nRescue dogs may need extra time and professional support—avoid overwhelming new environments.\n\n## When to pause\n\n- See your vet if pain or illness might be involved, and an ABTC-registered clinical behaviourist for aggression or severe fear.\n- Persistent fear or aggression—ABTC referral\n\n## Get help\n\n- Dogs Trust Behaviour Support Line or ABTC behaviourist\n",
       "provenance": {
         "protocolId": "proto-rescue-settling-dt",
-        "claimIds": [],
-        "sourceIds": [],
-        "reviewStatus": "paraphrase_ok_export",
+        "claimIds": [
+          "claim-dt-rehome-001-patience"
+        ],
+        "sourceIds": [
+          "src-dt-rehoming-hub"
+        ],
+        "reviewStatus": "reviewed_pilot_export",
         "lastVerified": "2026-10-10"
       },
       "suggestedAskKeywords": [
-        "rescue",
-        "adopt",
-        "settle",
-        "new home"
+        "rescue dog",
+        "newly adopted",
+        "settle in",
+        "rehomed",
+        "predictable routine",
+        "low pressure",
+        "professional support if fear persists"
       ]
     },
     {
@@ -124,43 +229,226 @@
       "advisory": true,
       "advisoryMessage": "Teenage fear periods vary; reduce pressure and seek help if anxiety persists.",
       "protocolId": "proto-adolescent-regression-mgmt",
-      "kind": "management",
-      "ownerBodyMarkdown": "## When your teenage dog regresses\n\nShorten sessions, revisit easy wins, and stay force-free through adolescent ups and downs.\n\nThis guide summarises approved management and education content from the Good Dog knowledge base. For personalised behaviour treatment, contact your vet and a qualified reward-based professional.",
+      "ownerBodyMarkdown": "Shorten sessions, revisit easy wins, and stay force-free through adolescent ups and downs.\n\n## What to try\n\n### Step 1\n\nShorten sessions; revisit foundation skills at easier criteria; avoid punishment for 'regression'.\n\nIf this is hard: Pause new skills; focus on sleep and enrichment.\n\n## Please note\n\nTeenage fear periods vary; reduce pressure and seek help if anxiety persists.\n\n## When to pause\n\n- Worsening fear—professional help\n\n## Get help\n\n- ABTC-registered trainer or behaviourist\n",
       "provenance": {
         "protocolId": "proto-adolescent-regression-mgmt",
-        "claimIds": [],
-        "sourceIds": [],
-        "reviewStatus": "paraphrase_ok_export",
+        "claimIds": [
+          "claim-dt-adolescent-001-regression"
+        ],
+        "sourceIds": [
+          "src-dt-puppy-training-101"
+        ],
+        "reviewStatus": "reviewed_pilot_export",
         "lastVerified": "2026-10-10"
       },
       "suggestedAskKeywords": [
-        "teenage",
+        "teenager",
         "adolescent",
-        "regress"
+        "regression",
+        "suddenly worse",
+        "fear period",
+        "adolescent regression",
+        "shorter sessions",
+        "stay force-free"
       ]
     },
     {
-      "lessonId": "lesson-read-your-dog-stress",
-      "title": "Read stress signals",
-      "summary": "Notice lip licks, yawning, and turning away—pause and help your dog feel safe.",
-      "advisory": false,
-      "advisoryMessage": null,
-      "protocolId": "proto-ddd-progression-skeleton",
-      "kind": "education",
-      "ownerBodyMarkdown": "## Read stress signals\n\nNotice lip licks, yawning, and turning away—pause and help your dog feel safe.\n\nThis guide summarises approved management and education content from the Good Dog knowledge base. For personalised behaviour treatment, contact your vet and a qualified reward-based professional.",
+      "lessonId": "lesson-vet-handling-prep",
+      "title": "Get ready for the vet and grooming",
+      "summary": "Practise short touch-and-treat sessions at home, keep the order the same, and make the clinic a happy place.",
+      "advisory": true,
+      "advisoryMessage": "If your dog growls, snaps or avoids being handled, see your vet first to rule out pain, then ask for an accredited behaviourist.",
+      "protocolId": "proto-handling-vet-prep-dt",
+      "ownerBodyMarkdown": "Practise short touch-and-treat sessions at home, keep the order the same, and make the clinic a happy place.\n\nIf you notice stress signals, pause and make the exercise easier instead of pushing on.\n\n## What to try\n\n### Step 1\n\nWhen you and your dog are both relaxed, touch a part of the body your dog already enjoys being touched for no more than three seconds, then give a treat. Keep sessions short and frequent.\n\nIf this is hard: Shorten the touch or go back to a more comfortable area.\n\n### Step 2\n\nSlowly move to new areas, always in the same order, and use a cue such as 'let me see' before touching. Work towards paws, tail, ears and mouth, and build touch time gradually from three to ten seconds. Stop if your dog seems uncomfortable.\n\nIf this is hard: Go back to the last area where your dog was relaxed and progress more slowly.\n\n### Step 3\n\nPractise in new quiet places and with other people, starting again from a gentle fuss each time. Drop in at the vet for treats and a fuss between appointments if your dog enjoys it, and bring a favourite toy or blanket.\n\nIf this is hard: Make visits shorter and quieter, and go at your dog's pace.\n\n## Please note\n\nIf your dog growls, snaps or avoids being handled, see your vet first to rule out pain, then ask for an accredited behaviourist.\n\n## When to pause\n\n- See your vet if pain or illness might be involved, and an ABTC-registered clinical behaviourist for aggression or severe fear.\n- Never tell your dog off for growling. It is a warning, so give them space and ask your vet and a qualified behaviourist for help.\n- If your dog tenses, growls or tries to move away, stop and ask your vet for help rather than pushing on.\n\n## Get help\n\n- Your vet first to rule out pain, then an accredited behaviourist via your vet if your dog still dislikes being handled.\n",
       "provenance": {
-        "protocolId": "proto-ddd-progression-skeleton",
-        "claimIds": [],
-        "sourceIds": [],
-        "reviewStatus": "paraphrase_ok_export",
+        "protocolId": "proto-handling-vet-prep-dt",
+        "claimIds": [
+          "claim-dt-vet-002-touch-treat-three-to-ten-seconds",
+          "claim-dt-handle-002-treat-same-order-generalise",
+          "claim-dt-handle-001-gradual-relaxed",
+          "claim-dt-handle-003-pain-vet-first",
+          "claim-dt-vet-003-speak-up-for-growl",
+          "claim-dt-vet-004-happy-visits-waiting-room"
+        ],
+        "sourceIds": [
+          "src-dt-how-to-handle",
+          "src-dt-happy-vet-visits"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
         "lastVerified": "2026-10-10"
       },
       "suggestedAskKeywords": [
-        "stress",
-        "worried",
-        "yawn",
-        "lip lick"
+        "vet visit",
+        "scared of the vet",
+        "grooming",
+        "handling",
+        "nail clipping",
+        "touch and treat",
+        "examination",
+        "same order each time",
+        "happy vet visits",
+        "pain or illness",
+        "fear of handling",
+        "see vet first"
+      ]
+    },
+    {
+      "lessonId": "lesson-how-dogs-learn",
+      "title": "How dogs learn: rewards, markers and associations",
+      "summary": "Dogs repeat what pays off and link events that happen together, so reward the behaviour you want straight away and check what your dog is already being rewarded for.",
+      "advisory": false,
+      "advisoryMessage": null,
+      "protocolId": "proto-reward-use-fundamentals",
+      "ownerBodyMarkdown": "Dogs repeat what pays off and link events that happen together, so reward the behaviour you want straight away and check what your dog is already being rewarded for.\n\nIf you notice stress signals, pause and make the exercise easier instead of pushing on.\n\n## What to try\n\n### Step 1\n\nFind rewards your dog really wants. Most dogs like food, toys and your attention, and some like a favourite game or a sniff. Use soft, smelly treats cut pea-sized for hard moments and plain biscuits for easy practice.\n\nIf this is hard: Offer a few options and watch which your dog works for.\n\n### Step 2\n\nGive the reward during the behaviour or within about half a second afterwards so your dog links the two. If you use a marker such as 'yes' or a click, say it calmly at the right moment and always follow it with a reward, repeating the pairing around 20 times at the start.\n\nIf this is hard: Practise the marker-then-treat pairing for longer before asking for anything.\n\n### Step 3\n\nWhen teaching something new, reward every success. Once your dog does it well in different places, reward every other time, then less often, mixing treats with praise and a fuss so your dog stays interested.\n\nIf this is hard: Go back to rewarding every time if your dog stops trying.\n\n### Step 4\n\nCheck what your dog is already being rewarded for. Attention, eye contact and being pushed away can all be rewards, so unwanted behaviour may continue even when you are telling the dog off. Ask for a calm behaviour and reward that instead.\n\nIf this is hard: Pick one behaviour to watch for a day.\n\n### Step 5\n\nKeep it kind and clear: end each short session on a success, teach one cue at a time with short consistent words, ignore mistakes and reward the next correct try, and make sure everyone at home uses the same cues. Never shout at, hit or frighten your dog.\n\nIf this is hard: Shorten the session and make the task easier.\n\n## When to pause\n\n- If training uses pain, fear, or equipment such as a choke or prong, switch to a reward-based professional.\n- See your vet if pain or illness might be involved, and an ABTC-registered clinical behaviourist for aggression or severe fear.\n- Stop and give the dog a break if it seems worried, frustrated or tired.\n\n## Get help\n\n- Your vet, then an ABTC-registered behaviourist if the dog shows fear or aggression.\n",
+      "provenance": {
+        "protocolId": "proto-reward-use-fundamentals",
+        "claimIds": [
+          "claim-dt-pr-001-definition",
+          "claim-bc-train-001-learn-by-association",
+          "claim-pdsa-rbt-001-timing-half-second",
+          "claim-dt-pr-004-unintentional-reinforcement",
+          "claim-dt-pr-002-continuous-reinforcement-new-skill",
+          "claim-dt-pr-003-marker-follow-reward",
+          "claim-dt-pr-005-raise-value-with-distractions",
+          "claim-dt-marker-001-charge-marker",
+          "claim-dt-marker-002-calm-marker-word",
+          "claim-bc-train-002-marker-pairing",
+          "claim-pdsa-rbt-002-golden-rules",
+          "claim-pdsa-rbt-003-no-punishment"
+        ],
+        "sourceIds": [
+          "src-dt-positive-reinforcement",
+          "src-dt-introducing-marker",
+          "src-bc-dog-puppy-training",
+          "src-pdsa-reward-based-training"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10"
+      },
+      "suggestedAskKeywords": [
+        "how dogs learn",
+        "rewards",
+        "treats",
+        "marker",
+        "clicker",
+        "positive reinforcement",
+        "why does my dog",
+        "reward timing"
+      ]
+    },
+    {
+      "lessonId": "lesson-equipment-and-law",
+      "title": "Kind equipment and the legal basics",
+      "summary": "Use a collar with an ID tag, a well-fitted harness and rewards; avoid prong, choke and shock devices, and check the current rules.",
+      "advisory": true,
+      "advisoryMessage": "Rules on shock collars differ across the UK and are under review in England, so check current rules; if your dog is worried by equipment or being handled, see your vet first.",
+      "protocolId": "proto-harness-and-equipment-basics",
+      "ownerBodyMarkdown": "Use a collar with an ID tag, a well-fitted harness and rewards; avoid prong, choke and shock devices, and check the current rules.\n\nIf you notice stress signals, pause and make the exercise easier instead of pushing on.\n\n## What to try\n\n### Step 1\n\nPut a collar with an identity tag on your dog and keep it on in public even if you walk in a harness. Make sure the microchip details are up to date.\n\nIf this is hard: Ask your vet to check the microchip.\n\n### Step 2\n\nChoose a harness that does not cross directly over the shoulders and restrict movement. It should fit so you can slip a finger between strap and body and your dog cannot slip out. Check collar, harness and lead for wear regularly.\n\nIf this is hard: Ask a pet shop or your vet to help with fit.\n\n### Step 3\n\nIntroduce the harness slowly. Scatter treats around it, feed treats through the head hole, rest it loosely on the neck, let your dog hear the clips, then fasten it with treats. Go back a stage if your dog worries.\n\nIf this is hard: Stay longer on the previous stage or stop for the day.\n\n### Step 4\n\nKeep to equipment that does not hurt or frighten. Prong collars, choke chains and shock collars rely on pain or fear, and welfare charities and vets advise against them. Teach loose lead walking with rewards instead, and check current rules because they are under review in England.\n\nIf this is hard: Ask a qualified reward-based trainer to help.\n\n## Please note\n\nRules on shock collars differ across the UK and are under review in England, so check current rules; if your dog is worried by equipment or being handled, see your vet first.\n\n## When to pause\n\n- If training uses pain, fear, or equipment such as a choke or prong, switch to a reward-based professional.\n- See your vet if pain or illness might be involved, and an ABTC-registered clinical behaviourist for aggression or severe fear.\n- Stop if your dog seems worried by the harness or being handled; speak to your vet.\n\n## Get help\n\n- Your vet first, then an accredited behaviourist if your dog is fearful of handling.\n",
+      "provenance": {
+        "protocolId": "proto-harness-and-equipment-basics",
+        "claimIds": [
+          "claim-dt-harness-001-choose-and-fit",
+          "claim-dog-002-collar-tag-microchip",
+          "claim-rspca-prong-001-harm-and-ineffective",
+          "claim-bva-ecollar-002-welfare-and-reward-based",
+          "claim-dt-harness-002-introduce-gradually",
+          "claim-govuk-001-microchip-8weeks",
+          "claim-rspca-prong-002-legal-but-alternatives",
+          "claim-bva-ecollar-001-uk-status",
+          "claim-hansard-ecollar-001-consult-2026",
+          "claim-dt-ll-002-no-aversive-kit"
+        ],
+        "sourceIds": [
+          "src-dt-harness-training",
+          "src-dog-ownership-guide",
+          "src-rspca-prong-collars",
+          "src-bva-shock-collars",
+          "src-dt-loose-lead",
+          "src-govuk-microchip",
+          "src-hansard-ecollars-2026"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10"
+      },
+      "suggestedAskKeywords": [
+        "harness",
+        "collar",
+        "id tag",
+        "microchip",
+        "prong collar",
+        "choke chain",
+        "shock collar",
+        "e-collar",
+        "head collar",
+        "equipment"
+      ]
+    },
+    {
+      "lessonId": "lesson-plan-and-measure",
+      "title": "Plan short sessions and track progress",
+      "summary": "Practise one skill at a time for a few minutes, add distraction slowly and keep a simple diary to see what is working.",
+      "advisory": false,
+      "advisoryMessage": null,
+      "protocolId": "proto-plan-and-measure-sessions",
+      "ownerBodyMarkdown": "Practise one skill at a time for a few minutes, add distraction slowly and keep a simple diary to see what is working.\n\nIf you notice stress signals, pause and make the exercise easier instead of pushing on.\n\n## What to try\n\n### Step 1\n\nPick one skill at a time and keep sessions short, about two to five minutes, practising little and often. Stop on a success.\n\nIf this is hard: Cut the session shorter.\n\n### Step 2\n\nStart in a quiet place with few distractions, then move to places with more distraction only when your dog copes. If it cannot focus, go back to the earlier place for a while.\n\nIf this is hard: Return to the quiet place.\n\n### Step 3\n\nKeep a simple diary. For each session write the date, skill, place, distractions, reward used and how it went. It shows progress and helps if you need to ask a trainer for help.\n\nIf this is hard: Use a note on your phone.\n\n### Step 4\n\nLook back after a week or two. If a skill works at home but not outside, practise it in the in-between places. Ask a qualified trainer or your vet if progress stalls or your dog shows fear or aggression.\n\nIf this is hard: Ask a reward-based trainer to review your diary.\n\n## When to pause\n\n- See your vet if pain or illness might be involved, and an ABTC-registered clinical behaviourist for aggression or severe fear.\n- Stop and rest if your dog loses interest or shows stress.\n\n## Get help\n\n- Your vet and an accredited behaviourist if fear or aggression are involved.\n",
+      "provenance": {
+        "protocolId": "proto-plan-and-measure-sessions",
+        "claimIds": [
+          "claim-bc-train-003-short-sessions-places",
+          "claim-rspca-brighton-001-diary-and-schedule",
+          "claim-pdsa-rbt-002-golden-rules"
+        ],
+        "sourceIds": [
+          "src-bc-dog-puppy-training",
+          "src-rspca-brighton-treats-markers",
+          "src-pdsa-reward-based-training"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10"
+      },
+      "suggestedAskKeywords": [
+        "training plan",
+        "session length",
+        "how long to train",
+        "training diary",
+        "progress",
+        "how often"
+      ]
+    },
+    {
+      "lessonId": "lesson-alone-prevention",
+      "title": "Practise short times alone",
+      "summary": "Build brief separations with a food toy and calm returns. This is prevention for dogs who cope—not a treatment plan for separation anxiety.",
+      "advisory": true,
+      "advisoryMessage": "This is gradual alone-time practice for dogs who are coping. If your dog panics when left, do not keep lengthening absences—arrange care and speak to your vet or a behaviour professional.",
+      "protocolId": "proto-alone-prevention-dt",
+      "ownerBodyMarkdown": "Build brief separations with a food toy and calm returns. This is prevention for dogs who cope—not a treatment plan for separation anxiety.\n\n## What to try\n\n### Step 1\n\nUse baby gate for brief visual separation; scatter treats or provide food toy before gate closes.\n\nIf this is hard: Stay closer to gate; shorten duration.\n\n### Step 2\n\nGradually increase time apart while owner in house, then very short departures with calm, low-key exits and returns.\n\nIf this is hard: Reduce seconds away; use your dog sitter instead of stretching duration if anxiety present.\n\n### Step 3\n\nIf the dog panics, stops coping, or already shows separation anxiety, stop lengthening absences. Arrange care so they are not left beyond what they can manage, and contact a vet or behaviour professional. This plan is prevention only—not a treatment programme.\n\nIf this is hard: Use a sitter or company instead of practising departures.\n\n## Please note\n\nThis is gradual alone-time practice for dogs who are coping. If your dog panics when left, do not keep lengthening absences—arrange care and speak to your vet or a behaviour professional.\n\n## When to pause\n\n- Do not leave beyond four-hour charity heuristic if avoidable\n- Any panic or injury risk—stop absences beyond threshold; contact behaviourist/vet\n\n## Get help\n\n- Separation anxiety signs → Dogs Trust Behaviour Support Line / vet / behaviourist\n",
+      "provenance": {
+        "protocolId": "proto-alone-prevention-dt",
+        "claimIds": [
+          "claim-dt-alone-001-gradual",
+          "claim-dt-sa-001-avoid-alone",
+          "claim-dt-alone-002-no-tell-off",
+          "claim-dt-alone-003-four-hours"
+        ],
+        "sourceIds": [
+          "src-dt-time-alone",
+          "src-dt-separation-anxiety"
+        ],
+        "reviewStatus": "reviewed_pilot_export",
+        "lastVerified": "2026-10-10"
+      },
+      "suggestedAskKeywords": [
+        "very gradual",
+        "food toy",
+        "shorten if stressed",
+        "calm exits and returns",
+        "stop beyond coping",
+        "arrange care",
+        "vet or behaviour professional",
+        "not a treatment plan"
       ]
     }
-  ]
+  ],
+  "excluded": []
 }

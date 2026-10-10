@@ -33,27 +33,32 @@ export function violatesNoAversiveRule(text: string): boolean {
   return aversivePatterns.some((re) => re.test(text));
 }
 
-type EscalatePattern = {
-  pattern: { source: string; flags?: string };
+type EscalatePatternEntry = {
+  pattern: string | { source: string; flags?: string };
+  flags?: string;
+  guideLessonIds?: string[];
 };
 
-const escalatePatterns: RegExp[] = (
-  askPatternsBundle.escalateQuestionPatterns as EscalatePattern[]
-).map((entry) => new RegExp(entry.pattern.source, entry.pattern.flags ?? "i"));
+function escalateRegExp(entry: EscalatePatternEntry): RegExp {
+  if (typeof entry.pattern === "string") {
+    return new RegExp(entry.pattern, entry.flags ?? "i");
+  }
+  return new RegExp(entry.pattern.source, entry.pattern.flags ?? entry.flags ?? "i");
+}
+
+const escalatePatternEntries =
+  askPatternsBundle.escalateQuestionPatterns as EscalatePatternEntry[];
+
+const escalatePatterns: RegExp[] = escalatePatternEntries.map(escalateRegExp);
 
 export function questionNeedsEscalateReferral(question: string): boolean {
   return escalatePatterns.some((re) => re.test(question));
 }
 
 export function getEscalateGuideLessonIds(question: string): string[] {
-  const patterns = askPatternsBundle.escalateQuestionPatterns as Array<{
-    pattern: { source: string; flags?: string };
-    guideLessonIds?: string[];
-  }>;
   const ids = new Set<string>();
-  for (const entry of patterns) {
-    const re = new RegExp(entry.pattern.source, entry.pattern.flags ?? "i");
-    if (re.test(question)) {
+  for (const entry of escalatePatternEntries) {
+    if (escalateRegExp(entry).test(question)) {
       for (const id of entry.guideLessonIds ?? []) ids.add(id);
     }
   }

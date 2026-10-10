@@ -1,0 +1,642 @@
+{
+  "schemaVersion": "1.1.0",
+  "generatedAt": "2026-10-10T17:32:14.001Z",
+  "courseId": "kindtrail-owner-crash-course-v1",
+  "title": "Owner crash course",
+  "summary": "A short, ordered path through the essentials: how dogs learn, reading your dog, core skills, real-life skills, and knowing when to get help.",
+  "alignment": {
+    "basis": "Stage order and coverage checks follow the topic headings in IMDT's public course and assessment outlines, retrieved 2026-10-10. Lesson wording is paraphrased from UK welfare-charity sources, not from IMDT course material.",
+    "disclaimer": "Independent guidance. Not affiliated with or endorsed by IMDT Ltd, and not a professional qualification.",
+    "sourceIds": [
+      "src-imdt-how-to-become",
+      "src-imdt-career-course",
+      "src-imdt-practical-instructor-course",
+      "src-imdt-assessment-practical-pdf",
+      "src-imdt-assessment-qa-pdf"
+    ],
+    "claimIds": [
+      "claim-imdt-cur-001-pathway",
+      "claim-imdt-cur-002-two-day-topics",
+      "claim-imdt-cur-003-four-day-topics",
+      "claim-imdt-cur-004-knowledge-areas",
+      "claim-imdt-cur-005-assessment-practical-exercises",
+      "claim-imdt-cur-006-assessment-theory-weighting"
+    ]
+  },
+  "parts": [
+    {
+      "id": "part-understand",
+      "order": 1,
+      "title": "Understand your dog",
+      "imdtAnalogue": "Theory course"
+    },
+    {
+      "id": "part-practise",
+      "order": 2,
+      "title": "Practise the skills",
+      "imdtAnalogue": "Practical course"
+    },
+    {
+      "id": "part-real-life",
+      "order": 3,
+      "title": "Real life and knowing your limits",
+      "imdtAnalogue": "Consultation, behaviour modification and professional boundaries"
+    }
+  ],
+  "stages": [
+    {
+      "id": "stage-how-dogs-learn",
+      "part": "part-understand",
+      "order": 1,
+      "title": "How dogs learn",
+      "aim": "Understand that dogs repeat what pays off and link events that happen together, so you can train with rewards on purpose.",
+      "lessons": [
+        {
+          "lessonId": "lesson-intro-marker",
+          "title": "Introduce a marker word",
+          "kind": "skill"
+        },
+        {
+          "lessonId": "lesson-how-dogs-learn",
+          "title": "How dogs learn: rewards, markers and associations",
+          "kind": "guide"
+        }
+      ],
+      "heldLessonIds": [],
+      "claimIds": [
+        "claim-dt-pr-001-definition",
+        "claim-dt-marker-001-charge-marker",
+        "claim-bc-train-001-learn-by-association",
+        "claim-pdsa-rbt-001-timing-half-second",
+        "claim-npsa-learn-001-classical",
+        "claim-npsa-learn-002-operant"
+      ],
+      "coverage": "partial",
+      "gaps": [
+        "Taught in plain language (rewards, markers, associations, accidental rewards). Habituation, counter-conditioning and the formal operant and classical terms stay in the evidence layer, not an owner lesson."
+      ]
+    },
+    {
+      "id": "stage-read-your-dog",
+      "part": "part-understand",
+      "order": 2,
+      "title": "Read your dog",
+      "aim": "Notice stress signs in context so you can give space early and avoid pushing a worried dog.",
+      "lessons": [
+        {
+          "lessonId": "lesson-read-your-dog-stress",
+          "title": "Read stress signals",
+          "kind": "guide"
+        }
+      ],
+      "heldLessonIds": [],
+      "claimIds": [
+        "claim-bc-stress-003-subtle-and-obvious-signs",
+        "claim-pdsa-stress-001-whole-dog-and-context"
+      ],
+      "coverage": "partial",
+      "gaps": [
+        "Stress signs only; no dog-to-dog communication, play versus conflict, or video-style practice."
+      ]
+    },
+    {
+      "id": "stage-puppy-and-development",
+      "part": "part-understand",
+      "order": 3,
+      "title": "Puppies and growing up",
+      "aim": "Give a young dog good early experiences and keep calm through teenage ups and downs.",
+      "lessons": [
+        {
+          "lessonId": "lesson-puppy-socialisation",
+          "title": "Socialise your puppy safely",
+          "kind": "guide"
+        },
+        {
+          "lessonId": "lesson-mouthing-redirect",
+          "title": "Redirect mouthing and nipping",
+          "kind": "skill"
+        },
+        {
+          "lessonId": "lesson-adolescent-regression",
+          "title": "When your teenage dog regresses",
+          "kind": "guide"
+        }
+      ],
+      "heldLessonIds": [],
+      "claimIds": [
+        "claim-npsa-learn-003-habituation-principles",
+        "claim-dt-pupsoc-001-critical-window"
+      ],
+      "coverage": "partial",
+      "gaps": [
+        "Nervous puppies, play versus aggression, and why puppies end up in rescue are not covered."
+      ]
+    },
+    {
+      "id": "stage-core-skills",
+      "part": "part-practise",
+      "order": 4,
+      "title": "Core skills",
+      "aim": "Teach attention, sit, down, a settle on a mat and a short stay, one small step at a time.",
+      "lessons": [
+        {
+          "lessonId": "lesson-name-attention",
+          "title": "Build name response",
+          "kind": "skill"
+        },
+        {
+          "lessonId": "lesson-first-sit",
+          "title": "First sit with a lure",
+          "kind": "skill"
+        },
+        {
+          "lessonId": "lesson-down-basics",
+          "title": "Teach down without forcing",
+          "kind": "skill"
+        },
+        {
+          "lessonId": "lesson-settle-mat",
+          "title": "Settle on a mat",
+          "kind": "skill"
+        },
+        {
+          "lessonId": "lesson-stay-basics",
+          "title": "Build a stay",
+          "kind": "skill"
+        },
+        {
+          "lessonId": "lesson-hand-touch",
+          "title": "Teach your dog to touch your hand",
+          "kind": "skill"
+        },
+        {
+          "lessonId": "lesson-spin-trick",
+          "title": "Teach your dog to spin",
+          "kind": "skill"
+        }
+      ],
+      "heldLessonIds": [],
+      "claimIds": [
+        "claim-dt-target-002-touch-steps",
+        "claim-bc-spin-001-lure-circle"
+      ],
+      "coverage": "partial",
+      "gaps": [
+        "Targeting a mat, send around and middle are not covered; middle has only a commercial source."
+      ]
+    },
+    {
+      "id": "stage-recall-and-lead",
+      "part": "part-practise",
+      "order": 5,
+      "title": "Coming back and walking nicely",
+      "aim": "Make coming back rewarding and keep the lead loose, using long lines until recall is reliable.",
+      "lessons": [
+        {
+          "lessonId": "lesson-recall-basics",
+          "title": "Build a reliable recall (basics)",
+          "kind": "skill"
+        },
+        {
+          "lessonId": "lesson-emergency-recall",
+          "title": "Emergency recall practice",
+          "kind": "skill"
+        },
+        {
+          "lessonId": "lesson-loose-lead",
+          "title": "Stop when the lead tightens",
+          "kind": "skill"
+        }
+      ],
+      "heldLessonIds": [],
+      "claimIds": [],
+      "coverage": "covered",
+      "gaps": []
+    },
+    {
+      "id": "stage-manners-and-management",
+      "part": "part-practise",
+      "order": 6,
+      "title": "Everyday manners",
+      "aim": "Swap jumping, grabbing and mouthing for behaviours you do want, and manage the setup while you teach.",
+      "lessons": [
+        {
+          "lessonId": "lesson-leave-it-basics",
+          "title": "Leave it — foundations",
+          "kind": "skill"
+        },
+        {
+          "lessonId": "lesson-rspca-leave",
+          "title": "Teach leave (RSPCA method)",
+          "kind": "skill"
+        },
+        {
+          "lessonId": "lesson-jumping-up",
+          "title": "Four paws on the floor",
+          "kind": "skill"
+        },
+        {
+          "lessonId": "lesson-steal-chase",
+          "title": "Stop the steal-and-chase game",
+          "kind": "guide"
+        },
+        {
+          "lessonId": "lesson-drop-it-swap",
+          "title": "Give things up with a fair trade",
+          "kind": "skill"
+        }
+      ],
+      "heldLessonIds": [],
+      "claimIds": [
+        "claim-dt-leave-003-fair-trade-steps"
+      ],
+      "coverage": "covered",
+      "gaps": []
+    },
+    {
+      "id": "stage-handling-and-vet",
+      "part": "part-practise",
+      "order": 7,
+      "title": "Handling, vet visits and muzzles",
+      "aim": "Make touch, the vet and (if needed) a muzzle predictable and pleasant, at your dog's pace.",
+      "lessons": [
+        {
+          "lessonId": "lesson-vet-handling-prep",
+          "title": "Get ready for the vet and grooming",
+          "kind": "guide"
+        }
+      ],
+      "heldLessonIds": [
+        "lesson-muzzle-training"
+      ],
+      "claimIds": [
+        "claim-dt-handle-003-pain-vet-first"
+      ],
+      "coverage": "partial",
+      "gaps": [
+        "Muzzle training is researched but held for human review before owner export.",
+        "Chin rest has only a US organisation source (research only), so there is no owner lesson."
+      ]
+    },
+    {
+      "id": "stage-behaviour-support",
+      "part": "part-real-life",
+      "order": 8,
+      "title": "When things are hard",
+      "aim": "Manage noise fear, lead reactivity and a new rescue dog without making things worse, and know when to ask for help.",
+      "lessons": [
+        {
+          "lessonId": "lesson-fireworks-management",
+          "title": "Help your dog through fireworks",
+          "kind": "guide"
+        },
+        {
+          "lessonId": "lesson-reactive-management",
+          "title": "Help your reactive dog on walks",
+          "kind": "guide"
+        },
+        {
+          "lessonId": "lesson-rescue-settling",
+          "title": "Help a rescue dog settle in",
+          "kind": "guide"
+        },
+        {
+          "lessonId": "lesson-alone-prevention",
+          "title": "Practise short times alone",
+          "kind": "guide"
+        }
+      ],
+      "heldLessonIds": [],
+      "claimIds": [
+        "claim-imdt-003-referral"
+      ],
+      "coverage": "covered",
+      "gaps": []
+    },
+    {
+      "id": "stage-ethics-equipment-law",
+      "part": "part-real-life",
+      "order": 9,
+      "title": "Kind methods, equipment and the law",
+      "aim": "Choose kind trainers and equipment, and know the basic UK legal duties.",
+      "lessons": [
+        {
+          "lessonId": "lesson-equipment-and-law",
+          "title": "Kind equipment and the legal basics",
+          "kind": "guide"
+        }
+      ],
+      "heldLessonIds": [],
+      "claimIds": [
+        "claim-imdt-001-force-free",
+        "claim-pdsa-rbt-003-no-punishment",
+        "claim-pdsa-muzzle-001-never-punish-never-alone",
+        "claim-dt-recall-005-uk-id-law",
+        "claim-dog-002-collar-tag-microchip",
+        "claim-rspca-prong-001-harm-and-ineffective",
+        "claim-bva-ecollar-001-uk-status",
+        "claim-hansard-ecollar-001-consult-2026"
+      ],
+      "coverage": "partial",
+      "gaps": [
+        "The lesson covers collar and ID tag, harness fit and avoiding pain-based gear. Head collars, long lines and retractable leads are not covered, and the dog-control and breed-type laws are in claims only.",
+        "Shock-collar rules are time-sensitive: the 2023 England regulations were draft only and never made, and Defra said in May 2026 it will consult later in this Parliament (review-020)."
+      ]
+    },
+    {
+      "id": "stage-plan-and-measure",
+      "part": "part-real-life",
+      "order": 10,
+      "title": "Plan and measure your training",
+      "aim": "Pick one small goal, record how it goes, and move on only when the last step is solid.",
+      "lessons": [
+        {
+          "lessonId": "lesson-plan-and-measure",
+          "title": "Plan short sessions and track progress",
+          "kind": "guide"
+        }
+      ],
+      "heldLessonIds": [],
+      "claimIds": [
+        "claim-bc-train-003-short-sessions-places",
+        "claim-rspca-brighton-001-diary-and-schedule"
+      ],
+      "coverage": "partial",
+      "gaps": [
+        "Session length guidance differs (Blue Cross 2 to 5 minutes, one RSPCA branch 5 to 15 minutes; disc-007). The diary advice comes from a single branch page, and the app's assessment metrics are not yet tied into the lesson."
+      ]
+    }
+  ],
+  "path": [
+    "lesson-intro-marker",
+    "lesson-how-dogs-learn",
+    "lesson-read-your-dog-stress",
+    "lesson-puppy-socialisation",
+    "lesson-mouthing-redirect",
+    "lesson-adolescent-regression",
+    "lesson-name-attention",
+    "lesson-first-sit",
+    "lesson-down-basics",
+    "lesson-settle-mat",
+    "lesson-stay-basics",
+    "lesson-hand-touch",
+    "lesson-spin-trick",
+    "lesson-recall-basics",
+    "lesson-emergency-recall",
+    "lesson-loose-lead",
+    "lesson-leave-it-basics",
+    "lesson-rspca-leave",
+    "lesson-jumping-up",
+    "lesson-steal-chase",
+    "lesson-drop-it-swap",
+    "lesson-vet-handling-prep",
+    "lesson-fireworks-management",
+    "lesson-reactive-management",
+    "lesson-rescue-settling",
+    "lesson-alone-prevention",
+    "lesson-equipment-and-law",
+    "lesson-plan-and-measure"
+  ],
+  "practicalExercises": [
+    {
+      "imdtExercise": "Emergency stop",
+      "status": "research_only",
+      "lessons": [],
+      "heldLessonIds": [],
+      "nearestLessonIds": [
+        "lesson-emergency-recall"
+      ],
+      "claimIds": [
+        "claim-mcconnell-stop-001-steps"
+      ]
+    },
+    {
+      "imdtExercise": "Mat target",
+      "status": "partial",
+      "lessons": [
+        {
+          "lessonId": "lesson-settle-mat",
+          "title": "Settle on a mat",
+          "kind": "skill"
+        }
+      ],
+      "heldLessonIds": [],
+      "nearestLessonIds": [],
+      "claimIds": []
+    },
+    {
+      "imdtExercise": "Send around",
+      "status": "gap",
+      "lessons": [],
+      "heldLessonIds": [],
+      "nearestLessonIds": [],
+      "claimIds": []
+    },
+    {
+      "imdtExercise": "Down",
+      "status": "covered",
+      "lessons": [
+        {
+          "lessonId": "lesson-down-basics",
+          "title": "Teach down without forcing",
+          "kind": "skill"
+        }
+      ],
+      "heldLessonIds": [],
+      "nearestLessonIds": [],
+      "claimIds": []
+    },
+    {
+      "imdtExercise": "Middle",
+      "status": "research_only",
+      "lessons": [],
+      "heldLessonIds": [],
+      "nearestLessonIds": [],
+      "claimIds": [
+        "claim-coa-middle-001-steps"
+      ]
+    },
+    {
+      "imdtExercise": "Chin rest",
+      "status": "research_only",
+      "lessons": [],
+      "heldLessonIds": [],
+      "nearestLessonIds": [
+        "lesson-vet-handling-prep"
+      ],
+      "claimIds": [
+        "claim-akc-chin-001-steps"
+      ]
+    },
+    {
+      "imdtExercise": "Nose to hand touch",
+      "status": "covered",
+      "lessons": [
+        {
+          "lessonId": "lesson-hand-touch",
+          "title": "Teach your dog to touch your hand",
+          "kind": "skill"
+        }
+      ],
+      "heldLessonIds": [],
+      "nearestLessonIds": [],
+      "claimIds": [
+        "claim-dt-target-002-touch-steps",
+        "claim-dt-target-003-frustration-signs"
+      ]
+    },
+    {
+      "imdtExercise": "Twist/spin",
+      "status": "covered",
+      "lessons": [
+        {
+          "lessonId": "lesson-spin-trick",
+          "title": "Teach your dog to spin",
+          "kind": "skill"
+        }
+      ],
+      "heldLessonIds": [],
+      "nearestLessonIds": [],
+      "claimIds": [
+        "claim-bc-spin-001-lure-circle"
+      ]
+    },
+    {
+      "imdtExercise": "Recall",
+      "status": "covered",
+      "lessons": [
+        {
+          "lessonId": "lesson-recall-basics",
+          "title": "Build a reliable recall (basics)",
+          "kind": "skill"
+        }
+      ],
+      "heldLessonIds": [],
+      "nearestLessonIds": [],
+      "claimIds": []
+    },
+    {
+      "imdtExercise": "Loose lead walking",
+      "status": "covered",
+      "lessons": [
+        {
+          "lessonId": "lesson-loose-lead",
+          "title": "Stop when the lead tightens",
+          "kind": "skill"
+        }
+      ],
+      "heldLessonIds": [],
+      "nearestLessonIds": [],
+      "claimIds": []
+    },
+    {
+      "imdtExercise": "Muzzle training",
+      "status": "held_for_review",
+      "lessons": [],
+      "heldLessonIds": [
+        "lesson-muzzle-training"
+      ],
+      "nearestLessonIds": [],
+      "claimIds": [
+        "claim-dt-muzzle-002-steps"
+      ]
+    },
+    {
+      "imdtExercise": "Retrieve",
+      "status": "partial",
+      "lessons": [
+        {
+          "lessonId": "lesson-drop-it-swap",
+          "title": "Give things up with a fair trade",
+          "kind": "skill"
+        }
+      ],
+      "heldLessonIds": [],
+      "nearestLessonIds": [
+        "lesson-steal-chase"
+      ],
+      "claimIds": [
+        "claim-dt-leave-003-fair-trade-steps",
+        "claim-akc-fetch-001-hold-then-fetch"
+      ]
+    }
+  ],
+  "theoryAreas": [
+    {
+      "area": "Operant conditioning",
+      "marks": 16,
+      "claimTopics": [
+        "B.operant_conditioning",
+        "B.marker_signals",
+        "B.luring_shaping_capturing_chaining"
+      ],
+      "claimCount": 9,
+      "evidenceStatus": "evidence"
+    },
+    {
+      "area": "Classical conditioning",
+      "marks": 16,
+      "claimTopics": [
+        "B.classical_conditioning",
+        "B.marker_signals"
+      ],
+      "claimCount": 5,
+      "evidenceStatus": "evidence"
+    },
+    {
+      "area": "General training knowledge",
+      "marks": 8,
+      "claimTopics": [
+        "C.session_planning",
+        "C.timing_rate_of_reinforcement",
+        "C.distance_duration_distraction",
+        "C.troubleshooting_learning"
+      ],
+      "claimCount": 10,
+      "evidenceStatus": "evidence"
+    },
+    {
+      "area": "Body language",
+      "marks": 4,
+      "claimTopics": [
+        "A.stress_fear_arousal"
+      ],
+      "claimCount": 10,
+      "evidenceStatus": "evidence"
+    },
+    {
+      "area": "Equipment use and conditioning",
+      "marks": 4,
+      "claimTopics": [
+        "K.training_equipment_welfare"
+      ],
+      "claimCount": 11,
+      "evidenceStatus": "evidence"
+    },
+    {
+      "area": "Dog law and code of ethics",
+      "marks": 2,
+      "claimTopics": [
+        "K.uk_law_professional",
+        "K.imdt_ethics"
+      ],
+      "claimCount": 18,
+      "evidenceStatus": "evidence"
+    }
+  ],
+  "summaryCounts": {
+    "stages": 10,
+    "pathLessons": 28,
+    "stageCoverage": {
+      "partial": 7,
+      "covered": 3
+    },
+    "practicalExerciseStatus": {
+      "research_only": 3,
+      "partial": 2,
+      "gap": 1,
+      "covered": 5,
+      "held_for_review": 1
+    }
+  }
+}

@@ -14,12 +14,20 @@ cd "$KB_REPO"
 npm ci
 npm run build:kb 2>/dev/null || npm run export:good-dog
 mkdir -p "$DEST"
-cp dist/good-dog-domain.json dist/good-dog-safety.json "$DEST/"
-for f in good-dog-guides.json good-dog-referrals.json good-dog-ask-patterns.json; do
+for f in good-dog-domain.json good-dog-safety.json good-dog-guides.json good-dog-referrals.json good-dog-ask-patterns.json good-dog-crash-course.json; do
   if [[ -f "dist/$f" ]]; then
     cp "dist/$f" "$DEST/"
   fi
 done
-# When DogResearch has not yet published companion files, regenerate from domain/safety.
-node "$ROOT/scripts/build-kb-companion-exports.mjs"
+
+missing=0
+for f in good-dog-guides.json good-dog-referrals.json good-dog-ask-patterns.json; do
+  if [[ ! -f "$DEST/$f" ]]; then
+    missing=1
+  fi
+done
+if [[ "$missing" -eq 1 ]]; then
+  node "$ROOT/scripts/build-kb-companion-exports.mjs"
+fi
+
 echo "Updated $DEST from $KB_REPO"

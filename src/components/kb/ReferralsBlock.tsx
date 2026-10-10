@@ -18,14 +18,18 @@ export function ReferralsBlock({ compact = false }: { compact?: boolean }) {
       <ul className={`flex flex-col gap-3 ${compact ? "mt-3" : "mt-4"}`}>
         {referrals.map((ref) => (
           <li key={ref.id} className="rounded-xl bg-accent-soft px-3 py-3">
-            <a
-              href={ref.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-brand-deep underline"
-            >
-              {ref.title}
-            </a>
+            {ref.url ? (
+              <a
+                href={ref.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-brand-deep underline"
+              >
+                {ref.title}
+              </a>
+            ) : (
+              <p className="font-semibold text-brand-deep">{ref.title}</p>
+            )}
             <p className="mt-1 text-sm leading-relaxed text-muted">{ref.body}</p>
           </li>
         ))}

@@ -1,7 +1,7 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
   "kbProfile": "research-agent-v1",
-  "generatedAt": "2026-10-10T15:23:15.493Z",
+  "generatedAt": "2026-10-10T17:32:13.830Z",
   "exercises": [
     {
       "id": "ex-reward-marker",
@@ -29,6 +29,7 @@
       ],
       "topicGroup": "everyday_foundations",
       "contentCompleteness": "steps_only",
+      "purposeOneLine": "Teach your dog that a calm 'yes' (or click) always means a reward is coming, before learning new skills.",
       "newExercise": false,
       "goodDogExportStatus": "active",
       "provenance": {
@@ -85,6 +86,7 @@
       ],
       "topicGroup": "everyday_foundations",
       "contentCompleteness": "steps_only",
+      "purposeOneLine": "Use a treat lure, reward the moment your dog sits, then add the word 'sit' at the right time.",
       "newExercise": false,
       "goodDogExportStatus": "active",
       "provenance": {
@@ -138,6 +140,7 @@
       ],
       "topicGroup": "everyday_foundations",
       "contentCompleteness": "steps_only",
+      "purposeOneLine": "Lure or shape a down and never push your dog into position.",
       "newExercise": false,
       "goodDogExportStatus": "active",
       "provenance": {
@@ -184,6 +187,7 @@
       ],
       "topicGroup": "everyday_foundations",
       "contentCompleteness": "steps_only",
+      "purposeOneLine": "Reward check-ins, then teach your dog that their name means look at you—without repeating it.",
       "newExercise": false,
       "goodDogExportStatus": "active",
       "provenance": {
@@ -230,6 +234,7 @@
       ],
       "topicGroup": "calm_confidence",
       "contentCompleteness": "steps_only",
+      "purposeOneLine": "Help your dog choose calm on a blanket, with more relaxation rewarded over time.",
       "newExercise": false,
       "goodDogExportStatus": "active",
       "provenance": {
@@ -278,6 +283,7 @@
       ],
       "topicGroup": "life_at_home",
       "contentCompleteness": "steps_only",
+      "purposeOneLine": "Reward your dog in position, return before treating, and build duration before distance.",
       "newExercise": false,
       "goodDogExportStatus": "active",
       "provenance": {
@@ -331,6 +337,7 @@
       ],
       "topicGroup": "everyday_foundations",
       "contentCompleteness": "steps_only",
+      "purposeOneLine": "Teach your dog to look away from tempting items and wait for a better reward.",
       "newExercise": false,
       "goodDogExportStatus": "active",
       "provenance": {
@@ -380,6 +387,7 @@
       ],
       "topicGroup": "everyday_foundations",
       "contentCompleteness": "steps_only",
+      "purposeOneLine": "Reward your dog for backing away from something so leaving it feels safe and worthwhile.",
       "newExercise": true,
       "goodDogExportStatus": "active",
       "provenance": {
@@ -428,6 +436,7 @@
       ],
       "topicGroup": "coming_back",
       "contentCompleteness": "steps_only",
+      "purposeOneLine": "Start in a secure space, make coming back always worth it, and use a long line before off-lead freedom.",
       "newExercise": false,
       "goodDogExportStatus": "active",
       "provenance": {
@@ -483,6 +492,7 @@
       ],
       "topicGroup": "coming_back",
       "contentCompleteness": "steps_only",
+      "purposeOneLine": "Make coming back always worth it—never punish late returns; use a long line until skills are solid.",
       "newExercise": true,
       "goodDogExportStatus": "active",
       "provenance": {
@@ -533,6 +543,7 @@
       ],
       "topicGroup": "life_at_home",
       "contentCompleteness": "steps_only",
+      "purposeOneLine": "Teach everyone to reward calm greetings, not jumping.",
       "newExercise": false,
       "goodDogExportStatus": "active",
       "provenance": {
@@ -576,6 +587,7 @@
       ],
       "topicGroup": "puppy_life",
       "contentCompleteness": "steps_only",
+      "purposeOneLine": "Meet your dog's needs, redirect to chews, and call for help if bites break skin.",
       "newExercise": false,
       "goodDogExportStatus": "active",
       "provenance": {
@@ -593,6 +605,164 @@
         "displayEligibilitySummary": [
           {
             "sourceId": "src-dt-mouthing-nipping",
+            "displayEligibility": "paraphrase_ok"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex-kb-hand-touch",
+      "slug": "kb-hand-touch",
+      "title": "Teach your dog to touch your hand",
+      "steps": [
+        "Rub a piece of food on your open hand and hold it out. When your dog sniffs or touches your hand with its nose, mark with your marker word and reward.",
+        "When your dog touches your hand every time you hold it out, say 'touch' the moment it makes contact so it learns the word.",
+        "Build time by waiting one second before you mark and reward, then two, increasing slowly while your dog keeps its nose on your hand.",
+        "When your dog holds a touch for five seconds, add a very slight distraction such as a piece of kibble or a toy in your other hand (not their favourite). Mark and reward with an extra tasty treat."
+      ],
+      "safetyNote": "safe-001-no-aversive-routine",
+      "prerequisiteIds": [
+        "ex-reward-marker"
+      ],
+      "learningObjectiveId": "hand-target",
+      "glossaryTermIds": [],
+      "contentVersion": 1,
+      "estimatedMinutes": 3,
+      "difficulty": 1,
+      "category": "engagement",
+      "lifeStages": [
+        "adult"
+      ],
+      "topicGroup": "everyday_foundations",
+      "contentCompleteness": "steps_only",
+      "purposeOneLine": "Mark and reward nose contact with your hand, add the word 'touch', then build a few seconds of hold and a mild distraction.",
+      "newExercise": true,
+      "goodDogExportStatus": "active",
+      "provenance": {
+        "protocolId": "proto-hand-touch-dt",
+        "claimIds": [
+          "claim-dt-target-002-touch-steps",
+          "claim-dt-target-003-frustration-signs",
+          "claim-dt-hand-target-001"
+        ],
+        "sourceIds": [
+          "src-dt-focus-training",
+          "src-dt-target-training"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10",
+        "displayEligibilitySummary": [
+          {
+            "sourceId": "src-dt-focus-training",
+            "displayEligibility": "paraphrase_ok"
+          },
+          {
+            "sourceId": "src-dt-target-training",
+            "displayEligibility": "paraphrase_ok"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex-kb-drop-it-swap",
+      "slug": "kb-drop-it-swap",
+      "title": "Give things up with a fair trade",
+      "steps": [
+        "Pick a toy that is not your dog's favourite and encourage your dog to play with it for a few seconds.",
+        "Place a handful of very tasty treats on the floor beside your dog. Let your dog choose to leave the toy and eat the treats on its own, then tell it well done and let it play with the toy again.",
+        "Repeat as a fun game a few times. When your dog is reliably letting go of the toy for the food, say your cue ('drop' or 'out') while your dog has the toy and then put the treats down.",
+        "Offer fair trades whenever your dog picks up something it should not have, offering the better item before you try to take anything. Store away things you do not want your dog to get and anything harmful."
+      ],
+      "safetyNote": "safe-004-scope-referral safe-005-growl-not-punish",
+      "prerequisiteIds": [
+        "ex-leave-it-easy"
+      ],
+      "learningObjectiveId": "leave-it",
+      "glossaryTermIds": [],
+      "contentVersion": 1,
+      "estimatedMinutes": 3,
+      "difficulty": 1,
+      "category": "manners",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "topicGroup": "everyday_foundations",
+      "contentCompleteness": "steps_only",
+      "purposeOneLine": "Trade a toy for tasty treats your dog chooses, never grab or chase, and add the word 'drop' once your dog reliably lets go.",
+      "newExercise": true,
+      "goodDogExportStatus": "active",
+      "provenance": {
+        "protocolId": "proto-drop-fair-trade-dt",
+        "claimIds": [
+          "claim-dt-leave-001-fair-trade",
+          "claim-dt-leave-003-fair-trade-steps",
+          "claim-dt-steal-001-no-chase-game",
+          "claim-dt-steal-002-ignore-drop"
+        ],
+        "sourceIds": [
+          "src-dt-leave-training",
+          "src-dt-stop-stealing"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10",
+        "displayEligibilitySummary": [
+          {
+            "sourceId": "src-dt-leave-training",
+            "displayEligibility": "paraphrase_ok"
+          },
+          {
+            "sourceId": "src-dt-stop-stealing",
+            "displayEligibility": "paraphrase_ok"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex-kb-spin-trick",
+      "slug": "kb-spin-trick",
+      "title": "Teach your dog to spin",
+      "steps": [
+        "Have your dog stand in front of you. Hold a treat at its nose and slowly move it to the side of its head so it follows with its nose.",
+        "Keep moving the treat in a circle around your dog's body. When it finishes a circle, mark with an enthusiastic 'yes' and give the treat. If it struggles, reward a half turn first, then build to a full circle.",
+        "Add the word 'spin' as you guide your dog round with an empty hand, then make the hand signal smaller until you are just moving your wrist and pointing."
+      ],
+      "safetyNote": "safe-001-no-aversive-routine",
+      "prerequisiteIds": [
+        "ex-reward-marker"
+      ],
+      "learningObjectiveId": "trick-training",
+      "glossaryTermIds": [],
+      "contentVersion": 1,
+      "estimatedMinutes": 3,
+      "difficulty": 1,
+      "category": "engagement",
+      "lifeStages": [
+        "adult"
+      ],
+      "topicGroup": "everyday_foundations",
+      "contentCompleteness": "steps_only",
+      "purposeOneLine": "Lure your dog's nose in a circle, reward half turns, then add the word and a small hand signal in short, fun sessions.",
+      "newExercise": true,
+      "goodDogExportStatus": "active",
+      "provenance": {
+        "protocolId": "proto-spin-lure-bc",
+        "claimIds": [
+          "claim-bc-spin-001-lure-circle",
+          "claim-bc-spin-002-fade-lure-add-cue",
+          "claim-bc-spin-003-short-sessions-frustration"
+        ],
+        "sourceIds": [
+          "src-bc-teach-spin"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10",
+        "displayEligibilitySummary": [
+          {
+            "sourceId": "src-bc-teach-spin",
             "displayEligibility": "paraphrase_ok"
           }
         ]
@@ -639,6 +809,7 @@
       ],
       "topicGroup": "walking_together",
       "contentCompleteness": "steps_only",
+      "purposeOneLine": "Dog chooses proximity and soft lead through reinforcement of check-ins and slack-lead moments, without relying on forward motion as the primary consequence for tight lead.",
       "newExercise": true,
       "goodDogExportStatus": "draft",
       "provenance": {
@@ -703,6 +874,14 @@
       "protocolId": "proto-adolescent-regression-mgmt",
       "advisory": true,
       "advisoryMessage": "Teenage fear periods vary; reduce pressure and seek help if anxiety persists."
+    },
+    {
+      "lessonId": "lesson-alone-prevention",
+      "title": "Practise short times alone",
+      "summary": "Build brief separations with a food toy and calm returns. This is prevention for dogs who cope—not a treatment plan for separation anxiety.",
+      "protocolId": "proto-alone-prevention-dt",
+      "advisory": true,
+      "advisoryMessage": "This is gradual alone-time practice for dogs who are coping. If your dog panics when left, do not keep lengthening absences—arrange care and speak to your vet or a behaviour professional."
     }
   ],
   "educationOnly": [
@@ -710,7 +889,31 @@
       "lessonId": "lesson-read-your-dog-stress",
       "title": "Read stress signals",
       "summary": "Notice lip licks, yawning, and turning away—pause and help your dog feel safe.",
-      "protocolId": "proto-ddd-progression-skeleton"
+      "protocolId": "proto-recognise-stress-signals"
+    },
+    {
+      "lessonId": "lesson-vet-handling-prep",
+      "title": "Get ready for the vet and grooming",
+      "summary": "Practise short touch-and-treat sessions at home, keep the order the same, and make the clinic a happy place.",
+      "protocolId": "proto-handling-vet-prep-dt"
+    },
+    {
+      "lessonId": "lesson-how-dogs-learn",
+      "title": "How dogs learn: rewards, markers and associations",
+      "summary": "Dogs repeat what pays off and link events that happen together, so reward the behaviour you want straight away and check what your dog is already being rewarded for.",
+      "protocolId": "proto-reward-use-fundamentals"
+    },
+    {
+      "lessonId": "lesson-equipment-and-law",
+      "title": "Kind equipment and the legal basics",
+      "summary": "Use a collar with an ID tag, a well-fitted harness and rewards; avoid prong, choke and shock devices, and check the current rules.",
+      "protocolId": "proto-harness-and-equipment-basics"
+    },
+    {
+      "lessonId": "lesson-plan-and-measure",
+      "title": "Plan short sessions and track progress",
+      "summary": "Practise one skill at a time for a few minutes, add distraction slowly and keep a simple diary to see what is working.",
+      "protocolId": "proto-plan-and-measure-sessions"
     }
   ],
   "skipped": []

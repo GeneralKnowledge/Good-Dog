@@ -85,6 +85,16 @@ export const LEARNING_OBJECTIVES: LearningObjective[] = [
     label: "Everyday confidence",
     plainEnglish: "Getting used to everyday experiences",
   },
+  {
+    id: "hand-target",
+    label: "Hand touch",
+    plainEnglish: "Touching your hand on cue",
+  },
+  {
+    id: "trick-training",
+    label: "Fun tricks",
+    plainEnglish: "Light-hearted skills for engagement",
+  },
 ];
 
 export function getObjectiveLabel(id: string): string {

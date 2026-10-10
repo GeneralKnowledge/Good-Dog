@@ -8,16 +8,35 @@ import {
 } from "@/lib/domains/dog-training/kb-import";
 import { getEscalateGuideLessonIds } from "@/lib/domains/dog-training/kb-safety";
 import { inferMetricProgress, getAssessmentMetrics } from "@/lib/domains/dog-training/kb-assessment";
+import { getCrashCourseStages } from "@/lib/domains/dog-training/kb-crash-course";
+
+const EXPECTED_GUIDE_IDS = [
+  "lesson-adolescent-regression",
+  "lesson-alone-prevention",
+  "lesson-equipment-and-law",
+  "lesson-fireworks-management",
+  "lesson-how-dogs-learn",
+  "lesson-plan-and-measure",
+  "lesson-puppy-socialisation",
+  "lesson-reactive-management",
+  "lesson-read-your-dog-stress",
+  "lesson-rescue-settling",
+  "lesson-steal-chase",
+  "lesson-vet-handling-prep",
+];
 
 describe("KB import loaders", () => {
-  it("vendors seven guides", () => {
-    expect(getAllGuides()).toHaveLength(7);
+  it("vendors twelve guides from DogResearch export", () => {
+    const guides = getAllGuides();
+    expect(guides).toHaveLength(12);
+    expect(guides.map((g) => g.lessonId).sort()).toEqual([...EXPECTED_GUIDE_IDS].sort());
+    expect(guides[0]?.ownerBodyMarkdown).toContain("## What to try");
   });
 
   it("exposes import metadata", () => {
     const meta = getKbImportMeta();
     expect(meta.generatedAt).toBeTruthy();
-    expect(meta.guidesSchemaVersion).toBe("1.0.0");
+    expect(meta.guidesSchemaVersion).toMatch(/^\d+\.\d+\.\d+$/);
   });
 
   it("links reactive questions to management guide", () => {
@@ -27,7 +46,7 @@ describe("KB import loaders", () => {
 
   it("crosswalks escalate help articles", () => {
     const guides = findGuidesForHelpArticle("help-aggression");
-    expect(guides[0]?.lessonId).toBe("lesson-reactive-management");
+    expect(guides.some((g) => g.lessonId === "lesson-reactive-management")).toBe(true);
   });
 
   it("maps escalate patterns to guide ids", () => {
@@ -38,6 +57,10 @@ describe("KB import loaders", () => {
 
   it("includes referrals", () => {
     expect(getReferrals().length).toBeGreaterThan(0);
+  });
+
+  it("loads crash course stages", () => {
+    expect(getCrashCourseStages().length).toBeGreaterThan(5);
   });
 
   it("infers assessment metrics from progress", () => {

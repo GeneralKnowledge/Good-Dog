@@ -4,6 +4,7 @@ import { AppHeader } from "@/components/AppHeader";
 import { GlossaryBrowser } from "@/components/glossary/GlossaryBrowser";
 import { LearnExerciseTopics } from "@/components/learn/LearnExerciseTopics";
 import { LearnGuides } from "@/components/learn/LearnGuides";
+import { LearnCrashCourse } from "@/components/learn/LearnCrashCourse";
 import { ReferralsBlock } from "@/components/kb/ReferralsBlock";
 import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
@@ -47,6 +48,17 @@ export default async function LearnPage() {
             <GlossaryBrowser exposure={exposure} />
           </div>
         </section>
+
+        <section>
+          <h2 className="heading-section">Owner crash course</h2>
+          <p className="mt-1 text-sm text-muted">
+            An ordered path through essentials — guides and practised skills from the knowledge
+            base. Today&apos;s plan remains your main practice hub.
+          </p>
+          <LearnCrashCourse dogId={dog.id} />
+        </section>
+
+        <hr className="hairline" />
 
         <section>
           <h2 className="heading-section">Guides</h2>

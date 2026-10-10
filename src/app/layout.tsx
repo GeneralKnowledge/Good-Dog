@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fraunces, Nunito_Sans } from "next/font/google";
+import { APP_DESCRIPTION, APP_NAME, THEME_COLOR } from "@/lib/app-meta";
 import "./globals.css";
 
 const display = Fraunces({
@@ -15,9 +16,22 @@ const body = Nunito_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Good Dog",
-  description:
-    "A friendly daily dog-training coach for ordinary UK dog owners. Short, practical, reward-based activities.",
+  title: APP_NAME,
+  description: APP_DESCRIPTION,
+  applicationName: APP_NAME,
+  appleWebApp: {
+    capable: true,
+    title: APP_NAME,
+    statusBarStyle: "default",
+  },
+  formatDetection: { telephone: false },
+  // Older iOS versions only honour the prefixed tag; Next emits just the modern one.
+  other: { "apple-mobile-web-app-capable": "yes" },
+};
+
+export const viewport: Viewport = {
+  themeColor: THEME_COLOR,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

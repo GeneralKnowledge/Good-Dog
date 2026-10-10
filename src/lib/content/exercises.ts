@@ -45,8 +45,13 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
       "timing",
       "threshold",
     ],
+    whyThisWorks: {
+      plainWhy:
+        "Giving your dog something they value right after they look at you makes looking more likely next time.",
+      termId: "positive-reinforcement",
+    },
     topicGroup: "everyday_foundations",
-    contentVersion: 2,
+    contentVersion: 3,
   },
   {
     id: "ex-reward-marker",
@@ -89,8 +94,13 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
       "capturing",
       "arousal",
     ],
+    whyThisWorks: {
+      plainWhy:
+        "A short marker word tells your dog exactly which moment earned the treat — then the treat pays for it.",
+      termId: "marker-word",
+    },
     topicGroup: "everyday_foundations",
-    contentVersion: 3,
+    contentVersion: 4,
   },
   {
     id: "ex-engagement-easy",
@@ -168,8 +178,13 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     harderVariationId: "ex-down-comfort",
     hint: "Lure slowly. Rushing often makes dogs jump instead of sit.",
     glossaryTermIds: ["luring", "marker-word", "timing", "cue", "fluency", "criteria"],
+    whyThisWorks: {
+      plainWhy:
+        "Guiding with food near the nose helps your dog discover the sit without being pushed into place.",
+      termId: "luring",
+    },
     topicGroup: "everyday_foundations",
-    contentVersion: 3,
+    contentVersion: 4,
   },
   {
     id: "ex-down-comfort",
@@ -475,7 +490,7 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     steps: [
       "Allow a brief sniff or glance at a mild distraction.",
       "Give your recall [[cue]] once in a friendly voice.",
-      "[[Reward]] heavily for coming away and returning.",
+      "[[reward|Reward]] heavily for coming away and returning.",
       "Keep success easy — [[distance]] and distraction should still feel under a comfortable [[threshold]].",
     ],
     lookFor: "Turning away from the distraction and returning willingly.",
@@ -560,7 +575,7 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
       "Start in a quiet indoor space or empty car park. Have treats accessible. Choose a place where [[arousal]] can stay moderate.",
     steps: [
       "Begin walking and use your [[marker-word]] for any moment the lead is soft.",
-      "[[Reward]] by your side — soft lead earns good things ([[positive-reinforcement]]).",
+      "[[reward|Reward]] by your side — soft lead earns good things ([[positive-reinforcement]]).",
       "If the lead tightens, stop politely and wait for slack, then move on.",
       "Keep sessions short — a few good metres beat a long struggle.",
     ],
@@ -656,8 +671,13 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
       "body-language",
       "drop-swap",
     ],
+    whyThisWorks: {
+      plainWhy:
+        "Turning away from a dull item can earn something better — while unsafe items stay out of reach as management, not a game.",
+      termId: "leave-it",
+    },
     topicGroup: "life_at_home",
-    contentVersion: 3,
+    contentVersion: 4,
   },
   {
     id: "ex-door-manners",
@@ -694,8 +714,13 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
       "marker-word",
       "distance",
     ],
+    whyThisWorks: {
+      plainWhy:
+        "A brief pause at the door is a trained skill; using a lead or quieter exit is management that keeps everyone safer while you practise.",
+      termId: "management",
+    },
     topicGroup: "life_at_home",
-    contentVersion: 3,
+    contentVersion: 4,
   },
   {
     id: "ex-greeting-calm",
@@ -759,7 +784,7 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
       "Choose a bed, crate with door open, or corner mat. Never force confinement; support [[choice-consent]].",
     steps: [
       "Toss a few treats onto the rest spot.",
-      "[[Reward]] your dog for going there voluntarily ([[capturing]]).",
+      "[[reward|Reward]] your dog for going there voluntarily ([[capturing]]).",
       "Sit nearby for a short calm minute.",
       "Allow free exit — the spot should feel optional and safe.",
     ],
@@ -814,8 +839,13 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
       "threshold",
       "stress-signals",
     ],
+    whyThisWorks: {
+      plainWhy:
+        "Keeping the sound soft enough that your puppy can stay curious means you’re working below a comfortable learning threshold.",
+      termId: "threshold",
+    },
     topicGroup: "puppy_life",
-    contentVersion: 2,
+    contentVersion: 3,
   },
   {
     id: "ex-puppy-surfaces",

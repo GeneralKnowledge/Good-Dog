@@ -61,6 +61,14 @@ export interface ExerciseContent {
   topicGroup: TopicGroup;
   /** Glossary terms introduced or reinforced by this exercise */
   glossaryTermIds?: string[];
+  /**
+   * Optional quiet “why this works” teaching moment (plain English + one term).
+   * Shown once per exercise guide; does not interrupt the steps.
+   */
+  whyThisWorks?: {
+    plainWhy: string;
+    termId: string;
+  };
   contentVersion: number;
 }
 

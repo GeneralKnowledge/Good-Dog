@@ -115,6 +115,40 @@ describe("glossary search", () => {
 });
 
 describe("exercise term links", () => {
+  it("only uses valid lowercase [[term-id]] or [[term-id|label]] markup", () => {
+    for (const exercise of EXERCISE_LIBRARY) {
+      const texts = [
+        exercise.purpose,
+        exercise.preparation,
+        ...exercise.steps,
+        exercise.lookFor,
+        exercise.ifDifficult,
+        exercise.hint,
+        exercise.safetyNote ?? "",
+      ];
+      for (const text of texts) {
+        // Capitalised ids like [[Reward]] do not match TERM_LINK_PATTERN.
+        expect(text, `${exercise.id} capitalised id`).not.toMatch(
+          /\[\[[A-Z][^\]]*\]\]/,
+        );
+        const tokens = text.match(/\[\[[^\]]+\]\]/g) ?? [];
+        for (const token of tokens) {
+          expect(token, `${exercise.id} ${token}`).toMatch(
+            /^\[\[[a-z0-9-]+(?:\|[^\]]+)?\]\]$/,
+          );
+        }
+      }
+    }
+  });
+
+  it("resolves [[reward|Reward]] alias markup to the reward term", () => {
+    expect(extractTermIdsFromText("[[reward|Reward]] heavily")).toEqual(["reward"]);
+    const recall = EXERCISE_LIBRARY.find((e) => e.id === "ex-recall-mild-distract")!;
+    const blob = recall.steps.join(" ");
+    expect(blob).toContain("[[reward|Reward]]");
+    expect(extractTermIdsFromText(blob)).toContain("reward");
+  });
+
   it("only links published glossary terms", () => {
     for (const exercise of EXERCISE_LIBRARY) {
       const texts = [
@@ -133,6 +167,19 @@ describe("exercise term links", () => {
       for (const id of exercise.glossaryTermIds ?? []) {
         expect(getGlossaryTerm(id), `${exercise.id} meta ${id}`).toBeTruthy();
       }
+    }
+  });
+
+  it("keeps whyThisWorks terms published and linked to real glossary entries", () => {
+    const withWhy = EXERCISE_LIBRARY.filter((e) => e.whyThisWorks);
+    expect(withWhy.length).toBeGreaterThanOrEqual(6);
+    for (const exercise of withWhy) {
+      const why = exercise.whyThisWorks!;
+      expect(why.plainWhy.length, exercise.id).toBeGreaterThan(40);
+      const term = getGlossaryTerm(why.termId);
+      expect(term, `${exercise.id} → ${why.termId}`).toBeTruthy();
+      expect(term!.published).toBe(true);
+      expect(exercise.glossaryTermIds ?? []).toContain(why.termId);
     }
   });
 

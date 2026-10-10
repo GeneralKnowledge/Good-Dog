@@ -223,6 +223,24 @@ export function ExerciseRunner({
         </div>
       </div>
 
+      {exercise.whyThisWorks ? (
+        <div className="rounded-2xl border border-brand/20 bg-brand-soft/50 px-4 py-3 text-sm leading-relaxed">
+          <p className="font-semibold text-brand-deep">Why this works</p>
+          <p className="mt-1 text-muted">
+            <TermRichText
+              text={`${exercise.whyThisWorks.plainWhy} This is called [[${exercise.whyThisWorks.termId}]].`}
+              onTermsPresented={onTermsPresented}
+              termExposure={termExposure}
+              highlightNewTermId={
+                !termExposure[exercise.whyThisWorks.termId]
+                  ? exercise.whyThisWorks.termId
+                  : null
+              }
+            />
+          </p>
+        </div>
+      ) : null}
+
       <div className="card p-5">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand">Before you start</p>
         <div className="mt-2 leading-relaxed">

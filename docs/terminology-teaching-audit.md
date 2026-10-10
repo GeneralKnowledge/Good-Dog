@@ -1,55 +1,36 @@
-# Training Terminology — Existing State Audit
+# Training Terminology — State Audit
 
-**Date:** 2026-10-09  
-**Purpose:** Brief baseline before adding Good Dog’s teaching glossary.
+**Updated:** 2026-10-10  
+**Purpose:** Living record of the teaching glossary (not a pre-build baseline).
 
-## Current state
+## Current state (verified in source)
 
 | Area | Finding |
 | --- | --- |
-| Exercise schema | No glossary fields; steps are plain strings |
-| Exercise copy | Uses everyday language (“mark the moment”, “reward”) but rarely names the technical term |
-| Hints | Mentions “lure” once (`ex-sit-comfort`) without defining luring |
-| Learn | Exercise library only — no glossary |
-| Ask / help | Welfare and practical Q&A; no terminology answers |
-| Tooltips | None |
-| Progress | Dog skill progress only — no owner vocabulary exposure |
-| Tests | No glossary coverage |
+| Glossary | Static typed terms in `src/lib/content/glossary.ts` (~44 published) |
+| Exercise schema | `glossaryTermIds`, optional `whyThisWorks`, inline `[[term-id]]` markup |
+| In-exercise UI | `TermRichText` + `GlossaryPanel` modal; progressive “(new training word)” cue |
+| Learn | Searchable glossary browser + term detail pages |
+| Ask | Glossary → help → optional AI; `preferApprovedGlossaryOverAi` |
+| Progress | `owner_term_progress` (introduced / explored); does not affect dog plans |
+| Tests | `tests/glossary*.ts(x)` + Playwright term dialog in main journey |
 
-## Gaps
+## Status checklist
 
-1. Beginners who hear “marker”, “threshold”, or “positive reinforcement” elsewhere get no bridge from the app.
-2. Occasional technical words (“lure”, “mark”) appear without Layer 2 explanations.
-3. No searchable everyday → technical entry points (e.g. “the word I say when…”).
-4. Optional AI is not grounded on approved definitions.
+- [x] Structured glossary + integrity validation
+- [x] Inline `[[term-id]]` links + `glossaryTermIds`
+- [x] Tap-to-explain panel (a11y: focus trap / restore / Escape)
+- [x] Learn browse/search + detail pages
+- [x] Owner-scoped term exposure
+- [x] Ask grounded on glossary
+- [x] Progressive “(new training word)” cue for first unseen term
+- [x] Orphan terms allowlisted via `LEARN_ASK_ONLY_TERM_IDS` (e.g. negative reinforcement)
+- [x] Quiet **Why this works** teaching moments on key exercises
+- [x] Invalid capitalised markup fixed (`[[reward|Reward]]`)
 
-## Implementation plan (this branch)
+## Remaining backlog
 
-1. Structured original glossary data + search helpers + tests  
-2. Exercise schema: `glossaryTermIds` + inline `[[term-id]]` markers in relevant copy  
-3. Tap-to-explain panel in guided exercises (mobile + a11y)  
-4. Owner-scoped term exposure (introduced / explored) — does not affect dog progression  
-5. Glossary browse/search in Learn  
-6. Ask grounded on glossary; docs for adding terms  
-
-No AI introduced if unused; existing optional AI will prefer glossary definitions.
-
-## Status (implemented on this branch)
-
-- [x] Structured glossary in `src/lib/content/glossary.ts`
-- [x] Inline `[[term-id]]` links + `glossaryTermIds` on exercises
-- [x] Tap-to-explain `GlossaryPanel` in `ExerciseRunner`
-- [x] Learn glossary browse/search + term detail pages
-- [x] Owner-scoped `owner_term_progress` (introduced / explored)
-- [x] Ask grounded on glossary (`answerFromGlossary` before help/AI)
-- [x] Authoring docs + Vitest coverage for integrity, search, UI, isolation
-
-## Phase 2+ backlog (next steps)
-
-- [x] Progressive new-vs-introduced cues in `ExerciseRunner` (quiet “(new training word)” cue)
-- [x] Orphan terms taught in context or allowlisted (`LEARN_ASK_ONLY_TERM_IDS`)
-- [x] Glossary panel focus trap, restore-focus, body scroll lock
-- [x] Ask short glossary cards + fail-closed preference for approved definitions over AI
-- [x] Stronger `needsQualifiedReview` boundary copy on term pages / panels
-- [x] Docs sync: authoring allowlist, content-review glossary section, exercise-audit version note
-- [x] Tests for progressive cue, orphan integrity, panel a11y, Ask grounding
+- Expand `whyThisWorks` to more exercises only when copy benefits
+- Content review passes for `needsQualifiedReview` terms
+- Optional dedicated `/learn/glossary` index route (browse already on Learn)
+- Shop / affiliate area — see [`shop-affiliate-plan.md`](./shop-affiliate-plan.md) (Amazon UK + Zooplus first; not built yet)

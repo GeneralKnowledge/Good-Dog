@@ -70,7 +70,7 @@ export const dogTrainingPolicy: CoachingPolicy<ExerciseContent, DogSubject> = {
   },
 
   dailyBudget(dog) {
-    return PLAN_LIMITS[dog.availableTime];
+    return PLAN_LIMITS[dog.availableTime] ?? PLAN_LIMITS.about_10;
   },
 
   starterExercises(eligible, dog) {

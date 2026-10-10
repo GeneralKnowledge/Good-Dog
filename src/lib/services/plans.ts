@@ -18,9 +18,36 @@ import {
   type SkillState,
 } from "@/lib/coaching";
 import { EXERCISE_LIBRARY, dogTrainingPolicy } from "@/lib/domains/dog-training";
+import { ensureExercises } from "@/lib/db/ensure-exercises";
+import { toDogSubject } from "@/lib/services/dogs";
 
 function exerciseVersionId(exerciseId: string, version: number) {
   return `${exerciseId}-v${version}`;
+}
+
+function requireExerciseVersion(exercise: (typeof EXERCISE_LIBRARY)[number]) {
+  const versionId = exerciseVersionId(exercise.id, exercise.contentVersion);
+  let version = db
+    .select()
+    .from(exerciseVersions)
+    .where(eq(exerciseVersions.id, versionId))
+    .get();
+
+  if (!version) {
+    // Self-heal after deploys that bump contentVersion without a manual seed.
+    ensureExercises(db);
+    version = db
+      .select()
+      .from(exerciseVersions)
+      .where(eq(exerciseVersions.id, versionId))
+      .get();
+  }
+
+  if (!version) {
+    throw new Error(`Missing exercise version for ${exercise.id}`);
+  }
+
+  return version;
 }
 
 export async function getOwnedDog(dogId: string, ownerId: string) {
@@ -121,14 +148,7 @@ export function getOrCreateDailyPlan(options: {
     });
 
   const generated = generateDailyPlan({
-    subject: {
-      id: dog.id,
-      name: dog.name,
-      lifeStage: dog.lifeStage,
-      availableTime: dog.availableTime,
-      primaryReason: dog.primaryReason,
-      trainingExperience: dog.trainingExperience,
-    },
+    subject: toDogSubject(dog),
     exercises: EXERCISE_LIBRARY,
     policy: dogTrainingPolicy,
     progressByObjective,
@@ -138,16 +158,7 @@ export function getOrCreateDailyPlan(options: {
 
   const items: PlanItem[] = generated.items.map((item) => {
     const exercise = EXERCISE_LIBRARY.find((e) => e.id === item.exerciseId)!;
-    const versionId = exerciseVersionId(exercise.id, exercise.contentVersion);
-    const version = db
-      .select()
-      .from(exerciseVersions)
-      .where(eq(exerciseVersions.id, versionId))
-      .get();
-
-    if (!version) {
-      throw new Error(`Missing exercise version for ${exercise.id}`);
-    }
+    const version = requireExerciseVersion(exercise);
 
     return {
       ...item,

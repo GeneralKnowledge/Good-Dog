@@ -150,34 +150,23 @@ export function ExerciseRunner({
   return (
     <div className="mx-5 my-4 flex flex-col gap-4 pb-8 fade-up">
       <div className="card p-5">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">Purpose</p>
-        <p className="mt-2 leading-relaxed">{exercise.purpose}</p>
-      </div>
+        <p className="leading-relaxed">{exercise.purpose}</p>
 
-      <div className="card p-5">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">Before you start</p>
-        <p className="mt-2 leading-relaxed">{exercise.preparation}</p>
-      </div>
+        <h2 className="mt-6 font-display text-xl">Before you start</h2>
+        <p className="mt-2 leading-relaxed text-muted">{exercise.preparation}</p>
 
-      <div className="card p-5">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">Let’s practise</p>
+        <h2 className="mt-6 font-display text-xl">Let’s practise</h2>
         <ol className="mt-3 list-decimal space-y-3 pl-5 leading-relaxed">
           {exercise.steps.map((step) => (
             <li key={step}>{step}</li>
           ))}
         </ol>
-      </div>
 
-      <div className="card p-5">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">What to look for</p>
-        <p className="mt-2 leading-relaxed">{exercise.lookFor}</p>
-      </div>
+        <h2 className="mt-6 font-display text-xl">What to look for</h2>
+        <p className="mt-2 leading-relaxed text-muted">{exercise.lookFor}</p>
 
-      <div className="card p-5">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">
-          If it feels difficult
-        </p>
-        <p className="mt-2 leading-relaxed">{exercise.ifDifficult}</p>
+        <h2 className="mt-6 font-display text-xl">If it feels difficult</h2>
+        <p className="mt-2 leading-relaxed text-muted">{exercise.ifDifficult}</p>
       </div>
 
       {exercise.safetyNote ? (
@@ -187,7 +176,7 @@ export function ExerciseRunner({
       ) : null}
 
       {showHint ? (
-        <div className="card p-4 text-sm leading-relaxed text-brand-deep fade-up">
+        <div className="rounded-2xl bg-brand-soft px-4 py-3 text-sm leading-relaxed text-brand-deep fade-up">
           <strong>Hint:</strong> {exercise.hint}
         </div>
       ) : null}

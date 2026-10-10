@@ -4,10 +4,15 @@ import { AppHeader } from "@/components/AppHeader";
 import { PlanCard } from "@/components/PlanCard";
 import { ShortPlanButton } from "@/components/ShortPlanButton";
 import { getExerciseById } from "@/lib/domains/dog-training";
-import { greetingForHour } from "@/lib/dates";
+import {
+  countPractisedDaysInLastWeek,
+  greetingForHour,
+  localDateString,
+} from "@/lib/dates";
 import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
-import { dogs, trainingSessions } from "@/lib/db/schema";
+import { trainingSessions } from "@/lib/db/schema";
+import { getDogForOwner } from "@/lib/services/dogs";
 import { getOrCreateDailyPlan } from "@/lib/services/plans";
 import type { PlanItem } from "@/lib/coaching";
 
@@ -19,7 +24,7 @@ export default async function TodayPage({
   const user = await requireUser();
   if (!user) redirect("/sign-in");
 
-  const dog = db.select().from(dogs).where(eq(dogs.ownerId, user.id)).get();
+  const dog = getDogForOwner(user.id);
   if (!dog) redirect("/onboarding");
 
   const params = await searchParams;
@@ -27,6 +32,22 @@ export default async function TodayPage({
   const items = JSON.parse(plan.itemsJson) as PlanItem[];
   const completedCount = items.filter((i) => i.completedSessionId).length;
   const allDone = plan.completionState === "completed" || completedCount === items.length;
+
+  const recentSessions = db
+    .select()
+    .from(trainingSessions)
+    .where(eq(trainingSessions.dogId, dog.id))
+    .orderBy(desc(trainingSessions.completedAt))
+    .limit(40)
+    .all();
+
+  const timezone = user.timezone;
+  const recentDateKeys = new Set(
+    recentSessions
+      .filter((s) => s.completedAt)
+      .map((s) => localDateString(s.completedAt!, timezone)),
+  );
+  const practisedDays = countPractisedDaysInLastWeek(recentDateKeys, timezone);
 
   const recentWin = db
     .select()
@@ -56,6 +77,12 @@ export default async function TodayPage({
         {allDone
           ? "Today’s plan is complete"
           : `${completedCount} of ${items.length} activities done`}
+        {practisedDays > 0 ? (
+          <span>
+            {" "}
+            · practised {practisedDays} of the last 7 days
+          </span>
+        ) : null}
       </div>
 
       {allDone ? (

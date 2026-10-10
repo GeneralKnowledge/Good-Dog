@@ -28,27 +28,11 @@ export function BottomNav() {
               data-prominent={item.prominent ? "true" : "false"}
               aria-current={active ? "page" : undefined}
             >
-              <span aria-hidden="true">{iconFor(item.label)}</span>
-              <span>{item.label}</span>
+              {item.label}
             </Link>
           );
         })}
       </div>
     </nav>
   );
-}
-
-function iconFor(label: string) {
-  switch (label) {
-    case "Today":
-      return "◎";
-    case "Learn":
-      return "☰";
-    case "My dog":
-      return "◌";
-    case "Ask":
-      return "?";
-    default:
-      return "•";
-  }
 }

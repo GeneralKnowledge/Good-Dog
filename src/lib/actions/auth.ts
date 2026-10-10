@@ -13,6 +13,7 @@ import {
   trainingSessions,
   users,
 } from "@/lib/db/schema";
+import { getDogForOwner } from "@/lib/services/dogs";
 import { signInSchema, signUpSchema } from "@/lib/validation";
 
 export type ActionResult = { ok: true } | { ok: false; error: string };
@@ -77,7 +78,7 @@ export async function signInAction(
 
   await createSession(user.id);
 
-  const dog = db.select().from(dogs).where(eq(dogs.ownerId, user.id)).get();
+  const dog = getDogForOwner(user.id);
   redirect(dog?.onboardingComplete ? "/today" : "/onboarding");
 }
 

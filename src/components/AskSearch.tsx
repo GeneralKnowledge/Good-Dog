@@ -1,17 +1,24 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState, useTransition } from "react";
 import type { HelpArticle } from "@/lib/domains/dog-training/content/help";
 import { searchHelp } from "@/lib/domains/dog-training/content/help";
 import { askOptionalAiAction } from "@/lib/actions/ask";
 
+export type AskArticle = HelpArticle & {
+  relatedExercises: Array<{ id: string; title: string; versionId: string }>;
+};
+
 export function AskSearch({
+  dogId,
   dogName,
   initialArticles,
   aiConfigured,
 }: {
+  dogId: string;
   dogName: string;
-  initialArticles: HelpArticle[];
+  initialArticles: AskArticle[];
   aiConfigured: boolean;
 }) {
   const [query, setQuery] = useState("");
@@ -21,7 +28,9 @@ export function AskSearch({
 
   const results = useMemo(() => {
     if (!query.trim()) return initialArticles;
-    return searchHelp(query);
+    const matched = searchHelp(query);
+    const byId = new Map(initialArticles.map((a) => [a.id, a]));
+    return matched.map((article) => byId.get(article.id) ?? { ...article, relatedExercises: [] });
   }, [query, initialArticles]);
 
   return (
@@ -51,6 +60,22 @@ export function AskSearch({
               <p className="mt-3 rounded-xl bg-accent-soft px-3 py-2 text-xs leading-relaxed">
                 This may need professional support beyond the app.
               </p>
+            ) : null}
+            {article.relatedExercises.length > 0 ? (
+              <div className="mt-3 flex flex-col gap-2">
+                <p className="text-xs font-semibold uppercase tracking-wide text-brand">
+                  Try a related exercise
+                </p>
+                {article.relatedExercises.map((exercise) => (
+                  <Link
+                    key={exercise.id}
+                    href={`/exercise/${exercise.id}?dogId=${dogId}&versionId=${exercise.versionId}`}
+                    className="btn btn-secondary w-full text-sm"
+                  >
+                    {exercise.title}
+                  </Link>
+                ))}
+              </div>
             ) : null}
           </li>
         ))}

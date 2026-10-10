@@ -1,20 +1,33 @@
-import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { AppHeader } from "@/components/AppHeader";
 import { AskSearch } from "@/components/AskSearch";
-import { HELP_ARTICLES } from "@/lib/domains/dog-training";
+import { getExerciseById, HELP_ARTICLES } from "@/lib/domains/dog-training";
 import { requireUser } from "@/lib/auth/session";
-import { db } from "@/lib/db";
-import { dogs } from "@/lib/db/schema";
+import { getDogForOwner } from "@/lib/services/dogs";
 
 export default async function AskPage() {
   const user = await requireUser();
   if (!user) redirect("/sign-in");
 
-  const dog = db.select().from(dogs).where(eq(dogs.ownerId, user.id)).get();
+  const dog = getDogForOwner(user.id);
   if (!dog) redirect("/onboarding");
 
   const aiConfigured = Boolean(process.env.OPENAI_API_KEY);
+
+  const articles = HELP_ARTICLES.map((article) => ({
+    ...article,
+    relatedExercises: (article.relatedExerciseIds ?? [])
+      .map((id) => {
+        const exercise = getExerciseById(id);
+        if (!exercise) return null;
+        return {
+          id: exercise.id,
+          title: exercise.title,
+          versionId: `${exercise.id}-v${exercise.contentVersion}`,
+        };
+      })
+      .filter((e): e is NonNullable<typeof e> => e !== null),
+  }));
 
   return (
     <main>
@@ -24,8 +37,9 @@ export default async function AskPage() {
       />
       <div className="px-5 pb-8">
         <AskSearch
+          dogId={dog.id}
           dogName={dog.name}
-          initialArticles={HELP_ARTICLES}
+          initialArticles={articles}
           aiConfigured={aiConfigured}
         />
         <p className="mt-6 text-xs leading-relaxed text-muted">

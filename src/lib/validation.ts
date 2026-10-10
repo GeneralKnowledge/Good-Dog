@@ -22,10 +22,6 @@ export const onboardingSchema = z.object({
   primaryReason: z.string().trim().min(1, "Tell us what you’d like help with").max(200),
   availableTime: z.enum(["few_minutes", "about_10", "more"]),
   trainingExperience: z.enum(["new", "some"]),
-  breedOrMix: z.string().trim().max(80).optional().or(z.literal("")),
-  householdContext: z.string().trim().max(200).optional().or(z.literal("")),
-  alreadyEasy: z.string().trim().max(200).optional().or(z.literal("")),
-  knownTriggers: z.string().trim().max(200).optional().or(z.literal("")),
   preferredRewards: z.string().trim().max(120).optional().or(z.literal("")),
 });
 

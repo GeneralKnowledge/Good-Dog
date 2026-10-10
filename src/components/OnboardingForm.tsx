@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState } from "react";
 import type { DogActionResult } from "@/lib/actions/dogs";
 
 export function OnboardingForm({
@@ -8,7 +8,6 @@ export function OnboardingForm({
 }: {
   action: (prev: DogActionResult | null, formData: FormData) => Promise<DogActionResult>;
 }) {
-  const [showOptional, setShowOptional] = useState(false);
   const [state, formAction, pending] = useActionState(action, null);
 
   return (
@@ -62,56 +61,15 @@ export function OnboardingForm({
         </select>
       </div>
 
-      <button
-        type="button"
-        className="btn btn-ghost self-start px-0"
-        onClick={() => setShowOptional((v) => !v)}
-      >
-        {showOptional ? "Hide optional questions" : "Add optional details"}
-      </button>
-
-      {showOptional ? (
-        <div className="flex flex-col gap-4 fade-up">
-          <div className="field">
-            <label htmlFor="breedOrMix">Breed or mix (optional)</label>
-            <input id="breedOrMix" name="breedOrMix" maxLength={80} />
-          </div>
-          <div className="field">
-            <label htmlFor="householdContext">Household context (optional)</label>
-            <input
-              id="householdContext"
-              name="householdContext"
-              maxLength={200}
-              placeholder="e.g. Busy flat, children, other pets"
-            />
-          </div>
-          <div className="field">
-            <label htmlFor="alreadyEasy">What already feels easy? (optional)</label>
-            <input id="alreadyEasy" name="alreadyEasy" maxLength={200} />
-          </div>
-          <div className="field">
-            <label htmlFor="knownTriggers">Situations to manage carefully (optional)</label>
-            <input id="knownTriggers" name="knownTriggers" maxLength={200} />
-          </div>
-          <div className="field">
-            <label htmlFor="preferredRewards">Preferred rewards (optional)</label>
-            <input
-              id="preferredRewards"
-              name="preferredRewards"
-              maxLength={120}
-              placeholder="Food, toys, praise…"
-            />
-          </div>
-        </div>
-      ) : (
-        <>
-          <input type="hidden" name="breedOrMix" value="" />
-          <input type="hidden" name="householdContext" value="" />
-          <input type="hidden" name="alreadyEasy" value="" />
-          <input type="hidden" name="knownTriggers" value="" />
-          <input type="hidden" name="preferredRewards" value="" />
-        </>
-      )}
+      <div className="field">
+        <label htmlFor="preferredRewards">Preferred rewards (optional)</label>
+        <input
+          id="preferredRewards"
+          name="preferredRewards"
+          maxLength={120}
+          placeholder="Food, toys, praise…"
+        />
+      </div>
 
       {state && !state.ok ? (
         <p className="rounded-xl bg-danger-soft px-3 py-2 text-sm text-danger" role="alert">

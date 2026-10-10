@@ -20,7 +20,11 @@ export const metadata: Metadata = {
     "A friendly daily dog-training coach for ordinary UK dog owners. Short, practical, reward-based activities.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en-GB" className={`${display.variable} ${body.variable} h-full`}>
       <body className="min-h-full antialiased">

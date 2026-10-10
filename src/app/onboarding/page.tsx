@@ -1,16 +1,14 @@
-import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { createDogAction } from "@/lib/actions/dogs";
 import { requireUser } from "@/lib/auth/session";
 import { OnboardingForm } from "@/components/OnboardingForm";
-import { db } from "@/lib/db";
-import { dogs } from "@/lib/db/schema";
+import { getDogForOwner } from "@/lib/services/dogs";
 
 export default async function OnboardingPage() {
   const user = await requireUser();
   if (!user) redirect("/sign-in");
 
-  const existing = db.select().from(dogs).where(eq(dogs.ownerId, user.id)).get();
+  const existing = getDogForOwner(user.id);
   if (existing?.onboardingComplete) {
     redirect("/today");
   }

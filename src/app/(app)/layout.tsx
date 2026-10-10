@@ -1,9 +1,7 @@
-import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
 import { requireUser } from "@/lib/auth/session";
-import { db } from "@/lib/db";
-import { dogs } from "@/lib/db/schema";
+import { getDogForOwner } from "@/lib/services/dogs";
 
 export default async function AppLayout({
   children,
@@ -13,7 +11,7 @@ export default async function AppLayout({
   const user = await requireUser();
   if (!user) redirect("/sign-in");
 
-  const dog = db.select().from(dogs).where(eq(dogs.ownerId, user.id)).get();
+  const dog = getDogForOwner(user.id);
   if (!dog?.onboardingComplete) redirect("/onboarding");
 
   return (

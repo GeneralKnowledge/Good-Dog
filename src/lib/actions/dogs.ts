@@ -29,10 +29,6 @@ export async function createDogAction(
     primaryReason: formData.get("primaryReason"),
     availableTime: formData.get("availableTime"),
     trainingExperience: formData.get("trainingExperience"),
-    breedOrMix: formData.get("breedOrMix") || "",
-    householdContext: formData.get("householdContext") || "",
-    alreadyEasy: formData.get("alreadyEasy") || "",
-    knownTriggers: formData.get("knownTriggers") || "",
     preferredRewards: formData.get("preferredRewards") || "",
   });
 
@@ -52,10 +48,6 @@ export async function createDogAction(
       primaryReason: data.primaryReason,
       availableTime: data.availableTime,
       trainingExperience: data.trainingExperience,
-      breedOrMix: data.breedOrMix || null,
-      householdContext: data.householdContext || null,
-      alreadyEasy: data.alreadyEasy || null,
-      knownTriggers: data.knownTriggers || null,
       preferredRewards: data.preferredRewards || null,
       onboardingComplete: true,
     })
@@ -83,10 +75,6 @@ export async function updateDogAction(
     primaryReason: formData.get("primaryReason") || undefined,
     availableTime: formData.get("availableTime") || undefined,
     trainingExperience: formData.get("trainingExperience") || undefined,
-    breedOrMix: formData.get("breedOrMix") ?? undefined,
-    householdContext: formData.get("householdContext") ?? undefined,
-    alreadyEasy: formData.get("alreadyEasy") ?? undefined,
-    knownTriggers: formData.get("knownTriggers") ?? undefined,
     preferredRewards: formData.get("preferredRewards") ?? undefined,
   });
 

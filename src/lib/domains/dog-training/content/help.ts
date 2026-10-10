@@ -76,6 +76,29 @@ export const HELP_ARTICLES: HelpArticle[] = [
     answer:
       "No. Good Dog follows reward-based, force-free guidance. Do not use intimidation, pain, fear, or equipment designed to punish. If a skill feels stuck, make it easier, change the environment, or ask for qualified reward-based help.",
   },
+  {
+    id: "help-jumping",
+    question: "What if my dog jumps up at people?",
+    keywords: ["jump", "jumping", "greeting", "visitors", "up"],
+    answer:
+      "Jumping is often a bid for attention. Turn away calmly, wait for four paws on the floor, then reward that quieter moment. Practise calmer greetings with willing helpers before visitors arrive. Avoid pushing your dog down or shouting — both can feel like attention.",
+    relatedExerciseIds: ["ex-greeting-calm", "ex-sit-comfort"],
+  },
+  {
+    id: "help-pulling",
+    question: "What if my dog pulls on the lead?",
+    keywords: ["pull", "pulling", "lead", "leash", "walk"],
+    answer:
+      "Pulling usually means forward motion is more rewarding than staying near you. Slow down or stop when the lead tightens, and reward check-ins and a looser lead. Keep sessions short in quieter places first. A few successful metres matter more than a long tug-of-war walk.",
+    relatedExerciseIds: ["ex-lead-loose", "ex-check-in-walk", "ex-lead-intro"],
+  },
+  {
+    id: "help-housetraining",
+    question: "What if my puppy has accidents indoors?",
+    keywords: ["toilet", "housetrain", "accident", "wee", "poo", "potty"],
+    answer:
+      "Accidents are common while bladders are still developing. Take your puppy out often after sleep, play, and meals, and reward outdoor toileting generously. Clean indoor accidents thoroughly without scolding. If accidents suddenly increase in an older puppy or adult, check with your vet.",
+  },
 ];
 
 export function searchHelp(query: string): HelpArticle[] {

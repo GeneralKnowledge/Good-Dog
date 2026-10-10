@@ -99,12 +99,9 @@ An internal, evidence-based audit against *publicly documented* IMDT ethics and 
 | [docs/progression-audit.md](./docs/progression-audit.md) | Scenario traces through the real planner |
 | [docs/improvement-roadmap.md](./docs/improvement-roadmap.md) | P0–P3 implementation plan |
 | [docs/content-review-checklist.md](./docs/content-review-checklist.md) | Pre-publication checklist for new/revised exercises |
-<<<<<<< HEAD
-| [docs/terminology-teaching-audit.md](./docs/terminology-teaching-audit.md) | Baseline audit before the glossary teaching layer |
+| [docs/terminology-teaching-audit.md](./docs/terminology-teaching-audit.md) | Terminology teaching glossary audit |
 | [docs/glossary-authoring.md](./docs/glossary-authoring.md) | How to add/review glossary terms |
 
 ## Content provenance
 
 Glossary definitions are original Good Dog educational content. Public IMDT and UK welfare materials were used only as general accuracy checks for principles — not as copy sources, and not as evidence of endorsement. Good Dog is independent and does not claim IMDT approval, accreditation, or professional review.
-=======
->>>>>>> origin/cursor/good-dog-mvp-e953

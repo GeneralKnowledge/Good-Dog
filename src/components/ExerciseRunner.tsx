@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useId, useState, useTransition } from "react";
+import { useCallback, useId, useMemo, useState, useTransition } from "react";
 import { nanoid } from "nanoid";
 import { markTermsIntroducedAction } from "@/lib/actions/glossary";
 import { submitFeedbackAction } from "@/lib/actions/training";
-import type { ExerciseContent } from "@/lib/types";
+import { extractTermIdsFromText } from "@/lib/content/glossary";
+import type { ExerciseContent, TermExposureState } from "@/lib/types";
 import { TermRichText } from "@/components/glossary/TermRichText";
 
 export function ExerciseRunner({
@@ -16,6 +17,7 @@ export function ExerciseRunner({
   planId,
   planItemId,
   exerciseVersionId,
+  termExposure = {},
 }: {
   exercise: ExerciseContent;
   dogId: string;
@@ -23,6 +25,7 @@ export function ExerciseRunner({
   planId?: string;
   planItemId?: string;
   exerciseVersionId: string;
+  termExposure?: Record<string, TermExposureState>;
 }) {
   const router = useRouter();
   const noteId = useId();
@@ -35,12 +38,52 @@ export function ExerciseRunner({
   const [mutationId] = useState(() => nanoid());
   const seen = useState(() => new Set<string>())[0];
 
-  const onTermsPresented = useCallback((termIds: string[]) => {
-    const fresh = termIds.filter((id) => !seen.has(id));
-    if (fresh.length === 0) return;
-    for (const id of fresh) seen.add(id);
-    void markTermsIntroducedAction(fresh);
-  }, [seen]);
+  const onTermsPresented = useCallback(
+    (termIds: string[]) => {
+      const fresh = termIds.filter((id) => !seen.has(id));
+      if (fresh.length === 0) return;
+      for (const id of fresh) seen.add(id);
+      void markTermsIntroducedAction(fresh);
+    },
+    [seen],
+  );
+
+  /** First new term in guide copy (not metadata-only footer). */
+  const firstNewTermId = useMemo(() => {
+    const guideTexts = [
+      exercise.purpose,
+      exercise.preparation,
+      ...exercise.steps,
+      exercise.lookFor,
+      exercise.ifDifficult,
+      exercise.safetyNote ?? "",
+    ];
+    for (const text of guideTexts) {
+      for (const id of extractTermIdsFromText(text)) {
+        if (!termExposure[id]) return id;
+      }
+    }
+    return null;
+  }, [exercise, termExposure]);
+
+  const newTermBlockIndex = useMemo(() => {
+    if (!firstNewTermId) return -1;
+    const blocks = [
+      exercise.purpose,
+      exercise.preparation,
+      ...exercise.steps,
+      exercise.lookFor,
+      exercise.ifDifficult,
+      exercise.safetyNote ?? "",
+    ];
+    return blocks.findIndex((text) =>
+      extractTermIdsFromText(text).includes(firstNewTermId),
+    );
+  }, [exercise, firstNewTermId]);
+
+  function highlightFor(blockIndex: number): string | null {
+    return newTermBlockIndex === blockIndex ? firstNewTermId : null;
+  }
 
   function sendFeedback(outcome: "easy" | "getting_there" | "too_difficult") {
     setError(null);
@@ -69,8 +112,8 @@ export function ExerciseRunner({
 
   if (phase === "done") {
     return (
-      <div className="card mx-5 my-4 p-5 fade-up">
-        <h2 className="font-display text-2xl">That’s useful feedback</h2>
+      <div className="panel mx-5 my-4 p-5 fade-up">
+        <h2 className="font-display text-2xl text-brand-deep">That’s useful feedback</h2>
         <p className="mt-2 text-muted leading-relaxed">
           We’ll adjust the next step for {dogName}. A short session is enough for today if you
           want to stop here.
@@ -91,8 +134,8 @@ export function ExerciseRunner({
   if (phase === "feedback") {
     return (
       <div className="mx-5 my-4 flex flex-col gap-4 fade-up">
-        <div className="card p-5">
-          <h2 className="font-display text-2xl">How did that go?</h2>
+        <div className="panel p-5">
+          <h2 className="font-display text-2xl text-brand-deep">How did that go?</h2>
           <p className="mt-2 text-muted">One tap is enough. Typing is optional.</p>
           <div className="mt-4 flex flex-col gap-3">
             <button
@@ -157,64 +200,127 @@ export function ExerciseRunner({
     );
   }
 
+  const stepStartIndex = 2;
+
   return (
-    <div className="mx-5 my-4 flex flex-col gap-4 pb-8 fade-up">
-      <p className="text-sm text-muted">
+    <div className="mx-5 my-4 flex flex-col gap-6 pb-10 fade-up">
+      <p className="text-sm leading-relaxed text-muted">
         Underlined words are training terms you can tap for a short explanation.
+        {firstNewTermId
+          ? " One new word in today’s guide is marked quietly so you can explore it if you want."
+          : ""}
       </p>
 
-      <div className="card p-5">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">Purpose</p>
-        <div className="mt-2 leading-relaxed">
-          <TermRichText text={exercise.purpose} onTermsPresented={onTermsPresented} />
+      <section>
+        <p className="section-label">Purpose</p>
+        <div className="mt-2 text-[1.05rem] leading-relaxed">
+          <TermRichText
+            text={exercise.purpose}
+            onTermsPresented={onTermsPresented}
+            termExposure={termExposure}
+            highlightNewTermId={highlightFor(0)}
+          />
         </div>
-      </div>
+      </section>
 
-      <div className="card p-5">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">Before you start</p>
-        <div className="mt-2 leading-relaxed">
-          <TermRichText text={exercise.preparation} onTermsPresented={onTermsPresented} />
+      {exercise.whyThisWorks ? (
+        <div className="why-band text-sm leading-relaxed">
+          <p className="font-semibold text-brand-deep">Why this works</p>
+          <p className="mt-1.5 text-muted">
+            <TermRichText
+              text={`${exercise.whyThisWorks.plainWhy} This is called [[${exercise.whyThisWorks.termId}]].`}
+              onTermsPresented={onTermsPresented}
+              termExposure={termExposure}
+              highlightNewTermId={
+                !termExposure[exercise.whyThisWorks.termId]
+                  ? exercise.whyThisWorks.termId
+                  : null
+              }
+            />
+          </p>
         </div>
-      </div>
+      ) : null}
 
-      <div className="card p-5">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">Let’s practise</p>
-        <ol className="mt-3 list-decimal space-y-3 pl-5 leading-relaxed">
-          {exercise.steps.map((step) => (
-            <li key={step}>
-              <TermRichText text={step} onTermsPresented={onTermsPresented} />
+      <section>
+        <p className="section-label">Before you start</p>
+        <div className="mt-2 leading-relaxed">
+          <TermRichText
+            text={exercise.preparation}
+            onTermsPresented={onTermsPresented}
+            termExposure={termExposure}
+            highlightNewTermId={highlightFor(1)}
+          />
+        </div>
+      </section>
+
+      <hr className="hairline" />
+
+      <section>
+        <p className="section-label">Let’s practise</p>
+        <ol className="mt-3 list-decimal space-y-4 pl-5 text-[1.05rem] leading-relaxed">
+          {exercise.steps.map((step, i) => (
+            <li key={step} className="pl-1">
+              <TermRichText
+                text={step}
+                onTermsPresented={onTermsPresented}
+                termExposure={termExposure}
+                highlightNewTermId={highlightFor(stepStartIndex + i)}
+              />
             </li>
           ))}
         </ol>
-      </div>
+      </section>
 
-      <div className="card p-5">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">What to look for</p>
-        <div className="mt-2 leading-relaxed">
-          <TermRichText text={exercise.lookFor} onTermsPresented={onTermsPresented} />
-        </div>
-      </div>
+      <hr className="hairline" />
 
-      <div className="card p-5">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">
-          If it feels difficult
-        </p>
+      <section>
+        <p className="section-label">What to look for</p>
         <div className="mt-2 leading-relaxed">
-          <TermRichText text={exercise.ifDifficult} onTermsPresented={onTermsPresented} />
+          <TermRichText
+            text={exercise.lookFor}
+            onTermsPresented={onTermsPresented}
+            termExposure={termExposure}
+            highlightNewTermId={highlightFor(stepStartIndex + exercise.steps.length)}
+          />
         </div>
-      </div>
+      </section>
+
+      <section>
+        <p className="section-label">If it feels difficult</p>
+        <div className="mt-2 leading-relaxed">
+          <TermRichText
+            text={exercise.ifDifficult}
+            onTermsPresented={onTermsPresented}
+            termExposure={termExposure}
+            highlightNewTermId={highlightFor(
+              stepStartIndex + exercise.steps.length + 1,
+            )}
+          />
+        </div>
+      </section>
 
       {exercise.safetyNote ? (
         <div className="rounded-2xl border border-accent/30 bg-accent-soft p-4 text-sm leading-relaxed">
           <strong>Safety note:</strong>{" "}
-          <TermRichText text={exercise.safetyNote} onTermsPresented={onTermsPresented} />
+          <TermRichText
+            text={exercise.safetyNote}
+            onTermsPresented={onTermsPresented}
+            termExposure={termExposure}
+            highlightNewTermId={highlightFor(
+              stepStartIndex + exercise.steps.length + 2,
+            )}
+          />
         </div>
       ) : null}
 
       {showHint ? (
-        <div className="card p-4 text-sm leading-relaxed text-brand-deep fade-up">
+        <div className="panel p-4 text-sm leading-relaxed text-brand-deep fade-up">
           <strong>Hint:</strong>{" "}
-          <TermRichText text={exercise.hint} onTermsPresented={onTermsPresented} />
+          <TermRichText
+            text={exercise.hint}
+            onTermsPresented={onTermsPresented}
+            termExposure={termExposure}
+          />
         </div>
       ) : null}
 
@@ -224,13 +330,13 @@ export function ExerciseRunner({
           {exercise.glossaryTermIds!.map((id, i) => (
             <span key={id}>
               {i > 0 ? ", " : ""}
-              <TermRichText text={`[[${id}]]`} onTermsPresented={onTermsPresented} />
+              <TermRichText text={`[[${id}]]`} termExposure={termExposure} />
             </span>
           ))}
         </div>
       ) : null}
 
-      <div className="flex flex-col gap-3">
+      <div className="sticky bottom-4 z-10 flex flex-col gap-3 bg-gradient-to-t from-[var(--sheet)] via-[var(--sheet)] to-transparent pt-6">
         <button type="button" className="btn btn-primary w-full" onClick={() => setPhase("feedback")}>
           Finish and tell us how it went
         </button>

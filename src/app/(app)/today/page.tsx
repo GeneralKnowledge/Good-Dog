@@ -27,6 +27,7 @@ export default async function TodayPage({
   const items = JSON.parse(plan.itemsJson) as PlanItem[];
   const completedCount = items.filter((i) => i.completedSessionId).length;
   const allDone = plan.completionState === "completed" || completedCount === items.length;
+  const progressPct = items.length === 0 ? 0 : Math.round((completedCount / items.length) * 100);
 
   const recentWin = db
     .select()
@@ -38,61 +39,73 @@ export default async function TodayPage({
     .limit(1)
     .get();
 
+  const firstOpenIndex = items.findIndex((i) => !i.completedSessionId);
+
   return (
-    <main>
+    <main className="flex min-h-0 flex-1 flex-col">
       <AppHeader
-        title={`Today’s plan for ${dog.name}`}
-        subtitle={`${greetingForHour()}. Just a few minutes together is a good start.`}
+        title={`Today with ${dog.name}`}
+        subtitle={`${greetingForHour()} — two or three quiet minutes is enough.`}
       />
 
-      {params.welcome === "1" ? (
-        <div className="mx-5 mb-4 rounded-2xl bg-brand-soft px-4 py-3 text-sm leading-relaxed text-brand-deep fade-up">
-          Welcome — you and {dog.name} are ready. We’ll suggest a few small activities each day.
-          Start with whichever feels easiest.
+      <div className="sheet flex flex-1 flex-col gap-4">
+        {params.welcome === "1" ? (
+          <div className="why-band text-sm leading-relaxed text-brand-deep fade-up">
+            Welcome — you and {dog.name} are ready. We’ll suggest a few small activities each day.
+            Start with whichever feels easiest.
+          </div>
+        ) : null}
+
+        <div className="fade-up fade-up-delay-1">
+          <div className="mb-2 flex items-baseline justify-between gap-3 text-sm">
+            <span className="font-semibold text-brand-deep">
+              {allDone
+                ? "Today’s plan is complete"
+                : `${completedCount} of ${items.length} done`}
+            </span>
+          </div>
+          <div className="progress-track" aria-hidden="true">
+            <div className="progress-fill" style={{ width: `${progressPct}%` }} />
+          </div>
         </div>
-      ) : null}
 
-      <div className="px-5 pb-2 text-sm text-muted">
-        {allDone
-          ? "Today’s plan is complete"
-          : `${completedCount} of ${items.length} activities done`}
-      </div>
-
-      {allDone ? (
-        <section className="mx-5 mb-4 card p-5 fade-up">
-          <h2 className="font-display text-2xl">That’s enough for today</h2>
-          <p className="mt-2 leading-relaxed text-muted">
-            You and {dog.name} put in a little practice today. That’s how skills grow.
-          </p>
-          {recentWin ? (
-            <p className="mt-3 text-sm text-brand-deep">
-              Recent win: an exercise felt comfortable — we’ll keep building from there.
+        {allDone ? (
+          <section className="panel p-5 fade-up">
+            <h2 className="font-display text-2xl text-brand-deep">That’s enough for today</h2>
+            <p className="mt-2 leading-relaxed text-muted">
+              You and {dog.name} put in a little practice. That’s how skills grow.
             </p>
-          ) : null}
+            {recentWin ? (
+              <p className="mt-3 text-sm text-brand-deep">
+                Recent win: an exercise felt comfortable — we’ll keep building from there.
+              </p>
+            ) : null}
+          </section>
+        ) : null}
+
+        <section className="flex flex-col gap-3">
+          {items.map((item, index) => {
+            const exercise = getExerciseById(item.exerciseId);
+            if (!exercise) return null;
+            return (
+              <PlanCard
+                key={item.id}
+                item={item}
+                exercise={exercise}
+                dogId={dog.id}
+                planId={plan.id}
+                emphasize={index === firstOpenIndex}
+              />
+            );
+          })}
         </section>
-      ) : null}
 
-      <section className="flex flex-col gap-4 px-5 pb-4">
-        {items.map((item) => {
-          const exercise = getExerciseById(item.exerciseId);
-          if (!exercise) return null;
-          return (
-            <PlanCard
-              key={item.id}
-              item={item}
-              exercise={exercise}
-              dogId={dog.id}
-              planId={plan.id}
-            />
-          );
-        })}
-      </section>
-
-      {!allDone && !plan.isShortPlan ? (
-        <div className="px-5 pb-6">
-          <ShortPlanButton dogId={dog.id} />
-        </div>
-      ) : null}
+        {!allDone && !plan.isShortPlan ? (
+          <div className="pb-2">
+            <ShortPlanButton dogId={dog.id} />
+          </div>
+        ) : null}
+      </div>
     </main>
   );
 }

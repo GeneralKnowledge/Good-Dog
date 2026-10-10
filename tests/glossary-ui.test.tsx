@@ -22,6 +22,7 @@ describe("TermRichText + GlossaryPanel", () => {
     container = document.createElement("div");
     document.body.appendChild(container);
     root = createRoot(container);
+    document.body.style.overflow = "";
   });
 
   afterEach(() => {
@@ -29,6 +30,7 @@ describe("TermRichText + GlossaryPanel", () => {
       root.unmount();
     });
     container.remove();
+    document.body.style.overflow = "";
   });
 
   it("opens and closes a definition without losing exercise copy", () => {
@@ -69,6 +71,8 @@ describe("TermRichText + GlossaryPanel", () => {
     const term = getGlossaryTerm("marker-word")!;
     expect(dialog!.textContent).toContain(term.shortDefinition);
     expect(dialog!.textContent).toMatch(/Example:/);
+    expect(document.body.style.overflow).toBe("hidden");
+
     const learnMore = Array.from(dialog!.querySelectorAll("button")).find((b) =>
       /Learn more/i.test(b.textContent ?? ""),
     );
@@ -83,10 +87,46 @@ describe("TermRichText + GlossaryPanel", () => {
     });
 
     expect(document.body.querySelector('[role="dialog"]')).toBeNull();
+    expect(document.body.style.overflow).not.toBe("hidden");
     expect(container.textContent).toMatch(/reward/);
   });
 
-  it("closes the panel with Escape for keyboard users", () => {
+  it("shows a quiet new-term cue only for the highlighted new term", () => {
+    act(() => {
+      root.render(
+        <TermRichText
+          text="Use your [[marker-word]] with clear [[timing]]."
+          termExposure={{ timing: "introduced" }}
+          highlightNewTermId="marker-word"
+        />,
+      );
+    });
+
+    expect(container.textContent).toMatch(/new training word/i);
+    expect(
+      container.querySelector(
+        'button.term-link[aria-label="New training word: Marker word"]',
+      ),
+    ).toBeTruthy();
+    expect(
+      container.querySelector('button.term-link[aria-label="Explain: Timing"]'),
+    ).toBeTruthy();
+  });
+
+  it("does not show a new cue for previously introduced terms", () => {
+    act(() => {
+      root.render(
+        <TermRichText
+          text="Use your [[marker-word]] again."
+          termExposure={{ "marker-word": "explored" }}
+          highlightNewTermId="marker-word"
+        />,
+      );
+    });
+    expect(container.textContent).not.toMatch(/new training word/i);
+  });
+
+  it("closes the panel with Escape and restores focus for keyboard users", () => {
     act(() => {
       root.render(<TermRichText text="Use a [[marker-word]] with clear timing." />);
     });
@@ -95,14 +135,59 @@ describe("TermRichText + GlossaryPanel", () => {
       "button.term-link",
     ) as HTMLButtonElement;
     act(() => {
+      termButton.focus();
       termButton.click();
     });
     expect(document.body.querySelector('[role="dialog"]')).toBeTruthy();
+    expect(document.body.style.overflow).toBe("hidden");
 
     act(() => {
       window.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
     });
     expect(document.body.querySelector('[role="dialog"]')).toBeNull();
+    expect(document.activeElement).toBe(termButton);
+  });
+
+  it("traps Tab focus inside the open dialog", () => {
+    act(() => {
+      root.render(<TermRichText text="Open [[marker-word]] please." />);
+    });
+    const termButton = container.querySelector(
+      "button.term-link",
+    ) as HTMLButtonElement;
+    act(() => {
+      termButton.click();
+    });
+
+    const dialog = document.body.querySelector('[role="dialog"]') as HTMLElement;
+    const focusable = [
+      ...dialog.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])',
+      ),
+    ];
+    expect(focusable.length).toBeGreaterThanOrEqual(2);
+    const first = focusable[0]!;
+    const last = focusable[focusable.length - 1]!;
+
+    act(() => {
+      last.focus();
+      window.dispatchEvent(
+        new KeyboardEvent("keydown", { key: "Tab", bubbles: true }),
+      );
+    });
+    expect(document.activeElement).toBe(first);
+
+    act(() => {
+      first.focus();
+      window.dispatchEvent(
+        new KeyboardEvent("keydown", {
+          key: "Tab",
+          shiftKey: true,
+          bubbles: true,
+        }),
+      );
+    });
+    expect(document.activeElement).toBe(last);
   });
 
   it("renders unknown term markup as plain text", () => {

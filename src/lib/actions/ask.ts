@@ -1,7 +1,10 @@
 "use server";
 
 import { HELP_ARTICLES, searchHelp } from "@/lib/content/help";
-import { answerFromGlossary } from "@/lib/content/terminology-answers";
+import {
+  answerFromGlossary,
+  preferApprovedGlossaryOverAi,
+} from "@/lib/content/terminology-answers";
 import { getPublishedGlossary } from "@/lib/content/glossary";
 import { requireUser } from "@/lib/auth/session";
 
@@ -19,7 +22,6 @@ export async function askOptionalAiAction(input: {
   const question = input.question.trim();
   if (!question) return { ok: false, error: "Enter a question first" };
 
-  // Prefer reviewed glossary definitions for terminology questions
   const glossaryHit = answerFromGlossary(question, input.dogName);
   if (glossaryHit) {
     return { ok: true, answer: glossaryHit.answer, source: "glossary" };
@@ -103,6 +105,16 @@ ${glossaryKnowledge}`,
         source: "help",
       };
     }
+
+    const approved = preferApprovedGlossaryOverAi(
+      question,
+      input.dogName,
+      content,
+    );
+    if (approved) {
+      return { ok: true, answer: approved.answer, source: "glossary" };
+    }
+
     return { ok: true, answer: content, source: "ai" };
   } catch {
     return {

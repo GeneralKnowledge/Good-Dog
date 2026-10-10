@@ -181,7 +181,12 @@ export const GLOSSARY: GlossaryTerm[] = [
     id: "marker-signal",
     preferredTerm: "Marker signal",
     alternativeTerms: ["click", "clicker"],
-    searchPhrases: ["clicker", "hand signal mark"],
+    searchPhrases: [
+      "clicker",
+      "hand signal mark",
+      "click then treat",
+      "other ways to mark",
+    ],
     category: "reward_based",
     shortDefinition:
       "Any consistent signal — word, click, or other cue — used as an event marker.",
@@ -354,7 +359,12 @@ export const GLOSSARY: GlossaryTerm[] = [
     id: "reinforcement-schedule",
     preferredTerm: "Reinforcement schedule",
     alternativeTerms: ["how often I reward"],
-    searchPhrases: ["do i treat every time", "intermittent rewards"],
+    searchPhrases: [
+      "do i treat every time",
+      "intermittent rewards",
+      "how often to reward",
+      "pay every time or sometimes",
+    ],
     category: "reward_based",
     shortDefinition:
       "The pattern of how often a behaviour earns a reinforcer.",
@@ -373,7 +383,12 @@ export const GLOSSARY: GlossaryTerm[] = [
     id: "negative-reinforcement",
     preferredTerm: "Negative reinforcement",
     alternativeTerms: ["R−"],
-    searchPhrases: ["removing pressure", "pressure and release"],
+    searchPhrases: [
+      "removing pressure",
+      "pressure and release",
+      "negative means bad",
+      "what negative reinforcement means",
+    ],
     category: "reward_based",
     shortDefinition:
       "When something is removed after a behaviour, and that makes the behaviour more likely.",
@@ -553,7 +568,12 @@ export const GLOSSARY: GlossaryTerm[] = [
     id: "training-vs-management",
     preferredTerm: "Management versus training",
     alternativeTerms: [],
-    searchPhrases: ["difference between management and training"],
+    searchPhrases: [
+      "difference between management and training",
+      "manage first train second",
+      "is a baby gate training",
+      "prevention versus teaching",
+    ],
     category: "behaviour_welfare",
     shortDefinition:
       "Management changes the setup; training teaches a new response.",
@@ -562,7 +582,11 @@ export const GLOSSARY: GlossaryTerm[] = [
     example:
       "A long line is management for safety outdoors; rewarding a recall is training.",
     relatedTermIds: ["management", "recall"],
-    relevantExerciseIds: ["ex-recall-foundation"],
+    relevantExerciseIds: [
+      "ex-recall-foundation",
+      "ex-leave-it-easy",
+      "ex-door-manners",
+    ],
     contentVersion: 1,
     published: true,
   },
@@ -696,7 +720,12 @@ export const GLOSSARY: GlossaryTerm[] = [
     id: "stay",
     preferredTerm: "Stay",
     alternativeTerms: [],
-    searchPhrases: ["don't move until i say"],
+    searchPhrases: [
+      "don't move until i say",
+      "longer pause than wait",
+      "stay versus wait",
+      "hold position",
+    ],
     category: "everyday_skills",
     shortDefinition:
       "Remaining in position until released, usually for longer or with more distance than a brief wait.",
@@ -747,7 +776,13 @@ export const GLOSSARY: GlossaryTerm[] = [
     id: "drop-swap",
     preferredTerm: "Drop or swap",
     alternativeTerms: ["trade", "give"],
-    searchPhrases: ["drop it", "trade the toy", "give me that"],
+    searchPhrases: [
+      "drop it",
+      "trade the toy",
+      "give me that",
+      "swap for a treat",
+      "release what they are holding",
+    ],
     category: "everyday_skills",
     shortDefinition:
       "Teaching a dog to release something by making the trade worthwhile.",
@@ -756,7 +791,7 @@ export const GLOSSARY: GlossaryTerm[] = [
     example:
       "You offer a tasty trade; your dog releases a toy; you praise and sometimes return the toy.",
     relatedTermIds: ["leave-it", "management"],
-    relevantExerciseIds: [],
+    relevantExerciseIds: ["ex-leave-it-easy"],
     needsQualifiedReview: true,
     contentVersion: 1,
     published: true,
@@ -803,7 +838,12 @@ export const GLOSSARY: GlossaryTerm[] = [
     id: "behaviour-chain",
     preferredTerm: "Behaviour chain",
     alternativeTerms: ["behavior chain", "chaining"],
-    searchPhrases: ["several behaviours in a row", "sequence of behaviours"],
+    searchPhrases: [
+      "several behaviours in a row",
+      "sequence of behaviours",
+      "go to mat then lie down",
+      "linking behaviours together",
+    ],
     category: "everyday_skills",
     shortDefinition:
       "A sequence of behaviours that run together, each step leading to the next.",
@@ -833,7 +873,103 @@ export const GLOSSARY: GlossaryTerm[] = [
     contentVersion: 1,
     published: true,
   },
+  {
+    id: "housetraining",
+    preferredTerm: "Housetraining",
+    alternativeTerms: ["toilet training", "house training", "potty training"],
+    searchPhrases: [
+      "toilet training",
+      "weeing in the house",
+      "puppy accidents",
+      "how to toilet train",
+      "going to the toilet outside",
+    ],
+    category: "everyday_skills",
+    shortDefinition:
+      "Helping a dog learn where toileting is wanted, mainly through routine, supervision, and rewarding outdoor success.",
+    deeperExplanation:
+      "Housetraining is mostly management plus clear pay for toileting in the right place. Scolding accidents often teaches dogs to hide when they need to go. Sudden regression can be medical and needs a vet check.",
+    example:
+      "You take your puppy out after a nap; they wee on the grass; you calmly mark and reward, then play a little.",
+    commonMisunderstanding:
+      "Accidents are rarely “spite”. They usually mean the schedule, supervision, or health picture needs adjusting.",
+    relatedTermIds: ["management", "reward", "marker-word", "training-vs-management"],
+    relevantExerciseIds: ["ex-toilet-routine"],
+    contentVersion: 1,
+    published: true,
+  },
+  {
+    id: "down",
+    preferredTerm: "Down",
+    alternativeTerms: ["lie down", "drop"],
+    searchPhrases: [
+      "lie down",
+      "teach down",
+      "get them to lie",
+      "down cue",
+    ],
+    category: "everyday_skills",
+    shortDefinition:
+      "Lying down on purpose when invited — elbows on the floor — without being pushed into position.",
+    deeperExplanation:
+      "A comfortable down is taught with luring or shaping, then named with a cue. It is different from a settle on a mat, though the two skills support each other. Never force hips or shoulders down.",
+    example:
+      "From a sit, you lower a treat to the floor; your dog folds into a down; you mark and reward.",
+    commonMisunderstanding:
+      "“Down” for lying down is not the same as asking a jumping dog to get “down” off a person — use clear, separate cues in everyday speech if needed.",
+    relatedTermIds: ["luring", "cue", "settle", "fluency"],
+    relevantExerciseIds: ["ex-down-comfort", "ex-sit-comfort"],
+    contentVersion: 1,
+    published: true,
+  },
+  {
+    id: "mouthing",
+    preferredTerm: "Mouthing",
+    alternativeTerms: ["puppy biting", "nipping", "play biting"],
+    searchPhrases: [
+      "puppy biting hands",
+      "nipping",
+      "teeth on skin",
+      "mouthing during play",
+      "stop puppy biting",
+    ],
+    category: "everyday_skills",
+    shortDefinition:
+      "When a puppy or dog puts teeth on skin or clothes during exploration or play — common in youngsters, and best handled with pauses and redirects.",
+    deeperExplanation:
+      "Mouthing is often normal puppy behaviour, especially when tired or overexcited. Useful responses include stopping play briefly, offering a toy or chew, and arranging more rest and enrichment. Painful or fearful biting, or guarding with growls and snaps, needs qualified in-person help — not an app treatment plan.",
+    example:
+      "Your puppy mouths your sleeve; you pause; you offer a soft toy; they chew the toy instead and play continues briefly.",
+    commonMisunderstanding:
+      "Smacking, shouting, or holding the mouth shut often worsens fear or rough play rather than teaching a kind alternative.",
+    relatedTermIds: [
+      "management",
+      "enrichment",
+      "arousal",
+      "recovery-time",
+      "body-language",
+    ],
+    relevantExerciseIds: ["ex-puppy-mouthing"],
+    needsQualifiedReview: true,
+    editorialNotes:
+      "Literacy + redirect only; escalate hard bites / guarding / fear — not a bite-inhibition protocol claim.",
+    contentVersion: 1,
+    published: true,
+  },
 ];
+
+/**
+ * Published terms taught via Ask/Learn literacy only — not required in exercise copy.
+ * Reasons are editorial; keep the set small.
+ */
+export const LEARN_ASK_ONLY_TERM_IDS: ReadonlySet<string> = new Set([
+  "negative-reinforcement",
+]);
+
+export const LEARN_ASK_ONLY_REASONS: Record<string, string> = {
+  "negative-reinforcement":
+    "Literacy distinction (add vs remove) for Ask/Learn; early plans should not centre −R teaching.",
+};
 
 export function getPublishedGlossary(): GlossaryTerm[] {
   return GLOSSARY.filter((t) => t.published);
@@ -941,4 +1077,11 @@ export function collectLinkedTermIds(texts: string[]): string[] {
     }
   }
   return [...ids];
+}
+
+/** Published terms that are neither linked in exercises nor allowlisted for Ask/Learn only. */
+export function findUntaughtPublishedTerms(linkedTermIds: ReadonlySet<string>): string[] {
+  return getPublishedGlossary()
+    .map((t) => t.id)
+    .filter((id) => !linkedTermIds.has(id) && !LEARN_ASK_ONLY_TERM_IDS.has(id));
 }

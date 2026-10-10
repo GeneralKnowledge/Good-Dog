@@ -96,19 +96,19 @@ export default async function GlossaryTermPage({
         ) : null}
 
         <section>
-          <h2 className="font-display text-xl text-brand-deep">In plain English</h2>
+          <h2 className="heading-subsection">In plain English</h2>
           <p className="mt-2 leading-relaxed">{term.shortDefinition}</p>
         </section>
 
         <hr className="hairline" />
 
         <section>
-          <h2 className="font-display text-xl text-brand-deep">A little more depth</h2>
+          <h2 className="heading-subsection">A little more depth</h2>
           <p className="mt-2 leading-relaxed text-muted">{term.deeperExplanation}</p>
         </section>
 
         <section>
-          <h2 className="font-display text-xl text-brand-deep">Example</h2>
+          <h2 className="heading-subsection">Example</h2>
           <p className="mt-2 leading-relaxed">{term.example}</p>
         </section>
 
@@ -131,7 +131,7 @@ export default async function GlossaryTermPage({
 
         {related.length > 0 ? (
           <section>
-            <h2 className="font-display text-xl text-brand-deep">Related words</h2>
+            <h2 className="heading-subsection">Related words</h2>
             <ul className="mt-3 flex flex-col gap-2">
               {related.map((r) => (
                 <li key={r!.id}>
@@ -149,7 +149,7 @@ export default async function GlossaryTermPage({
 
         {exercises.length > 0 && dog ? (
           <section>
-            <h2 className="font-display text-xl text-brand-deep">Try it in practice</h2>
+            <h2 className="heading-subsection">Try it in practice</h2>
             <ul className="mt-3 flex flex-col gap-3">
               {exercises.map((ex) => (
                 <li key={ex!.id} className="plan-row">

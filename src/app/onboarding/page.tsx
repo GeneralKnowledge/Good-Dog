@@ -15,11 +15,9 @@ export default async function OnboardingPage() {
   }
 
   return (
-    <main className="landing-shell flex flex-1 flex-col px-5 py-8">
-      <p className="font-display text-2xl text-chrome">Good Dog</p>
-      <h1 className="mt-5 font-display text-3xl leading-tight text-chrome">
-        Tell us about your dog
-      </h1>
+    <main className="marketing-shell flex flex-1 flex-col px-5 py-8">
+      <p className="heading-subsection text-chrome">Good Dog</p>
+      <h1 className="heading-section mt-5 text-chrome">Tell us about your dog</h1>
       <p className="mt-2 text-muted leading-relaxed">
         Just the essentials — enough to suggest a useful first plan. You can skip and edit later.
       </p>

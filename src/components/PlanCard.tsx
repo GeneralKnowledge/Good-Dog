@@ -25,7 +25,7 @@ export function PlanCard({
     >
       <div className="plan-row__body">
         <div className="flex items-start justify-between gap-3">
-          <h2 className="font-display text-xl leading-snug text-brand-deep">
+          <h2 className="heading-subsection leading-snug">
             {exercise.title}
           </h2>
           {done ? (

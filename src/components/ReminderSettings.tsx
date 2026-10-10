@@ -245,7 +245,7 @@ export function ReminderSettings({
   if (!configured) {
     return (
       <section className="card p-5">
-        <h2 className="font-display text-xl text-brand-deep">Training reminders</h2>
+        <h2 className="heading-subsection">Training reminders</h2>
         <p className="mt-2 text-sm leading-relaxed text-muted">
           Daily reminders are not configured on this server yet. Ask your host to set VAPID keys and
           a reminder cron job.
@@ -258,14 +258,14 @@ export function ReminderSettings({
 
   return (
     <section className="card p-5">
-      <h2 className="font-display text-xl text-brand-deep">Training reminders</h2>
+      <h2 className="heading-subsection">Training reminders</h2>
       <p className="mt-2 text-sm leading-relaxed text-muted">
         Get a gentle daily nudge when {dogName} still has practice left. On iPhone this only works
         from the Home Screen app (iOS 16.4+).
       </p>
 
       {iosNeedsInstall ? (
-        <p className="mt-3 rounded-xl bg-accent-soft px-3 py-2 text-sm text-[var(--caution)]" role="status">
+        <p className="mt-3 rounded-xl bg-accent-soft px-3 py-2 text-sm text-caution" role="status">
           You’re in Safari. Tap Share → <span className="font-semibold">Add to Home Screen</span>,
           open Good Dog from that icon, then turn reminders on here.
         </p>
@@ -279,7 +279,7 @@ export function ReminderSettings({
             name="reminderEnabled"
             checked={enabled}
             onChange={(event) => onToggle(event.target.checked)}
-            className="h-5 w-5 accent-[var(--brand)]"
+            className="h-5 w-5 accent-brand"
           />
         </label>
 

@@ -2,12 +2,12 @@ import Link from "next/link";
 
 export default function PrivacyPage() {
   return (
-    <main className="px-5 py-8">
-      <Link href="/" className="font-display text-2xl text-brand-deep">
+    <main className="marketing-shell flex flex-1 flex-col px-5 py-8">
+      <Link href="/" className="heading-subsection text-chrome">
         Good Dog
       </Link>
-      <h1 className="mt-6 font-display text-3xl">Privacy notice</h1>
-      <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted">
+      <h1 className="heading-section mt-6">Privacy notice</h1>
+      <div className="card mt-6 space-y-4 p-5 text-sm leading-relaxed text-muted">
         <p>
           Good Dog stores your account email, dog profile details you provide, daily plans, and
           training session feedback so the app can suggest suitable practice and show your history.
@@ -31,7 +31,7 @@ export default function PrivacyPage() {
           endorsed by any training organisation unless explicitly documented.
         </p>
       </div>
-      <Link href="/dog" className="btn btn-secondary mt-8 inline-flex">
+      <Link href="/dog" className="btn btn-secondary mt-8 w-full">
         Back
       </Link>
     </main>

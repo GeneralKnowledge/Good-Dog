@@ -80,7 +80,7 @@ export function InstallSplash({ mode }: { mode: Mode }) {
 
   const shellClass =
     mode === "landing"
-      ? "fixed inset-0 z-50 flex items-end justify-center bg-[rgba(31,42,36,0.45)] px-4 pb-10 pt-10 sm:items-center"
+      ? "fixed inset-0 z-50 flex items-end justify-center bg-chrome/45 px-4 pb-10 pt-10 sm:items-center"
       : "fixed inset-x-0 bottom-[4.5rem] z-40 mx-auto w-[min(100%,28rem)] px-4";
 
   return (
@@ -88,26 +88,20 @@ export function InstallSplash({ mode }: { mode: Mode }) {
       <div
         className={
           mode === "landing"
-            ? "w-full max-w-md overflow-hidden rounded-[1.5rem] border border-line bg-[var(--bg-elevated)] shadow-[var(--shadow)]"
-            : "rounded-2xl border border-line bg-[var(--bg-elevated)] p-4 shadow-[var(--shadow)]"
+            ? "w-full max-w-md overflow-hidden rounded-[1.5rem] border border-line bg-elevated shadow-[var(--shadow)]"
+            : "rounded-2xl border border-line bg-elevated p-4 shadow-[var(--shadow)]"
         }
       >
         {mode === "landing" ? (
-          <div
-            className="px-5 pb-2 pt-8"
-            style={{
-              background:
-                "radial-gradient(ellipse at 30% 0%, rgba(47,111,94,0.2), transparent 55%), linear-gradient(180deg, #f7faf6, #ffffff)",
-            }}
-          >
-            <p className="font-display text-3xl tracking-tight text-brand-deep">Good Dog</p>
+          <div className="install-splash-hero px-5 pb-2 pt-8">
+            <p className="heading-section tracking-tight">Good Dog</p>
             <p className="mt-3 max-w-[28ch] text-base leading-relaxed text-muted">
               Install the app for a one-tap shortcut to today’s plan.
             </p>
           </div>
         ) : (
           <>
-            <p className="font-display text-lg text-brand-deep">Install Good Dog</p>
+            <p className="heading-subsection">Install Good Dog</p>
             <p className="mt-1 text-sm leading-relaxed text-muted">
               Keep today’s plan a tap away on your home screen.
             </p>

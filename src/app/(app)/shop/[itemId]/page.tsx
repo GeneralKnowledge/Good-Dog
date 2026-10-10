@@ -48,7 +48,7 @@ export default async function ShopItemPage({
               : item.blurb}
           </p>
           {item.priceGbp !== undefined ? (
-            <p className="mt-3 font-display text-3xl text-accent">
+            <p className="heading-section mt-3 text-accent">
               {formatGbp(item.priceGbp)}
             </p>
           ) : null}

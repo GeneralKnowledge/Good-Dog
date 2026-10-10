@@ -41,7 +41,7 @@ export default async function LearnPage() {
       />
       <div className="sheet flex flex-1 flex-col gap-8">
         <section className="fade-up">
-          <h2 className="font-display text-2xl text-brand-deep">Training words</h2>
+          <h2 className="heading-section">Training words</h2>
           <p className="mt-1 text-sm text-muted">
             Proper terminology with plain-English explanations. Today’s plan remains the main place
             to practise.
@@ -54,7 +54,7 @@ export default async function LearnPage() {
         <hr className="hairline" />
 
         <section>
-          <h2 className="font-display text-2xl text-brand-deep">Exercise topics</h2>
+          <h2 className="heading-section">Exercise topics</h2>
           <div className="mt-4 flex flex-col gap-8">
             {TOPIC_GROUPS.map((group) => {
               const exercises = EXERCISE_LIBRARY.filter(
@@ -69,7 +69,7 @@ export default async function LearnPage() {
               if (exercises.length === 0) return null;
               return (
                 <section key={group.id} className="fade-up">
-                  <h3 className="font-display text-xl text-brand-deep">{group.title}</h3>
+                  <h3 className="heading-subsection">{group.title}</h3>
                   <p className="mt-1 text-sm text-muted">{group.description}</p>
                   <ul className="mt-3 flex flex-col gap-3">
                     {exercises.map((exercise) => {

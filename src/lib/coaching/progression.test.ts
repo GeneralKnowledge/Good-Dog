@@ -5,7 +5,7 @@ import {
   shouldPreferHarderVariation,
   type ProgressSnapshot,
 } from "./progression";
-import { DEFAULT_PROGRESSION_CONFIG } from "@/lib/types";
+import { DEFAULT_PROGRESSION_CONFIG } from "./types";
 
 const fresh: ProgressSnapshot = {
   state: "not_introduced",
@@ -64,5 +64,27 @@ describe("applyOutcomeToProgress", () => {
     );
     expect(progress.state).toBe("needs_easier");
     expect(progress.easyStreak).toBe(0);
+  });
+});
+
+describe("applyOutcomeToProgress getting_there", () => {
+  const states = [
+    "not_introduced",
+    "introduced",
+    "practising",
+    "becoming_consistent",
+    "ready_to_increase",
+    "needs_easier",
+  ] as const;
+
+  it.each(states)("from %s resets the streak and never skips ahead", (state) => {
+    const next = applyOutcomeToProgress(
+      { state, easyStreak: 2, recentOutcomes: [] },
+      "getting_there",
+      false,
+    );
+
+    expect(next.easyStreak).toBe(0);
+    expect(next.state).toBe(state === "not_introduced" ? "introduced" : "practising");
   });
 });

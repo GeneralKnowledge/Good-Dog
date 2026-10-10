@@ -3,13 +3,13 @@ import { redirect } from "next/navigation";
 import { AppHeader } from "@/components/AppHeader";
 import { PlanCard } from "@/components/PlanCard";
 import { ShortPlanButton } from "@/components/ShortPlanButton";
-import { getExerciseById } from "@/lib/content/exercises";
+import { getExerciseById } from "@/lib/domains/dog-training";
 import { greetingForHour } from "@/lib/dates";
 import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { dogs, trainingSessions } from "@/lib/db/schema";
 import { getOrCreateDailyPlan } from "@/lib/services/plans";
-import type { PlanItem } from "@/lib/types";
+import type { PlanItem } from "@/lib/coaching";
 
 export default async function TodayPage({
   searchParams,

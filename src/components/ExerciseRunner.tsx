@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useId, useState, useTransition } from "react";
 import { nanoid } from "nanoid";
 import { submitFeedbackAction } from "@/lib/actions/training";
-import type { ExerciseContent } from "@/lib/types";
+import type { ExerciseContent } from "@/lib/domains/dog-training/types";
 
 export function ExerciseRunner({
   exercise,

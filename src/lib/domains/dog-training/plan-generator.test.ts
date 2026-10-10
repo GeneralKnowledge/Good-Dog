@@ -1,9 +1,23 @@
 import { describe, expect, it } from "vitest";
-import { EXERCISE_LIBRARY } from "@/lib/content/exercises";
-import { generateDailyPlan } from "./plan-generator";
-import type { ProgressSnapshot } from "./progression";
+import {
+  generateDailyPlan as generateWithPolicy,
+  type GeneratePlanInput,
+  type ProgressSnapshot,
+} from "@/lib/coaching";
+import { EXERCISE_LIBRARY } from "./content/exercises";
+import { dogTrainingPolicy } from "./policy";
+import type { DogSubject, ExerciseContent } from "./types";
 
-const dog = {
+function generateDailyPlan(
+  input: Omit<GeneratePlanInput<ExerciseContent, DogSubject>, "subject" | "policy"> & {
+    dog: DogSubject;
+  },
+) {
+  const { dog, ...rest } = input;
+  return generateWithPolicy({ ...rest, subject: dog, policy: dogTrainingPolicy });
+}
+
+const dog: DogSubject = {
   id: "dog-1",
   name: "Moss",
   lifeStage: "adult" as const,

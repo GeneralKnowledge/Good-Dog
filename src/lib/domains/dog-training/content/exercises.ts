@@ -1,4 +1,4 @@
-import type { ExerciseContent } from "@/lib/types";
+import type { ExerciseContent } from "../types";
 
 /**
  * Original Good Dog exercise library.

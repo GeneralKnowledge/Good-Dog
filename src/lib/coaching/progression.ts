@@ -3,7 +3,7 @@ import {
   type ProgressionConfig,
   type SessionOutcome,
   type SkillState,
-} from "@/lib/types";
+} from "./types";
 
 export interface OutcomeRecord {
   outcome: SessionOutcome;
@@ -38,19 +38,8 @@ export function applyOutcomeToProgress(
   }
 
   if (outcome === "getting_there") {
-    const nextState: SkillState =
-      current.state === "not_introduced" ? "introduced" : "practising";
     return {
-      state: nextState === "practising" && current.state === "ready_to_increase"
-        ? "practising"
-        : current.state === "becoming_consistent" ||
-            current.state === "ready_to_increase"
-          ? "practising"
-          : nextState === "introduced" && current.state !== "not_introduced"
-            ? "practising"
-            : current.state === "not_introduced"
-              ? "introduced"
-              : "practising",
+      state: current.state === "not_introduced" ? "introduced" : "practising",
       easyStreak: 0,
       recentOutcomes,
     };

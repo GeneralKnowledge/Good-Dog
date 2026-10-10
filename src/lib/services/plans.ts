@@ -1,6 +1,5 @@
 import { and, desc, eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
-import { EXERCISE_LIBRARY } from "@/lib/content/exercises";
 import { localDateString } from "@/lib/dates";
 import { db } from "@/lib/db";
 import {
@@ -11,9 +10,14 @@ import {
   trainingSessions,
   users,
 } from "@/lib/db/schema";
-import { generateDailyPlan } from "@/lib/domain/plan-generator";
-import type { ProgressSnapshot } from "@/lib/domain/progression";
-import type { PlanItem, SkillState } from "@/lib/types";
+import {
+  generateDailyPlan,
+  type PlanItem,
+  type ProgressSnapshot,
+  type SessionOutcome,
+  type SkillState,
+} from "@/lib/coaching";
+import { EXERCISE_LIBRARY, dogTrainingPolicy } from "@/lib/domains/dog-training";
 
 function exerciseVersionId(exerciseId: string, version: number) {
   return `${exerciseId}-v${version}`;
@@ -111,13 +115,13 @@ export function getOrCreateDailyPlan(options: {
         exerciseId: s.exerciseId,
         learningObjectiveId: exercise?.learningObjectiveId ?? "unknown",
         completedAt: s.completedAt!.getTime(),
-        outcome: s.outcome as "easy" | "getting_there" | "too_difficult",
+        outcome: s.outcome as SessionOutcome,
         welfareConcern: s.welfareConcern,
       };
     });
 
   const generated = generateDailyPlan({
-    dog: {
+    subject: {
       id: dog.id,
       name: dog.name,
       lifeStage: dog.lifeStage,
@@ -126,6 +130,7 @@ export function getOrCreateDailyPlan(options: {
       trainingExperience: dog.trainingExperience,
     },
     exercises: EXERCISE_LIBRARY,
+    policy: dogTrainingPolicy,
     progressByObjective,
     recentSessions,
     shortPlan: options.shortPlan,

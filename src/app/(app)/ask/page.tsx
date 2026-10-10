@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { AppHeader } from "@/components/AppHeader";
 import { AskSearch } from "@/components/AskSearch";
-import { HELP_ARTICLES } from "@/lib/content/help";
+import { HELP_ARTICLES } from "@/lib/domains/dog-training";
 import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { dogs } from "@/lib/db/schema";

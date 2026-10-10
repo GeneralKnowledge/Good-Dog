@@ -2,7 +2,7 @@ import Link from "next/link";
 import { and, eq } from "drizzle-orm";
 import { notFound, redirect } from "next/navigation";
 import { ExerciseRunner } from "@/components/ExerciseRunner";
-import { getExerciseById } from "@/lib/content/exercises";
+import { getExerciseById } from "@/lib/domains/dog-training";
 import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { dogs, exerciseVersions } from "@/lib/db/schema";

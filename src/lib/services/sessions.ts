@@ -1,6 +1,5 @@
 import { and, eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
-import { EXERCISE_LIBRARY } from "@/lib/content/exercises";
 import { db } from "@/lib/db";
 import {
   dogSkillProgress,
@@ -11,8 +10,10 @@ import {
 import {
   applyOutcomeToProgress,
   type ProgressSnapshot,
-} from "@/lib/domain/progression";
-import type { SessionOutcome, SkillState } from "@/lib/types";
+  type SessionOutcome,
+  type SkillState,
+} from "@/lib/coaching";
+import { EXERCISE_LIBRARY } from "@/lib/domains/dog-training";
 import { markPlanItemComplete } from "./plans";
 
 export function submitSessionFeedback(options: {

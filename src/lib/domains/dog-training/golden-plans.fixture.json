@@ -662,7 +662,7 @@
  "progress2|young_puppy|few_minutes||recent=false": {
   "items": [
    "ex-name-response | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-sit-comfort | skill | A practical next step for Moss today."
+   "ex-handling-touch | skill | We’re keeping this one steady so Moss can build confidence."
   ],
   "meta": {
    "shortPlan": false,
@@ -674,7 +674,7 @@
   "items": [
    "ex-recall-mild-distract | engage | You’ve had some good practice with this skill, so we’re trying a tiny step forward.",
    "ex-handling-touch | skill | We’re keeping this one steady so Moss can build confidence.",
-   "ex-lead-intro | everyday | An easy activity that fits naturally into home life with Moss."
+   "ex-rest-spot | everyday | An easy activity that fits naturally into home life with Moss."
   ],
   "meta": {
    "shortPlan": false,
@@ -685,7 +685,7 @@
  "progress2|older_puppy|few_minutes||recent=false": {
   "items": [
    "ex-name-response | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-sit-comfort | skill | A practical next step for Moss today."
+   "ex-calm-home | skill | Useful practice for a skill you’re working on with Moss."
   ],
   "meta": {
    "shortPlan": false,
@@ -708,7 +708,7 @@
  "progress2|adolescent|few_minutes||recent=false": {
   "items": [
    "ex-name-response | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-sit-comfort | skill | A practical next step for Moss today."
+   "ex-calm-home | skill | Useful practice for a skill you’re working on with Moss."
   ],
   "meta": {
    "shortPlan": false,
@@ -731,7 +731,7 @@
  "progress2|adult|few_minutes||recent=false": {
   "items": [
    "ex-name-response | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-sit-comfort | skill | A practical next step for Moss today."
+   "ex-calm-home | skill | Useful practice for a skill you’re working on with Moss."
   ],
   "meta": {
    "shortPlan": false,
@@ -754,7 +754,7 @@
  "progress2|senior|few_minutes||recent=false": {
   "items": [
    "ex-name-response | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-sit-comfort | skill | A practical next step for Moss today."
+   "ex-calm-home | skill | Useful practice for a skill you’re working on with Moss."
   ],
   "meta": {
    "shortPlan": false,
@@ -904,11 +904,11 @@
   "items": [
    "ex-recall-foundation | engage | A short, friendly start to today’s session.",
    "ex-mat-settle | skill | We’re keeping this one steady so Moss can build confidence.",
-   "ex-handling-touch | everyday | An easy activity that fits naturally into home life with Moss."
+   "ex-toilet-routine | everyday | An easy activity that fits naturally into home life with Moss."
   ],
   "meta": {
    "shortPlan": false,
-   "totalMinutes": 9,
+   "totalMinutes": 10,
    "reason": "adaptive"
   }
  },
@@ -1007,7 +1007,7 @@
  "progress5|young_puppy|few_minutes||recent=false": {
   "items": [
    "ex-lead-intro | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-name-response | skill | A practical next step for Moss today."
+   "ex-engagement-easy | skill | A practical next step for Moss today."
   ],
   "meta": {
    "shortPlan": false,
@@ -1030,7 +1030,7 @@
  "progress5|older_puppy|few_minutes||recent=false": {
   "items": [
    "ex-lead-intro | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-name-response | skill | A practical next step for Moss today."
+   "ex-engagement-easy | skill | A practical next step for Moss today."
   ],
   "meta": {
    "shortPlan": false,
@@ -1053,7 +1053,7 @@
  "progress5|adolescent|few_minutes||recent=false": {
   "items": [
    "ex-lead-intro | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-name-response | skill | A practical next step for Moss today."
+   "ex-engagement-easy | skill | A practical next step for Moss today."
   ],
   "meta": {
    "shortPlan": false,
@@ -1076,7 +1076,7 @@
  "progress5|adult|few_minutes||recent=false": {
   "items": [
    "ex-lead-intro | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-name-response | skill | A practical next step for Moss today."
+   "ex-engagement-easy | skill | A practical next step for Moss today."
   ],
   "meta": {
    "shortPlan": false,
@@ -1099,7 +1099,7 @@
  "progress5|senior|few_minutes||recent=false": {
   "items": [
    "ex-lead-intro | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-name-response | skill | A practical next step for Moss today."
+   "ex-engagement-easy | skill | A practical next step for Moss today."
   ],
   "meta": {
    "shortPlan": false,

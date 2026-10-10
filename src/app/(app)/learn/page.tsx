@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { AppHeader } from "@/components/AppHeader";
 import { GlossaryBrowser } from "@/components/glossary/GlossaryBrowser";
 import { LearnExerciseTopics } from "@/components/learn/LearnExerciseTopics";
+import { LearnGuides } from "@/components/learn/LearnGuides";
+import { ReferralsBlock } from "@/components/kb/ReferralsBlock";
 import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { ownerTermProgress } from "@/lib/db/schema";
@@ -45,6 +47,17 @@ export default async function LearnPage() {
             <GlossaryBrowser exposure={exposure} />
           </div>
         </section>
+
+        <section>
+          <h2 className="heading-section">Guides</h2>
+          <p className="mt-1 text-sm text-muted">
+            Management and education from the Good Dog knowledge base — read-only support alongside
+            your daily plan.
+          </p>
+          <LearnGuides />
+        </section>
+
+        <ReferralsBlock compact />
 
         <hr className="hairline" />
 

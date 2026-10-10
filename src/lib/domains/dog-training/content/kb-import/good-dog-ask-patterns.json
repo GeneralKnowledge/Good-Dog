@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-10-10T15:23:15.493Z",
+  "violatesNoAversivePatterns": [
+    {
+      "source": "\\bshock collar\\b",
+      "flags": "i"
+    },
+    {
+      "source": "\\bchoke chain\\b",
+      "flags": "i"
+    },
+    {
+      "source": "\\bprong\\b",
+      "flags": "i"
+    },
+    {
+      "source": "\\balpha roll\\b",
+      "flags": "i"
+    },
+    {
+      "source": "\\bhit(ting)?\\s+(your\\s+)?dog\\b",
+      "flags": "i"
+    }
+  ],
+  "escalateQuestionPatterns": [
+    {
+      "id": "esc-bite-aggression",
+      "pattern": {
+        "source": "\\b(bite|biting|aggress|attack|blood|growl(?:s|ing)? at (?:me|child|children)|resource guard(?:ing)?)\\b",
+        "flags": "i"
+      },
+      "safetyRuleIds": [
+        "safe-004-scope-referral",
+        "safe-007-no-punish-growling"
+      ],
+      "guideLessonIds": [
+        "lesson-reactive-management"
+      ],
+      "helpArticleIds": [
+        "help-aggression"
+      ]
+    },
+    {
+      "id": "esc-fear-pain",
+      "pattern": {
+        "source": "\\b(severe fear|panic|separation distress|in pain|limping|cannot eat|not eating|sudden(?:ly)? chang(?:e|ed))\\b",
+        "flags": "i"
+      },
+      "safetyRuleIds": [
+        "safe-004-scope-referral"
+      ],
+      "guideLessonIds": [
+        "lesson-read-your-dog-stress",
+        "lesson-fireworks-management"
+      ],
+      "helpArticleIds": [
+        "help-pain",
+        "help-worried"
+      ]
+    }
+  ],
+  "ownerQuestionCrosswalk": [
+    {
+      "helpArticleId": "help-aggression",
+      "guideLessonIds": [
+        "lesson-reactive-management"
+      ]
+    },
+    {
+      "helpArticleId": "help-worried",
+      "guideLessonIds": [
+        "lesson-read-your-dog-stress"
+      ]
+    },
+    {
+      "helpArticleId": "help-pain",
+      "guideLessonIds": [
+        "lesson-read-your-dog-stress"
+      ]
+    }
+  ]
+}

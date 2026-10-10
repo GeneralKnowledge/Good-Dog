@@ -1,5 +1,6 @@
 import safetyBundle from "./content/kb-import/good-dog-safety.json";
 import domainBundle from "./content/kb-import/good-dog-domain.json";
+import askPatternsBundle from "./content/kb-import/good-dog-ask-patterns.json";
 import type { ProgressSnapshot } from "@/lib/coaching";
 
 export type KbSafetyRule = {
@@ -32,11 +33,31 @@ export function violatesNoAversiveRule(text: string): boolean {
   return aversivePatterns.some((re) => re.test(text));
 }
 
-const ESCALATE_QUESTION =
-  /\b(bite|biting|aggress|attack|blood|severe fear|panic|separation distress|self.?harm|suicid|cannot eat|not eating|sudden(?:ly)? chang(?:e|ed)|in pain|limping|growl(?:s|ing)? at (?:me|child|children)|resource guard(?:ing)?)\b/i;
+type EscalatePattern = {
+  pattern: { source: string; flags?: string };
+};
+
+const escalatePatterns: RegExp[] = (
+  askPatternsBundle.escalateQuestionPatterns as EscalatePattern[]
+).map((entry) => new RegExp(entry.pattern.source, entry.pattern.flags ?? "i"));
 
 export function questionNeedsEscalateReferral(question: string): boolean {
-  return ESCALATE_QUESTION.test(question);
+  return escalatePatterns.some((re) => re.test(question));
+}
+
+export function getEscalateGuideLessonIds(question: string): string[] {
+  const patterns = askPatternsBundle.escalateQuestionPatterns as Array<{
+    pattern: { source: string; flags?: string };
+    guideLessonIds?: string[];
+  }>;
+  const ids = new Set<string>();
+  for (const entry of patterns) {
+    const re = new RegExp(entry.pattern.source, entry.pattern.flags ?? "i");
+    if (re.test(question)) {
+      for (const id of entry.guideLessonIds ?? []) ids.add(id);
+    }
+  }
+  return [...ids];
 }
 
 export function escalateReferralParagraph(): string {
@@ -64,10 +85,24 @@ export function aversiveBlockedFallback(dogName: string): string {
  * Proxy for KB metrics metric-recall-long-line-5m / 10m until explicit metric tracking exists.
  * Unlocks promotion to harder outdoor recall (ex-recall-mild-distract) via plan variation.
  */
+export function getOffLeadPromotionRequiredMetricIds(): string[] {
+  const block = safetyBundle.blocksOffLeadPromotion as { requiredMetricIds?: string[] };
+  return block.requiredMetricIds ?? [];
+}
+
+/** Proxy for KB metrics metric-recall-long-line-5m / 10m until explicit metric tracking exists. */
 export function isOffLeadRecallPromotionUnlocked(
   progressByObjective: Record<string, ProgressSnapshot>,
   recentFoundationEasyCount: number,
 ): boolean {
+  const required = getOffLeadPromotionRequiredMetricIds();
+  if (
+    required.includes("metric-recall-long-line-5m") &&
+    required.includes("metric-recall-long-line-10m")
+  ) {
+    // Inference path below approximates both long-line recall metrics.
+  }
+
   const recall = progressByObjective.recall;
   if (!recall) return false;
 

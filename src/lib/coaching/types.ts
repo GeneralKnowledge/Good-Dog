@@ -42,6 +42,8 @@ export interface ProgressionConfig {
   recentWindowSize: number;
   avoidRepeatWithinDays: number;
   shortPlanMinutes: number;
+  /** Days to avoid repeating an objective after owner reports discomfort. */
+  welfareCooldownDays: number;
 }
 
 export const DEFAULT_PROGRESSION_CONFIG: ProgressionConfig = {
@@ -49,4 +51,5 @@ export const DEFAULT_PROGRESSION_CONFIG: ProgressionConfig = {
   recentWindowSize: 5,
   avoidRepeatWithinDays: 1,
   shortPlanMinutes: 4,
+  welfareCooldownDays: 3,
 };

@@ -65,6 +65,22 @@ describe("applyOutcomeToProgress", () => {
     expect(progress.state).toBe("needs_easier");
     expect(progress.easyStreak).toBe(0);
   });
+
+  it("does not clear needs_easier on one easy while welfare is still in cooldown window", () => {
+    const now = Date.now();
+    const progress = applyOutcomeToProgress(
+      {
+        state: "needs_easier",
+        easyStreak: 0,
+        recentOutcomes: [{ outcome: "easy", welfareConcern: true, at: now - 60_000 }],
+      },
+      "easy",
+      false,
+      DEFAULT_PROGRESSION_CONFIG,
+      now,
+    );
+    expect(progress.state).toBe("needs_easier");
+  });
 });
 
 describe("applyOutcomeToProgress getting_there", () => {

@@ -50,7 +50,7 @@ export const HELP_ARTICLES: HelpArticle[] = [
     question: "What if my dog seems worried?",
     keywords: ["worried", "fear", "scared", "overwhelm", "uncomfortable", "stress"],
     answer:
-      "Stop or pause the exercise. Give your dog more space, move somewhere quieter, and avoid pushing them to continue. Choose a calmer alternative or finish for now. Good Dog will treat welfare concerns as a reason to simplify, not to push harder. If worry is severe, sudden, or linked to possible pain, contact your vet.",
+      "Stop or pause the exercise. Give your dog more space, move somewhere quieter, and avoid pushing them to continue. Choose a calmer alternative or finish for now. Good Dog records comfort concerns, simplifies upcoming plans for a few days, and avoids repeating the same skill while confidence rebuilds. If worry is severe, sudden, or linked to possible pain, contact your vet.",
     escalate: true,
   },
   {

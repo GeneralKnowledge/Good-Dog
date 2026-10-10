@@ -138,7 +138,11 @@
         "proto-name-attention-dt"
       ],
       "goodDogModule": "foundation_skills",
-      "lastReviewed": "2026-10-10"
+      "lastReviewed": "2026-10-10",
+      "goodDogInferenceHints": {
+        "learningObjectiveIds": ["name-response"],
+        "exerciseIds": ["ex-name-response", "ex-name-mild-distract"]
+      }
     },
     {
       "id": "metric-recall-long-line-5m",
@@ -154,7 +158,11 @@
         "proto-recall-three-step-dt"
       ],
       "goodDogModule": "life_skills",
-      "lastReviewed": "2026-10-10"
+      "lastReviewed": "2026-10-10",
+      "goodDogInferenceHints": {
+        "learningObjectiveIds": ["recall"],
+        "exerciseIds": ["ex-recall-foundation"]
+      }
     },
     {
       "id": "metric-recall-long-line-10m",
@@ -170,7 +178,11 @@
         "proto-recall-three-step-dt"
       ],
       "goodDogModule": "life_skills",
-      "lastReviewed": "2026-10-10"
+      "lastReviewed": "2026-10-10",
+      "goodDogInferenceHints": {
+        "learningObjectiveIds": ["recall"],
+        "exerciseIds": ["ex-recall-foundation", "ex-recall-mild-distract"]
+      }
     },
     {
       "id": "metric-loose-lead-10-steps",
@@ -186,7 +198,11 @@
         "proto-loose-lead-dt"
       ],
       "goodDogModule": "life_skills",
-      "lastReviewed": "2026-10-10"
+      "lastReviewed": "2026-10-10",
+      "goodDogInferenceHints": {
+        "learningObjectiveIds": ["loose-lead"],
+        "exerciseIds": ["ex-lead-intro", "ex-check-in-walk"]
+      }
     },
     {
       "id": "metric-off-lead-not-unlocked",
@@ -203,7 +219,11 @@
         "proto-recall-three-step-dt"
       ],
       "goodDogModule": "life_skills",
-      "lastReviewed": "2026-10-10"
+      "lastReviewed": "2026-10-10",
+      "goodDogInferenceHints": {
+        "learningObjectiveIds": ["recall"],
+        "exerciseIds": ["ex-recall-foundation", "ex-recall-mild-distract"]
+      }
     }
   ],
   "violatesNoAversivePatterns": [

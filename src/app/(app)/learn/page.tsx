@@ -7,12 +7,11 @@ import {
   dogTrainingPolicy,
   EXERCISE_LIBRARY,
   TOPIC_GROUPS,
-  type DogSubject,
 } from "@/lib/domains/dog-training";
 import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { ownerTermProgress } from "@/lib/db/schema";
-import { getDogForOwner } from "@/lib/services/dogs";
+import { getDogForOwner, toDogSubject } from "@/lib/services/dogs";
 
 export default async function LearnPage() {
   const user = await requireUser();
@@ -21,14 +20,7 @@ export default async function LearnPage() {
   const dog = getDogForOwner(user.id);
   if (!dog) redirect("/onboarding");
 
-  const subject: DogSubject = {
-    id: dog.id,
-    name: dog.name,
-    lifeStage: dog.lifeStage as DogSubject["lifeStage"],
-    availableTime: dog.availableTime as DogSubject["availableTime"],
-    primaryReason: dog.primaryReason,
-    trainingExperience: dog.trainingExperience as DogSubject["trainingExperience"],
-  };
+  const subject = toDogSubject(dog);
 
   const progressRows = db
     .select()
@@ -68,7 +60,7 @@ export default async function LearnPage() {
               const exercises = EXERCISE_LIBRARY.filter(
                 (e) =>
                   e.topicGroup === group.id &&
-                  e.lifeStages.includes(dog.lifeStage as DogSubject["lifeStage"]),
+                  e.lifeStages.includes(subject.lifeStage),
               ).sort(
                 (a, b) =>
                   dogTrainingPolicy.affinityScore(b, subject) -

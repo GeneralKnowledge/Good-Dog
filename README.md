@@ -34,8 +34,24 @@ Open [http://localhost:3000](http://localhost:3000).
 | `DEFAULT_TIMEZONE` | Plan day boundary (default `Europe/London`) |
 | `OPENAI_API_KEY` | Optional Ask-screen AI helper |
 | `OPENAI_BASE_URL` / `OPENAI_MODEL` | Optional AI provider config |
+| `VAPID_PUBLIC_KEY` / `VAPID_PRIVATE_KEY` / `VAPID_SUBJECT` | Optional Web Push reminders |
+| `CRON_SECRET` | Auth for `/api/cron/reminders` (≥16 chars) |
 
-The core product works without any AI key.
+The core product works without any AI key. You can create an account, sign in, or **continue as a guest**. Guests get a full session on this device; add an email later from **My dog** to keep progress.
+
+### Optional training reminders (Web Push)
+
+1. Generate keys: `npx web-push generate-vapid-keys`
+2. Set in `.env.local`: `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` (e.g. `mailto:you@example.com`), and `CRON_SECRET` (≥16 chars)
+3. Restart the app, then enable reminders under **My dog**
+4. Call the cron endpoint on a schedule (every 5–15 minutes):
+
+```bash
+curl -X POST -H "Authorization: Bearer $CRON_SECRET" \
+  https://your-domain/api/cron/reminders
+```
+
+Reminders send only if practice is still outstanding that day. iPhone delivery requires the app installed to the Home Screen. Use **Send test notification** on My dog to verify delivery.
 
 ## Scripts
 
@@ -53,7 +69,7 @@ npm run icons:generate  # re-render app icons from scripts/assets/app-icon.svg
 
 ## Install on your phone
 
-Good Dog can be added to the Home Screen and opens full-screen like an app. It is **not** a full PWA: there is no service worker, so no offline mode, push notifications or cached pages. You need a connection to use it.
+Good Dog can be added to the Home Screen and opens full-screen like an app. A small service worker (`public/sw.js`) handles Web Push when reminders are configured; there is still no offline mode or page caching. You need a connection to use the app.
 
 - **iPhone (Safari):** Share, then Add to Home Screen.
 - **Android (Chrome):** menu, then Install app (or Add to Home screen).
@@ -69,11 +85,14 @@ Notes:
 ## Product map
 
 - **Today** — persisted daily plan (2–3 short activities)
-- **Learn** — curated exercise library by topic
-- **My dog** — profile, plain-English progress, history
-- **Ask** — searchable approved help answers (+ optional AI)
+- **Learn** — curated exercise library by topic, plus a searchable training glossary
+- **Shop** — optional kit ideas linked from training
+- **My dog** — profile, guest claim, reminder settings, plain-English progress, history
+- **Ask** — searchable approved help answers, glossary-grounded terminology (+ optional AI)
 
 Progression is deterministic (no LLM required): prerequisites, welfare overrides, consolidation vs modest difficulty increases, and same-day plan stability.
+
+Good Dog teaches proper training language gradually inside exercises (plain English first, technical term alongside, tap for a short definition). See [`docs/glossary-authoring.md`](./docs/glossary-authoring.md).
 
 ## Architecture notes
 

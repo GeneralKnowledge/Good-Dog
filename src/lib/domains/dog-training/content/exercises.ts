@@ -23,22 +23,35 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 2,
     prerequisiteIds: [],
     purpose:
-      "Help your dog learn that turning towards you when they hear their name is worthwhile.",
+      "Help your dog learn that turning towards you when they hear their name is worthwhile. This is everyday [[positive-reinforcement|positive reinforcement]]: a valued reward follows the look, so looking becomes more likely.",
     preparation:
-      "Choose a quiet room. Have a few small pieces of food your dog enjoys, or another suitable reward.",
+      "Choose a quiet room. Have a few small pieces of food your dog enjoys, or another suitable [[reward]].",
     steps: [
       "Wait until your dog is not already looking at you.",
-      "Say their name once in a friendly voice.",
-      "When they turn towards you, mark the moment with a consistent word such as “yes” and offer a reward.",
+      "Say their name once in a friendly voice. Their name is the [[cue]] for checking in.",
+      "When they turn towards you, say “Yes!” — your [[marker-word]] — then give a reward. Good [[timing]] marks the glance, not what happens afterwards.",
       "Repeat a few times, allowing short breaks.",
     ],
     lookFor: "Your dog starts turning towards you more readily.",
     ifDifficult:
-      "Move somewhere quieter, reduce distractions, and make the exercise easier. Avoid repeating their name over and over.",
+      "Move somewhere quieter, reduce distractions, and make the exercise easier. Avoid repeating their name over and over. If they seem worried, you may be past a comfortable [[threshold]] — give more space.",
     harderVariationId: "ex-name-mild-distract",
     hint: "Say the name once, then wait. Quiet patience often works better than repeating.",
+    glossaryTermIds: [
+      "positive-reinforcement",
+      "reward",
+      "cue",
+      "marker-word",
+      "timing",
+      "threshold",
+    ],
+    whyThisWorks: {
+      plainWhy:
+        "Giving your dog something they value right after they look at you makes looking more likely next time.",
+      termId: "positive-reinforcement",
+    },
     topicGroup: "everyday_foundations",
-    contentVersion: 1,
+    contentVersion: 3,
   },
   {
     id: "ex-reward-marker",
@@ -58,21 +71,36 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 2,
     prerequisiteIds: [],
     purpose:
-      "Give yourself a clear way to mark the exact moment your dog does something useful.",
+      "Give yourself a clear way to mark the exact moment your dog does something useful. Trainers call this an [[event-marker]]. Today you’ll use a spoken [[marker-word]] — one kind of [[marker-signal]].",
     preparation:
-      "Have several tiny treats ready. Practise somewhere calm with few distractions.",
+      "Have several tiny treats ready for clear [[reward-delivery]]. Practise somewhere calm with few distractions.",
     steps: [
-      "Say “yes” in a bright, consistent tone.",
-      "Immediately follow with a small reward.",
-      "Repeat a handful of times with short pauses.",
-      "Later, use the same word the moment your dog offers something you like.",
+      "Say “Yes!” in a bright, consistent tone. You may hear trainers call this a [[marker-word]].",
+      "Immediately follow with a small [[reward]]. The marker identifies the moment; the reward pays for it.",
+      "Repeat a handful of times with short pauses. Aim for crisp [[timing]] — marker, then reward.",
+      "Later, use the same word the moment your dog offers something you like ([[capturing]] a behaviour).",
     ],
     lookFor: "Your dog starts looking hopeful as soon as they hear the word.",
     ifDifficult:
-      "Keep sessions very short and use a reward your dog clearly enjoys.",
-    hint: "The word should come first, then the reward — keep the gap tiny.",
+      "Keep sessions very short and use a reward your dog clearly enjoys. If they get frantic, pause — [[arousal]] may be too high for clear learning.",
+    hint: "The word should come first, then the reward — keep the gap tiny. A clicker is another [[marker-signal]]; pick one clear option for now.",
+    glossaryTermIds: [
+      "event-marker",
+      "marker-word",
+      "marker-signal",
+      "reward",
+      "reward-delivery",
+      "timing",
+      "capturing",
+      "arousal",
+    ],
+    whyThisWorks: {
+      plainWhy:
+        "A short marker word tells your dog exactly which moment earned the treat — then the treat pays for it.",
+      termId: "marker-word",
+    },
     topicGroup: "everyday_foundations",
-    contentVersion: 1,
+    contentVersion: 4,
   },
   {
     id: "ex-engagement-easy",
@@ -92,21 +120,28 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 2,
     prerequisiteIds: [],
     purpose:
-      "Warm up by encouraging your dog to notice you and choose to engage.",
+      "Warm up by encouraging your dog to notice you and choose to engage. You may hear trainers call this [[engagement|focus or engagement]].",
     preparation:
-      "Stand or sit somewhere quiet. Have a couple of rewards ready.",
+      "Stand or sit somewhere quiet. Have a couple of rewards ready — whatever acts as a [[reinforcer]] for your dog today.",
     steps: [
       "Make a gentle sound or show a reward near your chest.",
-      "When your dog looks at you, mark and reward.",
+      "When your dog looks at you, use your [[marker-word]] and reward. This is [[capturing]] a glance.",
       "Take a small step sideways and wait for another look.",
       "Finish while it still feels easy and friendly.",
     ],
     lookFor: "Willing glances and a relaxed posture.",
     ifDifficult:
-      "Move closer, reduce noise, and reward any glance in your direction.",
+      "Move closer, reduce noise, and reward any glance in your direction. Lower your [[criteria]] rather than insisting.",
     hint: "You are inviting, not insisting. Keep it light.",
+    glossaryTermIds: [
+      "engagement",
+      "reinforcer",
+      "marker-word",
+      "capturing",
+      "criteria",
+    ],
     topicGroup: "everyday_foundations",
-    contentVersion: 1,
+    contentVersion: 2,
   },
   {
     id: "ex-sit-comfort",
@@ -126,22 +161,76 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: ["ex-engagement-easy"],
     purpose:
-      "Build a simple sit that your dog can offer without being pushed into position.",
+      "Build a simple sit that your dog can offer without being pushed into position. We’ll use gentle [[luring]] to guide the movement.",
     preparation:
-      "Use a non-slippery floor. Have treats ready at your dog’s nose height.",
+      "Use a non-slippery floor. Have treats ready at your dog’s nose height for [[luring]].",
     steps: [
-      "Hold a treat near your dog’s nose.",
-      "Slowly move it up and slightly back over their head.",
-      "As their bottom lowers, mark and reward.",
-      "Repeat a few times, then pause before they get tired.",
+      "Hold a treat near your dog’s nose — this starts the lure.",
+      "Slowly move it up and slightly back over their head ([[luring]] into a sit).",
+      "As their bottom lowers, say your [[marker-word]] and reward. That [[timing]] pays for the sit.",
+      "Repeat a few times, then pause before they get tired. Later you can add a verbal [[cue]] once the sit is easy.",
     ],
-    lookFor: "A soft, willing sit without wobbling or worry.",
+    lookFor: "A soft, willing sit without wobbling or worry — early [[fluency]].",
     ifDifficult:
-      "Ask for a smaller movement, reward sooner, or practise on a more secure surface.",
+      "Ask for a smaller movement, reward sooner, or practise on a more secure surface. That means lowering your [[criteria]].",
     safetyNote:
       "If sitting seems stiff or painful, stop and speak to your vet before continuing.",
-    harderVariationId: "ex-wait-brief",
+    harderVariationId: "ex-down-comfort",
     hint: "Lure slowly. Rushing often makes dogs jump instead of sit.",
+    glossaryTermIds: ["luring", "marker-word", "timing", "cue", "fluency", "criteria"],
+    whyThisWorks: {
+      plainWhy:
+        "Guiding with food near the nose helps your dog discover the sit without being pushed into place.",
+      termId: "luring",
+    },
+    topicGroup: "everyday_foundations",
+    contentVersion: 4,
+  },
+  {
+    id: "ex-down-comfort",
+    slug: "comfortable-down",
+    title: "Teach a comfortable down",
+    summary: "Help your dog lie down willingly without being pushed.",
+    learningObjectiveId: "down",
+    category: "manners",
+    lifeStages: [
+      "young_puppy",
+      "older_puppy",
+      "adolescent",
+      "adult",
+      "senior",
+    ],
+    difficulty: 2,
+    estimatedMinutes: 3,
+    prerequisiteIds: ["ex-sit-comfort"],
+    purpose:
+      "Build a soft [[down]] — lying down on purpose — using gentle [[luring]], not pressure on the shoulders or hips.",
+    preparation:
+      "Use a non-slippery floor or mat. Have small treats ready. Start somewhere quiet so [[arousal]] stays low.",
+    steps: [
+      "Begin from a sit, or wait until your dog sits.",
+      "Hold a treat at their nose, then slowly lower it straight down toward the floor between their front paws ([[luring]] into a down).",
+      "As elbows touch the floor, use your [[marker-word]] and reward on the floor. That [[timing]] pays for the lie-down.",
+      "Repeat a few times. Later you can add a verbal [[cue]] once the movement is easy.",
+    ],
+    lookFor: "A willing fold into a down without sprawling in worry or being shoved — early [[fluency]].",
+    ifDifficult:
+      "Reward a smaller dip toward the floor first, then build. That means lowering your [[criteria]]. A softer surface can help.",
+    safetyNote:
+      "Never push your dog’s back or hips into a down. If lying down seems stiff or painful, stop and speak to your vet.",
+    easierVariationId: "ex-sit-comfort",
+    harderVariationId: "ex-mat-settle",
+    hint: "Keep the lure close to the body. Sweeping it too far forward often makes dogs stand up and walk.",
+    glossaryTermIds: [
+      "down",
+      "luring",
+      "arousal",
+      "marker-word",
+      "timing",
+      "cue",
+      "fluency",
+      "criteria",
+    ],
     topicGroup: "everyday_foundations",
     contentVersion: 1,
   },
@@ -157,21 +246,22 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: ["ex-sit-comfort"],
     purpose:
-      "Help your dog pause calmly for a moment before getting up or moving forward.",
+      "Help your dog pause calmly for a moment before moving on. Trainers often call this a brief [[wait]]. A longer held pause is often called a [[stay]] — we are not asking for that yet.",
     preparation: "Start indoors. Have a reward ready and keep sessions short.",
     steps: [
       "Ask for a sit, or wait until your dog sits.",
-      "Hold a flat hand briefly as a pause cue.",
-      "Count one second, then mark and reward while they are still waiting.",
+      "Hold a flat hand briefly as a pause [[cue]].",
+      "Count one second, then use your [[marker-word]] and reward while they are still waiting.",
       "Release with a cheerful word such as “okay” and take a step together.",
     ],
-    lookFor: "A relaxed pause without leaping up early.",
+    lookFor: "A relaxed pause without leaping up early — early [[fluency]], not a long stare-down.",
     ifDifficult:
-      "Reward after half a second, then gradually build. Keep early waits tiny.",
+      "Reward after half a second, then gradually build. That means lowering your [[criteria]].",
     easierVariationId: "ex-sit-comfort",
-    hint: "Short successful waits beat long, wobbly ones.",
+    hint: "Short successful waits beat long, wobbly ones. Save a formal [[stay]] for when short waits feel easy.",
+    glossaryTermIds: ["wait", "stay", "cue", "marker-word", "fluency", "criteria"],
     topicGroup: "life_at_home",
-    contentVersion: 1,
+    contentVersion: 3,
   },
   {
     id: "ex-mat-settle",
@@ -191,22 +281,30 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: [],
     purpose:
-      "Give your dog a clear place to settle, useful for busy moments at home.",
+      "Give your dog a clear place to [[settle]], useful for busy moments at home. We’ll build it with [[shaping]] — rewarding small steps towards lying calmly on the mat.",
     preparation:
       "Place a mat or towel on the floor in a quiet spot. Have soft rewards ready.",
     steps: [
-      "Toss a treat onto the mat and let your dog step on to eat it.",
-      "Mark any feet on the mat and reward on the mat.",
-      "If they lie down, mark and reward calmly.",
+      "Toss a treat onto the mat and let your dog step on to eat it. Approaching can be your first [[criteria]].",
+      "Use your [[marker-word]] for any feet on the mat and reward on the mat.",
+      "If they lie down, mark and reward calmly — a bigger step in the [[shaping]] plan.",
       "Keep early sessions short and end before they wander off.",
     ],
-    lookFor: "Willing approaches to the mat and softer body language.",
+    lookFor: "Willing approaches to the mat and softer [[body-language]].",
     ifDifficult:
-      "Make the mat more inviting with easier rewards and less pressure to stay.",
+      "Make the mat more inviting with easier rewards and less pressure to stay. Lower the [[criteria]].",
     harderVariationId: "ex-calm-home",
-    hint: "Reward on the mat itself so the place becomes valuable.",
+    hint: "Reward on the mat itself so the place becomes valuable. Later, approach → settle can become a short [[behaviour-chain]].",
+    glossaryTermIds: [
+      "settle",
+      "shaping",
+      "criteria",
+      "marker-word",
+      "body-language",
+      "behaviour-chain",
+    ],
     topicGroup: "calm_confidence",
-    contentVersion: 1,
+    contentVersion: 3,
   },
   {
     id: "ex-calm-home",
@@ -220,22 +318,32 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: ["ex-mat-settle"],
     purpose:
-      "Help your dog practise settling while everyday life continues nearby.",
+      "Help your dog practise a calm [[settle]] while everyday life continues nearby — gentle [[generalisation]] of the mat skill. Going to the mat and settling can become a short [[behaviour-chain]] once each piece is easy.",
     preparation:
-      "Use the mat your dog already knows. Start when the house is fairly quiet.",
+      "Use the mat your dog already knows. Start when the house is fairly quiet so [[arousal]] stays manageable.",
     steps: [
-      "Invite your dog to the mat and reward a settle.",
+      "Invite your dog to the mat and reward a [[settle]].",
       "Sit nearby and calmly read or sip a drink for a minute.",
-      "Quietly reward soft staying every so often.",
-      "Release gently and finish before they get restless.",
+      "Quietly reward soft staying every so often — keep [[criteria]] realistic. You do not need a fixed [[reinforcement-schedule]] yet; pay often while this is new.",
+      "Release gently and finish before they get restless. Allow [[recovery-time]] afterwards if needed.",
     ],
-    lookFor: "Softer breathing and a willingness to stay without fussing.",
+    lookFor: "Softer breathing and a willingness to stay without fussing. Watch [[body-language]].",
     ifDifficult:
       "Shorten the time, reduce household movement, and return to simpler mat rewards.",
     easierVariationId: "ex-mat-settle",
     hint: "Calm owner energy helps. Avoid excitedly chatting through the settle.",
+    glossaryTermIds: [
+      "settle",
+      "generalisation",
+      "arousal",
+      "criteria",
+      "recovery-time",
+      "body-language",
+      "behaviour-chain",
+      "reinforcement-schedule",
+    ],
     topicGroup: "calm_confidence",
-    contentVersion: 1,
+    contentVersion: 3,
   },
   {
     id: "ex-handling-touch",
@@ -255,23 +363,29 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: [],
     purpose:
-      "Make collar touches, ear checks, and gentle handling feel predictable and kind.",
+      "Make collar touches, ear checks, and gentle handling feel predictable and kind. This supports [[choice-consent|choice and consent in handling]].",
     preparation:
       "Choose a quiet spot. Have high-value rewards. Keep your movements slow.",
     steps: [
       "Touch a neutral area such as the shoulder for one second.",
-      "Mark and reward immediately.",
+      "Use your [[marker-word]] and reward immediately.",
       "Repeat with brief touches to collar area, then paws if comfortable.",
-      "Stop while your dog still looks relaxed.",
+      "Stop while your dog still looks relaxed — watch their [[body-language]].",
     ],
-    lookFor: "Soft eyes, loose body, and willingness to stay near you.",
+    lookFor: "Soft eyes, loose body, and willingness to stay near you. Notice [[stress-signals]] such as freezing or turning away.",
     ifDifficult:
       "Touch even more briefly, use better rewards, and avoid areas your dog finds tricky.",
     safetyNote:
       "If your dog flinches, freezes, growls, or tries to move away, stop. Do not force handling.",
     hint: "Touch, then reward. Never pin or restrain for this exercise.",
+    glossaryTermIds: [
+      "choice-consent",
+      "marker-word",
+      "body-language",
+      "stress-signals",
+    ],
     topicGroup: "calm_confidence",
-    contentVersion: 1,
+    contentVersion: 2,
   },
   {
     id: "ex-name-mild-distract",
@@ -285,23 +399,32 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: ["ex-name-response"],
     purpose:
-      "Strengthen name response when the environment is a little more interesting.",
+      "Strengthen name response when the environment is a little more interesting. This is gentle [[proofing]] / [[generalisation]] — the same skill in a slightly harder picture.",
     preparation:
-      "Start in a familiar room with a mild distraction, such as a toy on the floor.",
+      "Start in a familiar room with a mild [[trigger|distraction]], such as a toy on the floor.",
     steps: [
       "Wait until your dog notices the mild distraction.",
-      "Say their name once.",
-      "If they turn to you, mark and reward generously.",
-      "If not, move a little closer or make the distraction quieter, then try again.",
+      "Say their name once — one clear [[cue]].",
+      "If they turn to you, use your [[marker-word]] and reward generously.",
+      "If not, move a little closer or make the distraction quieter, then try again. Extra [[distance]] from the distraction often helps.",
     ],
     lookFor: "Turning to you even when something else is present.",
     ifDifficult:
-      "Return to quiet name practice, then add distraction more gradually.",
+      "Return to quiet name practice, then add distraction more gradually. If they cannot respond comfortably, you may be past a practical [[threshold]] — make it easier.",
     easierVariationId: "ex-name-response",
     harderVariationId: "ex-recall-foundation",
     hint: "One clear name cue. If they miss it, change the setup rather than repeating loudly.",
+    glossaryTermIds: [
+      "proofing",
+      "generalisation",
+      "trigger",
+      "cue",
+      "marker-word",
+      "distance",
+      "threshold",
+    ],
     topicGroup: "everyday_foundations",
-    contentVersion: 1,
+    contentVersion: 2,
   },
   {
     id: "ex-recall-foundation",
@@ -321,25 +444,33 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: ["ex-name-response"],
     purpose:
-      "Teach that coming towards you when invited is one of the best choices available.",
+      "Teach a [[recall]] — coming towards you when invited — so return feels like one of the best choices available.",
     preparation:
-      "Use a hallway or quiet garden. Have excellent rewards. Keep a long line if outdoors.",
+      "Use a hallway or quiet garden. Have excellent rewards. Keep a long line if outdoors ([[management]] for safety while you train).",
     steps: [
-      "Crouch slightly and use a cheerful recall cue once.",
+      "Crouch slightly and use a cheerful recall [[cue]] once.",
       "As your dog moves towards you, encourage warmly.",
-      "When they arrive, mark and give several small rewards.",
+      "When they arrive, use your [[marker-word]] and give several small rewards ([[positive-reinforcement]]).",
       "Release them to sniff again so coming back does not end the fun.",
     ],
     lookFor: "Willing movement towards you without hesitation.",
     ifDifficult:
-      "Start closer, use better rewards, and practise before energy gets high.",
+      "Start closer, use better rewards, and practise before [[arousal]] gets high.",
     safetyNote:
       "Do not practise off-lead near roads or unfenced hazards until your dog is ready.",
     easierVariationId: "ex-name-response",
     harderVariationId: "ex-recall-mild-distract",
     hint: "Reward arrival generously. Coming back should feel like a celebration.",
+    glossaryTermIds: [
+      "recall",
+      "management",
+      "cue",
+      "marker-word",
+      "positive-reinforcement",
+      "arousal",
+    ],
     topicGroup: "coming_back",
-    contentVersion: 1,
+    contentVersion: 2,
   },
   {
     id: "ex-recall-mild-distract",
@@ -353,24 +484,34 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 4,
     prerequisiteIds: ["ex-recall-foundation"],
     purpose:
-      "Strengthen recall when your dog has a mild competing interest.",
+      "Strengthen [[recall]] when your dog has a mild competing interest — careful [[proofing]], not a hard test.",
     preparation:
-      "Quiet outdoor space or large room. Use a long line for safety outdoors.",
+      "Quiet outdoor space or large room. Use a long line for safety outdoors ([[management]]).",
     steps: [
       "Allow a brief sniff or glance at a mild distraction.",
-      "Give your recall cue once in a friendly voice.",
-      "Reward heavily for coming away and returning.",
-      "Keep success easy — distance and distraction should still feel manageable.",
+      "Give your recall [[cue]] once in a friendly voice.",
+      "[[reward|Reward]] heavily for coming away and returning.",
+      "Keep success easy — [[distance]] and distraction should still feel under a comfortable [[threshold]].",
     ],
     lookFor: "Turning away from the distraction and returning willingly.",
     ifDifficult:
-      "Reduce distance, choose a quieter spot, or return to easier recall games.",
+      "Reduce distance, choose a quieter spot, or return to easier recall games. Lower the [[criteria]].",
     easierVariationId: "ex-recall-foundation",
     safetyNote:
       "If your dog becomes overwhelmed or overexcited, pause and simplify. Use a lead or long line.",
     hint: "Set them up to succeed. Hard recalls learnt through failure take longer to repair.",
+    glossaryTermIds: [
+      "recall",
+      "proofing",
+      "management",
+      "cue",
+      "reward",
+      "distance",
+      "threshold",
+      "criteria",
+    ],
     topicGroup: "coming_back",
-    contentVersion: 1,
+    contentVersion: 2,
   },
   {
     id: "ex-lead-intro",
@@ -390,24 +531,32 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: [],
     purpose:
-      "Build positive feelings about the harness or collar and a light lead.",
+      "Build positive feelings about the harness or collar and a light lead — a kind foundation for later [[loose-lead-walking]].",
     preparation:
-      "Use a well-fitting harness if possible. Practise indoors first.",
+      "Use a well-fitting harness if possible. Practise indoors first. Support [[choice-consent]] by going slowly.",
     steps: [
-      "Present the harness or collar and reward curiosity.",
-      "Put it on gently, then reward and remove before fuss builds.",
+      "Present the harness or collar and [[reward]] curiosity.",
+      "Put it on gently, then reward and remove before fuss builds. Watch [[body-language]].",
       "Clip on a light lead and take a few steps indoors, rewarding calm movement.",
-      "Keep the session short and end on a success.",
+      "Keep the session short and end on a success. Allow [[recovery-time]] if your dog seemed tense.",
     ],
-    lookFor: "Relaxed body language while kitted up.",
+    lookFor: "Relaxed [[body-language]] while kitted up.",
     ifDifficult:
-      "Go slower, pair each step with food, and practise for seconds rather than minutes.",
+      "Go slower, pair each step with food, and practise for seconds rather than minutes. Lower the [[criteria]].",
     safetyNote:
       "Avoid tight collars that dig in, and never use equipment designed to cause pain or fear.",
     harderVariationId: "ex-lead-loose",
     hint: "The kit should predict good things, not the start of a battle.",
+    glossaryTermIds: [
+      "loose-lead-walking",
+      "choice-consent",
+      "reward",
+      "body-language",
+      "recovery-time",
+      "criteria",
+    ],
     topicGroup: "walking_together",
-    contentVersion: 1,
+    contentVersion: 2,
   },
   {
     id: "ex-lead-loose",
@@ -421,12 +570,12 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 4,
     prerequisiteIds: ["ex-lead-intro"],
     purpose:
-      "Teach that walking beside you with a soft lead earns pleasant things.",
+      "Build [[loose-lead-walking]] by paying generously when the lead stays soft.",
     preparation:
-      "Start in a quiet indoor space or empty car park. Have treats accessible.",
+      "Start in a quiet indoor space or empty car park. Have treats accessible. Choose a place where [[arousal]] can stay moderate.",
     steps: [
-      "Begin walking and mark any moment the lead is soft.",
-      "Reward by your side.",
+      "Begin walking and use your [[marker-word]] for any moment the lead is soft.",
+      "[[reward|Reward]] by your side — soft lead earns good things ([[positive-reinforcement]]).",
       "If the lead tightens, stop politely and wait for slack, then move on.",
       "Keep sessions short — a few good metres beat a long struggle.",
     ],
@@ -438,8 +587,15 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     safetyNote:
       "Do not jerk the lead or use aversive equipment. If walks feel unsafe, seek local reward-based help.",
     hint: "Reward the lead when it is soft. Stopping is clearer than tugging.",
+    glossaryTermIds: [
+      "loose-lead-walking",
+      "arousal",
+      "marker-word",
+      "reward",
+      "positive-reinforcement",
+    ],
     topicGroup: "walking_together",
-    contentVersion: 1,
+    contentVersion: 2,
   },
   {
     id: "ex-check-in-walk",
@@ -453,22 +609,31 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: ["ex-name-response", "ex-lead-intro"],
     purpose:
-      "Make voluntarily checking in with you a habit on ordinary walks.",
+      "Make voluntarily checking in with you a habit on ordinary walks — outdoor [[engagement]] and light [[generalisation]].",
     preparation:
-      "Choose a familiar, fairly quiet walking route. Keep rewards handy.",
+      "Choose a familiar, fairly quiet walking route. Keep rewards handy. Stay under a comfortable [[threshold]].",
     steps: [
-      "Walk normally and watch for any glance towards you.",
-      "Mark and reward those check-ins.",
-      "Occasionally say their name once if needed, then reward the turn.",
+      "Walk normally and watch for any glance towards you ([[capturing]]).",
+      "Use your [[marker-word]] and reward those check-ins.",
+      "Occasionally say their name once if needed, then reward the turn — that name is a [[cue]].",
       "Keep it conversational — a few good check-ins is enough.",
     ],
     lookFor: "More frequent voluntary looks back to you.",
     ifDifficult:
-      "Use a quieter route and reward even tiny head turns in your direction.",
+      "Use a quieter route and reward even tiny head turns in your direction. Lower the [[criteria]].",
     easierVariationId: "ex-name-response",
     hint: "Catch the check-in early. You are paying for attention, not waiting for perfection.",
+    glossaryTermIds: [
+      "engagement",
+      "generalisation",
+      "threshold",
+      "capturing",
+      "marker-word",
+      "cue",
+      "criteria",
+    ],
     topicGroup: "walking_together",
-    contentVersion: 1,
+    contentVersion: 2,
   },
   {
     id: "ex-leave-it-easy",
@@ -482,23 +647,37 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: ["ex-engagement-easy"],
     purpose:
-      "Help your dog learn that leaving something alone can earn something better.",
+      "Practise an easy [[leave-it]] game: turning away from something can earn something better. This is [[training-vs-management|training]]; keeping unsafe items out of reach is [[management]].",
     preparation:
-      "Use a low-value item under your foot or hand, and higher-value rewards from your other hand.",
+      "Use a low-value item under your foot or hand, and higher-value rewards from your other hand. Dangerous items are a [[management]] job first — not a training game.",
     steps: [
       "Place a dull item where your dog can see but not take it.",
-      "Wait for any look away or pause.",
-      "Mark and reward from your other hand.",
+      "Wait for any look away or pause — that is today’s [[criteria]].",
+      "Use your [[marker-word]] and reward from your other hand. A kind [[drop-swap|trade or swap]] is a related skill for items already in the mouth — we are not practising that here.",
       "Repeat a few times, keeping success easy.",
     ],
-    lookFor: "Offering space from the item without tension.",
+    lookFor: "Offering space from the item without tension. Watch [[body-language]].",
     ifDifficult:
       "Use an even duller item and reward the tiniest look away.",
     safetyNote:
-      "Do not use this game with dangerous items your dog might grab. Manage first, train second.",
+      "Do not use this game with dangerous items your dog might grab. Manage first, train second. If your dog stiffens or growls over items, pause and seek qualified reward-based help rather than forcing a [[drop-swap]].",
     hint: "You are teaching a choice, not a stare-down.",
+    glossaryTermIds: [
+      "leave-it",
+      "management",
+      "training-vs-management",
+      "criteria",
+      "marker-word",
+      "body-language",
+      "drop-swap",
+    ],
+    whyThisWorks: {
+      plainWhy:
+        "Turning away from a dull item can earn something better — while unsafe items stay out of reach as management, not a game.",
+      termId: "leave-it",
+    },
     topicGroup: "life_at_home",
-    contentVersion: 1,
+    contentVersion: 4,
   },
   {
     id: "ex-door-manners",
@@ -512,22 +691,36 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: ["ex-wait-brief"],
     purpose:
-      "Make doorways less exciting so exits feel safer and calmer.",
+      "Make doorways less exciting so exits feel safer and calmer. This is everyday [[door-manners]], built from a brief [[wait]] plus [[management]] — a clear [[training-vs-management]] pairing.",
     preparation:
-      "Practise at an internal door first. Have rewards ready.",
+      "Practise at an internal door first. Have rewards ready. Keep [[arousal]] low.",
     steps: [
       "Approach the closed door together.",
-      "Ask for a brief pause or reward any calm feet-still moment.",
-      "Open the door a little, mark calm behaviour, then close and reward.",
+      "Ask for a brief [[wait]] or reward any calm feet-still moment.",
+      "Open the door a little, use your [[marker-word]] for calm, then close and reward.",
       "Only move through once calm feels easy.",
     ],
     lookFor: "Less rushing and more settled feet near the door.",
     ifDifficult:
-      "Practise further from the door and keep openings tiny.",
+      "Practise further from the door and keep openings tiny. Increase [[distance]] from the excitement. Use [[management]] (lead, quieter exit) while you train.",
     easierVariationId: "ex-wait-brief",
     hint: "The door opening is a privilege earned by calm, not a race start.",
+    glossaryTermIds: [
+      "door-manners",
+      "wait",
+      "management",
+      "training-vs-management",
+      "arousal",
+      "marker-word",
+      "distance",
+    ],
+    whyThisWorks: {
+      plainWhy:
+        "A brief pause at the door is a trained skill; using a lead or quieter exit is management that keeps everyone safer while you practise.",
+      termId: "management",
+    },
     topicGroup: "life_at_home",
-    contentVersion: 1,
+    contentVersion: 4,
   },
   {
     id: "ex-greeting-calm",
@@ -541,23 +734,32 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: ["ex-sit-comfort"],
     purpose:
-      "Teach that calm approaches earn attention, while jumping gets a gentle reset.",
+      "Teach that calm approaches earn attention, while jumping gets a gentle reset. Use [[management]] and clear [[criteria]], not confrontation.",
     preparation:
-      "Ask a helper to approach slowly. Have treats ready. Keep greetings short.",
+      "Ask a helper to approach slowly. Have treats ready. Keep greetings short so [[arousal]] does not spike.",
     steps: [
       "Helper approaches without excited talk.",
-      "If your dog keeps paws down, mark and allow a brief hello.",
-      "If they jump, helper calmly steps back and waits.",
-      "Reward the next calm moment and end before overexcitement builds.",
+      "If your dog keeps paws down, use your [[marker-word]] and allow a brief hello.",
+      "If they jump, helper calmly steps back and waits ([[management]]).",
+      "Reward the next calm moment and end before overexcitement builds. Allow [[recovery-time]] if needed.",
     ],
-    lookFor: "More four-paws-on-floor greetings.",
+    lookFor: "More four-paws-on-floor greetings. Soft [[body-language]] beats a stiff “sit” under pressure.",
     ifDifficult:
-      "Greet at a greater distance, keep visits shorter, and reward calmer earlier signs.",
+      "Greet at a greater [[distance]], keep visits shorter, and reward calmer earlier signs.",
     safetyNote:
       "If greeting involves snapping, lunging, or serious worry, stop and seek qualified reward-based help.",
     hint: "Attention is the reward. Jumping should pause the greeting, not create a scuffle.",
+    glossaryTermIds: [
+      "management",
+      "criteria",
+      "arousal",
+      "marker-word",
+      "recovery-time",
+      "body-language",
+      "distance",
+    ],
     topicGroup: "life_at_home",
-    contentVersion: 1,
+    contentVersion: 2,
   },
   {
     id: "ex-rest-spot",
@@ -577,23 +779,31 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: [],
     purpose:
-      "Create a rest place that predicts calm rewards and quiet time.",
+      "Create a rest place that predicts calm rewards and quiet time — a soft form of [[enrichment]] and a calm [[settle]] option.",
     preparation:
-      "Choose a bed, crate with door open, or corner mat. Never force confinement.",
+      "Choose a bed, crate with door open, or corner mat. Never force confinement; support [[choice-consent]].",
     steps: [
       "Toss a few treats onto the rest spot.",
-      "Reward your dog for going there voluntarily.",
+      "[[reward|Reward]] your dog for going there voluntarily ([[capturing]]).",
       "Sit nearby for a short calm minute.",
       "Allow free exit — the spot should feel optional and safe.",
     ],
-    lookFor: "Willing visits and softer settling.",
+    lookFor: "Willing visits and softer settling. Soft [[body-language]].",
     ifDifficult:
       "Use better treats, shorter stays, and keep the area open and inviting.",
     safetyNote:
       "Do not shut a worried dog in a crate for this exercise. Rest places should feel safe.",
     hint: "Optional beats forced. A rest spot works when the dog chooses it.",
+    glossaryTermIds: [
+      "enrichment",
+      "settle",
+      "choice-consent",
+      "reward",
+      "capturing",
+      "body-language",
+    ],
     topicGroup: "calm_confidence",
-    contentVersion: 1,
+    contentVersion: 2,
   },
   {
     id: "ex-puppy-sounds",
@@ -607,23 +817,35 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: [],
     purpose:
-      "Help a puppy feel more confident about normal home sounds at a comfortable distance.",
+      "Help a puppy feel more confident about normal home sounds at a comfortable [[distance]]. You may hear related ideas called [[desensitisation]] and [[counterconditioning]] — we keep this gentle and optional.",
     preparation:
-      "Stay far enough away that the sound is mild. Have tasty rewards ready.",
+      "Stay far enough away that the sound is mild (below a practical [[threshold]]). Have tasty rewards ready.",
     steps: [
       "Play a quiet everyday sound (kettle, distant traffic recording, soft doorbell).",
-      "As soon as it starts, scatter a few treats on the floor.",
+      "As soon as it starts, scatter a few treats on the floor so the sound predicts good news.",
       "Keep the volume low and the session short.",
-      "Stop if your puppy looks worried — quieter and further is better.",
+      "Stop if your puppy looks worried — notice [[stress-signals]]. Quieter and further is better.",
     ],
     lookFor: "Curious or neutral responses rather than startling or hiding.",
     ifDifficult:
-      "Turn the sound down, increase distance, and pair with easier rewards.",
+      "Turn the sound down, increase [[distance]], and pair with easier rewards. Never push through fear.",
     safetyNote:
-      "Never force a puppy to stay near a scary sound. Fear needs space and time.",
+      "Never force a puppy to stay near a scary sound. Fear needs space and time. Serious fear needs qualified in-person help — this app is not a treatment plan.",
     hint: "Sound predicts snacks. Keep it boringly gentle.",
+    glossaryTermIds: [
+      "distance",
+      "desensitisation",
+      "counterconditioning",
+      "threshold",
+      "stress-signals",
+    ],
+    whyThisWorks: {
+      plainWhy:
+        "Keeping the sound soft enough that your puppy can stay curious means you’re working below a comfortable learning threshold.",
+      termId: "threshold",
+    },
     topicGroup: "puppy_life",
-    contentVersion: 1,
+    contentVersion: 3,
   },
   {
     id: "ex-puppy-surfaces",
@@ -637,21 +859,107 @@ export const EXERCISE_LIBRARY: ExerciseContent[] = [
     estimatedMinutes: 3,
     prerequisiteIds: [],
     purpose:
-      "Build confidence on grass, rubber mats, or other safe everyday surfaces.",
+      "Build confidence on grass, rubber mats, or other safe everyday surfaces — gentle exploration with [[choice-consent]].",
     preparation:
-      "Choose two safe surfaces. Keep sessions playful and optional.",
+      "Choose two safe surfaces. Keep sessions playful and optional. Stay under a comfortable [[threshold]].",
     steps: [
-      "Invite your puppy onto a familiar surface and reward.",
+      "Invite your puppy onto a familiar surface and [[reward]].",
       "Place a few treats just onto the edge of a new surface.",
-      "Let them choose to step on — never push or drag.",
-      "Celebrate small steps and finish while they still feel brave.",
+      "Let them choose to step on — never push or drag. Watch [[body-language]] and [[stress-signals]].",
+      "Celebrate small steps and finish while they still feel brave. Allow [[recovery-time]] afterwards.",
     ],
     lookFor: "Willing investigation without freezing or rushing away.",
     ifDifficult:
-      "Make the new surface smaller, closer to a familiar one, and more heavily rewarded.",
+      "Make the new surface smaller, closer to a familiar one, and more heavily rewarded. Increase comfort [[distance]] from anything scary.",
     safetyNote:
       "Avoid slippery or unsafe surfaces. If your puppy seems sore, check with a vet.",
     hint: "Choice builds confidence. Pushing builds worry.",
+    glossaryTermIds: [
+      "choice-consent",
+      "threshold",
+      "reward",
+      "body-language",
+      "stress-signals",
+      "recovery-time",
+      "distance",
+    ],
+    topicGroup: "puppy_life",
+    contentVersion: 2,
+  },
+  {
+    id: "ex-toilet-routine",
+    slug: "toilet-routine-basics",
+    title: "Build a simple toilet routine",
+    summary: "Use timing, supervision, and calm rewards for toileting outside.",
+    learningObjectiveId: "housetraining",
+    category: "home",
+    lifeStages: ["young_puppy", "older_puppy", "adolescent", "adult"],
+    difficulty: 1,
+    estimatedMinutes: 4,
+    prerequisiteIds: [],
+    purpose:
+      "Set up everyday [[housetraining]] with [[management]] first: take your dog out often, supervise indoors, and reward toileting outside. Accidents are information, not defiance.",
+    preparation:
+      "Choose a regular outdoor toilet spot. Have a lead ready and a few small rewards. Limit free roam indoors when you cannot watch ([[management]]).",
+    steps: [
+      "Take your dog out after waking, after meals, after play, and about every 1–2 hours for young puppies (less often for older dogs).",
+      "Wait quietly at the toilet spot. When they toilet outside, use your [[marker-word]] calmly and give a [[reward]].",
+      "If an accident happens indoors, clean thoroughly with an enzymatic cleaner. Skip scolding — it often teaches hiding, not holding on.",
+      "Indoors, interrupt gently if you catch them mid-sniff circling, then go straight outside and reward success there.",
+    ],
+    lookFor: "More toileting in the outdoor spot and fewer indoor accidents over days — not overnight perfection.",
+    ifDifficult:
+      "Increase outdoor trips, tighten indoor [[management]] (lead indoors, smaller room, puppy pen), and reward outdoor toileting more generously.",
+    safetyNote:
+      "Sudden loss of house training, straining, blood, or frequent attempts can be medical — contact your vet. Do not rub a dog’s nose in accidents or use punishment.",
+    hint: "Prevention beats mopping. Supervise, schedule, and pay outdoor toileting well.",
+    glossaryTermIds: [
+      "housetraining",
+      "management",
+      "marker-word",
+      "reward",
+      "training-vs-management",
+    ],
+    topicGroup: "life_at_home",
+    contentVersion: 1,
+  },
+  {
+    id: "ex-puppy-mouthing",
+    slug: "puppy-mouthing-redirect",
+    title: "Redirect puppy mouthing",
+    summary: "Give mouths a legal outlet and pause play when teeth land on skin.",
+    learningObjectiveId: "puppy-mouthing",
+    category: "puppy",
+    lifeStages: ["young_puppy", "older_puppy"],
+    difficulty: 1,
+    estimatedMinutes: 3,
+    prerequisiteIds: [],
+    purpose:
+      "Help with everyday [[mouthing]]: puppies explore with their mouths. We use [[management]], a pause, and a chew or toy — not smacking, yelling, or holding the mouth shut.",
+    preparation:
+      "Have a soft toy or suitable chew ready. Keep sessions short. If your puppy is overtired, they often mouth more — plan a rest after ([[recovery-time]] / [[enrichment]]).",
+    steps: [
+      "Start calm play with hands as invitations, not wrestle targets.",
+      "If teeth touch skin or clothes, calmly stop moving hands and pause play for a few seconds.",
+      "Offer the toy or chew as a redirect. When they mouth the toy, use your [[marker-word]] and continue briefly.",
+      "End before the puppy gets frantic. Tired, overstimulated puppies need sleep more than more games — watch [[arousal]] and [[stress-signals]].",
+    ],
+    lookFor: "More chewing on toys/chews and shorter mouthing-on-people bursts. Soft [[body-language]] during play.",
+    ifDifficult:
+      "Shorten play, add a rest break, use a longer toy, and increase [[management]] (playpen, chew station). Avoid rough hand play that invites nipping.",
+    safetyNote:
+      "Hard biting that breaks skin, guarding toys with growling/snapping, or fear-based biting is beyond this app — seek suitably qualified reward-based help, and a vet if pain seems possible. Never use physical punishment for mouthing.",
+    hint: "Be boring when teeth hit skin; be interesting when the toy is in the mouth.",
+    glossaryTermIds: [
+      "mouthing",
+      "management",
+      "recovery-time",
+      "enrichment",
+      "marker-word",
+      "arousal",
+      "stress-signals",
+      "body-language",
+    ],
     topicGroup: "puppy_life",
     contentVersion: 1,
   },
@@ -670,7 +978,7 @@ export const TOPIC_GROUPS: {
   {
     id: "puppy_life",
     title: "Puppy life",
-    description: "Gentle confidence-building for younger dogs.",
+    description: "Gentle confidence-building, mouthing redirects, and early life skills.",
   },
   {
     id: "walking_together",
@@ -690,7 +998,7 @@ export const TOPIC_GROUPS: {
   {
     id: "life_at_home",
     title: "Life at home",
-    description: "Doorways, greetings, and everyday pauses.",
+    description: "Toilet routines, doorways, greetings, and everyday pauses.",
   },
 ];
 

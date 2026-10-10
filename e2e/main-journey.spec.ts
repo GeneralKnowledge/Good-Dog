@@ -17,10 +17,10 @@ test("main owner journey", async ({ page }) => {
   await page.getByLabel("What would you most like help with?").fill("Everyday manners");
   await page.getByRole("button", { name: "Create my first plan" }).click();
 
-  await expect(page.getByRole("heading", { name: /today’s plan for pip/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Start exercise" }).first()).toBeVisible();
+  await expect(page.getByRole("heading", { name: /today with pip/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Start" }).first()).toBeVisible();
 
-  await page.getByRole("link", { name: "Start exercise" }).first().click();
+  await page.getByRole("link", { name: "Start" }).first().click();
   await expect(page.getByText("Let’s practise")).toBeVisible();
   await page.getByRole("button", { name: "Finish and tell us how it went" }).click();
   await page.getByRole("button", { name: /Easy/i }).click();
@@ -30,9 +30,14 @@ test("main owner journey", async ({ page }) => {
   await expect(page.getByText(/done/i).first()).toBeVisible();
 
   await page.goto("/today");
-  await expect(page.getByRole("heading", { name: /today’s plan for pip/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /today with pip/i })).toBeVisible();
+
+  await page.getByRole("link", { name: "Shop" }).click();
+  await expect(page.getByRole("heading", { name: "Shop" })).toBeVisible();
+  await expect(page.getByText(/Soft Training Bites/i)).toBeVisible();
 
   await page.getByRole("link", { name: "My dog" }).click();
   await expect(page.getByRole("heading", { name: "Pip" })).toBeVisible();
-  await expect(page.getByText(/skills in progress|recent activity|we’ve started|in progress/i).first()).toBeVisible();
+  await expect(page.getByText(/skills in progress|recent practice|we’ve started|in progress/i).first()).toBeVisible();
 });
+

@@ -10,6 +10,8 @@ import {
   dailyPlans,
   dogSkillProgress,
   dogs,
+  ownerTermProgress,
+  pushSubscriptions,
   trainingSessions,
   users,
 } from "@/lib/db/schema";
@@ -17,6 +19,10 @@ import { getDogForOwner } from "@/lib/services/dogs";
 import { signInSchema, signUpSchema } from "@/lib/validation";
 
 export type ActionResult = { ok: true } | { ok: false; error: string };
+
+function guestEmailFor(id: string): string {
+  return `guest-${id}@guest.local`;
+}
 
 export async function signUpAction(
   _prev: ActionResult | null,
@@ -44,12 +50,71 @@ export async function signUpAction(
       id,
       email,
       passwordHash,
+      isGuest: false,
       timezone: "Europe/London",
     })
     .run();
 
   await createSession(id);
   redirect("/onboarding");
+}
+
+export async function continueAsGuestAction(): Promise<void> {
+  const id = nanoid();
+  const passwordHash = await hashPassword(nanoid(32));
+  db.insert(users)
+    .values({
+      id,
+      email: guestEmailFor(id),
+      passwordHash,
+      isGuest: true,
+      timezone: "Europe/London",
+    })
+    .run();
+
+  await createSession(id);
+  redirect("/onboarding");
+}
+
+export async function claimGuestAccountAction(
+  _prev: ActionResult | null,
+  formData: FormData,
+): Promise<ActionResult> {
+  const user = await requireUser();
+  if (!user) {
+    redirect("/sign-in");
+  }
+  if (!user.isGuest) {
+    return { ok: false, error: "This account already has an email and password" };
+  }
+
+  const parsed = signUpSchema.safeParse({
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
+
+  if (!parsed.success) {
+    return { ok: false, error: parsed.error.issues[0]?.message ?? "Invalid input" };
+  }
+
+  const email = parsed.data.email.toLowerCase().trim();
+  const existing = db.select().from(users).where(eq(users.email, email)).get();
+  if (existing && existing.id !== user.id) {
+    return { ok: false, error: "An account with that email already exists" };
+  }
+
+  const passwordHash = await hashPassword(parsed.data.password);
+  db.update(users)
+    .set({
+      email,
+      passwordHash,
+      isGuest: false,
+      updatedAt: new Date(),
+    })
+    .where(eq(users.id, user.id))
+    .run();
+
+  return { ok: true };
 }
 
 export async function signInAction(
@@ -67,7 +132,7 @@ export async function signInAction(
 
   const email = parsed.data.email.toLowerCase().trim();
   const user = db.select().from(users).where(eq(users.email, email)).get();
-  if (!user) {
+  if (!user || user.isGuest) {
     return { ok: false, error: "Email or password is incorrect" };
   }
 
@@ -100,6 +165,8 @@ export async function deleteAccountAction(): Promise<void> {
     db.delete(dogSkillProgress).where(eq(dogSkillProgress.dogId, dog.id)).run();
     db.delete(dogs).where(eq(dogs.id, dog.id)).run();
   }
+  db.delete(ownerTermProgress).where(eq(ownerTermProgress.ownerId, user.id)).run();
+  db.delete(pushSubscriptions).where(eq(pushSubscriptions.userId, user.id)).run();
   db.delete(users).where(eq(users.id, user.id)).run();
   await destroySession();
   redirect("/");

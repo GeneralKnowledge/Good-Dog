@@ -30,12 +30,12 @@ export default async function AskPage() {
   }));
 
   return (
-    <main>
+    <main className="flex min-h-0 flex-1 flex-col">
       <AppHeader
         title="Ask"
         subtitle={`Practical answers for ordinary training questions with ${dog.name}.`}
       />
-      <div className="px-5 pb-8">
+      <div className="sheet flex flex-1 flex-col">
         <AskSearch
           dogId={dog.id}
           dogName={dog.name}

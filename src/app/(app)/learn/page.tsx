@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { AppHeader } from "@/components/AppHeader";
+import { GlossaryBrowser } from "@/components/glossary/GlossaryBrowser";
 import {
   dogTrainingPolicy,
   EXERCISE_LIBRARY,
@@ -8,6 +10,8 @@ import {
   type DogSubject,
 } from "@/lib/domains/dog-training";
 import { requireUser } from "@/lib/auth/session";
+import { db } from "@/lib/db";
+import { ownerTermProgress } from "@/lib/db/schema";
 import { getDogForOwner } from "@/lib/services/dogs";
 
 export default async function LearnPage() {
@@ -26,53 +30,89 @@ export default async function LearnPage() {
     trainingExperience: dog.trainingExperience as DogSubject["trainingExperience"],
   };
 
+  const progressRows = db
+    .select()
+    .from(ownerTermProgress)
+    .where(eq(ownerTermProgress.ownerId, user.id))
+    .all();
+
+  const exposure: Record<string, "introduced" | "explored"> = {};
+  for (const row of progressRows) {
+    exposure[row.termId] = row.state;
+  }
+
   return (
-    <main>
+    <main className="flex min-h-0 flex-1 flex-col">
       <AppHeader
         title="Learn"
-        subtitle="A small library of practical topics. Today’s plan remains the easiest place to start."
+        subtitle="Browse practical exercises, and look up training words when you want to understand them better."
       />
-      <div className="flex flex-col gap-5 px-5 pb-8">
-        {TOPIC_GROUPS.map((group) => {
-          const exercises = EXERCISE_LIBRARY.filter(
-            (e) =>
-              e.topicGroup === group.id &&
-              e.lifeStages.includes(dog.lifeStage as DogSubject["lifeStage"]),
-          ).sort(
-            (a, b) =>
-              dogTrainingPolicy.affinityScore(b, subject) -
-              dogTrainingPolicy.affinityScore(a, subject),
-          );
-          if (exercises.length === 0) return null;
-          return (
-            <section key={group.id} className="fade-up">
-              <h2 className="font-display text-2xl">{group.title}</h2>
-              <p className="mt-1 text-sm text-muted">{group.description}</p>
-              <ul className="mt-3 flex flex-col gap-3">
-                {exercises.map((exercise) => {
-                  const matchesFocus =
-                    dogTrainingPolicy.affinityScore(exercise, subject) >= 3;
-                  return (
-                    <li key={exercise.id} className="card p-4">
-                      <h3 className="font-semibold leading-snug">{exercise.title}</h3>
-                      <p className="mt-1 text-sm text-muted">{exercise.summary}</p>
-                      <p className="mt-2 text-xs text-muted">
-                        {exercise.estimatedMinutes} minutes
-                        {matchesFocus ? " · matches your focus" : ""}
-                      </p>
-                      <Link
-                        href={`/exercise/${exercise.id}?dogId=${dog.id}&versionId=${exercise.id}-v${exercise.contentVersion}`}
-                        className="btn btn-secondary mt-3 w-full"
-                      >
-                        Try this exercise
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </section>
-          );
-        })}
+      <div className="sheet flex flex-1 flex-col gap-8">
+        <section className="fade-up">
+          <h2 className="font-display text-2xl text-brand-deep">Training words</h2>
+          <p className="mt-1 text-sm text-muted">
+            Proper terminology with plain-English explanations. Today’s plan remains the main place
+            to practise.
+          </p>
+          <div className="mt-3">
+            <GlossaryBrowser exposure={exposure} />
+          </div>
+        </section>
+
+        <hr className="hairline" />
+
+        <section>
+          <h2 className="font-display text-2xl text-brand-deep">Exercise topics</h2>
+          <div className="mt-4 flex flex-col gap-8">
+            {TOPIC_GROUPS.map((group) => {
+              const exercises = EXERCISE_LIBRARY.filter(
+                (e) =>
+                  e.topicGroup === group.id &&
+                  e.lifeStages.includes(dog.lifeStage as DogSubject["lifeStage"]),
+              ).sort(
+                (a, b) =>
+                  dogTrainingPolicy.affinityScore(b, subject) -
+                  dogTrainingPolicy.affinityScore(a, subject),
+              );
+              if (exercises.length === 0) return null;
+              return (
+                <section key={group.id} className="fade-up">
+                  <h3 className="font-display text-xl text-brand-deep">{group.title}</h3>
+                  <p className="mt-1 text-sm text-muted">{group.description}</p>
+                  <ul className="mt-3 flex flex-col gap-3">
+                    {exercises.map((exercise) => {
+                      const matchesFocus =
+                        dogTrainingPolicy.affinityScore(exercise, subject) >= 3;
+                      return (
+                        <li key={exercise.id} className="plan-row">
+                          <div className="plan-row__body w-full">
+                            <h4 className="font-semibold leading-snug text-brand-deep">
+                              {exercise.title}
+                            </h4>
+                            <p className="mt-1 text-sm text-muted">{exercise.summary}</p>
+                            <p className="mt-2 text-xs text-muted">
+                              {exercise.estimatedMinutes} minutes
+                              {matchesFocus ? " · matches your focus" : ""}
+                              {(exercise.glossaryTermIds?.length ?? 0) > 0
+                                ? ` · ${exercise.glossaryTermIds!.length} training words`
+                                : ""}
+                            </p>
+                            <Link
+                              href={`/exercise/${exercise.id}?dogId=${dog.id}&versionId=${exercise.id}-v${exercise.contentVersion}`}
+                              className="btn btn-secondary mt-3 w-full"
+                            >
+                              Try this exercise
+                            </Link>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </section>
+              );
+            })}
+          </div>
+        </section>
       </div>
     </main>
   );

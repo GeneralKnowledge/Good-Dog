@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
+import { InstallSplash } from "@/components/InstallSplash";
 import { requireUser } from "@/lib/auth/session";
 import { getDogForOwner } from "@/lib/services/dogs";
 
@@ -15,8 +16,9 @@ export default async function AppLayout({
   if (!dog?.onboardingComplete) redirect("/onboarding");
 
   return (
-    <div className="flex min-h-dvh flex-col">
-      <div className="flex-1 pb-4">{children}</div>
+    <div className="app-frame">
+      <div className="app-frame__body">{children}</div>
+      <InstallSplash mode="in-app" />
       <BottomNav />
     </div>
   );

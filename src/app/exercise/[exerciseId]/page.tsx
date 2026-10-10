@@ -1,11 +1,12 @@
-import Link from "next/link";
 import { and, eq } from "drizzle-orm";
 import { notFound, redirect } from "next/navigation";
+import { AppHeader } from "@/components/AppHeader";
 import { ExerciseRunner } from "@/components/ExerciseRunner";
 import { getExerciseById } from "@/lib/domains/dog-training";
+import type { TermExposureState } from "@/lib/domains/dog-training/types";
 import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
-import { dogs, exerciseVersions } from "@/lib/db/schema";
+import { dogs, exerciseVersions, ownerTermProgress } from "@/lib/db/schema";
 
 export default async function ExercisePage({
   params,
@@ -48,7 +49,6 @@ export default async function ExercisePage({
 
   if (!version) notFound();
 
-  // Prefer historical snapshot when available
   let content = exercise;
   try {
     content = JSON.parse(version.snapshotJson);
@@ -56,28 +56,41 @@ export default async function ExercisePage({
     content = exercise;
   }
 
+  const progressRows = db
+    .select()
+    .from(ownerTermProgress)
+    .where(eq(ownerTermProgress.ownerId, user.id))
+    .all();
+
+  const termExposure: Record<string, TermExposureState> = {};
+  for (const row of progressRows) {
+    termExposure[row.termId] = row.state;
+  }
+
   return (
-    <main className="pb-8">
-      <header className="px-5 pt-6">
-        <Link href="/today" className="text-sm font-semibold text-brand-deep">
-          ← Back to today
-        </Link>
-        <h1 className="mt-4 font-display text-3xl leading-tight">{content.title}</h1>
-        <p className="mt-2 text-muted">{content.summary}</p>
+    <main className="flex min-h-0 flex-1 flex-col">
+      <AppHeader
+        backHref="/today"
+        backLabel="Today"
+        title={content.title}
+        subtitle={content.summary}
+      />
+      <div className="sheet flex flex-1 flex-col">
         {dog.preferredRewards ? (
-          <p className="mt-3 text-sm text-brand-deep">
+          <p className="mb-2 text-sm text-brand-deep">
             Preferred rewards for {dog.name}: {dog.preferredRewards}
           </p>
         ) : null}
-      </header>
-      <ExerciseRunner
-        exercise={content}
-        dogId={dog.id}
-        dogName={dog.name}
-        planId={query.planId}
-        planItemId={query.itemId}
-        exerciseVersionId={version.id}
-      />
+        <ExerciseRunner
+          exercise={content}
+          dogId={dog.id}
+          dogName={dog.name}
+          planId={query.planId}
+          planItemId={query.itemId}
+          exerciseVersionId={version.id}
+          termExposure={termExposure}
+        />
+      </div>
     </main>
   );
 }

@@ -19,6 +19,8 @@ export type TopicGroup =
   | "calm_confidence"
   | "life_at_home";
 
+export type TermExposureState = "introduced" | "explored";
+
 export interface ExerciseContent extends CoachingExercise {
   slug: string;
   title: string;
@@ -32,6 +34,16 @@ export interface ExerciseContent extends CoachingExercise {
   safetyNote?: string;
   hint: string;
   topicGroup: TopicGroup;
+  /** Glossary terms introduced or reinforced by this exercise */
+  glossaryTermIds?: string[];
+  /**
+   * Optional quiet “why this works” teaching moment (plain English + one term).
+   * Shown once per exercise guide; does not interrupt the steps.
+   */
+  whyThisWorks?: {
+    plainWhy: string;
+    termId: string;
+  };
   contentVersion: number;
 }
 

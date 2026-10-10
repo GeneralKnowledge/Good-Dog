@@ -4,8 +4,8 @@ export const APP_NAME = "Good Dog";
 export const APP_DESCRIPTION =
   "A friendly daily dog-training coach for ordinary UK dog owners. Short, practical, reward-based activities.";
 
-/** Matches --brand in globals.css. Tints the phone's status bar and task switcher. */
-export const THEME_COLOR = "#2f6f5e";
+/** Matches --chrome in globals.css. Tints the phone's status bar and task switcher. */
+export const THEME_COLOR = "#1b3022";
 
-/** Matches --bg in globals.css. Shown on the launch splash before the app paints. */
-export const BACKGROUND_COLOR = "#f3f6f2";
+/** Matches --sheet in globals.css. Shown on the launch splash before the app paints. */
+export const BACKGROUND_COLOR = "#f7f4eb";

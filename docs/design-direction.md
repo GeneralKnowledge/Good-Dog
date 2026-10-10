@@ -50,6 +50,21 @@ Calm UK garden coach — quiet confidence, never a gamified dashboard. Soft ligh
 
 Five destinations: **Today · Learn · Shop · My dog · Ask**. Active = soft brand wash + deep ink (not a solid filled “blob” for Today). Simple line icons, not emoji.
 
+On viewports **below 1024px**, primary nav is the sticky **bottom bar**. From **1024px (lg)** upward, the same links move to a **left sidebar** inside the app shell; the bottom bar is hidden.
+
+## Responsive layout
+
+Mobile-first breakpoints follow Tailwind defaults: **md** 768px, **lg** 1024px, **xl** 1280px.
+
+| Tier | Viewport | Shell & chrome |
+| --- | --- | --- |
+| Phone | &lt; 768px | Full-width column up to **28rem**; bottom nav |
+| Tablet | md–lg | Centered **framed** shell (rounded, shadow, sage stage on outer body); landing uses **two columns** (copy + photo) |
+| Small laptop | lg+ | Shell widens to **42rem**; **sidebar nav**; slightly wider sheet padding |
+| Large laptop | xl+ | Scannable lists use **`.grid-cards-2`** (Learn exercise topics, Shop own-brand, Ask articles); long copy uses **`.prose-width`** (~65ch) |
+
+CSS variables: `--shell-max`, `--shell-max-lg`, `--sidebar-width` in `src/app/globals.css`. Do not stretch exercise steps or Today’s plan into multi-column layouts.
+
 ## Shop notes
 
 Match the dropship mockup where practical: brand-led Shop header, own-brand session kit rows (thumb · title · pack · blurb · accent price · Add), drop-ship disclosure, affiliate section below. Checkout stays illustrative until trade fulfilment is live.

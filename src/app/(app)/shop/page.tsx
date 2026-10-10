@@ -28,14 +28,9 @@ export default async function ShopPage() {
         <section className="fade-up fade-up-delay-1">
           <h2 className="heading-subsection">Own brand · Session kit</h2>
 
-          <ul className="mt-4 flex flex-col">
-            {ownBrand.map((item, index) => (
-              <li
-                key={item.id}
-                className={`flex items-start gap-3 py-4 ${
-                  index > 0 ? "border-t border-line" : ""
-                }`}
-              >
+          <ul className="grid-cards-2 mt-4">
+            {ownBrand.map((item) => (
+              <li key={item.id} className="card flex items-start gap-3 p-4">
                 <Link
                   href={`/shop/${item.id}`}
                   className="relative h-[4.5rem] w-[3.5rem] shrink-0 overflow-hidden rounded-lg bg-brand-soft"

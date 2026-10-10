@@ -7,7 +7,7 @@ export default function PrivacyPage() {
         Good Dog
       </Link>
       <h1 className="heading-section mt-6">Privacy notice</h1>
-      <div className="card mt-6 space-y-4 p-5 text-sm leading-relaxed text-muted">
+      <div className="marketing-form-wrap card mt-6 space-y-4 p-5 text-sm leading-relaxed text-muted">
         <p>
           Good Dog stores your account email, dog profile details you provide, daily plans, and
           training session feedback so the app can suggest suitable practice and show your history.

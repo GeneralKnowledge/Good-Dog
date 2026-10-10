@@ -21,7 +21,7 @@ export function AppHeader({
       {backHref ? (
         <Link
           href={backHref}
-          className="mb-3 inline-block text-sm font-semibold text-on-chrome-muted"
+          className="chrome-back mb-3 inline-block text-sm font-semibold text-on-chrome-muted"
         >
           ← {backLabel ?? "Back"}
         </Link>

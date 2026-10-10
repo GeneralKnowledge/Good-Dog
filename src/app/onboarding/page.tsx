@@ -21,7 +21,7 @@ export default async function OnboardingPage() {
       <p className="mt-2 text-muted leading-relaxed">
         Just the essentials — enough to suggest a useful first plan. You can skip and edit later.
       </p>
-      <div className="card mt-6 p-5">
+      <div className="marketing-form-wrap card mt-6 p-5">
         <OnboardingForm action={createDogAction} />
       </div>
       <div className="mt-4">

@@ -11,7 +11,7 @@ export default function SignInPage() {
       </Link>
       <h1 className="heading-section mt-6 text-chrome">Welcome back</h1>
       <p className="mt-2 text-muted">Sign in to continue with today’s plan.</p>
-      <div className="card mt-6 p-5">
+      <div className="marketing-form-wrap card mt-6 p-5">
         <AuthForm action={signInAction} submitLabel="Sign in" mode="sign-in" />
       </div>
       <div className="mt-4">

@@ -13,7 +13,7 @@ export default function SignUpPage() {
       <p className="mt-2 text-muted">
         We’ll keep your dog’s profile and training history private to you.
       </p>
-      <div className="card mt-6 p-5">
+      <div className="marketing-form-wrap card mt-6 p-5">
         <AuthForm action={signUpAction} submitLabel="Create account" mode="sign-up" />
       </div>
       <div className="mt-4">

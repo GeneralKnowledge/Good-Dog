@@ -81,7 +81,7 @@ export function InstallSplash({ mode }: { mode: Mode }) {
   const shellClass =
     mode === "landing"
       ? "fixed inset-0 z-50 flex items-end justify-center bg-chrome/45 px-4 pb-10 pt-10 sm:items-center"
-      : "fixed inset-x-0 bottom-[4.5rem] z-40 mx-auto w-[min(100%,28rem)] px-4";
+      : "install-anchor fixed inset-x-0 bottom-[4.5rem] z-40 px-4 lg:bottom-4";
 
   return (
     <div className={shellClass} role="dialog" aria-label="Install Good Dog">

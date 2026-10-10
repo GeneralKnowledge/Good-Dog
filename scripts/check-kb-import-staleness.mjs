@@ -16,6 +16,7 @@ const files = [
   "good-dog-guides.json",
   "good-dog-referrals.json",
   "good-dog-ask-patterns.json",
+  "good-dog-crash-course.json",
 ];
 
 const now = Date.now();

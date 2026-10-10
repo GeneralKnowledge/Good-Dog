@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "1.0.0",
-  "generatedAt": "2026-10-10T15:23:15.494Z",
+  "schemaVersion": "1.1.0",
+  "generatedAt": "2026-10-10T17:32:13.832Z",
   "safetyRules": [
     {
       "id": "safe-001-no-aversive-routine",
@@ -61,7 +61,9 @@
       "rationaleClaimIds": [
         "claim-bc-stress-001-no-punish-defensive",
         "claim-bc-child-001-remove-on-stress",
-        "claim-dt-reactive-003-create-distance-reward"
+        "claim-dt-reactive-003-create-distance-reward",
+        "claim-bc-stress-004-defensive-escalation-health",
+        "claim-dt-vet-003-speak-up-for-growl"
       ],
       "action": "filter_and_refer",
       "severity": "critical",
@@ -140,8 +142,12 @@
       "goodDogModule": "foundation_skills",
       "lastReviewed": "2026-10-10",
       "goodDogInferenceHints": {
-        "learningObjectiveIds": ["name-response"],
-        "exerciseIds": ["ex-name-response", "ex-name-mild-distract"]
+        "exerciseIds": [
+          "ex-name-response"
+        ],
+        "learningObjectiveIds": [
+          "name-response"
+        ]
       }
     },
     {
@@ -160,8 +166,13 @@
       "goodDogModule": "life_skills",
       "lastReviewed": "2026-10-10",
       "goodDogInferenceHints": {
-        "learningObjectiveIds": ["recall"],
-        "exerciseIds": ["ex-recall-foundation"]
+        "exerciseIds": [
+          "ex-kb-emergency-recall",
+          "ex-recall-foundation"
+        ],
+        "learningObjectiveIds": [
+          "recall"
+        ]
       }
     },
     {
@@ -180,8 +191,13 @@
       "goodDogModule": "life_skills",
       "lastReviewed": "2026-10-10",
       "goodDogInferenceHints": {
-        "learningObjectiveIds": ["recall"],
-        "exerciseIds": ["ex-recall-foundation", "ex-recall-mild-distract"]
+        "exerciseIds": [
+          "ex-kb-emergency-recall",
+          "ex-recall-foundation"
+        ],
+        "learningObjectiveIds": [
+          "recall"
+        ]
       }
     },
     {
@@ -200,8 +216,13 @@
       "goodDogModule": "life_skills",
       "lastReviewed": "2026-10-10",
       "goodDogInferenceHints": {
-        "learningObjectiveIds": ["loose-lead"],
-        "exerciseIds": ["ex-lead-intro", "ex-check-in-walk"]
+        "exerciseIds": [
+          "ex-kb-loose-lead-check-in-draft",
+          "ex-lead-loose"
+        ],
+        "learningObjectiveIds": [
+          "lead-walking"
+        ]
       }
     },
     {
@@ -221,8 +242,13 @@
       "goodDogModule": "life_skills",
       "lastReviewed": "2026-10-10",
       "goodDogInferenceHints": {
-        "learningObjectiveIds": ["recall"],
-        "exerciseIds": ["ex-recall-foundation", "ex-recall-mild-distract"]
+        "exerciseIds": [
+          "ex-kb-emergency-recall",
+          "ex-recall-foundation"
+        ],
+        "learningObjectiveIds": [
+          "recall"
+        ]
       }
     }
   ],

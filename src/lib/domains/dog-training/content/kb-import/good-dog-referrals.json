@@ -1,35 +1,29 @@
 {
-  "schemaVersion": "1.0.0",
-  "generatedAt": "2026-10-10T15:23:15.493Z",
-  "ethicsDisclaimer": "Good Dog offers general reward-based training education. It is not veterinary care, clinical behaviour treatment, or a substitute for hands-on professional assessment.",
-  "referrals": [
-    {
-      "id": "ref-vet-first",
-      "title": "Contact your vet first",
-      "body": "Sudden behaviour change, pain, illness, or loss of appetite needs a medical check before training plans change.",
-      "url": "https://www.rspca.org.uk/adviceandwelfare/pets/dogs/health",
+  "schemaVersion": "1.1.0",
+  "generatedAt": "2026-10-10T17:32:13.934Z",
+  "referrals": {
+    "abtcRegister": {
+      "title": "Find an ABTC-registered trainer",
+      "body": "RSPCA recommends looking for ABTC-registered animal training instructors for ethical training that meets welfare needs.",
+      "url": "https://abtc.org.uk/owners/",
       "rationaleClaimIds": [
-        "claim-imdt-003-referral"
+        "claim-rspca-003-abtc-trainer"
       ]
     },
-    {
-      "id": "ref-abtc-find",
-      "title": "Find ABTC-registered help",
-      "body": "For ongoing aggression, severe fear, or clinical behaviour needs, use an ABTC-registered Clinical Animal Behaviourist or Veterinary Behaviourist.",
-      "url": "https://www.abtc.org.uk/",
+    "vetFirst": {
+      "title": "See your vet first",
+      "body": "Dogs Trust advises having a reactive dog examined by a vet to check for underlying medical conditions before behaviour change work, noting pain and illness can reduce tolerance and coping.",
       "rationaleClaimIds": [
-        "claim-imdt-003-referral",
-        "claim-abtc-003-no-aversives"
+        "claim-dt-reactive-002-vet-check-first"
       ]
     },
-    {
-      "id": "ref-imdt-ethics",
-      "title": "Reward-based training standards",
-      "body": "Choose trainers aligned with force-free, science-based methods — avoid pain, fear, and coercion as routine solutions.",
-      "url": "https://www.imdt.uk.com/",
+    "dogsTrustBehaviourLine": {
+      "title": "Dogs Trust Behaviour Support Line",
+      "body": "Free telephone advice for UK dog owners struggling with behaviour.",
+      "url": "https://www.dogstrust.org.uk/dog-advice/understanding-your-dog/finding-behaviour-and-training-support",
       "rationaleClaimIds": [
-        "claim-imdt-001-force-free"
+        "claim-dt-reactive-006-behaviour-support-referral"
       ]
     }
-  ]
+  }
 }

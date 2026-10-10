@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AppHeader } from "@/components/AppHeader";
+import { GuideMarkdown } from "@/components/kb/GuideMarkdown";
 import { GuideProvenance } from "@/components/kb/GuideProvenance";
 import { ReferralsBlock } from "@/components/kb/ReferralsBlock";
 import { getAllGuides, getGuideByLessonId } from "@/lib/domains/dog-training/kb-import";
@@ -8,24 +9,6 @@ import { requireUser } from "@/lib/auth/session";
 
 export function generateStaticParams() {
   return getAllGuides().map((g) => ({ lessonId: g.lessonId }));
-}
-
-function renderMarkdownBody(body: string) {
-  const blocks = body.split(/\n\n+/);
-  return blocks.map((block, i) => {
-    if (block.startsWith("## ")) {
-      return (
-        <h2 key={i} className="heading-subsection mt-6 first:mt-0">
-          {block.slice(3)}
-        </h2>
-      );
-    }
-    return (
-      <p key={i} className="mt-3 leading-relaxed text-muted">
-        {block}
-      </p>
-    );
-  });
 }
 
 export default async function GuidePage({
@@ -51,7 +34,7 @@ export default async function GuidePage({
           </div>
         ) : null}
 
-        <div className="fade-up">{renderMarkdownBody(guide.ownerBodyMarkdown)}</div>
+        <GuideMarkdown body={guide.ownerBodyMarkdown} />
 
         <GuideProvenance guide={guide} />
 

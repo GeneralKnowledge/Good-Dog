@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getAllGuides } from "@/lib/domains/dog-training/kb-import";
+import { getAllGuides, getGuideKind } from "@/lib/domains/dog-training/kb-import";
 
 export function LearnGuides() {
   const guides = getAllGuides();
@@ -17,7 +17,7 @@ export function LearnGuides() {
               <p className="font-semibold">{guide.title}</p>
               <p className="mt-1 text-sm text-muted">{guide.summary}</p>
               <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-brand">
-                {guide.kind === "management" ? "Management guide" : "Education"}
+                {getGuideKind(guide) === "management" ? "Management guide" : "Education"}
               </p>
             </div>
           </Link>

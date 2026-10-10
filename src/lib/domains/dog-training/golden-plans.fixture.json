@@ -442,13 +442,13 @@
  },
  "progress0|young_puppy|about_10|Recall help|recent=true": {
   "items": [
-   "ex-rest-spot | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-lead-intro | skill | We’re keeping this one steady so Moss can build confidence.",
-   "ex-puppy-sounds | everyday | An easy activity that fits naturally into home life with Moss."
+   "ex-kb-emergency-recall | engage | Useful practice for a skill you’re working on with Moss.",
+   "ex-rest-spot | skill | Useful practice for a skill you’re working on with Moss.",
+   "ex-lead-intro | everyday | An easy activity that fits naturally into home life with Moss."
   ],
   "meta": {
    "shortPlan": false,
-   "totalMinutes": 9,
+   "totalMinutes": 10,
    "reason": "adaptive"
   }
  },
@@ -465,7 +465,7 @@
  },
  "progress0|older_puppy|about_10|Recall help|recent=true": {
   "items": [
-   "ex-recall-mild-distract | engage | Useful practice for a skill you’re working on with Moss.",
+   "ex-kb-emergency-recall | engage | Useful practice for a skill you’re working on with Moss.",
    "ex-rest-spot | skill | Useful practice for a skill you’re working on with Moss.",
    "ex-lead-intro | everyday | An easy activity that fits naturally into home life with Moss."
   ],
@@ -488,7 +488,7 @@
  },
  "progress0|adolescent|about_10|Recall help|recent=true": {
   "items": [
-   "ex-recall-mild-distract | engage | Useful practice for a skill you’re working on with Moss.",
+   "ex-kb-emergency-recall | engage | Useful practice for a skill you’re working on with Moss.",
    "ex-rest-spot | skill | Useful practice for a skill you’re working on with Moss.",
    "ex-lead-intro | everyday | An easy activity that fits naturally into home life with Moss."
   ],
@@ -511,7 +511,7 @@
  },
  "progress0|adult|about_10|Recall help|recent=true": {
   "items": [
-   "ex-recall-mild-distract | engage | Useful practice for a skill you’re working on with Moss.",
+   "ex-kb-emergency-recall | engage | Useful practice for a skill you’re working on with Moss.",
    "ex-rest-spot | skill | Useful practice for a skill you’re working on with Moss.",
    "ex-lead-intro | everyday | An easy activity that fits naturally into home life with Moss."
   ],
@@ -534,7 +534,7 @@
  },
  "progress0|senior|about_10|Recall help|recent=true": {
   "items": [
-   "ex-recall-mild-distract | engage | Useful practice for a skill you’re working on with Moss.",
+   "ex-kb-emergency-recall | engage | Useful practice for a skill you’re working on with Moss.",
    "ex-rest-spot | skill | Useful practice for a skill you’re working on with Moss.",
    "ex-lead-intro | everyday | An easy activity that fits naturally into home life with Moss."
   ],
@@ -672,7 +672,7 @@
  },
  "progress2|young_puppy|about_10|Recall help|recent=true": {
   "items": [
-   "ex-recall-mild-distract | engage | You’ve had some good practice with this skill, so we’re trying a tiny step forward.",
+   "ex-kb-emergency-recall | engage | A short, friendly start to today’s session.",
    "ex-handling-touch | skill | We’re keeping this one steady so Moss can build confidence.",
    "ex-rest-spot | everyday | An easy activity that fits naturally into home life with Moss."
   ],
@@ -695,7 +695,7 @@
  },
  "progress2|older_puppy|about_10|Recall help|recent=true": {
   "items": [
-   "ex-recall-mild-distract | engage | You’ve had some good practice with this skill, so we’re trying a tiny step forward.",
+   "ex-kb-emergency-recall | engage | A short, friendly start to today’s session.",
    "ex-calm-home | skill | Useful practice for a skill you’re working on with Moss.",
    "ex-handling-touch | everyday | An easy activity that fits naturally into home life with Moss."
   ],
@@ -718,7 +718,7 @@
  },
  "progress2|adolescent|about_10|Recall help|recent=true": {
   "items": [
-   "ex-recall-mild-distract | engage | You’ve had some good practice with this skill, so we’re trying a tiny step forward.",
+   "ex-kb-emergency-recall | engage | A short, friendly start to today’s session.",
    "ex-calm-home | skill | Useful practice for a skill you’re working on with Moss.",
    "ex-handling-touch | everyday | An easy activity that fits naturally into home life with Moss."
   ],
@@ -741,7 +741,7 @@
  },
  "progress2|adult|about_10|Recall help|recent=true": {
   "items": [
-   "ex-recall-mild-distract | engage | You’ve had some good practice with this skill, so we’re trying a tiny step forward.",
+   "ex-kb-emergency-recall | engage | A short, friendly start to today’s session.",
    "ex-calm-home | skill | Useful practice for a skill you’re working on with Moss.",
    "ex-handling-touch | everyday | An easy activity that fits naturally into home life with Moss."
   ],
@@ -764,7 +764,7 @@
  },
  "progress2|senior|about_10|Recall help|recent=true": {
   "items": [
-   "ex-recall-mild-distract | engage | You’ve had some good practice with this skill, so we’re trying a tiny step forward.",
+   "ex-kb-emergency-recall | engage | A short, friendly start to today’s session.",
    "ex-calm-home | skill | Useful practice for a skill you’re working on with Moss.",
    "ex-handling-touch | everyday | An easy activity that fits naturally into home life with Moss."
   ],
@@ -788,8 +788,8 @@
  "progress3|young_puppy|about_10|Recall help|recent=true": {
   "items": [
    "ex-mat-settle | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-handling-touch | skill | A practical next step for Moss today.",
-   "ex-lead-intro | everyday | An easy activity that fits naturally into home life with Moss."
+   "ex-kb-rspca-leave | skill | Useful practice for a skill you’re working on with Moss.",
+   "ex-handling-touch | everyday | An easy activity that fits naturally into home life with Moss."
   ],
   "meta": {
    "shortPlan": false,
@@ -811,8 +811,8 @@
  "progress3|older_puppy|about_10|Recall help|recent=true": {
   "items": [
    "ex-mat-settle | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-handling-touch | skill | A practical next step for Moss today.",
-   "ex-lead-intro | everyday | An easy activity that fits naturally into home life with Moss."
+   "ex-kb-rspca-leave | skill | Useful practice for a skill you’re working on with Moss.",
+   "ex-handling-touch | everyday | An easy activity that fits naturally into home life with Moss."
   ],
   "meta": {
    "shortPlan": false,
@@ -834,8 +834,8 @@
  "progress3|adolescent|about_10|Recall help|recent=true": {
   "items": [
    "ex-mat-settle | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-handling-touch | skill | A practical next step for Moss today.",
-   "ex-lead-intro | everyday | An easy activity that fits naturally into home life with Moss."
+   "ex-kb-rspca-leave | skill | Useful practice for a skill you’re working on with Moss.",
+   "ex-handling-touch | everyday | An easy activity that fits naturally into home life with Moss."
   ],
   "meta": {
    "shortPlan": false,
@@ -857,8 +857,8 @@
  "progress3|adult|about_10|Recall help|recent=true": {
   "items": [
    "ex-mat-settle | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-handling-touch | skill | A practical next step for Moss today.",
-   "ex-lead-intro | everyday | An easy activity that fits naturally into home life with Moss."
+   "ex-kb-rspca-leave | skill | Useful practice for a skill you’re working on with Moss.",
+   "ex-handling-touch | everyday | An easy activity that fits naturally into home life with Moss."
   ],
   "meta": {
    "shortPlan": false,
@@ -880,8 +880,8 @@
  "progress3|senior|about_10|Recall help|recent=true": {
   "items": [
    "ex-mat-settle | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-handling-touch | skill | A practical next step for Moss today.",
-   "ex-lead-intro | everyday | An easy activity that fits naturally into home life with Moss."
+   "ex-kb-rspca-leave | skill | Useful practice for a skill you’re working on with Moss.",
+   "ex-handling-touch | everyday | An easy activity that fits naturally into home life with Moss."
   ],
   "meta": {
    "shortPlan": false,
@@ -1019,11 +1019,11 @@
   "items": [
    "ex-lead-intro | engage | Useful practice for a skill you’re working on with Moss.",
    "ex-puppy-sounds | skill | Useful practice for a skill you’re working on with Moss.",
-   "ex-handling-touch | everyday | An easy activity that fits naturally into home life with Moss."
+   "ex-kb-emergency-recall | everyday | An easy activity that fits naturally into home life with Moss."
   ],
   "meta": {
    "shortPlan": false,
-   "totalMinutes": 9,
+   "totalMinutes": 10,
    "reason": "adaptive"
   }
  },
@@ -1042,11 +1042,11 @@
   "items": [
    "ex-lead-intro | engage | Useful practice for a skill you’re working on with Moss.",
    "ex-puppy-sounds | skill | Useful practice for a skill you’re working on with Moss.",
-   "ex-mat-settle | everyday | Let’s make this easier today and build up gradually with Moss."
+   "ex-kb-emergency-recall | everyday | An easy activity that fits naturally into home life with Moss."
   ],
   "meta": {
    "shortPlan": false,
-   "totalMinutes": 9,
+   "totalMinutes": 10,
    "reason": "adaptive"
   }
  },
@@ -1064,12 +1064,12 @@
  "progress5|adolescent|about_10|Recall help|recent=true": {
   "items": [
    "ex-lead-intro | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-mat-settle | skill | Let’s make this easier today and build up gradually with Moss.",
-   "ex-handling-touch | everyday | An easy activity that fits naturally into home life with Moss."
+   "ex-kb-emergency-recall | skill | Useful practice for a skill you’re working on with Moss.",
+   "ex-mat-settle | everyday | Let’s make this easier today and build up gradually with Moss."
   ],
   "meta": {
    "shortPlan": false,
-   "totalMinutes": 9,
+   "totalMinutes": 10,
    "reason": "adaptive"
   }
  },
@@ -1087,12 +1087,12 @@
  "progress5|adult|about_10|Recall help|recent=true": {
   "items": [
    "ex-lead-intro | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-mat-settle | skill | Let’s make this easier today and build up gradually with Moss.",
-   "ex-handling-touch | everyday | An easy activity that fits naturally into home life with Moss."
+   "ex-kb-emergency-recall | skill | Useful practice for a skill you’re working on with Moss.",
+   "ex-mat-settle | everyday | Let’s make this easier today and build up gradually with Moss."
   ],
   "meta": {
    "shortPlan": false,
-   "totalMinutes": 9,
+   "totalMinutes": 10,
    "reason": "adaptive"
   }
  },
@@ -1110,12 +1110,12 @@
  "progress5|senior|about_10|Recall help|recent=true": {
   "items": [
    "ex-lead-intro | engage | Useful practice for a skill you’re working on with Moss.",
-   "ex-mat-settle | skill | Let’s make this easier today and build up gradually with Moss.",
-   "ex-handling-touch | everyday | An easy activity that fits naturally into home life with Moss."
+   "ex-kb-emergency-recall | skill | Useful practice for a skill you’re working on with Moss.",
+   "ex-mat-settle | everyday | Let’s make this easier today and build up gradually with Moss."
   ],
   "meta": {
    "shortPlan": false,
-   "totalMinutes": 9,
+   "totalMinutes": 10,
    "reason": "adaptive"
   }
  }

@@ -11,7 +11,7 @@ export type KbGuide = {
   advisory: boolean;
   advisoryMessage: string | null;
   protocolId: string;
-  kind: "management" | "education";
+  kind?: "management" | "education";
   ownerBodyMarkdown: string;
   provenance: {
     protocolId: string;
@@ -40,28 +40,61 @@ export function getKbImportMeta() {
   };
 }
 
+const educationLessonIds = new Set(
+  ((domainBundle.educationOnly ?? []) as Array<{ lessonId: string }>).map(
+    (entry) => entry.lessonId,
+  ),
+);
+
+export function getGuideKind(guide: KbGuide): "management" | "education" {
+  if (guide.kind) return guide.kind;
+  return educationLessonIds.has(guide.lessonId) ? "education" : "management";
+}
+
 export function getAllGuides(): KbGuide[] {
   return guidesBundle.guides as KbGuide[];
 }
 
 export function getManagementGuides(): KbGuide[] {
-  return getAllGuides().filter((g) => g.kind === "management");
+  return getAllGuides().filter((g) => getGuideKind(g) === "management");
 }
 
 export function getEducationModules(): KbGuide[] {
-  return getAllGuides().filter((g) => g.kind === "education");
+  return getAllGuides().filter((g) => getGuideKind(g) === "education");
 }
 
 export function getGuideByLessonId(lessonId: string): KbGuide | undefined {
   return getAllGuides().find((g) => g.lessonId === lessonId);
 }
 
+type ReferralsRecord = Record<
+  string,
+  {
+    title: string;
+    body: string;
+    url?: string;
+    rationaleClaimIds: string[];
+  }
+>;
+
 export function getReferrals(): KbReferral[] {
-  return referralsBundle.referrals as KbReferral[];
+  const raw = referralsBundle.referrals as ReferralsRecord;
+  return Object.entries(raw).map(([id, ref]) => ({
+    id,
+    title: ref.title,
+    body: ref.body,
+    url: ref.url ?? "",
+    rationaleClaimIds: ref.rationaleClaimIds,
+  }));
 }
 
 export function getEthicsDisclaimer(): string {
-  return referralsBundle.ethicsDisclaimer as string;
+  const fromBundle = referralsBundle as { ethicsDisclaimer?: string };
+  if (fromBundle.ethicsDisclaimer) return fromBundle.ethicsDisclaimer;
+  return (
+    "Good Dog offers general reward-based training education. It is not veterinary care, " +
+    "clinical behaviour treatment, or a substitute for hands-on professional assessment."
+  );
 }
 
 export function getAskPatternsBundle() {
@@ -85,14 +118,15 @@ export function findGuidesForQuestion(question: string): KbGuide[] {
   return scored.map((r) => r.guide);
 }
 
+const HELP_ARTICLE_GUIDE_IDS: Record<string, string[]> = {
+  "help-aggression": ["lesson-reactive-management"],
+  "help-worried": ["lesson-read-your-dog-stress"],
+  "help-pain": ["lesson-read-your-dog-stress", "lesson-vet-handling-prep"],
+};
+
 export function findGuidesForHelpArticle(helpArticleId: string): KbGuide[] {
-  const crosswalk = askPatternsBundle.ownerQuestionCrosswalk as Array<{
-    helpArticleId: string;
-    guideLessonIds: string[];
-  }>;
-  const entry = crosswalk.find((c) => c.helpArticleId === helpArticleId);
-  if (!entry) return [];
-  return entry.guideLessonIds
+  const lessonIds = HELP_ARTICLE_GUIDE_IDS[helpArticleId] ?? [];
+  return lessonIds
     .map((id) => getGuideByLessonId(id))
     .filter((g): g is KbGuide => Boolean(g));
 }

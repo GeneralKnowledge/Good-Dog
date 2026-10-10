@@ -48,7 +48,23 @@ npm run test:e2e     # Playwright main journey
 npm run lint
 npm run typecheck
 npm run build
+npm run icons:generate  # re-render app icons from scripts/assets/app-icon.svg
 ```
+
+## Install on your phone
+
+Good Dog can be added to the Home Screen and opens full-screen like an app. It is **not** a full PWA: there is no service worker, so no offline mode, push notifications or cached pages. You need a connection to use it.
+
+- **iPhone (Safari):** Share, then Add to Home Screen.
+- **Android (Chrome):** menu, then Install app (or Add to Home screen).
+
+Notes:
+
+- The site must be served over **HTTPS** (localhost is fine for development). Plain HTTP will give a normal bookmark instead of an app.
+- To pick up a changed icon or name, remove the shortcut and add it again. Phones cache these when the shortcut is created.
+- On iPhone the Home Screen app keeps its own cookies, separate from Safari, so you sign in again the first time you open it. Sessions last 30 days from sign-in.
+- Branding (name, colours) lives in `src/lib/app-meta.ts`; the manifest is `src/app/manifest.ts`.
+- Each main page has a `loading.tsx` skeleton so taps respond instantly while the page loads. Prefetching only runs in production builds.
 
 ## Product map
 

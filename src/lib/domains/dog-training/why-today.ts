@@ -1,15 +1,14 @@
-import type { PlanItemRole, SkillState } from "@/lib/types";
+import type { WhyTodayInput } from "@/lib/coaching";
 
-export function buildWhyToday(input: {
-  dogName: string;
-  role: PlanItemRole;
-  skillState?: SkillState;
-  preferredEasier?: boolean;
-  preferredHarder?: boolean;
-  isStarter?: boolean;
-}): string {
-  const { dogName, role, preferredEasier, preferredHarder, isStarter, skillState } =
-    input;
+export function explainPlanItem(input: WhyTodayInput): string {
+  const {
+    subjectName: dogName,
+    role,
+    preferredEasier,
+    preferredHarder,
+    isStarter,
+    skillState,
+  } = input;
 
   if (preferredEasier) {
     return `Let’s make this easier today and build up gradually with ${dogName}.`;

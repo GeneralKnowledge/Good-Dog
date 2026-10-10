@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState, useTransition } from "react";
-import type { HelpArticle } from "@/lib/content/help";
-import { searchHelp } from "@/lib/content/help";
+import type { HelpArticle } from "@/lib/domains/dog-training/content/help";
+import { searchHelp } from "@/lib/domains/dog-training/content/help";
 import { askOptionalAiAction } from "@/lib/actions/ask";
 
 export function AskSearch({

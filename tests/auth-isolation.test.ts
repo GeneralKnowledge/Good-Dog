@@ -8,7 +8,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { nanoid } from "nanoid";
 import { ensureSchema } from "@/lib/db/ensure-schema";
 import * as schema from "@/lib/db/schema";
-import { EXERCISE_LIBRARY } from "@/lib/content/exercises";
+import { EXERCISE_LIBRARY } from "@/lib/domains/dog-training";
 
 describe("data isolation and persistence invariants", () => {
   let dbPath: string;

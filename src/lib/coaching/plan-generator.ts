@@ -1,41 +1,36 @@
 import { nanoid } from "nanoid";
-import {
-  DEFAULT_PROGRESSION_CONFIG,
-  type AvailableTime,
-  type ExerciseContent,
-  type LifeStage,
-  type PlanItem,
-  type PlanItemRole,
-  type ProgressionConfig,
-  type SkillState,
-} from "@/lib/types";
+import type { CoachingPolicy } from "./policy";
 import {
   shouldPreferEasierVariation,
   shouldPreferHarderVariation,
   type ProgressSnapshot,
 } from "./progression";
-import { buildWhyToday } from "./why-today";
-
-export interface DogPlanInput {
-  id: string;
-  name: string;
-  lifeStage: LifeStage;
-  availableTime: AvailableTime;
-  primaryReason: string;
-  trainingExperience: "new" | "some";
-}
+import {
+  DEFAULT_PROGRESSION_CONFIG,
+  type CoachingExercise,
+  type CoachingSubject,
+  type PlanItem,
+  type PlanItemRole,
+  type ProgressionConfig,
+  type SessionOutcome,
+  type SkillState,
+} from "./types";
 
 export interface RecentSessionSummary {
   exerciseId: string;
   learningObjectiveId: string;
   completedAt: number;
-  outcome: "easy" | "getting_there" | "too_difficult";
+  outcome: SessionOutcome;
   welfareConcern: boolean;
 }
 
-export interface GeneratePlanInput {
-  dog: DogPlanInput;
-  exercises: ExerciseContent[];
+export interface GeneratePlanInput<
+  E extends CoachingExercise,
+  S extends CoachingSubject,
+> {
+  subject: S;
+  exercises: E[];
+  policy: CoachingPolicy<E, S>;
   progressByObjective: Record<string, ProgressSnapshot>;
   recentSessions: RecentSessionSummary[];
   shortPlan?: boolean;
@@ -52,33 +47,12 @@ export interface GeneratedPlan {
   };
 }
 
-function maxMinutes(
-  availableTime: AvailableTime,
-  shortPlan: boolean,
-  config: ProgressionConfig,
-): number {
-  if (shortPlan) return 4;
-  switch (availableTime) {
-    case "few_minutes":
-      return config.maxPlanMinutesFew;
-    case "about_10":
-      return config.maxPlanMinutesAbout10;
-    case "more":
-      return config.maxPlanMinutesMore;
-  }
-}
+const DAY_MS = 24 * 60 * 60 * 1000;
 
-function isLifeStageSuitable(
-  exercise: ExerciseContent,
-  lifeStage: LifeStage,
-): boolean {
-  return exercise.lifeStages.includes(lifeStage);
-}
-
-function prerequisitesMet(
-  exercise: ExerciseContent,
+function prerequisitesMet<E extends CoachingExercise>(
+  exercise: E,
   progressByObjective: Record<string, ProgressSnapshot>,
-  exercisesById: Map<string, ExerciseContent>,
+  exercisesById: Map<string, E>,
 ): boolean {
   return exercise.prerequisiteIds.every((preId) => {
     const pre = exercisesById.get(preId);
@@ -100,17 +74,17 @@ function recentlyPractised(
   now: number,
   avoidWithinDays: number,
 ): boolean {
-  const windowMs = avoidWithinDays * 24 * 60 * 60 * 1000;
+  const windowMs = avoidWithinDays * DAY_MS;
   return recentSessions.some(
     (s) => s.exerciseId === exerciseId && now - s.completedAt < windowMs,
   );
 }
 
-function resolveVariation(
-  exercise: ExerciseContent,
+function resolveVariation<E extends CoachingExercise>(
+  exercise: E,
   progress: ProgressSnapshot | undefined,
-  exercisesById: Map<string, ExerciseContent>,
-): { exercise: ExerciseContent; preferredEasier: boolean; preferredHarder: boolean } {
+  exercisesById: Map<string, E>,
+): { exercise: E; preferredEasier: boolean; preferredHarder: boolean } {
   if (!progress) {
     return { exercise, preferredEasier: false, preferredHarder: false };
   }
@@ -132,9 +106,10 @@ function resolveVariation(
   return { exercise, preferredEasier: false, preferredHarder: false };
 }
 
-function scoreExercise(
-  exercise: ExerciseContent,
-  dog: DogPlanInput,
+function scoreExercise<E extends CoachingExercise, S extends CoachingSubject>(
+  exercise: E,
+  subject: S,
+  policy: CoachingPolicy<E, S>,
   progress: ProgressSnapshot | undefined,
   recentSessions: RecentSessionSummary[],
   now: number,
@@ -142,16 +117,7 @@ function scoreExercise(
 ): number {
   let score = 10 - exercise.difficulty;
 
-  if (dog.trainingExperience === "new" && exercise.difficulty === 1) {
-    score += 3;
-  }
-
-  const reason = dog.primaryReason.toLowerCase();
-  if (reason.includes("recall") && exercise.category === "recall") score += 4;
-  if (reason.includes("walk") && exercise.category === "walking") score += 4;
-  if (reason.includes("settle") && exercise.category === "calm") score += 4;
-  if (reason.includes("manners") && exercise.category === "manners") score += 3;
-  if (reason.includes("puppy") && exercise.category === "puppy") score += 4;
+  score += policy.affinityScore(exercise, subject);
 
   if (progress?.state === "needs_easier") score += 2;
   if (progress?.state === "practising") score += 3;
@@ -188,38 +154,21 @@ function pickRole(index: number, shortPlan: boolean): PlanItemRole {
   return "everyday";
 }
 
-function starterPool(exercises: ExerciseContent[], lifeStage: LifeStage) {
-  const preferredIds = [
-    "ex-engagement-easy",
-    "ex-name-response",
-    "ex-reward-marker",
-    "ex-mat-settle",
-    "ex-rest-spot",
-    "ex-handling-touch",
-    "ex-lead-intro",
-  ];
-
-  if (lifeStage === "young_puppy" || lifeStage === "older_puppy") {
-    preferredIds.push("ex-puppy-sounds", "ex-puppy-surfaces");
-  }
-
-  return exercises.filter(
-    (e) =>
-      preferredIds.includes(e.id) &&
-      e.difficulty <= 1 &&
-      isLifeStageSuitable(e, lifeStage),
-  );
-}
-
-export function generateDailyPlan(input: GeneratePlanInput): GeneratedPlan {
+export function generateDailyPlan<
+  E extends CoachingExercise,
+  S extends CoachingSubject,
+>(input: GeneratePlanInput<E, S>): GeneratedPlan {
+  const { subject, policy } = input;
   const config = input.config ?? DEFAULT_PROGRESSION_CONFIG;
   const now = input.now ?? Date.now();
   const shortPlan = Boolean(input.shortPlan);
-  const budget = maxMinutes(input.dog.availableTime, shortPlan, config);
+  const budget = shortPlan
+    ? { maxMinutes: config.shortPlanMinutes, itemCount: 1 }
+    : policy.dailyBudget(subject);
   const exercisesById = new Map(input.exercises.map((e) => [e.id, e]));
 
   const eligible = input.exercises.filter((exercise) => {
-    if (!isLifeStageSuitable(exercise, input.dog.lifeStage)) return false;
+    if (!policy.isEligible(exercise, subject)) return false;
     if (!prerequisitesMet(exercise, input.progressByObjective, exercisesById)) {
       return false;
     }
@@ -232,7 +181,7 @@ export function generateDailyPlan(input: GeneratePlanInput): GeneratedPlan {
 
   let candidates = eligible;
   if (!hasAnyProgress) {
-    const starters = starterPool(eligible, input.dog.lifeStage);
+    const starters = policy.starterExercises(eligible, subject);
     if (starters.length > 0) candidates = starters;
   }
 
@@ -248,7 +197,8 @@ export function generateDailyPlan(input: GeneratePlanInput): GeneratedPlan {
         progress,
         score: scoreExercise(
           resolved.exercise,
-          input.dog,
+          subject,
+          policy,
           progress,
           input.recentSessions,
           now,
@@ -258,15 +208,17 @@ export function generateDailyPlan(input: GeneratePlanInput): GeneratedPlan {
     })
     .sort((a, b) => b.score - a.score);
 
-  const targetCount = shortPlan ? 1 : input.dog.availableTime === "few_minutes" ? 2 : 3;
   const selected: typeof scored = [];
   const usedObjectives = new Set<string>();
   const usedCategories = new Set<string>();
   let minutes = 0;
 
   for (const candidate of scored) {
-    if (selected.length >= targetCount) break;
-    if (minutes + candidate.exercise.estimatedMinutes > budget && selected.length > 0) {
+    if (selected.length >= budget.itemCount) break;
+    if (
+      minutes + candidate.exercise.estimatedMinutes > budget.maxMinutes &&
+      selected.length > 0
+    ) {
       continue;
     }
     if (usedObjectives.has(candidate.exercise.learningObjectiveId) && !shortPlan) {
@@ -305,8 +257,8 @@ export function generateDailyPlan(input: GeneratePlanInput): GeneratedPlan {
       exerciseId: item.exercise.id,
       exerciseVersionId: "", // filled by persistence layer
       role,
-      whyToday: buildWhyToday({
-        dogName: input.dog.name,
+      whyToday: policy.explain({
+        subjectName: subject.name,
         role,
         skillState: item.progress?.state as SkillState | undefined,
         preferredEasier: item.preferredEasier,

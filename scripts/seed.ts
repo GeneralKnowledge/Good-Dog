@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import fs from "node:fs";
 import path from "node:path";
-import { EXERCISE_LIBRARY } from "../src/lib/content/exercises";
+import { EXERCISE_LIBRARY } from "../src/lib/domains/dog-training/content/exercises";
 import { ensureSchema } from "../src/lib/db/ensure-schema";
 import * as schema from "../src/lib/db/schema";
 

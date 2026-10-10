@@ -1,5 +1,6 @@
 import Link from "next/link";
-import type { ExerciseContent, PlanItem } from "@/lib/types";
+import type { PlanItem } from "@/lib/coaching";
+import type { ExerciseContent } from "@/lib/domains/dog-training/types";
 
 export function PlanCard({
   item,

@@ -1,6 +1,6 @@
 "use server";
 
-import { HELP_ARTICLES, searchHelp } from "@/lib/content/help";
+import { HELP_ARTICLES, searchHelp } from "@/lib/domains/dog-training";
 import { requireUser } from "@/lib/auth/session";
 
 export type AskResult =

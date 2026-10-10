@@ -5,9 +5,9 @@ import { describe, expect, it } from "vitest";
 import { ensureSchema } from "@/lib/db/ensure-schema";
 import * as schema from "@/lib/db/schema";
 
-const tables = Object.values(schema).filter((value): value is SQLiteTable =>
+const tables = Object.values(schema).filter((value) =>
   is(value, SQLiteTable),
-);
+) as SQLiteTable[];
 
 function bootstrap() {
   const sqlite = new Database(":memory:");

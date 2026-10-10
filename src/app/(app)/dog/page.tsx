@@ -2,6 +2,7 @@ import { desc, eq } from "drizzle-orm";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { AppHeader } from "@/components/AppHeader";
+import { ClaimGuestForm } from "@/components/ClaimGuestForm";
 import { DogProfileEditor } from "@/components/DogProfileEditor";
 import { getExerciseById } from "@/lib/content/exercises";
 import { getObjectiveLabel } from "@/lib/content/learning-objectives";
@@ -154,6 +155,17 @@ export default async function DogPage() {
           </Link>
         </section>
 
+        {user.isGuest ? (
+          <section className="panel p-5">
+            <h2 className="font-display text-xl text-brand-deep">Keep your progress</h2>
+            <p className="mt-2 text-sm leading-relaxed text-muted">
+              You’re using a guest session on this device. Add an email and password so you can sign
+              in again later without losing {dog.name}’s plan and history.
+            </p>
+            <ClaimGuestForm />
+          </section>
+        ) : null}
+
         <section>
           <DogProfileEditor dog={dog} />
         </section>
@@ -166,7 +178,7 @@ export default async function DogPage() {
           </form>
           <form action={deleteAccountAction}>
             <button type="submit" className="btn btn-ghost w-full text-danger">
-              Delete account and training data
+              {user.isGuest ? "Delete guest data" : "Delete account and training data"}
             </button>
           </form>
           <Link href="/privacy" className="text-center text-sm text-muted underline">

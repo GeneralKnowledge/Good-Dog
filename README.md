@@ -25,6 +25,8 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+You can create an account, sign in, or **continue as a guest**. Guests get a full session on this device; add an email later from **My dog** to keep progress. The app also supports **Add to Home Screen** (web app manifest + install prompt) for a phone shortcut.
+
 ### Environment
 
 | Variable | Purpose |
@@ -97,7 +99,7 @@ An internal, evidence-based audit against *publicly documented* IMDT ethics and 
 | [docs/progression-audit.md](./docs/progression-audit.md) | Scenario traces through the real planner |
 | [docs/improvement-roadmap.md](./docs/improvement-roadmap.md) | P0–P3 implementation plan |
 | [docs/content-review-checklist.md](./docs/content-review-checklist.md) | Pre-publication checklist for new/revised exercises |
-| [docs/terminology-teaching-audit.md](./docs/terminology-teaching-audit.md) | Baseline audit before the glossary teaching layer |
+| [docs/terminology-teaching-audit.md](./docs/terminology-teaching-audit.md) | Terminology teaching glossary audit |
 | [docs/glossary-authoring.md](./docs/glossary-authoring.md) | How to add/review glossary terms |
 
 ## Content provenance

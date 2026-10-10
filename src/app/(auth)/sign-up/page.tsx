@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { signUpAction } from "@/lib/actions/auth";
 import { AuthForm } from "@/components/AuthForm";
+import { GuestContinueButton } from "@/components/GuestContinueButton";
 
 export default function SignUpPage() {
   return (
@@ -16,6 +17,9 @@ export default function SignUpPage() {
       </p>
       <div className="panel mt-6 p-5 fade-up fade-up-delay-3">
         <AuthForm action={signUpAction} submitLabel="Create account" mode="sign-up" />
+      </div>
+      <div className="mt-4">
+        <GuestContinueButton className="btn btn-secondary w-full" label="Continue as guest instead" />
       </div>
       <p className="mt-5 text-center text-sm text-muted">
         Already have an account?{" "}

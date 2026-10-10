@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { signInAction } from "@/lib/actions/auth";
 import { AuthForm } from "@/components/AuthForm";
+import { GuestContinueButton } from "@/components/GuestContinueButton";
 
 export default function SignInPage() {
   return (
@@ -16,6 +17,9 @@ export default function SignInPage() {
       </p>
       <div className="panel mt-6 p-5 fade-up fade-up-delay-3">
         <AuthForm action={signInAction} submitLabel="Sign in" mode="sign-in" />
+      </div>
+      <div className="mt-4">
+        <GuestContinueButton className="btn btn-secondary w-full" />
       </div>
       <p className="mt-5 text-center text-sm text-muted">
         New here?{" "}

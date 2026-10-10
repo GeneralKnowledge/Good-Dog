@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
+import { GuestContinueButton } from "@/components/GuestContinueButton";
 import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { dogs } from "@/lib/db/schema";
@@ -37,7 +38,12 @@ export default async function HomePage() {
           <Link href="/sign-in" className="btn btn-secondary w-full">
             Sign in
           </Link>
-          <p className="px-1 pt-2 text-center text-xs leading-relaxed text-muted">
+          <GuestContinueButton />
+          <p className="px-1 pt-1 text-center text-xs leading-relaxed text-muted">
+            Guests can try the full app. Create an account later from My dog to keep progress across
+            devices.
+          </p>
+          <p className="px-1 pt-1 text-center text-xs leading-relaxed text-muted">
             General reward-based training guidance for everyday life — not veterinary care or
             individual behaviour assessment.
           </p>

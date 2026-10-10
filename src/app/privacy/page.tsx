@@ -9,8 +9,14 @@ export default function PrivacyPage() {
       <h1 className="mt-6 font-display text-3xl text-chrome">Privacy notice</h1>
       <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted">
         <p>
-          Good Dog stores your account email, dog profile details you provide, daily plans, and
-          training session feedback so the app can suggest suitable practice and show your history.
+          Good Dog stores your account email (when you create an account), dog profile details you
+          provide, daily plans, and training session feedback so the app can suggest suitable
+          practice and show your history.
+        </p>
+        <p>
+          Guest sessions create a temporary account tied to this device’s browser cookie. Guest
+          progress is private like any other account. Add an email from My dog if you want to keep
+          that history across devices.
         </p>
         <p>
           We do not sell personal data. Training notes are private to your account. Server-side

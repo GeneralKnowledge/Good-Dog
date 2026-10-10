@@ -58,27 +58,23 @@ export default async function DogPage() {
 
       <div className="sheet flex flex-1 flex-col gap-6">
         <section className="profile-hero fade-up">
-          <h1 className="m-0 font-display text-4xl leading-none text-[#f7f4eb]">
-            {dog.name}
-          </h1>
-          <p className="mt-2 text-sm font-semibold text-accent">
+          <h1 className="m-0">{dog.name}</h1>
+          <p className="profile-hero__meta mt-2 text-sm font-semibold text-accent">
             {LIFE_STAGE_LABELS[dog.lifeStage] ?? dog.lifeStage}
             {" · "}
             usually{" "}
             {TIME_LABELS[dog.availableTime]?.toLowerCase() ?? "a short session"}
           </p>
-          <p className="mt-3 leading-relaxed text-[rgba(27,48,34,0.85)]">
-            {dog.primaryReason}
-          </p>
+          <p className="profile-hero__body mt-3 leading-relaxed">{dog.primaryReason}</p>
           {dog.preferredRewards ? (
-            <p className="mt-2 text-sm text-[rgba(27,48,34,0.7)]">
+            <p className="profile-hero__detail mt-2 text-sm">
               Preferred rewards: {dog.preferredRewards}
             </p>
           ) : null}
         </section>
 
         <section>
-          <h2 className="font-display text-xl text-brand-deep">Skills in progress</h2>
+          <h2 className="heading-subsection">Skills in progress</h2>
           {progress.length === 0 ? (
             <p className="mt-2 leading-relaxed text-muted">
               No practised skills yet. Complete an activity from Today and we’ll summarise what
@@ -103,7 +99,7 @@ export default async function DogPage() {
         <hr className="hairline" />
 
         <section>
-          <h2 className="font-display text-xl text-brand-deep">Recent practice</h2>
+          <h2 className="heading-subsection">Recent practice</h2>
           {history.length === 0 ? (
             <p className="mt-2 text-muted">
               Nothing recorded yet — history appears after the first session.
@@ -149,7 +145,7 @@ export default async function DogPage() {
         <section>
           <Link href="/shop" className="plan-row block text-brand-deep">
             <div className="plan-row__body">
-              <p className="font-display text-lg">Shop kit ideas</p>
+              <p className="heading-subsection">Shop kit ideas</p>
               <p className="mt-1 text-sm text-muted">
                 Session treats and walk gear — optional, never required for the plan.
               </p>
@@ -163,7 +159,7 @@ export default async function DogPage() {
 
         {user.isGuest ? (
           <section className="card p-5">
-            <h2 className="font-display text-xl text-brand-deep">Keep your progress</h2>
+            <h2 className="heading-subsection">Keep your progress</h2>
             <p className="mt-2 text-sm leading-relaxed text-muted">
               You’re using a guest session on this device. Add an email and password so you can
               sign in again later without losing {dog.name}’s plan and history.

@@ -16,11 +16,11 @@ export default async function HomePage() {
     <main className="landing-shell flex min-h-dvh flex-1 flex-col">
       <InstallSplash mode="landing" />
       <div className="flex flex-1 flex-col px-5 pb-8 pt-10">
-        <p className="font-display text-5xl tracking-tight text-chrome fade-up">Good Dog</p>
-        <h1 className="mt-5 max-w-[16ch] font-display text-[1.85rem] leading-[1.15] text-chrome fade-up fade-up-delay-1">
+        <p className="text-display-brand fade-up">Good Dog</p>
+        <h1 className="heading-marketing mt-5 max-w-[16ch] fade-up fade-up-delay-1">
           A few quiet minutes together, every day.
         </h1>
-        <p className="mt-4 max-w-[32ch] text-base leading-relaxed text-[rgba(27,48,34,0.78)] fade-up fade-up-delay-2">
+        <p className="text-marketing-lead mt-4 max-w-[32ch] text-base leading-relaxed fade-up fade-up-delay-2">
           Open the app. Find out what to practise today. Follow simple steps.
         </p>
 

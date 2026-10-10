@@ -92,7 +92,7 @@ export default async function TodayPage({
 
         {planError ? (
           <section className="card p-5 fade-up" role="alert">
-            <h2 className="font-display text-xl text-brand-deep">Plan unavailable</h2>
+            <h2 className="heading-subsection">Plan unavailable</h2>
             <p className="mt-2 text-sm leading-relaxed text-muted">{planError}</p>
             <a href="/today" className="btn btn-primary mt-4 w-full">
               Try again
@@ -120,7 +120,7 @@ export default async function TodayPage({
 
         {allDone ? (
           <section className="panel p-5 fade-up">
-            <h2 className="font-display text-2xl text-brand-deep">That’s enough for today</h2>
+            <h2 className="heading-section">That’s enough for today</h2>
             <p className="mt-2 leading-relaxed text-muted">
               You and {subject.name} put in a little practice. That’s how skills grow.
             </p>

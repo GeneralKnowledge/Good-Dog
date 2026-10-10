@@ -26,9 +26,7 @@ export default async function ShopPage() {
 
       <div className="sheet flex flex-1 flex-col">
         <section className="fade-up fade-up-delay-1">
-          <h2 className="font-display text-xl text-brand-deep">
-            Own brand · Session kit
-          </h2>
+          <h2 className="heading-subsection">Own brand · Session kit</h2>
 
           <ul className="mt-4 flex flex-col">
             {ownBrand.map((item, index) => (
@@ -52,15 +50,13 @@ export default async function ShopPage() {
                 </Link>
                 <div className="min-w-0 flex-1">
                   <Link href={`/shop/${item.id}`} className="block">
-                    <h3 className="font-display text-lg leading-snug text-brand-deep">
-                      {item.title}
-                    </h3>
+                    <h3 className="heading-subsection leading-snug">{item.title}</h3>
                     <p className="mt-0.5 text-sm text-muted">{item.packLabel}</p>
                     <p className="mt-1 text-sm leading-relaxed text-muted">
                       {item.blurb}
                     </p>
                     {item.priceGbp !== undefined ? (
-                      <p className="mt-2 font-display text-xl text-accent">
+                      <p className="heading-subsection mt-2 text-accent">
                         {formatGbp(item.priceGbp)}
                       </p>
                     ) : null}
@@ -80,9 +76,7 @@ export default async function ShopPage() {
         <hr className="my-8 hairline" />
 
         <section className="pb-2 fade-up">
-          <h2 className="font-display text-xl text-brand-deep">
-            Also useful (affiliate)
-          </h2>
+          <h2 className="heading-subsection">Also useful (affiliate)</h2>
           <ul className="mt-4 flex flex-col gap-3">
             {affiliates.map((item) => (
               <li key={item.id} className="plan-row">

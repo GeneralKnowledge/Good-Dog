@@ -61,7 +61,7 @@ export function AskSearch({
 
       {glossaryMatches.length > 0 ? (
         <section aria-label="Training words">
-          <h2 className="mb-2 font-display text-xl">Training words</h2>
+          <h2 className="heading-subsection mb-2">Training words</h2>
           <ul className="flex flex-col gap-3">
             {glossaryMatches.map((term) => (
               <GlossaryMatchCard
@@ -117,7 +117,7 @@ export function AskSearch({
       </ul>
 
       <div className="card p-4">
-        <h2 className="font-display text-xl">Ask with approved guidance</h2>
+        <h2 className="heading-subsection">Ask with approved guidance</h2>
         <p className="mt-2 text-sm leading-relaxed text-muted">
           Terminology answers use Good Dog’s reviewed glossary. Optional AI (when configured) stays
           grounded on the same approved text.
@@ -188,7 +188,7 @@ function GlossaryMatchCard({
 }) {
   return (
     <li className="card p-4 fade-up">
-      <h3 className="font-display text-lg leading-snug text-brand-deep">{term.preferredTerm}</h3>
+      <h3 className="heading-subsection leading-snug">{term.preferredTerm}</h3>
       <p className="mt-2 text-sm leading-relaxed text-muted">{term.shortDefinition}</p>
       {expanded ? (
         <div className="mt-3 space-y-2 text-sm leading-relaxed text-muted">

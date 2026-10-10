@@ -1,16 +1,30 @@
 @import "tailwindcss";
 
+/*
+ * Good Dog design system
+ * 1. Calm over clever — one primary action per block; motion for orientation only.
+ * 2. Chrome vs sheet — dark chrome for wayfinding; cream sheet for reading and tasks.
+ * 3. Hierarchy — Fraunces display, Nunito UI labels, muted supporting text.
+ * 4. Surfaces — card (action), panel (info), plan-row (list), why-band (coaching), chip (filter).
+ * 5. Tokens only — extend variables here; avoid raw hex in components.
+ * 6. Touch-first — 44px+ targets, safe areas on shell and nav.
+ */
+
 :root {
-  /* Mockup chrome system */
   --chrome: #1b3022;
   --chrome-soft: #243a2d;
   --sheet: #f7f4eb;
   --sheet-deep: #efeadf;
 
+  --on-chrome: #f7f4eb;
+  --on-chrome-muted: rgba(247, 244, 235, 0.78);
+  --on-chrome-subtle: rgba(247, 244, 235, 0.62);
+
   --bg: #f3f6f2;
   --bg-elevated: #ffffff;
   --ink: #1f2a24;
   --ink-muted: #5a6b62;
+  --ink-on-marketing: rgba(27, 48, 34, 0.78);
   --line: #e0d9cc;
   --brand: #2f6f5e;
   --brand-deep: #1f4f43;
@@ -21,8 +35,14 @@
   --caution: #9a5b1f;
   --danger: #8b3a3a;
   --danger-soft: #f7eaea;
+  --emphasis: #dee5d6;
+  --hero: #b8c4b0;
   --shadow: 0 12px 36px rgba(27, 48, 34, 0.12);
   --radius: 1.35rem;
+
+  --marketing-sage-top: #e4ebe0;
+  --marketing-sage-mid: #eef3ea;
+  --marketing-sage-bottom: #e8efe4;
 }
 
 @theme inline {
@@ -38,7 +58,15 @@
   --color-danger: var(--danger);
   --color-danger-soft: var(--danger-soft);
   --color-chrome: var(--chrome);
+  --color-chrome-soft: var(--chrome-soft);
   --color-sheet: var(--sheet);
+  --color-sheet-deep: var(--sheet-deep);
+  --color-on-chrome: var(--on-chrome);
+  --color-on-chrome-muted: var(--on-chrome-muted);
+  --color-emphasis: var(--emphasis);
+  --color-hero: var(--hero);
+  --color-caution: var(--caution);
+  --color-elevated: var(--bg-elevated);
   /* next/font sets --font-nunito / --font-fraunces on <html> */
   --font-sans: var(--font-nunito), "Segoe UI", ui-sans-serif, sans-serif;
   --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
@@ -123,9 +151,50 @@ summary,
   min-height: 0;
 }
 
+.text-display-brand {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 3rem;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--chrome);
+}
+
+.heading-marketing {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.85rem;
+  line-height: 1.15;
+  color: var(--chrome);
+}
+
+.heading-page {
+  margin: 0.65rem 0 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.85rem;
+  line-height: 1.12;
+  color: var(--on-chrome);
+}
+
+.heading-section {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: var(--brand-deep);
+}
+
+.heading-subsection {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: var(--brand-deep);
+}
+
+.text-marketing-lead {
+  color: var(--ink-on-marketing);
+}
+
 .chrome-header {
   background: var(--chrome);
-  color: #f7f4eb;
+  color: var(--on-chrome);
   padding: 1.35rem 1.25rem 1.5rem;
 }
 
@@ -137,7 +206,7 @@ summary,
   font-family: var(--font-display), Georgia, serif;
   font-size: 1.15rem;
   letter-spacing: -0.02em;
-  color: #f7f4eb;
+  color: var(--on-chrome);
 }
 
 .chrome-header h1 {
@@ -145,7 +214,7 @@ summary,
   font-family: var(--font-display), Georgia, serif;
   font-size: 1.85rem;
   line-height: 1.12;
-  color: #f7f4eb;
+  color: var(--on-chrome);
 }
 
 .chrome-header .chrome-sub {
@@ -153,7 +222,7 @@ summary,
   max-width: 34ch;
   font-size: 0.95rem;
   line-height: 1.45;
-  color: rgba(247, 244, 235, 0.78);
+  color: var(--on-chrome-muted);
 }
 
 .sheet {
@@ -223,7 +292,7 @@ summary,
 }
 
 .plan-row[data-emphasis="true"] {
-  background: #dee5d6;
+  background: var(--emphasis);
   border-color: rgba(47, 111, 94, 0.14);
 }
 
@@ -254,16 +323,28 @@ summary,
 
 .profile-hero {
   border-radius: var(--radius);
-  background: #cfdacd;
+  background: var(--hero);
   padding: 1.35rem 1.25rem;
-  color: var(--chrome);
+  color: var(--ink);
 }
 
 .profile-hero h1 {
   font-family: var(--font-display), Georgia, serif;
   font-size: 2.4rem;
   line-height: 1.05;
-  color: #f7f4eb;
+  color: var(--chrome);
+}
+
+.profile-hero .profile-hero__meta {
+  color: var(--brand-deep);
+}
+
+.profile-hero .profile-hero__body {
+  color: var(--ink);
+}
+
+.profile-hero .profile-hero__detail {
+  color: var(--ink-muted);
 }
 
 .btn {
@@ -348,12 +429,31 @@ summary,
   resize: vertical;
 }
 
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink-muted);
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.chip--active {
+  border-color: transparent;
+  background: var(--brand-soft);
+  color: var(--brand-deep);
+}
+
 .nav-bar {
   position: sticky;
   bottom: 0;
   z-index: 20;
   background: var(--chrome);
-  border-top: 1px solid rgba(247, 244, 235, 0.08);
+  border-top: 1px solid color-mix(in srgb, var(--on-chrome) 8%, transparent);
   padding: 0.45rem 0.45rem calc(0.45rem + env(safe-area-inset-bottom));
 }
 
@@ -374,7 +474,7 @@ summary,
   gap: 0.15rem;
   padding: 0.45rem 0.15rem;
   border-radius: 0.9rem;
-  color: rgba(247, 244, 235, 0.62);
+  color: var(--on-chrome-subtle);
   font-size: 0.68rem;
   font-weight: 700;
   transition: background-color 160ms ease, color 160ms ease;
@@ -391,16 +491,35 @@ summary,
 }
 
 .nav-item[data-active="true"] {
-  color: #f7f4eb;
-  background: rgba(247, 244, 235, 0.12);
+  color: var(--on-chrome);
+  background: color-mix(in srgb, var(--on-chrome) 12%, transparent);
 }
 
-/* Landing (soft sage + photo plane) */
+/* Pre-app: landing (photo hero) vs softer auth/onboarding */
 .landing-shell {
   min-height: 100dvh;
   background:
     radial-gradient(ellipse at 70% 20%, rgba(196, 122, 44, 0.08), transparent 40%),
-    linear-gradient(180deg, #e4ebe0 0%, #eef3ea 45%, var(--sheet) 100%);
+    linear-gradient(
+      180deg,
+      var(--marketing-sage-top) 0%,
+      var(--marketing-sage-mid) 45%,
+      var(--sheet) 100%
+    );
+  color: var(--ink);
+}
+
+.marketing-shell,
+.auth-shell {
+  min-height: 100dvh;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(47, 111, 94, 0.14), transparent 45%),
+    linear-gradient(
+      180deg,
+      var(--marketing-sage-mid) 0%,
+      var(--sheet) 40%,
+      var(--marketing-sage-bottom) 100%
+    );
   color: var(--ink);
 }
 
@@ -413,12 +532,28 @@ summary,
   animation: heroDrift 18s ease-in-out infinite alternate;
 }
 
-.auth-shell {
+.page-skeleton {
+  display: flex;
   min-height: 100dvh;
+  flex-direction: column;
+  background: var(--chrome);
+}
+
+.page-skeleton__chrome {
+  padding: 1.35rem 1.25rem 1.5rem;
+}
+
+.page-skeleton__sheet {
+  flex: 1;
+  border-radius: 1.75rem 1.75rem 0 0;
+  background: var(--sheet);
+  padding: 1.25rem;
+}
+
+.install-splash-hero {
   background:
-    radial-gradient(ellipse at 20% 0%, rgba(47, 111, 94, 0.14), transparent 45%),
-    linear-gradient(180deg, #eef3ea 0%, var(--sheet) 40%, #e8efe4 100%);
-  color: var(--ink);
+    radial-gradient(ellipse at 30% 0%, rgba(47, 111, 94, 0.2), transparent 55%),
+    linear-gradient(180deg, var(--bg), var(--bg-elevated));
 }
 
 .fade-up {

@@ -5,11 +5,11 @@ import { GuestContinueButton } from "@/components/GuestContinueButton";
 
 export default function SignUpPage() {
   return (
-    <main className="landing-shell flex flex-1 flex-col px-5 py-8">
-      <Link href="/" className="font-display text-2xl text-chrome">
+    <main className="marketing-shell flex flex-1 flex-col px-5 py-8">
+      <Link href="/" className="heading-subsection text-chrome">
         Good Dog
       </Link>
-      <h1 className="mt-6 font-display text-3xl text-chrome">Create your account</h1>
+      <h1 className="heading-section mt-6 text-chrome">Create your account</h1>
       <p className="mt-2 text-muted">
         We’ll keep your dog’s profile and training history private to you.
       </p>

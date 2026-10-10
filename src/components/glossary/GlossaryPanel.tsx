@@ -79,7 +79,7 @@ export function GlossaryPanel({
             <p className="text-xs font-semibold uppercase tracking-wide text-brand">
               Training word
             </p>
-            <h2 id={titleId} className="font-display text-2xl leading-tight">
+            <h2 id={titleId} className="heading-section leading-tight">
               {term.preferredTerm}
             </h2>
           </div>

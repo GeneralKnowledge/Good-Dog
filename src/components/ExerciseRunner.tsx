@@ -113,7 +113,7 @@ export function ExerciseRunner({
   if (phase === "done") {
     return (
       <div className="panel mx-5 my-4 p-5 fade-up">
-        <h2 className="font-display text-2xl text-brand-deep">That’s useful feedback</h2>
+        <h2 className="heading-section">That’s useful feedback</h2>
         <p className="mt-2 text-muted leading-relaxed">
           We’ll adjust the next step for {dogName}. A short session is enough for today if you
           want to stop here.
@@ -135,7 +135,7 @@ export function ExerciseRunner({
     return (
       <div className="mx-5 my-4 flex flex-col gap-4 fade-up">
         <div className="panel p-5">
-          <h2 className="font-display text-2xl text-brand-deep">How did that go?</h2>
+          <h2 className="heading-section">How did that go?</h2>
           <p className="mt-2 text-muted">One tap is enough. Typing is optional.</p>
           <div className="mt-4 flex flex-col gap-3">
             <button
@@ -336,7 +336,7 @@ export function ExerciseRunner({
         </div>
       ) : null}
 
-      <div className="sticky bottom-4 z-10 flex flex-col gap-3 bg-gradient-to-t from-[var(--sheet)] via-[var(--sheet)] to-transparent pt-6">
+      <div className="sticky bottom-4 z-10 flex flex-col gap-3 bg-gradient-to-t from-sheet via-sheet to-transparent pt-6">
         <button type="button" className="btn btn-primary w-full" onClick={() => setPhase("feedback")}>
           Finish and tell us how it went
         </button>

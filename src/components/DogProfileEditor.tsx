@@ -9,7 +9,7 @@ export function DogProfileEditor({ dog }: { dog: Dog }) {
 
   return (
     <details className="card p-5">
-      <summary className="cursor-pointer font-display text-xl">Edit profile</summary>
+      <summary className="heading-subsection cursor-pointer">Edit profile</summary>
       <form action={formAction} className="mt-4 flex flex-col gap-4">
         <input type="hidden" name="dogId" value={dog.id} />
         <div className="field">

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Full-bleed square so it works as an iOS icon and as an Android maskable icon.
+       The paw stays inside the central safe zone (about 80% of the width). -->
+  <rect width="512" height="512" fill="#2f6f5e"/>
+  <g fill="#ffffff" transform="translate(256 262) scale(1.3) translate(-256 -243)">
+    <path d="M256 250c-46 0-92 46-92 88 0 30 22 40 46 40 16 0 30-8 46-8s30 8 46 8c24 0 46-10 46-40 0-42-46-88-92-88z"/>
+    <ellipse cx="160" cy="222" rx="26" ry="36" transform="rotate(-20 160 222)"/>
+    <ellipse cx="214" cy="160" rx="28" ry="38" transform="rotate(-8 214 160)"/>
+    <ellipse cx="298" cy="160" rx="28" ry="38" transform="rotate(8 298 160)"/>
+    <ellipse cx="352" cy="222" rx="26" ry="36" transform="rotate(20 352 222)"/>
+  </g>
+</svg>

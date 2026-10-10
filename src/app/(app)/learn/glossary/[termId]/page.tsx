@@ -70,7 +70,8 @@ export default async function GlossaryTermPage({
 
   const related = term.relatedTermIds
     .map((id) => getGlossaryTerm(id))
-    .filter(Boolean);
+    .filter(Boolean)
+    .sort((a, b) => a!.preferredTerm.localeCompare(b!.preferredTerm, "en-GB"));
   const exercises = term.relevantExerciseIds
     .map((id) => getExerciseById(id))
     .filter(Boolean);

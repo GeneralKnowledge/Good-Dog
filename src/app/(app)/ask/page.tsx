@@ -1,8 +1,11 @@
+import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { AppHeader } from "@/components/AppHeader";
 import { AskSearch } from "@/components/AskSearch";
 import { getExerciseById, HELP_ARTICLES } from "@/lib/domains/dog-training";
 import { requireUser } from "@/lib/auth/session";
+import { db } from "@/lib/db";
+import { ownerTermProgress } from "@/lib/db/schema";
 import { getDogForOwner } from "@/lib/services/dogs";
 
 export default async function AskPage() {
@@ -13,6 +16,16 @@ export default async function AskPage() {
   if (!dog) redirect("/onboarding");
 
   const aiConfigured = Boolean(process.env.OPENAI_API_KEY);
+
+  const progressRows = db
+    .select()
+    .from(ownerTermProgress)
+    .where(eq(ownerTermProgress.ownerId, user.id))
+    .all();
+  const termExposure: Record<string, "introduced" | "explored"> = {};
+  for (const row of progressRows) {
+    termExposure[row.termId] = row.state;
+  }
 
   const articles = HELP_ARTICLES.map((article) => ({
     ...article,
@@ -41,6 +54,7 @@ export default async function AskPage() {
           dogName={dog.name}
           initialArticles={articles}
           aiConfigured={aiConfigured}
+          termExposure={termExposure}
         />
         <p className="mt-6 text-xs leading-relaxed text-muted">
           Good Dog provides general training guidance, not veterinary care or individual behaviour

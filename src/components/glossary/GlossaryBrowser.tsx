@@ -1,29 +1,118 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   GLOSSARY_CATEGORIES,
   searchGlossary,
   type GlossaryCategory,
   type GlossaryTerm,
 } from "@/lib/content/glossary";
+import {
+  countTermsByExposure,
+  filterGlossaryByExposure,
+  sortGlossaryForBrowse,
+  type GlossaryBrowseSort,
+  type TermExposureFilter,
+  type TermExposureMap,
+} from "@/lib/content/glossary-browse";
 
-export function GlossaryBrowser({
-  exposure,
-}: {
-  exposure: Record<string, "introduced" | "explored">;
-}) {
+const STORAGE_KEY = "good-dog-learn-glossary";
+
+type StoredPrefs = {
+  exposureFilter: TermExposureFilter;
+  sort: GlossaryBrowseSort;
+};
+
+function loadPrefs(): StoredPrefs {
+  if (typeof window === "undefined") {
+    return { exposureFilter: "all", sort: "alpha" };
+  }
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY);
+    if (!raw) return { exposureFilter: "all", sort: "alpha" };
+    const parsed = JSON.parse(raw) as Partial<StoredPrefs>;
+    const exposureFilter = parsed.exposureFilter ?? "all";
+    const sort = parsed.sort === "newFirst" ? "newFirst" : "alpha";
+    if (!["all", "new", "introduced", "explored"].includes(exposureFilter)) {
+      return { exposureFilter: "all", sort };
+    }
+    return { exposureFilter: exposureFilter as TermExposureFilter, sort };
+  } catch {
+    return { exposureFilter: "all", sort: "alpha" };
+  }
+}
+
+function savePrefs(prefs: StoredPrefs) {
+  try {
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+  } catch {
+    // ignore quota / private mode
+  }
+}
+
+export function GlossaryBrowser({ exposure }: { exposure: TermExposureMap }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<GlossaryCategory | "all">("all");
+  const [exposureFilter, setExposureFilter] = useState<TermExposureFilter>(
+    () => loadPrefs().exposureFilter,
+  );
+  const [sort, setSort] = useState<GlossaryBrowseSort>(() => loadPrefs().sort);
+  const skipSavePrefs = useRef(true);
 
-  const results = useMemo(() => {
+  useEffect(() => {
+    if (skipSavePrefs.current) {
+      skipSavePrefs.current = false;
+      return;
+    }
+    savePrefs({ exposureFilter, sort });
+  }, [exposureFilter, sort]);
+
+  const isSearching = query.trim().length > 0;
+
+  const categoryScoped = useMemo(() => {
     let terms = searchGlossary(query);
     if (category !== "all") {
       terms = terms.filter((t) => t.category === category);
     }
     return terms;
   }, [query, category]);
+
+  const results = useMemo(() => {
+    let terms = filterGlossaryByExposure(categoryScoped, exposure, exposureFilter);
+    if (!isSearching) {
+      terms = sortGlossaryForBrowse(terms, sort, exposure);
+    }
+    return terms;
+  }, [categoryScoped, exposure, exposureFilter, sort, isSearching]);
+
+  const countsInView = useMemo(
+    () => countTermsByExposure(categoryScoped, exposure),
+    [categoryScoped, exposure],
+  );
+
+  const emptyMessage = useMemo(() => {
+    if (isSearching && results.length === 0) {
+      return (
+        <>
+          No matching terms. Try “marker”, “reward”, “threshold”, or describe what you’re looking
+          for in everyday words.
+        </>
+      );
+    }
+    if (exposureFilter === "new" && categoryScoped.length > 0) {
+      return (
+        <>
+          You’ve opened all terms in this view — try <strong>All</strong> or{" "}
+          <strong>Explored</strong>.
+        </>
+      );
+    }
+    if (exposureFilter !== "all" && results.length === 0) {
+      return <>Nothing in this filter for the current category. Try another filter or All.</>;
+    }
+    return <>No terms to show.</>;
+  }, [isSearching, results.length, exposureFilter, categoryScoped.length]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -38,13 +127,13 @@ export function GlossaryBrowser({
       </div>
 
       <div className="flex flex-wrap gap-2" role="group" aria-label="Glossary categories">
-        <CategoryChip
-          label="All"
+        <FilterChip
+          label="All topics"
           active={category === "all"}
           onClick={() => setCategory("all")}
         />
         {GLOSSARY_CATEGORIES.map((c) => (
-          <CategoryChip
+          <FilterChip
             key={c.id}
             label={c.title}
             active={category === c.id}
@@ -52,6 +141,55 @@ export function GlossaryBrowser({
           />
         ))}
       </div>
+
+      <div className="flex flex-wrap gap-2" role="group" aria-label="Your progress">
+        <FilterChip
+          label="All"
+          testId="glossary-filter-all"
+          active={exposureFilter === "all"}
+          onClick={() => setExposureFilter("all")}
+        />
+        <FilterChip
+          label="New to you"
+          testId="glossary-filter-new"
+          active={exposureFilter === "new"}
+          onClick={() => setExposureFilter("new")}
+        />
+        <FilterChip
+          label="Seen"
+          testId="glossary-filter-seen"
+          active={exposureFilter === "introduced"}
+          onClick={() => setExposureFilter("introduced")}
+        />
+        <FilterChip
+          label="Explored"
+          testId="glossary-filter-explored"
+          active={exposureFilter === "explored"}
+          onClick={() => setExposureFilter("explored")}
+        />
+      </div>
+
+      {!isSearching ? (
+        <div className="flex flex-wrap items-center gap-2">
+          <FilterChip
+            label="A–Z"
+            active={sort === "alpha"}
+            onClick={() => setSort("alpha")}
+          />
+          <FilterChip
+            label="New first"
+            active={sort === "newFirst"}
+            onClick={() => setSort("newFirst")}
+          />
+        </div>
+      ) : null}
+
+      <p className="text-sm text-muted" aria-live="polite">
+        {results.length} {results.length === 1 ? "term" : "terms"}
+        {exposureFilter === "all" && countsInView.new > 0
+          ? ` · ${countsInView.new} new to you`
+          : ""}
+      </p>
 
       <ul className="flex flex-col">
         {results.map((term, index) => (
@@ -63,28 +201,28 @@ export function GlossaryBrowser({
           />
         ))}
         {results.length === 0 ? (
-          <li className="py-4 text-sm text-muted">
-            No matching terms. Try “marker”, “reward”, “threshold”, or describe what you’re looking
-            for in everyday words.
-          </li>
+          <li className="py-4 text-sm text-muted">{emptyMessage}</li>
         ) : null}
       </ul>
     </div>
   );
 }
 
-function CategoryChip({
+function FilterChip({
   label,
   active,
   onClick,
+  testId,
 }: {
   label: string;
   active: boolean;
   onClick: () => void;
+  testId?: string;
 }) {
   return (
     <button
       type="button"
+      data-testid={testId}
       onClick={onClick}
       className={`chip ${active ? "chip--active" : ""}`}
       aria-pressed={active}
@@ -104,11 +242,7 @@ function TermCard({
   bordered?: boolean;
 }) {
   const badge =
-    state === "explored"
-      ? "Explored"
-      : state === "introduced"
-        ? "Seen"
-        : null;
+    state === "explored" ? "Explored" : state === "introduced" ? "Seen" : null;
 
   return (
     <li className={`fade-up ${bordered ? "border-t border-line" : ""}`}>

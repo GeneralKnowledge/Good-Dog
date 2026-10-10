@@ -2,6 +2,7 @@
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { GlossaryBrowser } from "@/components/glossary/GlossaryBrowser";
 import { TermRichText } from "@/components/glossary/TermRichText";
 import { getGlossaryTerm } from "@/lib/content/glossary";
 
@@ -12,6 +13,21 @@ vi.mock("@/lib/actions/glossary", () => ({
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn() }),
+}));
+
+vi.mock("next/link", () => ({
+  default: ({
+    href,
+    children,
+    ...rest
+  }: {
+    href: string;
+    children: React.ReactNode;
+  }) => (
+    <a href={href} {...rest}>
+      {children}
+    </a>
+  ),
 }));
 
 describe("TermRichText + GlossaryPanel", () => {
@@ -198,5 +214,51 @@ describe("TermRichText + GlossaryPanel", () => {
     });
     expect(container.textContent).toContain("mystery");
     expect(container.querySelector("button.term-link")).toBeNull();
+  });
+});
+
+describe("GlossaryBrowser", () => {
+  let container: HTMLDivElement;
+  let root: Root;
+
+  beforeEach(() => {
+    container = document.createElement("div");
+    document.body.appendChild(container);
+    root = createRoot(container);
+    sessionStorage.clear();
+  });
+
+  afterEach(() => {
+    act(() => {
+      root.unmount();
+    });
+    container.remove();
+    sessionStorage.clear();
+  });
+
+  it("filters to new-to-you terms and hides explored", () => {
+    act(() => {
+      root.render(
+        <GlossaryBrowser
+          exposure={{
+            "marker-word": "explored",
+            reward: "introduced",
+          }}
+        />,
+      );
+    });
+
+    const exploredLink = container.querySelector('a[href="/learn/glossary/marker-word"]');
+    expect(exploredLink).toBeTruthy();
+
+    const newFilter = Array.from(container.querySelectorAll("button")).find(
+      (b) => b.textContent === "New to you",
+    );
+    act(() => {
+      newFilter!.click();
+    });
+
+    expect(container.querySelector('a[href="/learn/glossary/marker-word"]')).toBeNull();
+    expect(container.textContent).toMatch(/new to you/i);
   });
 });

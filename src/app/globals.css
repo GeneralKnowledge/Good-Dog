@@ -197,13 +197,12 @@ summary,
 
 .nav-item {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 0.2rem;
-  padding: 0.45rem 0.25rem;
+  justify-content: center;
+  padding: 0.7rem 0.25rem;
   border-radius: 1rem;
   color: var(--ink-muted);
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   font-weight: 600;
   transition: transform 120ms ease, background-color 160ms ease;
 }

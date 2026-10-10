@@ -64,6 +64,11 @@ export default async function ExercisePage({
         </Link>
         <h1 className="mt-4 font-display text-3xl leading-tight">{content.title}</h1>
         <p className="mt-2 text-muted">{content.summary}</p>
+        {dog.preferredRewards ? (
+          <p className="mt-3 text-sm text-brand-deep">
+            Preferred rewards for {dog.name}: {dog.preferredRewards}
+          </p>
+        ) : null}
       </header>
       <ExerciseRunner
         exercise={content}

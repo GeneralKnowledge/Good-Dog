@@ -32,4 +32,21 @@ export function greetingForHour(date: Date = new Date(), timeZone = DEFAULT_TZ):
   return "Good evening";
 }
 
+/** How many of the last 7 local calendar days appear in `practisedDates` (YYYY-MM-DD). */
+export function countPractisedDaysInLastWeek(
+  practisedDates: Set<string>,
+  timeZone: string = DEFAULT_TZ,
+  now: Date = new Date(),
+): number {
+  const cursor = new Date(now);
+  // Noon UTC avoids skipping a calendar day around DST shifts.
+  cursor.setUTCHours(12, 0, 0, 0);
+  let count = 0;
+  for (let i = 0; i < 7; i += 1) {
+    if (practisedDates.has(localDateString(cursor, timeZone))) count += 1;
+    cursor.setUTCDate(cursor.getUTCDate() - 1);
+  }
+  return count;
+}
+
 export { DEFAULT_TZ };

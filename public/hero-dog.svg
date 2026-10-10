@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2f6f5e" stop-opacity="0"/>
+      <stop offset="55%" stop-color="#2f6f5e" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#1f4f43" stop-opacity="0.16"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="url(#ground)"/>
+  <!-- soft path / ground line -->
+  <path d="M0 340c80-28 160-28 240 0s160 28 240 0 160-28 240 0v140H0V340z" fill="#2f6f5e" fill-opacity="0.1"/>
+  <!-- dog silhouette, sitting facing right -->
+  <g fill="#1f4f43" fill-opacity="0.55">
+    <ellipse cx="312" cy="318" rx="78" ry="22" fill-opacity="0.12"/>
+    <path d="M250 210c8-42 38-68 78-70 28-2 48 10 58 28 6 10 18 14 28 10 14-6 30 2 34 16 4 14-4 28-18 32l-8 2c6 18 8 38 4 58-6 34-28 58-62 66-8 2-14 8-16 16l-4 18c-2 8-10 12-18 10s-12-10-10-18l6-20c-30-4-54-22-66-48-10-22-10-46-2-68-12-4-22-16-20-30 2-12 12-20 16-22z"/>
+    <path d="M348 168c12-8 28-6 36 4 6 8 4 18-2 24-10-8-22-14-34-16z" fill-opacity="0.35"/>
+    <path d="M268 300c-4 18-2 36 4 52 2 6-2 12-8 12s-10-6-12-12c-8-20-10-42-4-62 6-4 14-2 20 10z" fill-opacity="0.4"/>
+    <path d="M318 308c2 20 6 38 14 52 4 6 0 14-6 14s-12-6-14-12c-10-18-16-40-18-60 8-2 18 0 24 6z" fill-opacity="0.4"/>
+  </g>
+  <!-- small treat / reward cue -->
+  <circle cx="430" cy="250" r="10" fill="#c47a2c" fill-opacity="0.55"/>
+  <circle cx="430" cy="250" r="4" fill="#f8efe4" fill-opacity="0.8"/>
+</svg>

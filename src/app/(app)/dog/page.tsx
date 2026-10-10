@@ -7,8 +7,9 @@ import { describeSkillState } from "@/lib/coaching";
 import { getExerciseById, getObjectiveLabel } from "@/lib/domains/dog-training";
 import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
-import { dogSkillProgress, dogs, trainingSessions } from "@/lib/db/schema";
+import { dogSkillProgress, trainingSessions } from "@/lib/db/schema";
 import { deleteAccountAction, signOutAction } from "@/lib/actions/auth";
+import { getDogForOwner } from "@/lib/services/dogs";
 
 const LIFE_STAGE_LABELS: Record<string, string> = {
   young_puppy: "Young puppy",
@@ -28,7 +29,7 @@ export default async function DogPage() {
   const user = await requireUser();
   if (!user) redirect("/sign-in");
 
-  const dog = db.select().from(dogs).where(eq(dogs.ownerId, user.id)).get();
+  const dog = getDogForOwner(user.id);
   if (!dog) redirect("/onboarding");
 
   const progress = db

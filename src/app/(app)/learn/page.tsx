@@ -1,18 +1,30 @@
 import Link from "next/link";
-import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { AppHeader } from "@/components/AppHeader";
-import { EXERCISE_LIBRARY, TOPIC_GROUPS } from "@/lib/domains/dog-training";
+import {
+  dogTrainingPolicy,
+  EXERCISE_LIBRARY,
+  TOPIC_GROUPS,
+  type DogSubject,
+} from "@/lib/domains/dog-training";
 import { requireUser } from "@/lib/auth/session";
-import { db } from "@/lib/db";
-import { dogs } from "@/lib/db/schema";
+import { getDogForOwner } from "@/lib/services/dogs";
 
 export default async function LearnPage() {
   const user = await requireUser();
   if (!user) redirect("/sign-in");
 
-  const dog = db.select().from(dogs).where(eq(dogs.ownerId, user.id)).get();
+  const dog = getDogForOwner(user.id);
   if (!dog) redirect("/onboarding");
+
+  const subject: DogSubject = {
+    id: dog.id,
+    name: dog.name,
+    lifeStage: dog.lifeStage as DogSubject["lifeStage"],
+    availableTime: dog.availableTime as DogSubject["availableTime"],
+    primaryReason: dog.primaryReason,
+    trainingExperience: dog.trainingExperience as DogSubject["trainingExperience"],
+  };
 
   return (
     <main>
@@ -25,7 +37,11 @@ export default async function LearnPage() {
           const exercises = EXERCISE_LIBRARY.filter(
             (e) =>
               e.topicGroup === group.id &&
-              e.lifeStages.includes(dog.lifeStage),
+              e.lifeStages.includes(dog.lifeStage as DogSubject["lifeStage"]),
+          ).sort(
+            (a, b) =>
+              dogTrainingPolicy.affinityScore(b, subject) -
+              dogTrainingPolicy.affinityScore(a, subject),
           );
           if (exercises.length === 0) return null;
           return (
@@ -33,21 +49,26 @@ export default async function LearnPage() {
               <h2 className="font-display text-2xl">{group.title}</h2>
               <p className="mt-1 text-sm text-muted">{group.description}</p>
               <ul className="mt-3 flex flex-col gap-3">
-                {exercises.map((exercise) => (
-                  <li key={exercise.id} className="card p-4">
-                    <h3 className="font-semibold leading-snug">{exercise.title}</h3>
-                    <p className="mt-1 text-sm text-muted">{exercise.summary}</p>
-                    <p className="mt-2 text-xs text-muted">
-                      {exercise.estimatedMinutes} minutes
-                    </p>
-                    <Link
-                      href={`/exercise/${exercise.id}?dogId=${dog.id}&versionId=${exercise.id}-v${exercise.contentVersion}`}
-                      className="btn btn-secondary mt-3 w-full"
-                    >
-                      Try this exercise
-                    </Link>
-                  </li>
-                ))}
+                {exercises.map((exercise) => {
+                  const matchesFocus =
+                    dogTrainingPolicy.affinityScore(exercise, subject) >= 3;
+                  return (
+                    <li key={exercise.id} className="card p-4">
+                      <h3 className="font-semibold leading-snug">{exercise.title}</h3>
+                      <p className="mt-1 text-sm text-muted">{exercise.summary}</p>
+                      <p className="mt-2 text-xs text-muted">
+                        {exercise.estimatedMinutes} minutes
+                        {matchesFocus ? " · matches your focus" : ""}
+                      </p>
+                      <Link
+                        href={`/exercise/${exercise.id}?dogId=${dog.id}&versionId=${exercise.id}-v${exercise.contentVersion}`}
+                        className="btn btn-secondary mt-3 w-full"
+                      >
+                        Try this exercise
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </section>
           );

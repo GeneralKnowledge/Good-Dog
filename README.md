@@ -62,10 +62,13 @@ Progression is deterministic (no LLM required): prerequisites, welfare overrides
 ## Architecture notes
 
 - UI in `src/app` and `src/components`
-- Server actions in `src/lib/actions`
-- Domain services in `src/lib/domain` and `src/lib/services`
-- Seeded exercise content in `src/lib/content`
+- Server actions in `src/lib/actions`, persistence in `src/lib/services`
+- `src/lib/coaching`: domain-neutral planning and progression engine
+- `src/lib/domains/dog-training`: dog-specific content, vocabulary and rules
 - Historical exercise versions stored as JSON snapshots
+
+See [docs/architecture.md](docs/architecture.md) for the module map, the import
+rules that keep the engine reusable, and where each kind of change belongs.
 
 ## Testing
 

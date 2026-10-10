@@ -1,6 +1,26 @@
 # Coaching App Template: Research and Design Guide
 
-Status: proposal, for discussion. No application code is changed by this document.
+Status: research and design reference. See "Scope decision" below for what was chosen and what was built.
+
+## Scope decision (update)
+
+After review, the direction is narrower than the options explored below:
+
+- **Goal:** a reusable base for the owner's own apps, not a product to sell or open-source. This removes the licensing and public-scaffolder concerns.
+- **Focus:** the current Good Dog app only. Other apps (a cat-care app was discussed purely as an illustration) are out of scope and nothing was built for them.
+- **Approach:** make the current app modular for easier maintenance, with a clear split between **common** code and **specialised** (dog-training) code, so it can serve as a base later without further rewrites.
+- **Not doing now:** adopting a paid starter kit, a monorepo, renaming database tables, or a second domain pack. These stay as options in the sections below.
+
+What was built is Phase 1 (below), in a behaviour-preserving form. The result is documented in [architecture.md](architecture.md). The rest of this guide is kept as the reference for later phases.
+
+| Guide item | Status |
+| --- | --- |
+| 3.4.1 Schema defined twice | Done. One bootstrap, plus a drift test. (It was actually defined three times: also in the seed script and a test.) |
+| 3.4.4 Unreadable `getting_there` branch | Done. Simplified, with tests for every starting state. |
+| 3.4.5 Plan generator mixes concerns | Partly. Domain decisions moved behind `CoachingPolicy`. Not yet split into pipeline stages. |
+| 3.2 Core coupled to dogs (types, starter ids, goal scoring, wording) | Done for the engine. Services and database tables are still dog-named. |
+| 5.4 Conformance suite | Partly. Engine tests use a neutral fixture. A formal shared suite is not built. |
+| Everything else (shell, notifications, billing, admin, i18n, and so on) | Not started. Revisit when an app needs it. |
 
 This guide answers two questions:
 

@@ -253,6 +253,10 @@ textarea {
   gap: 0.2rem;
 }
 
+.nav-grid--five {
+  grid-template-columns: repeat(5, 1fr);
+}
+
 .nav-item {
   display: flex;
   flex-direction: column;

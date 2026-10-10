@@ -1,7 +1,7 @@
 # Drop-ship mockup notes (Pero Trade / Signature)
 
-**Status:** Design exploration only — not production packaging or live shop UI.  
-**Related:** [`shop-affiliate-plan.md`](./shop-affiliate-plan.md)
+**Status:** Explore UI shipped at `/shop` (illustrative prices; checkout not live). Packaging art is SVG placeholder until trade samples.  
+**Related:** [`shop-affiliate-plan.md`](./shop-affiliate-plan.md), [`design-direction.md`](./design-direction.md)
 
 ## What we can confirm from public Pero materials
 

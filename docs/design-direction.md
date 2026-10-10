@@ -44,11 +44,16 @@ Calm UK garden coach — quiet confidence, never a gamified dashboard. Soft ligh
 | Learn | Find a word or browse a topic |
 | Ask | Get a short grounded answer |
 | My dog | See who we’re coaching + history |
+| Shop | Curated session kit (own-brand treats) + honest affiliate walk kit |
 
 ## Navigation
 
-Four destinations: **Today · Learn · My dog · Ask**. Active = soft brand wash + deep ink (not a solid filled “blob” for Today). Simple line icons, not emoji.
+Five destinations: **Today · Learn · Shop · My dog · Ask**. Active = soft brand wash + deep ink (not a solid filled “blob” for Today). Simple line icons, not emoji.
+
+## Shop notes
+
+Match the dropship mockup where practical: brand-led Shop header, own-brand session kit rows (thumb · title · pack · blurb · accent price · Add), drop-ship disclosure, affiliate section below. Checkout stays illustrative until trade fulfilment is live.
 
 ## Out of scope this pass
 
-Shop route (planned, not shipped), Expo/native shell, new photography beyond one licensed hero asset.
+Live Stripe/checkout, Expo/native shell, final Pero die-line photography.

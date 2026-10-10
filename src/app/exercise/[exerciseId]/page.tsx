@@ -3,9 +3,10 @@ import { notFound, redirect } from "next/navigation";
 import { AppHeader } from "@/components/AppHeader";
 import { ExerciseRunner } from "@/components/ExerciseRunner";
 import { getExerciseById } from "@/lib/domains/dog-training";
+import type { TermExposureState } from "@/lib/domains/dog-training/types";
 import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
-import { dogs, exerciseVersions } from "@/lib/db/schema";
+import { dogs, exerciseVersions, ownerTermProgress } from "@/lib/db/schema";
 
 export default async function ExercisePage({
   params,
@@ -55,6 +56,17 @@ export default async function ExercisePage({
     content = exercise;
   }
 
+  const progressRows = db
+    .select()
+    .from(ownerTermProgress)
+    .where(eq(ownerTermProgress.ownerId, user.id))
+    .all();
+
+  const termExposure: Record<string, TermExposureState> = {};
+  for (const row of progressRows) {
+    termExposure[row.termId] = row.state;
+  }
+
   return (
     <main className="flex min-h-0 flex-1 flex-col">
       <AppHeader
@@ -76,6 +88,7 @@ export default async function ExercisePage({
           planId={query.planId}
           planItemId={query.itemId}
           exerciseVersionId={version.id}
+          termExposure={termExposure}
         />
       </div>
     </main>

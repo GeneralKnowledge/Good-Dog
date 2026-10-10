@@ -104,7 +104,7 @@ Affiliate items stay static outbound links. Own-brand items use checkout → sup
 
 ## Design exploration
 
-Packaging + in-app shop mockups for drop-shipped Signature-style treats (with pack-size caveats) are noted in [`shop-dropship-mockup-notes.md`](./shop-dropship-mockup-notes.md).
+Packaging + in-app shop mockups for drop-shipped Signature-style treats (with pack-size caveats) are noted in [`shop-dropship-mockup-notes.md`](./shop-dropship-mockup-notes.md). Broader app redesign mockups (landing, Today, exercise, Learn, Ask, My dog) are in [`site-redesign-mockup-notes.md`](./site-redesign-mockup-notes.md).
 
 ## Out of scope for this planning pass
 

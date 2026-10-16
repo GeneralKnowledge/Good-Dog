@@ -26,16 +26,15 @@ export default async function HomePage() {
           </p>
 
           <div className="mt-8 flex flex-col gap-3 fade-up fade-up-delay-3 md:mt-10">
-            <Link href="/sign-up" className="btn btn-primary w-full">
-              Get started
+            <GuestContinueButton className="btn btn-primary w-full" label="Start today" />
+            <Link href="/sign-up" className="btn btn-secondary w-full">
+              Create account
             </Link>
-            <Link href="/sign-in" className="btn btn-secondary w-full">
+            <Link href="/sign-in" className="btn btn-ghost w-full">
               Sign in
             </Link>
-            <GuestContinueButton />
             <p className="px-1 pt-1 text-center text-xs leading-relaxed text-muted md:text-left">
-              Guests can try the full app. Create an account later from My dog to keep progress
-              across devices.
+              Start today works on this device with no email. Save progress anytime from My dog.
             </p>
             <p className="px-1 pt-1 text-center text-xs leading-relaxed text-muted md:text-left">
               General reward-based training guidance for everyday life — not veterinary care or

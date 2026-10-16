@@ -5,13 +5,20 @@ import type { DogActionResult } from "@/lib/actions/dogs";
 
 export function OnboardingForm({
   action,
+  defaultPrimaryReason = "",
+  showPrimaryReasonField = true,
 }: {
   action: (prev: DogActionResult | null, formData: FormData) => Promise<DogActionResult>;
+  defaultPrimaryReason?: string;
+  showPrimaryReasonField?: boolean;
 }) {
   const [state, formAction, pending] = useActionState(action, null);
 
   return (
     <form action={formAction} className="flex flex-col gap-4">
+      {!showPrimaryReasonField && defaultPrimaryReason ? (
+        <input type="hidden" name="primaryReason" value={defaultPrimaryReason} />
+      ) : null}
       <div className="field">
         <label htmlFor="name">Dog’s name</label>
         <input id="name" name="name" required maxLength={40} placeholder="e.g. Moss" />
@@ -28,16 +35,19 @@ export function OnboardingForm({
         </select>
       </div>
 
-      <div className="field">
-        <label htmlFor="primaryReason">What would you most like help with?</label>
-        <input
-          id="primaryReason"
-          name="primaryReason"
-          required
-          maxLength={200}
-          placeholder="e.g. Everyday manners, recall, calmer walks"
-        />
-      </div>
+      {showPrimaryReasonField ? (
+        <div className="field">
+          <label htmlFor="primaryReason">What would you most like help with?</label>
+          <input
+            id="primaryReason"
+            name="primaryReason"
+            required
+            maxLength={200}
+            defaultValue={defaultPrimaryReason}
+            placeholder="e.g. Everyday manners, recall, calmer walks"
+          />
+        </div>
+      ) : null}
 
       <div className="field">
         <label htmlFor="availableTime">How much time do you usually have?</label>

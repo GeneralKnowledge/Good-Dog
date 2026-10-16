@@ -24,12 +24,14 @@ export function AskSearch({
   initialArticles,
   aiConfigured,
   termExposure = {},
+  suggestedQuestions = [],
 }: {
   dogId: string;
   dogName: string;
   initialArticles: AskArticle[];
   aiConfigured: boolean;
   termExposure?: TermExposureMap;
+  suggestedQuestions?: string[];
 }) {
   const [query, setQuery] = useState("");
   const [aiAnswer, setAiAnswer] = useState<string | null>(null);
@@ -85,6 +87,30 @@ export function AskSearch({
           placeholder={`e.g. What if ${dogName} gets distracted?`}
         />
       </div>
+
+      {!isSearching && suggestedQuestions.length > 0 ? (
+        <section aria-label="Suggested questions">
+          <p className="section-label">Related to today</p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {suggestedQuestions.map((question) => (
+              <button
+                key={question}
+                type="button"
+                className="chip text-left"
+                onClick={() => {
+                  setQuery(question);
+                  setAiAnswer(null);
+                  setAiSource(null);
+                  setAiError(null);
+                  setExpandedTermId(null);
+                }}
+              >
+                {question}
+              </button>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       {!isSearching ? (
         <div className="card p-4 text-sm leading-relaxed text-muted">

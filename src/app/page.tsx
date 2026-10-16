@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { GuestContinueButton } from "@/components/GuestContinueButton";
-import { InstallSplash } from "@/components/InstallSplash";
 import { requireUser } from "@/lib/auth/session";
 import { getDogForOwner } from "@/lib/services/dogs";
 
@@ -14,7 +13,6 @@ export default async function HomePage() {
 
   return (
     <main className="landing-shell flex min-h-dvh flex-1 flex-col">
-      <InstallSplash mode="landing" />
       <div className="landing-layout px-5 pb-8 pt-10">
         <div className="landing-layout__copy flex flex-col">
           <p className="text-display-brand fade-up">Good Dog</p>

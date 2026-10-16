@@ -3,6 +3,9 @@ import { redirect } from "next/navigation";
 import { AppHeader } from "@/components/AppHeader";
 import { AskSearch } from "@/components/AskSearch";
 import { getExerciseById, HELP_ARTICLES } from "@/lib/domains/dog-training";
+import { suggestedAskQuestions } from "@/lib/ask/suggested-questions";
+import type { PlanItem } from "@/lib/coaching";
+import { getOrCreateDailyPlan } from "@/lib/services/plans";
 import { requireUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { ownerTermProgress } from "@/lib/db/schema";
@@ -26,6 +29,19 @@ export default async function AskPage() {
   const termExposure: Record<string, "introduced" | "explored"> = {};
   for (const row of progressRows) {
     termExposure[row.termId] = row.state;
+  }
+
+  let suggestedQuestions = suggestedAskQuestions(undefined);
+  try {
+    const plan = getOrCreateDailyPlan({ dogId: dog.id, ownerId: user.id });
+    const items = JSON.parse(plan.itemsJson) as PlanItem[];
+    const firstOpen = items.find((item) => !item.completedSessionId);
+    if (firstOpen) {
+      const exercise = getExerciseById(firstOpen.exerciseId);
+      suggestedQuestions = suggestedAskQuestions(exercise?.category);
+    }
+  } catch {
+    // Plan optional for Ask chips — defaults are fine.
   }
 
   const articles = HELP_ARTICLES.map((article) => ({
@@ -56,6 +72,7 @@ export default async function AskPage() {
           initialArticles={articles}
           aiConfigured={aiConfigured}
           termExposure={termExposure}
+          suggestedQuestions={suggestedQuestions}
         />
         <div className="mt-6">
           <ReferralsBlock compact />

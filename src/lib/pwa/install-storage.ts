@@ -1,7 +1,10 @@
 export const INSTALL_DISMISS_KEY = "good-dog-install-dismissed";
 export const APP_ENTERED_AT_KEY = "good-dog-app-entered-at";
+export const FIRST_SESSION_COMPLETE_KEY = "good-dog-first-session-complete";
 
-/** Wait after first authenticated app entry before showing the in-app install splash. */
+export const FIRST_SESSION_EVENT = "good-dog-first-session-complete";
+
+/** @deprecated Install splash is gated on first completed session instead. */
 export const IN_APP_INSTALL_DELAY_MS = 5 * 60 * 1000;
 
 export function isStandaloneDisplay(): boolean {
@@ -32,6 +35,34 @@ export function writeInstallDismissed(): void {
   } catch {
     // ignore
   }
+}
+
+export function readFirstSessionComplete(): boolean {
+  try {
+    return window.localStorage.getItem(FIRST_SESSION_COMPLETE_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+export function writeFirstSessionComplete(): void {
+  try {
+    if (window.localStorage.getItem(FIRST_SESSION_COMPLETE_KEY) === "1") return;
+    window.localStorage.setItem(FIRST_SESSION_COMPLETE_KEY, "1");
+    window.dispatchEvent(new Event(FIRST_SESSION_EVENT));
+  } catch {
+    // ignore
+  }
+}
+
+export function subscribeFirstSession(onStoreChange: () => void): () => void {
+  const handler = () => onStoreChange();
+  window.addEventListener(FIRST_SESSION_EVENT, handler);
+  window.addEventListener("storage", handler);
+  return () => {
+    window.removeEventListener(FIRST_SESSION_EVENT, handler);
+    window.removeEventListener("storage", handler);
+  };
 }
 
 export function ensureAppEnteredAt(): number {

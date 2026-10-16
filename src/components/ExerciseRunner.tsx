@@ -2,13 +2,18 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useId, useMemo, useState, useTransition } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState, useTransition } from "react";
 import { nanoid } from "nanoid";
 import { markTermsIntroducedAction } from "@/lib/actions/glossary";
 import { submitFeedbackAction } from "@/lib/actions/training";
 import { extractTermIdsFromText } from "@/lib/content/glossary";
 import type { ExerciseContent, TermExposureState } from "@/lib/domains/dog-training/types";
 import { TermRichText } from "@/components/glossary/TermRichText";
+import {
+  clearExerciseProgress,
+  readExerciseProgress,
+  saveExerciseProgress,
+} from "@/lib/exercise-progress-storage";
 
 export function ExerciseRunner({
   exercise,
@@ -29,7 +34,25 @@ export function ExerciseRunner({
 }) {
   const router = useRouter();
   const noteId = useId();
+  const practiseRef = useRef<HTMLElement | null>(null);
   const [phase, setPhase] = useState<"guide" | "feedback" | "done">("guide");
+  const [restored, setRestored] = useState(false);
+
+  useEffect(() => {
+    if (!planItemId || restored) return;
+    const saved = readExerciseProgress(planItemId);
+    if (
+      saved &&
+      saved.exerciseId === exercise.id &&
+      saved.dogId === dogId &&
+      (saved.phase === "guide" || saved.phase === "feedback")
+    ) {
+      // Restore client-only progress after hydration (localStorage).
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional post-hydration restore
+      setPhase(saved.phase);
+    }
+    setRestored(true);
+  }, [dogId, exercise.id, planItemId, restored]);
   const [showHint, setShowHint] = useState(false);
   const [welfareConcern, setWelfareConcern] = useState(false);
   const [note, setNote] = useState("");
@@ -85,6 +108,26 @@ export function ExerciseRunner({
     return newTermBlockIndex === blockIndex ? firstNewTermId : null;
   }
 
+  useEffect(() => {
+    if (phase === "done" || !planId || !planItemId) return;
+    saveExerciseProgress({
+      dogId,
+      planId,
+      planItemId,
+      exerciseId: exercise.id,
+      phase: phase === "feedback" ? "feedback" : "guide",
+    });
+    window.dispatchEvent(new Event("good-dog-exercise-progress"));
+  }, [phase, dogId, planId, planItemId, exercise.id]);
+
+  useEffect(() => {
+    if (!restored || phase !== "guide" || !planItemId) return;
+    const saved = readExerciseProgress(planItemId);
+    if (saved?.phase === "guide" && practiseRef.current) {
+      practiseRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [phase, planItemId, restored]);
+
   function sendFeedback(outcome: "easy" | "getting_there" | "too_difficult") {
     setError(null);
     startTransition(async () => {
@@ -105,6 +148,8 @@ export function ExerciseRunner({
         return;
       }
 
+      clearExerciseProgress(planItemId);
+      window.dispatchEvent(new Event("good-dog-exercise-progress"));
       setPhase("done");
       router.refresh();
     });
@@ -255,7 +300,7 @@ export function ExerciseRunner({
 
       <hr className="hairline" />
 
-      <section>
+      <section ref={practiseRef} id="practise">
         <p className="section-label">Let’s practise</p>
         <ol className="mt-3 list-decimal space-y-4 pl-5 text-[1.05rem] leading-relaxed">
           {exercise.steps.map((step, i) => (

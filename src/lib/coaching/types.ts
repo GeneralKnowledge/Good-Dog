@@ -17,6 +17,8 @@ export interface PlanItem {
   role: PlanItemRole;
   whyToday: string;
   completedSessionId?: string;
+  /** How many times this slot was swapped for another exercise today. */
+  replaceCount?: number;
 }
 
 /** The part of an exercise the engine needs. Domains extend it with their own fields. */

@@ -1,20 +1,24 @@
 import { expect, test } from "@playwright/test";
+import { dismissInstallSplashIfVisible } from "./helpers";
 
 test("main owner journey", async ({ page }) => {
   const email = `owner-${Date.now()}@example.com`;
   const password = "password123";
 
   await page.goto("/");
+  await dismissInstallSplashIfVisible(page);
   await expect(page.getByRole("heading", { name: /few quiet minutes/i })).toBeVisible();
-  await page.getByRole("link", { name: "Get started" }).click();
+  await page.getByRole("link", { name: "Create account" }).click();
 
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill(password);
   await page.getByRole("button", { name: "Create account" }).click();
 
-  await expect(page.getByRole("heading", { name: /tell us about your dog/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /what would feel like a win/i })).toBeVisible();
+  await page.getByRole("button", { name: "Everyday manners" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: /tell us about your dog/i }).click();
   await page.getByLabel("Dog’s name").fill("Pip");
-  await page.getByLabel("What would you most like help with?").fill("Everyday manners");
   await page.getByRole("button", { name: "Create my first plan" }).click();
 
   await expect(page.getByRole("heading", { name: /today with pip/i })).toBeVisible();

@@ -1,6 +1,6 @@
-import Link from "next/link";
 import type { PlanItem } from "@/lib/coaching";
 import type { ExerciseContent } from "@/lib/domains/dog-training/types";
+import { PlanItemActions } from "@/components/PlanItemActions";
 
 export function PlanCard({
   item,
@@ -44,12 +44,12 @@ export function PlanCard({
         ) : null}
       </div>
       {!done ? (
-        <Link
-          href={`/exercise/${exercise.id}?dogId=${dogId}&planId=${planId}&itemId=${item.id}&versionId=${item.exerciseVersionId}`}
-          className="btn btn-primary btn-compact shrink-0 self-center"
-        >
-          Start
-        </Link>
+        <PlanItemActions
+          item={item}
+          dogId={dogId}
+          planId={planId}
+          exerciseSlug={exercise.id}
+        />
       ) : null}
     </article>
   );

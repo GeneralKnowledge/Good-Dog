@@ -314,3 +314,127 @@ export function generateDailyPlan<
     },
   };
 }
+
+const MAX_REPLACES_PER_ITEM = 2;
+
+export function maxPlanItemReplacements(): number {
+  return MAX_REPLACES_PER_ITEM;
+}
+
+export interface PickReplacementInput<
+  E extends CoachingExercise,
+  S extends CoachingSubject,
+> extends GeneratePlanInput<E, S> {
+  excludeExerciseIds: string[];
+  replaceExerciseId: string;
+  itemRole: PlanItemRole;
+}
+
+export interface ReplacementPick {
+  exerciseId: string;
+  whyToday: string;
+}
+
+/** Pick one alternative exercise for an open plan slot (planner-safe). */
+export function pickPlanItemReplacement<
+  E extends CoachingExercise,
+  S extends CoachingSubject,
+>(input: PickReplacementInput<E, S>): ReplacementPick | null {
+  const { subject, policy } = input;
+  const config = input.config ?? DEFAULT_PROGRESSION_CONFIG;
+  const now = input.now ?? Date.now();
+  const exercisesById = new Map(input.exercises.map((e) => [e.id, e]));
+  const replaced = exercisesById.get(input.replaceExerciseId);
+  if (!replaced) return null;
+
+  const exclude = new Set(input.excludeExerciseIds);
+
+  const eligible = input.exercises.filter((exercise) => {
+    if (exclude.has(exercise.id)) return false;
+    if (!policy.isEligible(exercise, subject)) return false;
+    if (!prerequisitesMet(exercise, input.progressByObjective, exercisesById)) {
+      return false;
+    }
+    if (
+      objectiveInWelfareCooldown(
+        exercise.learningObjectiveId,
+        input.recentSessions,
+        now,
+        config,
+      )
+    ) {
+      return false;
+    }
+    return true;
+  });
+
+  if (eligible.length === 0) return null;
+
+  const anyWelfareCooldown = input.recentSessions.some(
+    (s) =>
+      s.welfareConcern &&
+      now - s.completedAt < config.welfareCooldownDays * DAY_MS,
+  );
+
+  let candidates = eligible;
+  if (anyWelfareCooldown) {
+    const calm = eligible.filter((e) =>
+      (WELFARE_CALM_EXERCISE_IDS as readonly string[]).includes(e.id),
+    );
+    if (calm.length > 0) candidates = calm;
+  }
+
+  const scored = candidates
+    .map((exercise) => {
+      const baseProgress =
+        input.progressByObjective[exercise.learningObjectiveId];
+      const resolved = resolveVariation(exercise, baseProgress, exercisesById);
+      const progress =
+        input.progressByObjective[resolved.exercise.learningObjectiveId];
+      let score = scoreExercise(
+        resolved.exercise,
+        subject,
+        policy,
+        progress,
+        input.recentSessions,
+        now,
+        config,
+      );
+
+      if (resolved.exercise.category === replaced.category) score += 5;
+      if (resolved.exercise.difficulty < replaced.difficulty) score += 4;
+      if (resolved.exercise.difficulty > replaced.difficulty + 1) score -= 6;
+
+      if (
+        baseProgress?.state === "needs_easier" &&
+        !exercise.easierVariationId &&
+        resolved.exercise.id === exercise.id
+      ) {
+        score -= 25;
+      }
+
+      return {
+        ...resolved,
+        progress,
+        score,
+      };
+    })
+    .sort((a, b) => b.score - a.score);
+
+  const best = scored[0];
+  if (!best) return null;
+
+  const whyToday = `You asked for something different today. ${policy.explain({
+    subjectName: subject.name,
+    role: input.itemRole,
+    skillState: best.progress?.state as SkillState | undefined,
+    preferredEasier: best.preferredEasier || best.exercise.difficulty < replaced.difficulty,
+    preferredHarder: best.preferredHarder,
+    isStarter: false,
+  })}`;
+
+  return {
+    exerciseId: best.exercise.id,
+    whyToday,
+  };
+}

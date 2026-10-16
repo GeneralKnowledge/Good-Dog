@@ -18,4 +18,12 @@ test("guest can start today and finish outcome-led onboarding", async ({ page })
   await page.getByRole("button", { name: "Create my first plan" }).click();
 
   await expect(page.getByRole("heading", { name: /today with river/i })).toBeVisible();
+
+  await page.getByRole("link", { name: "Start" }).first().click();
+  await expect(page.getByText("Let’s practise")).toBeVisible();
+  await page.getByRole("link", { name: "Leave for now" }).click();
+  await expect(page.getByRole("link", { name: "Continue" }).first()).toBeVisible();
+
+  await page.getByRole("button", { name: "Swap activity" }).first().click();
+  await expect(page.getByRole("link", { name: "Start" }).first()).toBeVisible({ timeout: 10_000 });
 });

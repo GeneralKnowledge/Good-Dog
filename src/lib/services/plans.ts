@@ -12,6 +12,8 @@ import {
 } from "@/lib/db/schema";
 import {
   generateDailyPlan,
+  maxPlanItemReplacements,
+  pickPlanItemReplacement,
   type PlanItem,
   type ProgressSnapshot,
   type SessionOutcome,
@@ -228,4 +230,118 @@ export function markPlanItemComplete(options: {
     .run();
 
   return db.select().from(dailyPlans).where(eq(dailyPlans.id, plan.id)).get()!;
+}
+
+function loadRecentSessionsForPlan(dogId: string) {
+  const recent = db
+    .select()
+    .from(trainingSessions)
+    .where(eq(trainingSessions.dogId, dogId))
+    .orderBy(desc(trainingSessions.completedAt))
+    .limit(30)
+    .all();
+
+  return recent
+    .filter((s) => s.completedAt && s.outcome)
+    .map((s) => {
+      const exercise = EXERCISE_LIBRARY.find((e) => e.id === s.exerciseId);
+      return {
+        exerciseId: s.exerciseId,
+        learningObjectiveId: exercise?.learningObjectiveId ?? "unknown",
+        completedAt: s.completedAt!.getTime(),
+        outcome: s.outcome as SessionOutcome,
+        welfareConcern: s.welfareConcern,
+      };
+    });
+}
+
+export function replaceOpenPlanItem(options: {
+  planId: string;
+  planItemId: string;
+  ownerId: string;
+}): { ok: true; exerciseId: string } | { ok: false; error: string } {
+  const plan = db.select().from(dailyPlans).where(eq(dailyPlans.id, options.planId)).get();
+  if (!plan) {
+    return { ok: false, error: "Today’s plan was not found" };
+  }
+
+  const dog = db
+    .select()
+    .from(dogs)
+    .where(and(eq(dogs.id, plan.dogId), eq(dogs.ownerId, options.ownerId)))
+    .get();
+
+  if (!dog) {
+    return { ok: false, error: "Dog not found" };
+  }
+
+  const items = JSON.parse(plan.itemsJson) as PlanItem[];
+  const index = items.findIndex((i) => i.id === options.planItemId);
+  if (index === -1) {
+    return { ok: false, error: "That activity is no longer on today’s plan" };
+  }
+
+  const current = items[index]!;
+  if (current.completedSessionId) {
+    return { ok: false, error: "This activity is already done for today" };
+  }
+
+  const replaceCount = current.replaceCount ?? 0;
+  if (replaceCount >= maxPlanItemReplacements()) {
+    return {
+      ok: false,
+      error: "You’ve already swapped this slot twice today — try the suggestion or skip to the next item",
+    };
+  }
+
+  const progressByObjective = loadProgressMap(dog.id);
+  const recentSessions = loadRecentSessionsForPlan(dog.id);
+  const exercisesForPlan = exercisesWithRecallPromotionGate(
+    EXERCISE_LIBRARY,
+    progressByObjective,
+    recentSessions,
+  );
+
+  const excludeExerciseIds = items.map((i) => i.exerciseId);
+  const pick = pickPlanItemReplacement({
+    subject: toDogSubject(dog),
+    exercises: exercisesForPlan,
+    policy: dogTrainingPolicy,
+    progressByObjective,
+    recentSessions,
+    excludeExerciseIds,
+    replaceExerciseId: current.exerciseId,
+    itemRole: current.role,
+  });
+
+  if (!pick) {
+    return {
+      ok: false,
+      error: "We couldn’t find another suitable activity just now. Try starting this one or come back later.",
+    };
+  }
+
+  const exercise = EXERCISE_LIBRARY.find((e) => e.id === pick.exerciseId);
+  if (!exercise) {
+    return { ok: false, error: "Exercise not found" };
+  }
+
+  const version = requireExerciseVersion(exercise);
+  const updatedItem: PlanItem = {
+    ...current,
+    exerciseId: pick.exerciseId,
+    exerciseVersionId: version.id,
+    whyToday: pick.whyToday,
+    replaceCount: replaceCount + 1,
+  };
+
+  const nextItems = [...items];
+  nextItems[index] = updatedItem;
+
+  db.update(dailyPlans)
+    .set({ itemsJson: JSON.stringify(nextItems) })
+    .where(eq(dailyPlans.id, plan.id))
+    .run();
+
+  return { ok: true, exerciseId: pick.exerciseId };
 }

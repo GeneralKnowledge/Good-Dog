@@ -14,6 +14,7 @@ import {
   readExerciseProgress,
   saveExerciseProgress,
 } from "@/lib/exercise-progress-storage";
+import { writeFirstSessionComplete } from "@/lib/pwa/install-storage";
 
 export function ExerciseRunner({
   exercise,
@@ -150,6 +151,7 @@ export function ExerciseRunner({
 
       clearExerciseProgress(planItemId);
       window.dispatchEvent(new Event("good-dog-exercise-progress"));
+      writeFirstSessionComplete();
       setPhase("done");
       router.refresh();
     });

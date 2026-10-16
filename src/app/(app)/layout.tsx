@@ -20,7 +20,7 @@ export default async function AppLayout({
       <PrimaryNav variant="sidebar" />
       <div className="app-frame__main">
         <div className="app-frame__body">{children}</div>
-        <InstallSplash mode="in-app" />
+        <InstallSplash />
         <PrimaryNav variant="bottom" />
       </div>
     </div>

@@ -15,6 +15,11 @@ import { isPushConfigured } from "@/lib/push/vapid";
 import { getDogForOwner } from "@/lib/services/dogs";
 import { AssessmentMetricsChecklist } from "@/components/dog/AssessmentMetricsChecklist";
 import { loadProgressMap } from "@/lib/services/plans";
+import {
+  countCompletedTrainingSessions,
+  SESSIONS_BEFORE_GUEST_SAVE_NUDGE,
+} from "@/lib/services/session-count";
+import { GuestSaveProgressNudge } from "@/components/GuestSaveProgressNudge";
 
 const LIFE_STAGE_LABELS: Record<string, string> = {
   young_puppy: "Young puppy",
@@ -59,11 +64,23 @@ export default async function DogPage() {
     .filter((s) => s.outcome)
     .map((s) => ({ exerciseId: s.exerciseId, outcome: s.outcome! }));
 
+  const completedSessionCount = countCompletedTrainingSessions(dog.id);
+  const showGuestSaveNudge =
+    user.isGuest && completedSessionCount >= SESSIONS_BEFORE_GUEST_SAVE_NUDGE;
+
   return (
     <main className="flex min-h-0 flex-1 flex-col">
       <AppHeader emphasizeTitle />
 
       <div className="sheet flex flex-1 flex-col gap-6">
+        {showGuestSaveNudge ? (
+          <GuestSaveProgressNudge
+            dogName={dog.name}
+            sessionCount={completedSessionCount}
+            prominent
+          />
+        ) : null}
+
         <section className="profile-hero fade-up">
           <h1 className="m-0">{dog.name}</h1>
           <p className="profile-hero__meta mt-2 text-sm font-semibold text-accent">
@@ -177,7 +194,7 @@ export default async function DogPage() {
         </section>
 
         {user.isGuest ? (
-          <section className="card p-5">
+          <section id="keep-progress" className="card scroll-mt-6 p-5">
             <h2 className="heading-subsection">Keep your progress</h2>
             <p className="mt-2 text-sm leading-relaxed text-muted">
               You’re using a guest session on this device. Add an email and password so you can

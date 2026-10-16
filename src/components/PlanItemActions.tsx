@@ -24,30 +24,28 @@ export function PlanItemActions({
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [swapError, setSwapError] = useState<string | null>(null);
-  const [canContinue, setCanContinue] = useState(false);
-
-  const refreshProgress = useCallback(() => {
+  const readCanContinue = useCallback(() => {
     const progress = readExerciseProgress(item.id);
-    setCanContinue(
-      Boolean(
-        progress &&
-          progress.planItemId === item.id &&
-          progress.exerciseId === item.exerciseId &&
-          progress.planId === planId,
-      ),
+    return Boolean(
+      progress &&
+        progress.planItemId === item.id &&
+        progress.exerciseId === item.exerciseId &&
+        progress.planId === planId,
     );
   }, [item.id, item.exerciseId, planId]);
 
+  const [canContinue, setCanContinue] = useState(false);
+
   useEffect(() => {
-    refreshProgress();
-    const onUpdate = () => refreshProgress();
-    window.addEventListener("storage", onUpdate);
-    window.addEventListener("good-dog-exercise-progress", onUpdate);
+    const sync = () => setCanContinue(readCanContinue());
+    sync();
+    window.addEventListener("storage", sync);
+    window.addEventListener("good-dog-exercise-progress", sync);
     return () => {
-      window.removeEventListener("storage", onUpdate);
-      window.removeEventListener("good-dog-exercise-progress", onUpdate);
+      window.removeEventListener("storage", sync);
+      window.removeEventListener("good-dog-exercise-progress", sync);
     };
-  }, [refreshProgress]);
+  }, [readCanContinue, exerciseSlug]);
 
   const href = `/exercise/${exerciseSlug}?dogId=${dogId}&planId=${planId}&itemId=${item.id}&versionId=${item.exerciseVersionId}`;
 
